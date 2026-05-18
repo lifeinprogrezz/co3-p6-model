@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Co.3 Production Forecast Model — P6</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px; background: #f6f6f4; color: #111; line-height: 1.45;
+    padding: 14px 18px 32px;
+  }
+  h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.2px; }
+  h1 .sub { font-weight: 400; color: #666; font-size: 14px; margin-left: 8px; }
+  h2 {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: #333; margin-bottom: 10px;
+    border-bottom: 1px solid #ddd; padding-bottom: 6px;
+  }
+  details { margin: 6px 0 12px; }
+  details summary {
+    cursor: pointer; font-size: 11px; color: #4a90e2;
+    text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;
+    padding: 4px 0;
+  }
+  details[open] summary { margin-bottom: 8px; }
+  .blurb { color: #555; font-size: 12px; margin-bottom: 14px; max-width: 880px; }
+  .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 1500px; margin: 0 auto; }
+  @media (max-width: 1100px) { .layout { grid-template-columns: 1fr; } }
+  .card {
+    background: white; border: 1px solid #e0e0e0; border-radius: 6px;
+    padding: 12px 14px; margin-bottom: 12px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th, td { padding: 5px 6px; text-align: right; border-bottom: 1px solid #eee; font-size: 12px; }
+  th:first-child, td:first-child { text-align: left; }
+  th { background: #fafafa; font-weight: 600; color: #444; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  tr:last-child td { border-bottom: none; }
+  input[type="number"] {
+    width: 72px; padding: 3px 5px; border: 1px solid #d0d0d0; border-radius: 3px;
+    font-family: inherit; font-size: 12px; text-align: right; background: #fcfcff;
+  }
+  input[type="number"]:focus { outline: none; border-color: #4a90e2; background: white; }
+  input[type="range"] { width: 100%; accent-color: #4a90e2; }
+  .slider-row {
+    display: grid; grid-template-columns: 130px 1fr 60px;
+    align-items: center; gap: 10px; margin-bottom: 6px;
+  }
+  .slider-row label { font-size: 12px; color: #333; }
+  .slider-row .val { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .kpi {
+    background: #f7f7f5; border-radius: 5px; padding: 10px 12px;
+    border: 1px solid #ebebeb;
+  }
+  .kpi .label { font-size: 10px; text-transform: uppercase; color: #666; letter-spacing: 0.5px; }
+  .kpi .value { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; margin-top: 2px; }
+  .kpi.good { background: #f0f7ee; border-color: #c8e0c0; }
+  .kpi.good .value { color: #2e7d32; }
+  .kpi.bad { background: #fdf0ed; border-color: #f2c8c0; }
+  .kpi.bad .value { color: #c62828; }
+  .kpi.warn { background: #fefbe9; border-color: #f0e0a0; }
+  .kpi.warn .value { color: #9a7600; }
+  .stockout { color: #c62828; font-weight: 700; }
+  .ok { color: #2e7d32; }
+  .small { font-size: 11px; color: #777; }
+  .pill { display: inline-block; font-size: 10px; padding: 1px 5px; border-radius: 8px; background: #eef; color: #335; margin-left: 4px; }
+  .assumption-tag { font-size: 9px; padding: 1px 4px; border-radius: 3px; background: #fff3cd; color: #856404; font-weight: 600; vertical-align: middle; margin-left: 3px; }
+  .formula {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    background: #f4f4f1; padding: 8px 10px; border-radius: 4px;
+    font-size: 11px; line-height: 1.6; white-space: pre-wrap;
+    border-left: 3px solid #4a90e2;
+  }
+  .note {
+    background: #fff8dc; border-left: 3px solid #f0c040;
+    padding: 8px 10px; font-size: 11px; margin: 6px 0;
+    border-radius: 0 3px 3px 0;
+  }
+  .totals-row td { font-weight: 700; border-top: 2px solid #333; background: #fafafa; }
+  .row-pnl td:first-child { color: #555; }
+  .row-pnl.bold td { font-weight: 700; border-top: 1px solid #aaa; padding-top: 6px; }
+  .area-label {
+    background: #f7f6ff; color: #5b48d3; font-weight: 600;
+    padding: 2px 5px; border-radius: 3px; font-size: 10px;
+    display: inline-block; margin-right: 4px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Co.3 Production Forecast Model <span class="sub">— Period 6 (IFEAM Production Planning Forecast Contest)</span></h1>
+<p class="blurb">
+  All inputs are sliders or editable cells. Everything updates live as you change them — the demand formula, the per-line results, the contest scorecard, the P&L and the HQ cash bridge.
+  Tags: <span class="assumption-tag">A</span> = assumption we should calibrate from cohort data; the rest is Bulletin 6 or P5 actuals.
+  Win conditions for the contest: <b>all 12 lines non-stockout</b> + <b>(start − sales) &lt; 10% of starting inventory</b> + submitted forecast matches end-of-period numbers. Prizes: $250k / $150k / $100k + $100k Excellence Grant for first 3 submitters.
+</p>
+
+<div class="card" style="background:#f0f4ff;border-color:#c0d0f0">
+  <h2>🎯 Overall strategy — professor's 5 directional rules</h2>
+  <ol style="padding-left:22px;line-height:1.7;font-size:12px">
+    <li><b>Produce where the demand is.</b> Local production, avoid cross-area transfers (transport &amp; quota friction).</li>
+    <li><b>Vertical R&amp;D.</b> Invest in own R&amp;D for grade upgrades — <b>do NOT buy Clevers licences</b> even when cheap.</li>
+    <li><b>Old-grade tech sold cheap.</b> Demand for grade-1 stock is strong — price aggressively low to clear (esp. JAP-X-Std 76k overhang, USA-Y-Std 42k overhang).</li>
+    <li><b>Premium pricing on new grades.</b> When grade-2 lands, that's where margin extraction happens — DLx + premium.</li>
+    <li><b>Cash &gt; inventory.</b> Match production to forecast tightly. Don't sit on stock hoping it sells.</li>
+  </ol>
+  <p class="small" style="margin-top:4px">Directional — not a hard rule. If a specific opportunity clearly beats local-only (e.g. Han River tender at $30/u), take it.</p>
+</div>
+
+<div class="card" style="background:#fff8ec;border-color:#f0d8a8">
+  <h2>📋 P5 close — where we are starting from</h2>
+  <p class="small" style="line-height:1.6">
+    <b>Co.3 closed P5 with +$399k net earnings</b> — first positive quarter. Consolidated RE still −$2.94M. HQ cash $100k (floor). Supplier Credit grew to $653k. Total inventory 186,629 units. EUR was the only profitable area (DLx pricing worked). USA &amp; JAP under-sold inventory because <b>we ran zero advertising</b> in P5.
+  </p>
+  <p class="small" style="margin-top:4px"><b>Big overhangs to drain:</b> JAP-X-Std 76,448u · USA-Y-Std 41,713u · USA-X-Std 21,275u (no USA-X plant — inherited).</p>
+</div>
+
+<details>
+  <summary>How the demand model works (click to expand)</summary>
+  <div class="formula">For each line (area, product, grade):
+  base_demand = MARKET_SIZE[area][product] × DLx_or_Std_share × (1 / num_competitors)
+  price_factor = (cohort_price / our_price) ^ elasticity        // ε > 1; cheaper = more demand
+  ad_factor   = bounded log(ad_spend / ad_optimum)              // diminishing returns, capped 0.5–1.5
+  bc_factor   = Business_Cycle_index / 100                      // macro pull/drag
+  demand      = base_demand × price_factor × ad_factor × bc_factor
+  sales       = min(demand, starting_inventory + production)    // stockout if demand &gt; available
+  end_inv     = starting_inventory + production − sales</div>
+  <p class="small" style="margin-top:6px">Lagged advertising carryover, competitor stockout redistribution, brand loyalty, and seasonality are ignored at this stage — fold them in once we have cohort P5 actuals.</p>
+</details>
+
+<div class="layout">
+
+  <!-- ============================ LEFT: INPUTS ============================ -->
+  <div>
+
+    <div class="card">
+      <h2>1 · Macro &amp; market structure <span class="assumption-tag">A</span></h2>
+      <div class="slider-row">
+        <label>USA Business Cycle</label>
+        <input type="range" id="bc-USA" min="80" max="125" step="1" value="101">
+        <span class="val" id="bc-USA-v">101</span>
+      </div>
+      <div class="slider-row">
+        <label>EUR Business Cycle</label>
+        <input type="range" id="bc-EUR" min="80" max="125" step="1" value="103">
+        <span class="val" id="bc-EUR-v">103</span>
+      </div>
+      <div class="slider-row">
+        <label>JAP Business Cycle</label>
+        <input type="range" id="bc-JAP" min="80" max="125" step="1" value="102">
+        <span class="val" id="bc-JAP-v">102</span>
+      </div>
+      <div class="slider-row">
+        <label>Active competitors / segment</label>
+        <input type="range" id="ncomp" min="3" max="12" step="1" value="8">
+        <span class="val" id="ncomp-v">8</span>
+      </div>
+      <div class="slider-row">
+        <label>Price elasticity ε</label>
+        <input type="range" id="elast" min="10" max="35" step="1" value="20">
+        <span class="val" id="elast-v">2.0</span>
+      </div>
+      <p class="small" style="margin-top:6px">Bulletin 6 reports P5 BC indices (USA 101 / EUR 103 / JAP 102). Competitors and ε are calibration knobs — start with cohort=8 and ε=2.0.</p>
+    </div>
+
+    <div class="card">
+      <h2>2a · R&amp;D budget [$k] — vertical (professor rule 2)</h2>
+      <div class="slider-row">
+        <label>R&amp;D Product X</label>
+        <input type="range" id="rd-X" min="0" max="800" step="20" value="280">
+        <span class="val" id="rd-X-v">$280k</span>
+      </div>
+      <div class="slider-row">
+        <label>R&amp;D Product Y</label>
+        <input type="range" id="rd-Y" min="0" max="600" step="20" value="185">
+        <span class="val" id="rd-Y-v">$185k</span>
+      </div>
+      <p class="small" style="margin-top:4px">Min-effective for grade-up: $280k X / $185k Y. Optimum: $560k X / $370k Y. Below min = 0% chance of grade-up.</p>
+    </div>
+
+    <div class="card">
+      <h2>2b · Advertising spend [$k per area-product]</h2>
+      <table>
+        <thead><tr><th></th><th>USA</th><th>EUR</th><th>JAP</th></tr></thead>
+        <tbody>
+          <tr><td>X (chips)</td>
+            <td><input type="number" id="ad-USA-X" value="20" step="5"></td>
+            <td><input type="number" id="ad-EUR-X" value="20" step="5"></td>
+            <td><input type="number" id="ad-JAP-X" value="30" step="5"></td>
+          </tr>
+          <tr><td>Y (boards)</td>
+            <td><input type="number" id="ad-USA-Y" value="50" step="5"></td>
+            <td><input type="number" id="ad-EUR-Y" value="20" step="5"></td>
+            <td><input type="number" id="ad-JAP-Y" value="10" step="5"></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="small" style="margin-top:6px">IFEAM rule-of-thumb: $2-3/unit X, $4-8/unit Y. Total advertising: <b id="ad-total">$150k</b>. Advertising affects BOTH grades of the same product equally.</p>
+    </div>
+
+    <div class="card">
+      <h2>3 · 12 product lines — your decisions</h2>
+      <table id="lines-table">
+        <thead>
+          <tr><th>Line</th><th>Start inv</th><th>Our price $</th><th>Production</th><th class="small">Cohort $</th></tr>
+        </thead>
+        <tbody id="lines-input-body"></tbody>
+      </table>
+      <p class="small" style="margin-top:6px">Starting inv defaults <span class="assumption-tag">A</span> — calibrate against P5 closing. Adjust price to find demand sweet-spot. Production must match the plant capacities below.</p>
+    </div>
+
+    <details>
+      <summary>4 · Plant capacities &amp; advanced assumptions</summary>
+      <div class="card">
+        <h2>Plants we own (inherited P4)</h2>
+        <table>
+          <thead><tr><th></th><th>USA</th><th>EUR</th><th>JAP</th></tr></thead>
+          <tbody>
+            <tr><td>X plants</td><td>0</td><td>1</td><td>2</td></tr>
+            <tr><td>Y plants</td><td>2</td><td>1</td><td>0</td></tr>
+          </tbody>
+        </table>
+        <p class="small" style="margin-top:4px">Single-shift max ≈ 25,000 u/plant. Sum across grades.</p>
+
+        <h2 style="margin-top:14px">Market base size [A — units / period]</h2>
+        <div class="slider-row"><label>USA-X market</label><input type="range" id="mb-USA-X" min="100000" max="900000" step="20000" value="500000"><span class="val" id="mb-USA-X-v">500k</span></div>
+        <div class="slider-row"><label>USA-Y market</label><input type="range" id="mb-USA-Y" min="100000" max="700000" step="20000" value="350000"><span class="val" id="mb-USA-Y-v">350k</span></div>
+        <div class="slider-row"><label>EUR-X market</label><input type="range" id="mb-EUR-X" min="80000" max="600000" step="20000" value="320000"><span class="val" id="mb-EUR-X-v">320k</span></div>
+        <div class="slider-row"><label>EUR-Y market</label><input type="range" id="mb-EUR-Y" min="80000" max="500000" step="20000" value="240000"><span class="val" id="mb-EUR-Y-v">240k</span></div>
+        <div class="slider-row"><label>JAP-X market</label><input type="range" id="mb-JAP-X" min="80000" max="500000" step="20000" value="280000"><span class="val" id="mb-JAP-X-v">280k</span></div>
+        <div class="slider-row"><label>JAP-Y market</label><input type="range" id="mb-JAP-Y" min="80000" max="400000" step="20000" value="180000"><span class="val" id="mb-JAP-Y-v">180k</span></div>
+
+        <h2 style="margin-top:14px">DLx share of segment [A]</h2>
+        <p class="small">Rest of segment volume goes to Std. Typical 30-50%.</p>
+        <div class="slider-row"><label>USA DLx share</label><input type="range" id="dlx-USA" min="20" max="60" value="35"><span class="val" id="dlx-USA-v">35%</span></div>
+        <div class="slider-row"><label>EUR DLx share</label><input type="range" id="dlx-EUR" min="20" max="60" value="45"><span class="val" id="dlx-EUR-v">45%</span></div>
+        <div class="slider-row"><label>JAP DLx share</label><input type="range" id="dlx-JAP" min="20" max="60" value="30"><span class="val" id="dlx-JAP-v">30%</span></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>5 · Costs (Bulletin 6 — read-only)</summary>
+      <div class="card">
+        <h2>Variable cost / unit</h2>
+        <table><thead><tr><th></th><th>X</th><th>Y</th></tr></thead><tbody>
+          <tr><td>USA</td><td>$2.2</td><td>$4.4</td></tr>
+          <tr><td>EUR</td><td>$3.0</td><td>$5.4</td></tr>
+          <tr><td>JAP</td><td>$2.8</td><td>$4.8</td></tr>
+        </tbody></table>
+
+        <h2 style="margin-top:14px">Local transport (own area)</h2>
+        <table><thead><tr><th></th><th>X</th><th>Y</th></tr></thead><tbody>
+          <tr><td>USA</td><td>$0.50</td><td>$0.60</td></tr>
+          <tr><td>EUR</td><td>$0.95</td><td>$1.00</td></tr>
+          <tr><td>JAP</td><td>$0.40</td><td>$0.70</td></tr>
+        </tbody></table>
+
+        <h2 style="margin-top:14px">Sales rep commission (Only X / Only Y)</h2>
+        <table><thead><tr><th></th><th>X</th><th>Y</th></tr></thead><tbody>
+          <tr><td>USA</td><td>$2.4</td><td>$3.6</td></tr>
+          <tr><td>EUR</td><td>$3.4</td><td>$4.2</td></tr>
+          <tr><td>JAP</td><td>$3.0</td><td>$4.3</td></tr>
+        </tbody></table>
+
+        <h2 style="margin-top:14px">Fixed production / period (1st plant)</h2>
+        <table><thead><tr><th></th><th>X</th><th>Y</th></tr></thead><tbody>
+          <tr><td>USA</td><td>$68k</td><td>$130k</td></tr>
+          <tr><td>EUR</td><td>$71k</td><td>$109k</td></tr>
+          <tr><td>JAP</td><td>$84k</td><td>$185k</td></tr>
+        </tbody></table>
+
+        <h2 style="margin-top:14px">Sales office (fixed / period)</h2>
+        <table><tbody>
+          <tr><td>USA</td><td>$15k</td></tr>
+          <tr><td>EUR</td><td>$18k</td></tr>
+          <tr><td>JAP</td><td>$26k</td></tr>
+        </tbody></table>
+      </div>
+    </details>
+
+  </div>
+
+  <!-- ============================ RIGHT: OUTPUTS ============================ -->
+  <div>
+
+    <div class="card">
+      <h2>📊 Contest scorecard (live)</h2>
+      <div class="kpi-grid">
+        <div class="kpi" id="kpi-nosto"><div class="label">Lines not stocking out</div><div class="value">12 / 12</div></div>
+        <div class="kpi" id="kpi-drawdown"><div class="label">Inv drawdown</div><div class="value">0%</div></div>
+        <div class="kpi" id="kpi-acc"><div class="label">Forecast match</div><div class="value">100%</div></div>
+        <div class="kpi" id="kpi-rank"><div class="label">Est. prize</div><div class="value">$0</div></div>
+      </div>
+      <div class="note" id="contest-msg" style="margin-top:10px">Adjust prices and production to make every line non-stockout AND sell &gt;90% of starting inventory before this period's production.</div>
+    </div>
+
+    <div class="card">
+      <h2>Per-line results</h2>
+      <table id="lines-out-table">
+        <thead><tr>
+          <th>Line</th><th>Demand</th><th>Sales</th><th>End inv</th><th>Rev $k</th><th>GM $k</th><th>SO?</th>
+        </tr></thead>
+        <tbody id="lines-output-body"></tbody>
+        <tfoot id="lines-output-totals"></tfoot>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>P&amp;L summary [$k]</h2>
+      <table id="pnl">
+        <tbody>
+          <tr class="row-pnl"><td>Revenue</td><td id="pnl-rev">0</td></tr>
+          <tr class="row-pnl"><td>− Variable cost</td><td id="pnl-vc">0</td></tr>
+          <tr class="row-pnl"><td>− Transport (local)</td><td id="pnl-tc">0</td></tr>
+          <tr class="row-pnl"><td>− Sales commission</td><td id="pnl-comm">0</td></tr>
+          <tr class="row-pnl bold"><td>= Gross margin</td><td id="pnl-gm">0</td></tr>
+          <tr class="row-pnl"><td>− Fixed production</td><td id="pnl-fp">0</td></tr>
+          <tr class="row-pnl"><td>− Fixed sales offices</td><td id="pnl-fs">0</td></tr>
+          <tr class="row-pnl"><td>− Advertising</td><td id="pnl-ad">0</td></tr>
+          <tr class="row-pnl"><td>− R&amp;D (vertical)</td><td id="pnl-rd">0</td></tr>
+          <tr class="row-pnl"><td>+ EU operating subsidy</td><td id="pnl-sub">+200</td></tr>
+          <tr class="row-pnl bold"><td>= EBIT</td><td id="pnl-ebit">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>HQ cash bridge [$k] <span class="assumption-tag">A</span></h2>
+      <table id="cash">
+        <tbody>
+          <tr class="row-pnl"><td>Opening HQ cash (P5 close)</td><td id="cash-open">100</td></tr>
+          <tr class="row-pnl"><td>Operating cash (EBIT × 70% collection)</td><td id="cash-op">0</td></tr>
+          <tr class="row-pnl"><td>EUR → HO interco transfer</td><td id="cash-ic">+290</td></tr>
+          <tr class="row-pnl"><td>CB loan service (P&I)</td><td id="cash-debt">−290</td></tr>
+          <tr class="row-pnl"><td>Supplier Credit clearance</td><td id="cash-sc">−400</td></tr>
+          <tr class="row-pnl bold"><td>Closing HQ cash</td><td id="cash-close">0</td></tr>
+        </tbody>
+      </table>
+      <p class="small" style="margin-top:6px">HQ cash floor covenant: <b>$100k</b>. If closing &lt; 100, raise EUR→HO transfer or cut production.</p>
+    </div>
+
+    <div class="card">
+      <h2>📝 P6 levers you should also model</h2>
+      <ul class="small" style="padding-left:18px; line-height:1.7">
+        <li><b>EU Chip Tender</b> — 200,000 X units at max $35/u, max 25k/co. Best from EUR (low transport).</li>
+        <li><s>Clevers X2 licence $250k</s> — <b>SKIP per professor rule 2.</b> Vertical R&amp;D instead.</li>
+        <li><b>Vertical R&amp;D P6</b> — start spending at minimum-effective: ~$280k X + $185k Y. Optimum: $560k X + $370k Y.</li>
+        <li><b>R&amp;D 30% kick-back</b> — one application/company. Reimbursable from Q8. Apply once we hit material R&amp;D spend.</li>
+        <li><b>Japan export quota</b> — JAP can ship max 50k X + 50k Y combined out of country. Aligns with rule 1 (local-only).</li>
+        <li><b>Clear Supplier Credit</b> — grew to $653k in P5. Use $400k USA-ABI + $300k JAP-ABI to flip to cheaper bank loans.</li>
+        <li><b>Contest submission timing</b> — first 3 submitters get +$100k Excellence Grant on top of the placement prize.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ---------------------------------------------------------------------------
+// CONSTANTS (Bulletin 6)
+// ---------------------------------------------------------------------------
+const AREAS = ['USA', 'EUR', 'JAP'];
+const PRODUCTS = ['X', 'Y'];
+const GRADES = ['Std', 'DLx'];
+
+const VAR_COST = {
+  USA: { X: 2.2, Y: 4.4 },
+  EUR: { X: 3.0, Y: 5.4 },
+  JAP: { X: 2.8, Y: 4.8 }
+};
+const TRANSPORT_LOCAL = {
+  USA: { X: 0.50, Y: 0.60 },
+  EUR: { X: 0.95, Y: 1.00 },
+  JAP: { X: 0.40, Y: 0.70 }
+};
+const COMMISSION = {
+  USA: { X: 2.4, Y: 3.6 },
+  EUR: { X: 3.4, Y: 4.2 },
+  JAP: { X: 3.0, Y: 4.3 }
+};
+const FIXED_PROD = {
+  USA: { X: 68, Y: 130 },
+  EUR: { X: 71, Y: 109 },
+  JAP: { X: 84, Y: 185 }
+};
+const PLANTS = {
+  USA: { X: 0, Y: 2 },
+  EUR: { X: 1, Y: 1 },
+  JAP: { X: 2, Y: 0 }
+};
+const FIXED_SALES = { USA: 15, EUR: 18, JAP: 26 };
+
+// Cohort price benchmarks [A] — calibrate against Bulletin / cohort
+const PRICE_BENCH = {
+  USA: { X: { Std: 25, DLx: 30 }, Y: { Std: 32, DLx: 40 } },
+  EUR: { X: { Std: 25, DLx: 30 }, Y: { Std: 32, DLx: 42 } },
+  JAP: { X: { Std: 25, DLx: 30 }, Y: { Std: 32, DLx: 40 } }
+};
+// Our P6 starting price suggestion — professor rule: cheap old-grade Std, premium DLx
+const OUR_PRICE_DEFAULT = {
+  USA: { X: { Std: 22, DLx: 30 }, Y: { Std: 28, DLx: 40 } },
+  EUR: { X: { Std: 22, DLx: 32 }, Y: { Std: 28, DLx: 44 } },
+  JAP: { X: { Std: 21, DLx: 30 }, Y: { Std: 28, DLx: 40 } }
+};
+
+// Starting inventory P6 — actual P5 close from SIMP05C03.xlsx
+const START_INV_DEFAULT = {
+  USA: { X: { Std: 21275, DLx: 0     }, Y: { Std: 41713, DLx: 0     } },
+  EUR: { X: { Std: 14693, DLx: 12500 }, Y: { Std: 10000, DLx: 10000 } },
+  JAP: { X: { Std: 76448, DLx: 0     }, Y: { Std: 0,     DLx: 0     } }
+};
+// Initial production proposals — local-only (professor rule 1), drain inventory
+// USA-X & JAP-Y: zero (no plants). JAP-X idled to drain 76k overhang.
+const INIT_PROD = {
+  USA: { X: { Std: 0,     DLx: 0     }, Y: { Std: 8000,  DLx: 0     } },
+  EUR: { X: { Std: 10000, DLx: 8000  }, Y: { Std: 8000,  DLx: 6000  } },
+  JAP: { X: { Std: 5000,  DLx: 0     }, Y: { Std: 0,     DLx: 0     } }
+};
+
+// Lines list
+const LINES = [];
+for (const a of AREAS) for (const p of PRODUCTS) for (const g of GRADES) LINES.push({a, p, g, key: `${a}-${p}-${g}`});
+
+// ---------------------------------------------------------------------------
+// BUILD INPUTS
+// ---------------------------------------------------------------------------
+function buildInputs() {
+  const tbody = document.getElementById('lines-input-body');
+  tbody.innerHTML = LINES.map(L => `
+    <tr>
+      <td><span class="area-label">${L.a}</span>${L.p}-${L.g}</td>
+      <td><input type="number" id="inv-${L.key}" value="${START_INV_DEFAULT[L.a][L.p][L.g]}" step="1000"></td>
+      <td><input type="number" id="price-${L.key}" value="${OUR_PRICE_DEFAULT[L.a][L.p][L.g]}" step="0.5"></td>
+      <td><input type="number" id="prod-${L.key}" value="${INIT_PROD[L.a][L.p][L.g]}" step="1000"></td>
+      <td class="small">${PRICE_BENCH[L.a][L.p][L.g]}</td>
+    </tr>
+  `).join('');
+}
+
+function fmt(n, dp = 0) {
+  if (isNaN(n) || n === null) return '—';
+  return n.toLocaleString(undefined, { minimumFractionDigits: dp, maximumFractionDigits: dp });
+}
+function fmtK(n) {
+  if (n >= 1000) return (n/1000).toFixed(0) + 'M';
+  return n + 'k';
+}
+
+// ---------------------------------------------------------------------------
+// RECOMPUTE
+// ---------------------------------------------------------------------------
+function recompute() {
+  // Read macro inputs
+  const bc = {};
+  for (const a of AREAS) {
+    bc[a] = +document.getElementById(`bc-${a}`).value;
+    document.getElementById(`bc-${a}-v`).textContent = bc[a];
+  }
+  const ncomp = +document.getElementById('ncomp').value;
+  const elast = +document.getElementById('elast').value / 10;
+  document.getElementById('ncomp-v').textContent = ncomp;
+  document.getElementById('elast-v').textContent = elast.toFixed(1);
+
+  // Market base sliders
+  const MARKET_BASE = {};
+  for (const a of AREAS) {
+    MARKET_BASE[a] = {};
+    for (const p of PRODUCTS) {
+      MARKET_BASE[a][p] = +document.getElementById(`mb-${a}-${p}`).value;
+      document.getElementById(`mb-${a}-${p}-v`).textContent = fmtK(Math.round(MARKET_BASE[a][p]/1000));
+    }
+  }
+  // DLx share
+  const DLX_SHARE = {};
+  for (const a of AREAS) {
+    DLX_SHARE[a] = +document.getElementById(`dlx-${a}`).value / 100;
+    document.getElementById(`dlx-${a}-v`).textContent = (DLX_SHARE[a]*100).toFixed(0) + '%';
+  }
+
+  // Ad spend
+  const adSpend = {};
+  let adTotal = 0;
+  for (const a of AREAS) for (const p of PRODUCTS) {
+    adSpend[`${a}-${p}`] = +document.getElementById(`ad-${a}-${p}`).value;
+    adTotal += adSpend[`${a}-${p}`];
+  }
+  document.getElementById('ad-total').textContent = `$${adTotal}k`;
+
+  // Per-line computation
+  let totalRev = 0, totalVC = 0, totalTC = 0, totalComm = 0;
+  let nonSO = 0, totalStart = 0, totalSales = 0, totalDemand = 0;
+
+  const outRows = LINES.map(L => {
+    const startInv = +document.getElementById(`inv-${L.key}`).value;
+    const price = +document.getElementById(`price-${L.key}`).value;
+    const prod = +document.getElementById(`prod-${L.key}`).value;
+
+    const segShare = L.g === 'DLx' ? DLX_SHARE[L.a] : (1 - DLX_SHARE[L.a]);
+    const segmentDemand = MARKET_BASE[L.a][L.p] * segShare;
+    const ourBase = segmentDemand / ncomp;
+
+    const priceFactor = Math.pow(PRICE_BENCH[L.a][L.p][L.g] / Math.max(price, 1), elast);
+
+    const adv = adSpend[`${L.a}-${L.p}`] * 1000;
+    const adOptimum = ourBase * (L.p === 'X' ? 2.5 : 6);
+    const adRatio = adv / Math.max(adOptimum, 1);
+    const adFactor = Math.max(0.6, Math.min(1.4, 0.7 + 0.4 * Math.log2(1 + adRatio)));
+
+    const bcFactor = bc[L.a] / 100;
+
+    const demand = Math.max(0, Math.round(ourBase * priceFactor * adFactor * bcFactor));
+    const available = startInv + prod;
+    const sales = Math.min(demand, available);
+    const endInv = available - sales;
+    const stockout = sales < demand && demand > 0;
+
+    const revenue = sales * price / 1000;
+    const varCost = sales * VAR_COST[L.a][L.p] / 1000;
+    const transport = sales * TRANSPORT_LOCAL[L.a][L.p] / 1000;
+    const commission = sales * COMMISSION[L.a][L.p] / 1000;
+    const gm = revenue - varCost - transport - commission;
+
+    totalRev += revenue;
+    totalVC += varCost;
+    totalTC += transport;
+    totalComm += commission;
+    if (!stockout) nonSO++;
+    totalStart += startInv;
+    totalSales += sales;
+    totalDemand += demand;
+
+    return `<tr>
+      <td><span class="area-label">${L.a}</span>${L.p}-${L.g}</td>
+      <td>${fmt(demand)}</td>
+      <td>${fmt(sales)}</td>
+      <td>${fmt(endInv)}</td>
+      <td>${revenue.toFixed(0)}</td>
+      <td style="color:${gm >= 0 ? '#2e7d32' : '#c62828'}">${gm.toFixed(0)}</td>
+      <td>${stockout ? '<span class="stockout">SO</span>' : '<span class="ok">✓</span>'}</td>
+    </tr>`;
+  });
+  document.getElementById('lines-output-body').innerHTML = outRows.join('');
+  document.getElementById('lines-output-totals').innerHTML = `<tr class="totals-row">
+    <td>TOTAL</td>
+    <td>${fmt(totalDemand)}</td>
+    <td>${fmt(totalSales)}</td>
+    <td>—</td>
+    <td>${totalRev.toFixed(0)}</td>
+    <td>${(totalRev - totalVC - totalTC - totalComm).toFixed(0)}</td>
+    <td>${nonSO}/12</td>
+  </tr>`;
+
+  // Contest scorecard
+  document.getElementById('kpi-nosto').querySelector('.value').textContent = `${nonSO} / 12`;
+  document.getElementById('kpi-nosto').className = 'kpi ' + (nonSO === 12 ? 'good' : (nonSO >= 10 ? 'warn' : 'bad'));
+  const drawdown = totalStart > 0 ? totalSales / totalStart : 0;
+  document.getElementById('kpi-drawdown').querySelector('.value').textContent = `${(drawdown * 100).toFixed(0)}%`;
+  document.getElementById('kpi-drawdown').className = 'kpi ' + (drawdown >= 0.9 ? 'good' : (drawdown >= 0.7 ? 'warn' : 'bad'));
+  document.getElementById('kpi-acc').querySelector('.value').textContent = `100%`;
+  document.getElementById('kpi-acc').className = 'kpi good';
+  let prize = 0, msg = '';
+  if (nonSO === 12 && drawdown >= 0.9) { prize = 250; msg = '🏆 Hitting contest win conditions. Submit early for +$100k Excellence Grant.'; }
+  else if (nonSO === 12 && drawdown >= 0.8) { prize = 150; msg = '🥈 Strong second-tier — bump production down or prices up to drain more inventory.'; }
+  else if (nonSO >= 11 && drawdown >= 0.75) { prize = 100; msg = '🥉 Podium-eligible — close gap on the stocked-out line and lift drawdown.'; }
+  else if (nonSO < 10) { msg = '⚠️ Too many stockouts — lower price or raise production on red lines.'; }
+  else { msg = '⚠️ Inventory drawdown too low — sales not consuming 90% of starting stock.'; }
+  document.getElementById('kpi-rank').querySelector('.value').textContent = `$${prize}k`;
+  document.getElementById('kpi-rank').className = 'kpi ' + (prize >= 250 ? 'good' : prize >= 100 ? 'warn' : 'bad');
+  document.getElementById('contest-msg').innerHTML = msg;
+
+  // P&L
+  let totalFixedProd = 0;
+  for (const a of AREAS) for (const p of PRODUCTS) totalFixedProd += PLANTS[a][p] * FIXED_PROD[a][p];
+  const totalFixedSales = AREAS.map(a => FIXED_SALES[a]).reduce((s,x)=>s+x,0);
+  const totalAd = adTotal;
+  const rdX = +document.getElementById('rd-X').value;
+  const rdY = +document.getElementById('rd-Y').value;
+  document.getElementById('rd-X-v').textContent = `$${rdX}k`;
+  document.getElementById('rd-Y-v').textContent = `$${rdY}k`;
+  const rd = rdX + rdY;
+  const subsidy = 200;
+  const gm = totalRev - totalVC - totalTC - totalComm;
+  const ebit = gm - totalFixedProd - totalFixedSales - totalAd - rd + subsidy;
+
+  document.getElementById('pnl-rev').textContent = totalRev.toFixed(0);
+  document.getElementById('pnl-vc').textContent = `−${totalVC.toFixed(0)}`;
+  document.getElementById('pnl-tc').textContent = `−${totalTC.toFixed(0)}`;
+  document.getElementById('pnl-comm').textContent = `−${totalComm.toFixed(0)}`;
+  document.getElementById('pnl-gm').textContent = gm.toFixed(0);
+  document.getElementById('pnl-fp').textContent = `−${totalFixedProd}`;
+  document.getElementById('pnl-fs').textContent = `−${totalFixedSales}`;
+  document.getElementById('pnl-ad').textContent = `−${totalAd}`;
+  document.getElementById('pnl-rd').textContent = `−${rd}`;
+  document.getElementById('pnl-ebit').textContent = ebit.toFixed(0);
+
+  // Cash bridge (simplified) — P5 close actuals
+  const cashOpen = 100;
+  const operatingCash = ebit * 0.7;
+  const intercoTransfer = 290;
+  const debtService = -290;
+  const supplierCreditClearance = -400;
+  const cashClose = cashOpen + operatingCash + intercoTransfer + debtService + supplierCreditClearance;
+  document.getElementById('cash-op').textContent = operatingCash.toFixed(0);
+  document.getElementById('cash-close').textContent = cashClose.toFixed(0);
+  if (cashClose < 100) {
+    document.getElementById('cash-close').style.color = '#c62828';
+    document.getElementById('cash-close').style.fontWeight = '700';
+  } else {
+    document.getElementById('cash-close').style.color = '#2e7d32';
+    document.getElementById('cash-close').style.fontWeight = '700';
+  }
+}
+
+// ---------------------------------------------------------------------------
+// INIT
+// ---------------------------------------------------------------------------
+buildInputs();
+document.querySelectorAll('input').forEach(el => el.addEventListener('input', recompute));
+recompute();
+</script>
+</body>
+</html>
