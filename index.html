@@ -388,14 +388,21 @@
 
 <!-- 3.3 12 product lines ────────────────────────────────────── -->
 <div class="card">
-  <h3>12 product lines — set price and production</h3>
+  <h3>12 product lines — set price and production for P6</h3>
+  <p class="muted" style="margin-top:-4px;margin-bottom:14px"><b>Timing:</b> every number you set here applies to <b>P6</b>. Units sell during P6 at the price below; production runs during P6 and joins the P5-close inventory as the pool available to sell.</p>
   <table id="lines-table" class="big">
     <thead>
-      <tr><th>Line</th><th>Start inv</th><th>Price $</th><th>Production</th><th>Cohort $</th></tr>
+      <tr>
+        <th>Line</th>
+        <th>Start inv<br><span style="font-weight:500;color:var(--muted);text-transform:none;letter-spacing:0">P5 close</span></th>
+        <th>P6 sell price $</th>
+        <th>P6 production<br><span style="font-weight:500;color:var(--muted);text-transform:none;letter-spacing:0">units</span></th>
+        <th>Cohort $<br><span style="font-weight:500;color:var(--muted);text-transform:none;letter-spacing:0">benchmark</span></th>
+      </tr>
     </thead>
     <tbody id="lines-input-body"></tbody>
   </table>
-  <p class="muted">Inventory shown is the P5 close — only change if you're calibrating.</p>
+  <p class="muted">Start inv is the P5 close — only edit if you're calibrating against the actual SIMP05C03 numbers.</p>
 </div>
 
 <!-- 3.4 Live scorecard ──────────────────────────────────────── -->
@@ -412,10 +419,10 @@
 
 <!-- 3.5 Per-line results ────────────────────────────────────── -->
 <div class="card">
-  <h3>Per-line results</h3>
+  <h3>Per-line P6 results (forecast)</h3>
   <table id="lines-out-table" class="big">
     <thead><tr>
-      <th>Line</th><th>Demand</th><th>Sales</th><th>End inv</th><th>Rev $k</th><th>GM $k</th><th>Stock?</th>
+      <th>Line</th><th>P6 demand</th><th>P6 sales</th><th>End inv<br><span style="font-weight:500;color:var(--muted);text-transform:none;letter-spacing:0">P6 close</span></th><th>Rev $k</th><th>GM $k</th><th>Stock?</th>
     </tr></thead>
     <tbody id="lines-output-body"></tbody>
     <tfoot id="lines-output-totals"></tfoot>
