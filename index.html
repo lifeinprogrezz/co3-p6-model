@@ -611,7 +611,7 @@
 </div>
 
 <div class="card">
-  <h3>Sales priorities <span class="sub">where we push</span></h3>
+  <h3>Sales priorities <span class="sub">where we push · what's selling now</span></h3>
   <table class="matrix">
     <thead><tr><th></th><th>USA</th><th>EUROPE</th><th>JAPAN</th></tr></thead>
     <tbody>
@@ -620,55 +620,85 @@
     </tbody>
   </table>
   <p class="muted">Default: produce locally to keep transport low. If long-term it's cheaper to ship across regions than to produce locally, we'll do that.</p>
-</div>
 
-<div class="card">
-  <h3>Operating principles</h3>
-  <div class="principles">
-    <div class="principle">
-      <div class="title">IP-led innovation</div>
-      <div class="body">We own X1/Y1 patents. License higher grades from Clevers only when the license is cheaper than in-house R&amp;D. Default: in-house.</div>
+  <h5 style="font-size:12px;text-transform:uppercase;letter-spacing:0.7px;color:var(--muted);font-weight:700;margin-top:18px;margin-bottom:10px">What sold in P6 — by location &amp; grade</h5>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;font-size:13px" class="sold-grid">
+    <div style="background:#faf8f1;border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+      <div style="font-weight:700;color:var(--accent);font-size:12px;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">🇺🇸 USA</div>
+      <div><b>X-Std</b> <span class="grade-chip g0">g0</span> $25 · 9.6k <small style="color:var(--muted)">(inv only, no plant)</small></div>
+      <div style="margin-top:4px"><b>Y-Std</b> <span class="grade-chip g0">g0</span> $31 · 25.7k</div>
     </div>
-    <div class="principle">
-      <div class="title">Cash discipline</div>
-      <div class="body">HQ never below $100k floor. Hunt every quarterly subsidy. Match production tightly to demand — cash &gt; inventory.</div>
+    <div style="background:#faf8f1;border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+      <div style="font-weight:700;color:var(--accent);font-size:12px;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">🇪🇺 EUR</div>
+      <div><b>X-Std</b> <span class="grade-chip g1">g1</span> $27 · 14.6k</div>
+      <div style="margin-top:4px"><b>X-DLx</b> <span class="grade-chip g1">g1</span> $31 · 12.5k</div>
+      <div style="margin-top:4px"><b>Y-Std</b> <span class="grade-chip g0">g0</span> $33 · 10k</div>
+      <div style="margin-top:4px"><b>Y-DLx</b> <span class="grade-chip g1">g1</span> $42 · 10k</div>
     </div>
+    <div style="background:#faf8f1;border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+      <div style="font-weight:700;color:var(--accent);font-size:12px;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px">🇯🇵 JAP</div>
+      <div><b>X-Std</b> <span class="grade-chip g0">g0</span> $23 · 56.2k <small style="color:var(--muted)">(overhang)</small></div>
+    </div>
+  </div>
+
+  <h5 style="font-size:12px;text-transform:uppercase;letter-spacing:0.7px;color:var(--muted);font-weight:700;margin-top:18px;margin-bottom:8px">Cross-shipping — intracompany transfers</h5>
+  <div style="background:var(--accent-soft);border:1px solid #b8caec;border-radius:8px;padding:12px 14px;font-size:13px">
+    <div><b>P6 (done):</b> USA → JAP, <b>Y-Std 16,000 units @ $30</b> — fed JAP inventory where we have no Y plant.</div>
+    <div style="margin-top:6px"><b>P7 (planned):</b> USA → JAP, <b>X-Std 16,000 units @ $30</b> — draining USA X-Std stock (we have no USA X plant).</div>
   </div>
 </div>
 
-<div class="card">
-  <h3>Functional doctrine <span class="sub">how each director plays the plan</span></h3>
-  <div class="doctrine">
-    <div class="doc-row">
-      <div class="who">MARKETING <small>Satoshi</small></div>
-      <div class="what">Short-term: clear inventory + generate cash with aggressive grade-1 pricing. Long-term: <b>EUR = premium DLX margins</b>, <b>JAP = high-volume X + industrial supply</b>, <b>USA = Y-board base</b>. Pursue special opportunities, optimize regional pricing/grades.</div>
-    </div>
-    <div class="doc-row">
-      <div class="who">FINANCE <small>Jeongho</small></div>
-      <div class="what">Minimize high-cost supplier credit. Use ST/LT bank loans for stable liquidity, accounting for regional rate differentials. Hunt quarterly subsidies. <b>Target 50:50 E/L by P10</b> via active financial leverage.</div>
-    </div>
-    <div class="doc-row">
-      <div class="who">R&amp;D <small>Kavya</small></div>
-      <div class="what">Phased: leverage Grade 1 → Grade 2 via internal spend + strategic license → Grade 3 fully internal. Use the one-time 30% R&amp;D reimbursement. Floor from P6: <b>$560k/qtr X, $370k/qtr Y</b>. Goal: best products in market.</div>
-    </div>
-    <div class="doc-row">
-      <div class="who">PRODUCTION <small>Febby</small></div>
-      <div class="what">Match production tightly to forecast demand — don't over-build. Finish draining the JAP-X-Std overhang (20k left). EUR capacity is now 35k X / 30k Y per quarter; the headroom is real but we don't fill it just because it exists.</div>
-    </div>
-  </div>
-</div>
+<details class="bullcard" style="background:#faf8f1;border-color:var(--border)">
+  <summary>
+    <h4 style="margin:0">📖 Team reference — principles, doctrine, committee</h4>
+    <div class="one-line">Stable reference. Click to expand once; not part of the daily scan.</div>
+  </summary>
+  <div class="detail" style="padding-top:16px">
 
-<div class="card">
-  <h3>Executive Committee <span class="sub">6 directors · Doc 12 final</span></h3>
-  <div class="team">
-    <div class="person"><div class="name">Billie Doré</div><div class="role">CEO · Stakeholder Mgmt · Holding Co.</div></div>
-    <div class="person"><div class="name">Satoshi Kiyomiya</div><div class="role">Marketing · Japan Country Manager</div></div>
-    <div class="person"><div class="name">Jeongho Park</div><div class="role">Finance &amp; Cash Pooling</div></div>
-    <div class="person"><div class="name">Febby Veronica</div><div class="role">Operations / Sourcing · USA Country Manager</div></div>
-    <div class="person"><div class="name">Kavya Prem</div><div class="role">Innovation &amp; R&amp;D</div></div>
-    <div class="person"><div class="name">Roberto Quintero</div><div class="role">Strategic Planning &amp; Market Intelligence · EUR Country Manager</div></div>
+    <h5 style="font-size:12px;text-transform:uppercase;letter-spacing:0.7px;color:var(--muted);font-weight:700;margin-bottom:10px;margin-top:4px">Operating principles</h5>
+    <div class="principles" style="margin-bottom:20px">
+      <div class="principle">
+        <div class="title">IP-led innovation</div>
+        <div class="body">We own X1/Y1 patents. License higher grades from Clevers only when the license is cheaper than in-house R&amp;D. Default: in-house.</div>
+      </div>
+      <div class="principle">
+        <div class="title">Cash discipline</div>
+        <div class="body">HQ never below $100k floor. Hunt every quarterly subsidy. Match production tightly to demand — cash &gt; inventory.</div>
+      </div>
+    </div>
+
+    <h5 style="font-size:12px;text-transform:uppercase;letter-spacing:0.7px;color:var(--muted);font-weight:700;margin-bottom:10px">Functional doctrine — how each director plays the plan</h5>
+    <div class="doctrine" style="margin-bottom:20px">
+      <div class="doc-row">
+        <div class="who">MARKETING <small>Satoshi</small></div>
+        <div class="what">Short-term: clear inventory + generate cash with grade-1 pricing. Long-term: <b>EUR = premium DLX margins</b>, <b>JAP = high-volume X</b>, <b>USA = Y-board base</b>.</div>
+      </div>
+      <div class="doc-row">
+        <div class="who">FINANCE <small>Jeongho</small></div>
+        <div class="what">Minimize high-cost supplier credit. Use ST/LT bank loans for stable liquidity. Hunt quarterly subsidies. Target 50:50 E/L via active leverage.</div>
+      </div>
+      <div class="doc-row">
+        <div class="who">R&amp;D <small>Kavya</small></div>
+        <div class="what">Phased: leverage Grade 1 → Grade 2 internal + strategic license → Grade 3 internal. Use the 30% R&amp;D reimbursement. Floor: <b>$560k/qtr X, $370k/qtr Y</b>.</div>
+      </div>
+      <div class="doc-row">
+        <div class="who">PRODUCTION <small>Febby</small></div>
+        <div class="what">Match production tightly to forecast — don't over-build. Finish the JAP-X-Std drawdown. Don't fill the new EUR headroom just because it exists.</div>
+      </div>
+    </div>
+
+    <h5 style="font-size:12px;text-transform:uppercase;letter-spacing:0.7px;color:var(--muted);font-weight:700;margin-bottom:10px">Executive Committee — 6 directors</h5>
+    <div class="team">
+      <div class="person"><div class="name">Billie Doré</div><div class="role">CEO · Stakeholder Mgmt · Holding Co.</div></div>
+      <div class="person"><div class="name">Satoshi Kiyomiya</div><div class="role">Marketing · Japan Country Manager</div></div>
+      <div class="person"><div class="name">Jeongho Park</div><div class="role">Finance &amp; Cash Pooling</div></div>
+      <div class="person"><div class="name">Febby Veronica</div><div class="role">Operations / Sourcing · USA Country Manager</div></div>
+      <div class="person"><div class="name">Kavya Prem</div><div class="role">Innovation &amp; R&amp;D</div></div>
+      <div class="person"><div class="name">Roberto Quintero</div><div class="role">Strategic Planning &amp; Market Intelligence · EUR Country Manager</div></div>
+    </div>
+
   </div>
-</div>
+</details>
 
 <!-- ═══════════════════════════════════════════════════════════
      ② WHERE WE ARE — P6 submitted, results delivered
@@ -776,7 +806,7 @@
       <tr><td><b>USA</b> Y-Std</td><td>41,713</td><td>40,000</td><td>$31</td><td>25,686 + 16,000 intra</td><td>40,028</td><td><span class="badge overstock">over-built</span></td></tr>
       <tr><td><b>USA</b> Y-DLx</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td><span class="badge ok">—</span></td></tr>
       <tr class="cell-good"><td><b>EUR</b> X-Std</td><td>14,693</td><td>17,000</td><td>$27</td><td>14,639</td><td>10,174</td><td><span class="badge sold-out">100% starting</span></td></tr>
-      <tr class="cell-good"><td><b>EUR</b> X-DLx <small style="color:var(--muted)">grade 1 sold / grade 2 P7</small></td><td>12,500</td><td>14,881</td><td>$31</td><td>12,500 (grade 1)</td><td>14,881 (grade 2)</td><td><span class="badge sold-out">100% / new ready P7</span></td></tr>
+      <tr class="cell-good"><td><b>EUR</b> X-DLx <small style="color:var(--muted)">g1 sold · g2 P7</small></td><td>12,500</td><td>14,881</td><td>$31</td><td>12,500</td><td>14,881</td><td><span class="badge sold-out">100%</span></td></tr>
       <tr class="cell-good"><td><b>EUR</b> Y-Std</td><td>10,000</td><td>10,000</td><td>$33</td><td>10,000</td><td>10,000</td><td><span class="badge sold-out">100% starting</span></td></tr>
       <tr class="cell-good"><td><b>EUR</b> Y-DLx <small style="color:var(--muted)">grade 1</small></td><td>10,000</td><td>10,000</td><td>$42</td><td>10,000</td><td>10,000</td><td><span class="badge sold-out">100% starting</span></td></tr>
       <tr class="cell-good"><td><b>JAP</b> X-Std</td><td>76,448</td><td>0</td><td>$23</td><td>56,217</td><td>20,231</td><td><span class="badge sold-out">overhang drained</span></td></tr>
@@ -1312,55 +1342,55 @@
   <div class="owner-group">
     <div class="owner-head"><span class="name">Satoshi</span><span class="role">Marketing · JAP</span></div>
     <ul class="checklist">
-      <li><b>🚀 Launch JAP X-DLx grade-2</b> — post price ~$30–32 (field median $31) and advertise $50k+. We have 25,000 units ready.</li>
-      <li><b>Lift EUR prices $1–3</b> — we sold through all 4 lines in P6, money was left on the table. EUR X-DLx $31 → $32–33, EUR Y-DLx $42 → $43–44.</li>
-      <li><b>Finish the JAP X-Std drawdown</b> — 20k left at $23. Hold price, clear the line.</li>
-      <li><b>Fix ad spend</b> — from $80k on one cell to roughly $300–400k spread sensibly. Rule of thumb: $2–3 per unit for X, $4–8 for Y.</li>
-      <li><b>USA-Y decision</b> (with Febby) — lift price + push ads + run capacity, or accept the quarterly drag.</li>
-      <li>(optional) Decide on the METI export-quota registration — only register if we actually plan to ship JAP → USA / EU.</li>
+      <li><b>Launch JAP X-DLx</b> — post $30–32, advertise $50k+. 25k units ready. 🚀</li>
+      <li><b>Lift EUR prices</b> — X-DLx $31→$33, Y-DLx $42→$44.</li>
+      <li><b>Finish JAP X-Std drawdown</b> — hold $23, clear 20k.</li>
+      <li><b>Fix ad spend</b> — ~$300–400k spread (was $80k on 1 cell).</li>
+      <li><b>USA-Y call</b> (w/ Febby) — push price+ads or accept drag.</li>
+      <li>(opt) METI export quota — only if shipping JAP→USA/EU.</li>
     </ul>
   </div>
 
   <div class="owner-group">
     <div class="owner-head"><span class="name">Kavya</span><span class="role">R&amp;D</span></div>
     <ul class="checklist">
-      <li><b>Restart R&amp;D in-house</b> — $560k X / $370k Y per quarter (we skipped both in P6).</li>
-      <li><b>Recommend: Clevers Y2 license $300k vs in-house Y ramp</b> — bring a payback window.</li>
-      <li>(optional) <b>Model the P8 grade-3 sprint</b> — Clevers X3 + Y3 = $750k total, prizes worth up to ~$1.2M. Go/no-go before P7 lock.</li>
+      <li><b>Restart R&amp;D in-house</b> — $560k X / $370k Y.</li>
+      <li><b>Y2 license vs in-house Y</b> — bring payback recommendation.</li>
+      <li>(opt) <b>Model P8 grade-3 sprint</b> — $750k cost, ~$1.2M prizes.</li>
     </ul>
   </div>
 
   <div class="owner-group">
     <div class="owner-head"><span class="name">Jeongho</span><span class="role">Finance</span></div>
     <ul class="checklist">
-      <li><b>Pay $100k to Co.1</b> — EU capacity certification (Payment to Other Cos row).</li>
-      <li><b>Re-cost the treasury</b> for the new 7% sub → HQ transfer tax. Prefer HQ → subs flows.</li>
-      <li><b>Investigate Supplier Credit growth</b> — $653k → $758k. What's auto-rolling? Design the runoff.</li>
-      <li><b>Submit MBA26Co03_p7.xls</b> with a 5-min buffer · cell E1 = 7 · filename and extension exact.</li>
-      <li>(optional) Apply for the <b>Info-system grant</b> — $400k + $200k per system sold.</li>
-      <li>(optional) Build the <b>P7 close-to-close cash forecast</b> with the 7% tax baked in.</li>
+      <li><b>Pay $100k to Co.1</b> — EU cert (Payment row).</li>
+      <li><b>Re-cost treasury</b> for new 7% sub→HQ tax.</li>
+      <li><b>Investigate Supplier Credit growth</b> — $653→$758k.</li>
+      <li><b>Submit MBA26Co03_p7.xls</b> — 5-min buffer, E1=7.</li>
+      <li>(opt) <b>Info-system grant</b> — $400k + $200k/system.</li>
+      <li>(opt) <b>P7 cash forecast</b> w/ 7% tax baked in.</li>
     </ul>
   </div>
 
   <div class="owner-group">
     <div class="owner-head"><span class="name">Febby</span><span class="role">Operations · USA</span></div>
     <ul class="checklist">
-      <li><b>P7 production plan</b> — EUR can now do 35k X / 30k Y per quarter, but don't fill the headroom for the sake of it. Match production tightly to forecast demand.</li>
-      <li><b>USA-Y decision</b> (with Satoshi) — push capacity or accept the drag.</li>
+      <li><b>P7 production plan</b> — match demand, don't fill EUR 35k/30k headroom.</li>
+      <li><b>USA-Y call</b> (w/ Satoshi) — push capacity or accept drag.</li>
     </ul>
   </div>
 
   <div class="owner-group">
     <div class="owner-head"><span class="name">Roberto</span><span class="role">Strategy · EUR</span></div>
     <ul class="checklist">
-      <li><b>File the EU labor subsidy</b> — claim $200k (2 EUR plants × $100k) with the EU administrator.</li>
+      <li><b>File EU labor subsidy</b> — claim $200k (2 plants × $100k).</li>
     </ul>
   </div>
 
   <div class="owner-group">
     <div class="owner-head"><span class="name">All directors</span><span class="role">together</span></div>
     <ul class="checklist">
-      <li><b>Sign the bulletin declaration</b> — 6 signers × $10k = $60k bonus. First 3 companies only, so move fast.</li>
+      <li><b>Sign bulletin declarations × 6</b> → $60k (first 3 cos only).</li>
     </ul>
   </div>
 
