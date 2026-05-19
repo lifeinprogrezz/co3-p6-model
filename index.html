@@ -220,18 +220,28 @@
   }
   .submitted-list .detail { color: var(--muted); font-size: 14px; }
 
-  /* ── P7 bulletin cards grid ──────────────────────────────── */
+  /* ── P7 bulletin cards (expandable) ──────────────────────── */
   .bulletin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (max-width: 700px) { .bulletin-grid { grid-template-columns: 1fr; } }
-  .bullcard {
+  details.bullcard {
     background: var(--card); border: 1px solid var(--border); border-radius: 8px;
-    padding: 14px 16px;
+    padding: 0; overflow: hidden;
   }
-  .bullcard.must-do { background: var(--red-soft); border-color: #ecbdba; }
-  .bullcard.easy { background: var(--green-soft); border-color: #b8d8b6; }
-  .bullcard.decide { background: var(--accent-soft); border-color: #b8caec; }
-  .bullcard.watch { background: var(--gold-soft); border-color: #ecd99a; }
-  .bullcard.skip { background: #f3f1e9; border-color: var(--border); opacity: 0.85; }
+  details.bullcard > summary {
+    list-style: none; cursor: pointer; padding: 14px 16px;
+    display: block; position: relative;
+  }
+  details.bullcard > summary::-webkit-details-marker { display: none; }
+  details.bullcard > summary::after {
+    content: "▾"; position: absolute; right: 14px; top: 14px;
+    font-size: 14px; color: var(--muted); transition: transform 0.15s;
+  }
+  details.bullcard[open] > summary::after { transform: rotate(180deg); }
+  details.bullcard.must-do { background: var(--red-soft); border-color: #ecbdba; }
+  details.bullcard.easy { background: var(--green-soft); border-color: #b8d8b6; }
+  details.bullcard.decide { background: var(--accent-soft); border-color: #b8caec; }
+  details.bullcard.watch { background: var(--gold-soft); border-color: #ecd99a; }
+  details.bullcard.skip { background: #f3f1e9; border-color: var(--border); opacity: 0.85; }
   .bullcard .ribbon {
     display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.7px;
     text-transform: uppercase; padding: 2px 8px; border-radius: 999px;
@@ -242,11 +252,41 @@
   .bullcard.decide .ribbon { background: var(--accent); color: white; }
   .bullcard.watch .ribbon { background: var(--gold); color: white; }
   .bullcard.skip .ribbon { background: var(--muted); color: white; }
-  .bullcard h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.1px; }
-  .bullcard p { font-size: 14px; line-height: 1.5; color: var(--ink); }
-  .bullcard .amount { font-size: 20px; font-weight: 800; color: var(--ink); }
+  .bullcard h4 {
+    font-size: 16px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.1px;
+    padding-right: 24px;
+  }
+  .bullcard .one-line {
+    font-size: 13px; color: var(--muted); margin-top: 4px; line-height: 1.4;
+  }
+  .bullcard .detail {
+    padding: 0 16px 16px; font-size: 13px; line-height: 1.55; color: var(--ink);
+    border-top: 1px solid rgba(0,0,0,0.07); padding-top: 12px; margin-top: 4px;
+  }
+  .bullcard .detail p { margin-bottom: 6px; }
+  .bullcard .detail b { color: var(--ink); }
+  .bullcard .amount { font-size: 20px; font-weight: 800; }
   .bullcard .amount.cost { color: var(--red); }
   .bullcard .amount.gain { color: var(--green); }
+
+  /* ── Checklist groups by owner ───────────────────────────── */
+  .owner-group { margin-bottom: 20px; }
+  .owner-group:last-child { margin-bottom: 0; }
+  .owner-group .owner-head {
+    display: flex; align-items: baseline; gap: 10px;
+    padding-bottom: 8px; margin-bottom: 8px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .owner-group .owner-head .name {
+    font-size: 16px; font-weight: 800; letter-spacing: -0.2px;
+  }
+  .owner-group .owner-head .role {
+    font-size: 11px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.5px; font-weight: 600;
+  }
+  .owner-group .checklist li { padding-left: 32px; }
+  .owner-group .checklist li::before { top: 12px; left: 0; }
+  .owner-group .checklist li::after { left: 5px; top: 10px; }
 
   /* ── Checklist ───────────────────────────────────────────── */
   .checklist { list-style: none; padding: 0; }
@@ -378,6 +418,7 @@
   table.results .badge.sold-out { background: var(--green); color: white; }
   table.results .badge.overstock { background: var(--gold); color: white; }
   table.results .badge.stranded { background: var(--red); color: white; }
+  table.results .badge.ready { background: var(--accent); color: white; }
   table.results .badge.ok { background: #e0dfd5; color: var(--muted); }
 
   /* ── Insight callouts ────────────────────────────────────── */
@@ -393,8 +434,8 @@
   .insight .icon {
     font-size: 18px; margin-bottom: 4px;
   }
-  .insight h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-  .insight p { font-size: 14px; line-height: 1.5; }
+  .insight h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
+  .insight p { font-size: 13px; line-height: 1.45; }
   .insight .num {
     font-size: 22px; font-weight: 800; letter-spacing: -0.3px;
     font-variant-numeric: tabular-nums;
@@ -428,11 +469,10 @@
 <body>
 
 <header class="page-header">
-  <div class="brand">Co.3 — Corporate Strategy & P7 Playbook</div>
-  <div class="subtitle">Five plants. Three subs + HQ. The plan to swing $4.3M in 6 quarters.</div>
+  <div class="brand">Co.3 — Daily Briefing</div>
   <div class="meta">
-    <span><b>P6:</b> submitted 2026-05-18 · <span class="pill live">results delivered 2026-05-19</span></span>
-    <span><b>P7:</b> Doc 17 received 2026-05-19 · <span class="pill live">decision phase</span></span>
+    <span><b>P6:</b> submitted · <span class="pill live">results delivered</span></span>
+    <span><b>P7:</b> Doc 17 received · <span class="pill live">decision phase</span></span>
   </div>
 </header>
 
@@ -448,31 +488,27 @@
 </div>
 
 <div class="card strategy-hero">
-  <h3>Our binding plan, as approved 2026-05-13</h3>
+  <h3>What we're playing for</h3>
   <div class="big">
-    We swing retained earnings from <b style="color:#ff8b8b">−$3.3M</b> to <b style="color:#9be29b">+$1M+</b>
-    over six quarters by running EUR as the treasury hub, defending all five plants,
-    investing aggressively in R&amp;D, and pricing for cash &gt; inventory.
-  </div>
-  <div class="footnote">
-    This is the durable corporate frame — we do not relitigate it period by period.
-    Doc 17+ bulletins are interpreted <i>through</i> this plan, not against it.
+    We compete on <b style="color:#9be29b">best-in-market technology</b>.
+    Premium product, sold anywhere — open to consolidating production where it makes sense.
+    Our edge is the tech, not the local footprint.
   </div>
 </div>
 
 <div class="card">
-  <h3>5 Corporate Objectives <span class="sub">by P10 unless noted</span></h3>
+  <h3>5 Corporate Objectives</h3>
   <ol class="obj">
-    <li><b>Retained earnings</b> — swing from −$3.3M (P4) to <b>&gt;+$1M by P10</b>. ($4.3M turnaround / 6 qtrs.)</li>
-    <li><b>Capital structure</b> — Equity / Liabilities <b>≥20/80</b> every quarter; back to <b>≥50/50 by P10</b>.</li>
-    <li><b>Profitability</b> — quarterly <b>ROA growth ≥10% from P8</b> onward.</li>
+    <li><b>Retained earnings</b> — swing from negative back to positive.</li>
+    <li><b>Capital structure</b> — Equity / Liabilities <b>≥20/80</b> every quarter; target <b>50/50</b>.</li>
+    <li><b>Profitability</b> — quarterly <b>ROA growth ≥10%</b>.</li>
     <li><b>Working capital</b> — cut inventory from $3.3M / 232k units to <b>&lt;$500k by P7</b> (≈$2.8M cash released).</li>
     <li><b>Innovation</b> — position in <b>top 5%</b> of market leaders via sustained R&amp;D.</li>
   </ol>
 </div>
 
 <div class="card">
-  <h3>Where we operate <span class="sub">asset map · locked P5–P10</span></h3>
+  <h3>Where we operate <span class="sub">5 plants today</span></h3>
   <table class="matrix">
     <thead><tr><th></th><th>USA</th><th>EUROPE</th><th>JAPAN</th></tr></thead>
     <tbody>
@@ -480,11 +516,11 @@
       <tr><td>Y — Boards plants</td><td class="plant-y">2</td><td class="plant-y">1</td><td class="zero">0</td></tr>
     </tbody>
   </table>
-  <p class="muted"><b>Locked:</b> no plant divestitures (SDG 8). Each plant stays open even at 30% utilization. New plants only in service of grade-2/3 mix in later periods.</p>
+  <p class="muted">We're open to consolidating plants if the math says so. The edge is the tech, not the local footprint — we can ship anywhere.</p>
 </div>
 
 <div class="card">
-  <h3>Sales priorities <span class="sub">where we push · Doc 12 ticked boxes</span></h3>
+  <h3>Sales priorities <span class="sub">where we push</span></h3>
   <table class="matrix">
     <thead><tr><th></th><th>USA</th><th>EUROPE</th><th>JAPAN</th></tr></thead>
     <tbody>
@@ -492,27 +528,19 @@
       <tr><td>Y — Boards</td><td class="ticked">✓</td><td class="ticked">✓</td><td class="un">·</td></tr>
     </tbody>
   </table>
-  <p class="muted">Local-production-for-local-demand: minimises transport, dodges export quotas. Cross-area transfers only for industrial sales or quota arbitrage.</p>
+  <p class="muted">Default: produce locally to keep transport low. If long-term it's cheaper to ship across regions than to produce locally, we'll do that.</p>
 </div>
 
 <div class="card">
-  <h3>Operating principles <span class="sub">the four rules</span></h3>
+  <h3>Operating principles</h3>
   <div class="principles">
     <div class="principle">
-      <div class="title">EUR is the treasury hub</div>
-      <div class="body">Three operating subs (USA, EUR, JAP) + HQ Liechtenstein. EUR is the only cash-positive territory at P5 start — most upstream transfers route through EUR → HQ.</div>
-    </div>
-    <div class="principle">
       <div class="title">IP-led innovation</div>
-      <div class="body">We own X1/Y1 patents. License higher grades from Clevers <i>only</i> when license cost &lt; in-house R&amp;D burn. Default from P7: in-house.</div>
+      <div class="body">We own X1/Y1 patents. License higher grades from Clevers only when the license is cheaper than in-house R&amp;D. Default: in-house.</div>
     </div>
     <div class="principle">
       <div class="title">Cash discipline</div>
-      <div class="body">No new plants in P5. HQ never below $100k floor. Clear Supplier Credit by end-P5. Hunt every quarterly subsidy. Minimize supplier credit reliance.</div>
-    </div>
-    <div class="principle">
-      <div class="title">Preserve employment</div>
-      <div class="body">All 5 inherited plants stay open through P5–P10 (SDG 8). 50% gender parity at C-level. Single-shift in P5 → kWh/unit reporting at P10 audit.</div>
+      <div class="body">HQ never below $100k floor. Hunt every quarterly subsidy. Match production tightly to demand — cash &gt; inventory.</div>
     </div>
   </div>
 </div>
@@ -534,7 +562,7 @@
     </div>
     <div class="doc-row">
       <div class="who">PRODUCTION <small>Febby</small></div>
-      <div class="what">Reduced utilization in P5 → drain 232k overhang. Progressive ramp as demand normalizes. Plant expansion only when grade-2/3 mix demands it across all regions.</div>
+      <div class="what">Match production tightly to forecast demand — don't over-build. Finish draining the JAP-X-Std overhang (20k left). EUR capacity is now 35k X / 30k Y per quarter; the headroom is real but we don't fill it just because it exists.</div>
     </div>
   </div>
 </div>
@@ -549,11 +577,10 @@
     <div class="person"><div class="name">Kavya Prem</div><div class="role">Innovation &amp; R&amp;D</div></div>
     <div class="person"><div class="name">Roberto Quintero</div><div class="role">Strategic Planning &amp; Market Intelligence · EUR Country Manager</div></div>
   </div>
-  <p class="muted">Rhythm: weekly cross-functional decision meeting. CFO drafts cash budget · directors confirm inputs · CEO consolidates.</p>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     ② WHERE WE ARE — P6 submitted, results pending
+     ② WHERE WE ARE — P6 submitted, results delivered
      ═══════════════════════════════════════════════════════════ -->
 <div class="section">
   <span class="num">02</span>
@@ -583,13 +610,13 @@
 
 <!-- ─── P6 results landed ──────────────────────────────────── -->
 <div class="results-hero">
-  <div class="verdict">📊 P6 results · delivered 2026-05-19</div>
+  <div class="verdict">📊 P6 results</div>
   <div class="headline">
     Operating <span class="pos">+$524k</span> · consolidated <span class="neg">−$50k</span>
-    — the Clevers X2 license and HQ interest absorbed our operating gain. <b>One-period investment drag</b>, not a structural miss.
+    — the Clevers X2 license absorbed our operating gain. A planned one-period investment, not a structural miss.
   </div>
   <div class="subhead">
-    EUR and JAP each profitable; USA-Y operating loss; <b>25k JAP X-DLx units stranded</b> (built at grade 2, no price posted, zero sales). RE now <b>−$2.99M</b> (vs −$2.94M prior). Cash position improved to <b>$1.46M</b> consolidated. We have one big leak to plug and three soft tactical issues.
+    EUR and JAP each profitable on their own; USA-Y at an operating loss. Cash position improved to <b>$1.46M</b> consolidated. Our new grade-2 X-DLx inventory (built in P6) is ready to sell from P7 — that's <b>~40k premium units ready to go</b>.
   </div>
   <div class="results-headline-grid">
     <div class="results-kpi warn">
@@ -604,9 +631,9 @@
       <div class="label">Consol. cash</div>
       <div class="value">$1.46M</div>
     </div>
-    <div class="results-kpi bad">
-      <div class="label">Stranded $ (JAP X-DLx)</div>
-      <div class="value">$447k</div>
+    <div class="results-kpi good">
+      <div class="label">Grade-2 X-DLx ready P7</div>
+      <div class="value">~40k u</div>
     </div>
   </div>
 </div>
@@ -658,55 +685,55 @@
       <tr><td><b>USA</b> Y-Std</td><td>41,713</td><td>40,000</td><td>$31</td><td>25,686 + 16,000 intra</td><td>40,028</td><td><span class="badge overstock">over-built</span></td></tr>
       <tr><td><b>USA</b> Y-DLx</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td><span class="badge ok">—</span></td></tr>
       <tr class="cell-good"><td><b>EUR</b> X-Std</td><td>14,693</td><td>17,000</td><td>$27</td><td>14,639</td><td>10,174</td><td><span class="badge sold-out">100% starting</span></td></tr>
-      <tr class="cell-good"><td><b>EUR</b> X-DLx <small style="color:var(--muted)">grade 2</small></td><td>12,500</td><td>14,881</td><td>$31</td><td>12,500</td><td>14,881</td><td><span class="badge sold-out">100% starting</span></td></tr>
+      <tr class="cell-good"><td><b>EUR</b> X-DLx <small style="color:var(--muted)">grade 1 sold / grade 2 P7</small></td><td>12,500</td><td>14,881</td><td>$31</td><td>12,500 (grade 1)</td><td>14,881 (grade 2)</td><td><span class="badge sold-out">100% / new ready P7</span></td></tr>
       <tr class="cell-good"><td><b>EUR</b> Y-Std</td><td>10,000</td><td>10,000</td><td>$33</td><td>10,000</td><td>10,000</td><td><span class="badge sold-out">100% starting</span></td></tr>
       <tr class="cell-good"><td><b>EUR</b> Y-DLx <small style="color:var(--muted)">grade 1</small></td><td>10,000</td><td>10,000</td><td>$42</td><td>10,000</td><td>10,000</td><td><span class="badge sold-out">100% starting</span></td></tr>
       <tr class="cell-good"><td><b>JAP</b> X-Std</td><td>76,448</td><td>0</td><td>$23</td><td>56,217</td><td>20,231</td><td><span class="badge sold-out">overhang drained</span></td></tr>
-      <tr class="cell-bad"><td><b>JAP</b> X-DLx <small style="color:var(--muted)">grade 2</small></td><td>0</td><td>25,000</td><td><b style="color:var(--red)">none posted</b></td><td>0</td><td>25,000</td><td><span class="badge stranded">$447k stranded</span></td></tr>
+      <tr class="cell-good"><td><b>JAP</b> X-DLx <small style="color:var(--muted)">grade 2</small></td><td>0</td><td>25,000</td><td>—</td><td>0</td><td>25,000</td><td><span class="badge ready">ready P7</span></td></tr>
       <tr><td><b>JAP</b> Y-Std (via USA intra)</td><td>0</td><td>0</td><td>$32 (no plant)</td><td>0</td><td>16,000 received</td><td><span class="badge ok">received via intra</span></td></tr>
       <tr><td><b>JAP</b> Y-DLx</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td><span class="badge ok">—</span></td></tr>
     </tbody>
   </table>
-  <p class="muted" style="margin-top:12px"><b>Inventory move:</b> 186,629 → 157,944 units (−15%). But dollar inventory <i>grew</i> $2.43M → $2.99M because the mix shifted to high-cost DLx (esp. the stranded JAP X-DLx + over-built EUR DLx). The 232k → &lt;$500k by P7 objective is now unreachable this quarter — need a 3-period plan.</p>
+  <p class="muted" style="margin-top:12px"><b>Inventory move:</b> 186,629 → 157,944 units (−15%). Grade-2 X-DLx units built in P6 sell from P7 onward — that's how the simulation handles new-grade tech.</p>
 </div>
 
 <div class="card">
-  <h3>Three wins + four issues from P6</h3>
+  <h3>What worked + what to fix</h3>
   <div class="insight-grid">
     <div class="insight win">
       <div class="icon">🏆</div>
-      <h4>EUR sold 100% of starting inventory on all 4 lines</h4>
-      <p>The premium DLx anchor worked: <b>$31 X-DLx and $42 Y-DLx both cleared</b>. EUR was our most profitable sub at <span class="num">+$422k</span> operating. Doctrine validated.</p>
+      <h4>EUR sold 100% of starting inventory</h4>
+      <p>All 4 EUR lines cleared. Premium DLx anchor works. <span class="num">+$422k</span> operating.</p>
     </div>
     <div class="insight win">
       <div class="icon">📉</div>
       <h4>JAP X-Std overhang drained</h4>
-      <p>Sold <b>56,217 units</b> of the 76k JAP-X-Std overhang at $23. Down to <span class="num">20,231</span> ending. One more period of similar action clears the line completely.</p>
+      <p>76k → <span class="num">20k</span> at $23. One more period likely clears the line.</p>
     </div>
     <div class="insight win">
       <div class="icon">💰</div>
-      <h4>Cash position strengthened</h4>
-      <p>Consolidated cash <b>$1.46M</b> (EUR $788k, JAP $461k, USA $115k, HQ $100k floor). All subs cash-positive. Area Bank Loans gave us the runway without HQ stress.</p>
+      <h4>Cash up to $1.46M</h4>
+      <p>All subs cash-positive. HQ at floor. Area Bank Loans funded the ramp.</p>
     </div>
-    <div class="insight miss">
-      <div class="icon">🚨</div>
-      <h4>JAP X-DLx — 25,000 units stranded</h4>
-      <p>We built grade-2 X-DLx in JAP for <b>$447k production cost</b> + drew on $250k license — but <b>posted no price</b>, so zero consumer sales. Now sitting on 25,000 units of fresh grade-2 inventory in JAP. <b>P7 absolute must: price them and advertise.</b></p>
+    <div class="insight win">
+      <div class="icon">🚀</div>
+      <h4>~40k grade-2 X-DLx ready to sell P7</h4>
+      <p>25k JAP + ~15k EUR built in P6 will start selling in P7 (new-grade tech sells from N+1). Premium price &amp; ad plan ready.</p>
     </div>
     <div class="insight miss">
       <div class="icon">📦</div>
-      <h4>EUR over-built across all 4 DLx/Std lines</h4>
-      <p>Sold 100% of <i>starting</i> inventory but built equivalent volume on top — so end inventory ≈ start inventory. We left margin on the table by not raising prices. <b>Push EUR prices up $1–3 in P7</b>, especially DLx.</p>
+      <h4>EUR over-built every line</h4>
+      <p>Produced as much as we sold → ending inv flat. Lift EUR prices $1–3 in P7.</p>
     </div>
     <div class="insight miss">
       <div class="icon">⚖️</div>
       <h4>USA-Y operating loss −$66k</h4>
-      <p>Two Y plants in USA carry $333k fixed cost vs only $796k revenue. Either ramp volume hard (push price $29–30 + ads + production at capacity) or accept it as a quarterly drag while doctrine forbids plant divestiture.</p>
+      <p>2 Y plants, $333k fixed cost vs $796k revenue. Push volume or accept the drag.</p>
     </div>
     <div class="insight watch">
       <div class="icon">💳</div>
       <h4>Supplier Credit grew to $758k</h4>
-      <p>Doctrine was: clear by end-P5. Instead it grew from $653k → $758k (+$105k). <b>Jeongho:</b> identify what's auto-rolling and design the runoff schedule for P7-P8.</p>
+      <p>From $653k. Jeongho — find what's auto-rolling and plan the runoff.</p>
     </div>
   </div>
 </div>
@@ -724,12 +751,11 @@
       <tr><td>EUR Y-Std</td><td>$30</td><td>$33</td><td>$44 · Co.15</td><td>$33</td><td>median</td></tr>
       <tr><td>EUR Y-DLx</td><td>$35 · Co.6</td><td>$42</td><td>$50 · Co.17,18</td><td>$42</td><td>median</td></tr>
       <tr><td>JAP X-Std</td><td>$20 · Co.13</td><td>$24</td><td>$27 · Co.4,6</td><td>$23</td><td>aggressive (intended)</td></tr>
-      <tr class="cell-bad"><td>JAP X-DLx</td><td>$23 · Co.6</td><td>$31</td><td>$33 · Co.13,15</td><td><b>no offer</b></td><td>missed market</td></tr>
+      <tr><td>JAP X-DLx</td><td>$23 · Co.6</td><td>$31</td><td>$33 · Co.13,15</td><td>launching P7</td><td>—</td></tr>
     </tbody>
   </table>
   <div class="note">
-    <b>P7 grade-2 race:</b> ~half the field is now producing X-DLx at grade 2 (Co.3, Co.4, Co.5, Co.8, Co.9, Co.10, Co.12, Co.13, Co.15 — per their P7 production grades posted). <b>We are no longer ahead</b>; we're median in the grade-2 cluster. The window for our X2 premium is narrowing — need to push the inventory we have now and start in-house Y R&amp;D to reach grade-2 Y next.<br><br>
-    <b>Notable:</b> Co.13 plays aggressive low-price ($20–22 X across all markets) — likely an overhang-clearing strategy similar to ours. Co.17 and Co.18 have <b>identical pricing</b> across all 12 lines (possible coordination or copy).
+    <b>P7 grade-2 race:</b> roughly half the field is producing X-DLx at grade 2. We're median, not ahead. Push our inventory and start in-house Y R&amp;D to reach grade-2 Y next.
   </div>
 </div>
 
@@ -792,126 +818,253 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     ③ P7 — NEW CONTEXT (Doc 17)
+     ③ BULLETIN OPPORTUNITIES (Doc 17)
      ═══════════════════════════════════════════════════════════ -->
 <div class="section">
   <span class="num">03</span>
-  <h2>Period 7 — what changed</h2>
-  <span class="tag">Doc 17 · 2026-05-19</span>
+  <h2>Bulletin opportunities</h2>
+  <span class="tag">click any card to expand</span>
 </div>
 
 <div class="card">
-  <h3>The 9 shifts that matter <span class="sub">filtered for our doctrine</span></h3>
+  <h3>P7 — what's on the table this period</h3>
   <div class="bulletin-grid">
 
-    <div class="bullcard must-do">
-      <span class="ribbon">Mandatory</span>
-      <h4>🇪🇺 EU capacity certification</h4>
-      <p><b>Pay $100k to Co.1</b> at start of P7 ($75k per X plant + $25k per Y plant; we have 1+1). Unlocks revised EUR capacity: <b>X = 35,000 / Y = 30,000 units per qtr</b> (~30% increase).</p>
-      <p style="margin-top:8px"><span class="amount cost">−$100k</span> · Penalty if skipped: $250k + cumulative dues.</p>
-    </div>
+    <details class="bullcard easy">
+      <summary>
+        <span class="ribbon">Easy money</span>
+        <h4>🇪🇺 EU labor subsidy — claim $200k</h4>
+        <div class="one-line">2 EUR plants × $100k. Apply with administrator before deadline.</div>
+      </summary>
+      <div class="detail">
+        <p>Continues from prior period. Eligible: companies owning EUR plants and not solely sourcing USA. We qualify with 1 X + 1 Y plant in EUR.</p>
+        <p><b>Owner:</b> Roberto. Submit the request to the EU administrator before the P7 close.</p>
+      </div>
+    </details>
 
-    <div class="bullcard easy">
-      <span class="ribbon">Easy money</span>
-      <h4>🇪🇺 EU labor-content subsidy</h4>
-      <p><b>$100k per plant per quarter</b>, for companies owning EUR plants (excl. USA-only sourcing). We have 2 EUR plants → apply with administrator before deadline.</p>
-      <p style="margin-top:8px"><span class="amount gain">+$200k</span> · Continues from Doc 16.</p>
-    </div>
+    <details class="bullcard easy">
+      <summary>
+        <span class="ribbon">Easy money</span>
+        <h4>✍️ Sign the bulletin — get $60k</h4>
+        <div class="one-line">6 signers × $10k each. First 3 companies only — submit fast.</div>
+      </summary>
+      <div class="detail">
+        <p>Each of our 6 managers submits a one-page "I declare I have read this bulletin" declaration. Repeatable each quarter while the program is open.</p>
+        <p><b>Owner:</b> All directors. Roberto can compile + deliver.</p>
+      </div>
+    </details>
 
-    <div class="bullcard easy">
-      <span class="ribbon">Easy money</span>
-      <h4>✍️ Bulletin-read $10k bonus</h4>
-      <p>Each of our 6 signing managers submits a one-page "I declare I have read this bulletin" declaration. First 3 companies eligible — submit fast.</p>
-      <p style="margin-top:8px"><span class="amount gain">+$60k</span> · 6 signers × $10k.</p>
-    </div>
+    <details class="bullcard must-do">
+      <summary>
+        <span class="ribbon">Mandatory</span>
+        <h4>🇪🇺 Pay $100k to Co.1 — EU capacity cert</h4>
+        <div class="one-line">Unlocks new EUR capacity: 35k X / 30k Y per quarter.</div>
+      </summary>
+      <div class="detail">
+        <p>$75k per X plant + $25k per Y plant. We have 1 of each in EUR → $100k.</p>
+        <p>Paid via "Payment to Other Cos" row, counterparty = Co.1.</p>
+        <p><b>Penalty if skipped:</b> $250k + cumulative dues per period of delay.</p>
+        <p><b>Owner:</b> Jeongho.</p>
+      </div>
+    </details>
 
-    <div class="bullcard must-do">
-      <span class="ribbon">New tax</span>
-      <h4>📤 7% transfer tax · sub → HQ</h4>
-      <p><b>EUR/JAP → HQ transfers now taxed 7% at origin</b> (G7/Japan-EU agreement, mirrored on US side). HQ → subs unaffected. Treasury hub math changes: every $100k EUR→HQ now costs us $7k.</p>
-      <p style="margin-top:8px">Requires CEO/CFO declaration certifying transfer = current activities.</p>
-    </div>
+    <details class="bullcard must-do">
+      <summary>
+        <span class="ribbon">New tax</span>
+        <h4>📤 7% tax on subs → HQ transfers</h4>
+        <div class="one-line">EUR or JAP sending cash up to HQ now costs 7%. HQ → subs unaffected.</div>
+      </summary>
+      <div class="detail">
+        <p>Every $100k transferred from EUR or JAP to HQ now costs $7k in tax at origin. HQ to subs is free (so prefer top-down flows).</p>
+        <p>Needs a CEO/CFO declaration certifying the transfer is from current activities.</p>
+        <p><b>Owner:</b> Jeongho — re-cost the treasury plan with this in mind.</p>
+      </div>
+    </details>
 
-    <div class="bullcard decide">
-      <span class="ribbon">Decide</span>
-      <h4>🔬 Clevers Y2 license now available</h4>
-      <p><b>$300k</b> for Y grade-2 (new this period). Our doctrine says "vertical from P7" — so default is to start in-house Y R&amp;D ($370k/qtr floor) instead of licensing. Kavya: argue if license window is shorter.</p>
-      <p style="margin-top:8px;font-size:13px;color:var(--muted)">X3/Y3 land in P8 at $350k/$400k via Clevers — keep dry powder for the grade-3 race.</p>
-    </div>
+    <details class="bullcard decide">
+      <summary>
+        <span class="ribbon">Decide</span>
+        <h4>🔬 Buy Clevers Y2 license — $300k?</h4>
+        <div class="one-line">Or start in-house Y R&D ($370k/qtr). Default: in-house.</div>
+      </summary>
+      <div class="detail">
+        <p>Y grade-2 just became available from Clevers at $300k. Our doctrine is to go in-house from now on.</p>
+        <p>Take the license only if Kavya can show the payback window is shorter than the in-house ramp.</p>
+        <p><b>Owner:</b> Kavya — bring a recommendation.</p>
+      </div>
+    </details>
 
-    <div class="bullcard decide">
-      <span class="ribbon">Optional</span>
-      <h4>🇯🇵 METI export quota</h4>
-      <p>JAP can export up to <b>300k X + 300k Y to USA</b> AND same to EU during P7. Register quarterly plan at METI — first-come-first-served. Only register if our P7 plan actually uses it.</p>
-      <p style="margin-top:8px;font-size:13px;color:var(--muted)">Most local-production doctrine: don't reach for this. Use only if JAP-X overhang persists.</p>
-    </div>
+    <details class="bullcard decide">
+      <summary>
+        <span class="ribbon">Optional</span>
+        <h4>🇯🇵 METI export quota for JAP</h4>
+        <div class="one-line">Up to 300k X + 300k Y allowed to USA and to EU. Register only if used.</div>
+      </summary>
+      <div class="detail">
+        <p>First-come-first-served allocation. Register a quarterly plan at METI.</p>
+        <p>Only useful if we actually plan to ship JAP → USA or JAP → EU. Local production doctrine says skip by default.</p>
+        <p><b>Owner:</b> Satoshi.</p>
+      </div>
+    </details>
 
-    <div class="bullcard watch">
-      <span class="ribbon">Watch</span>
-      <h4>📈 Securities rate ↑ 2.0%</h4>
-      <p>Central Bank Securities Interest doubled (was 1.0%). Bank financing still accessible but pricier. ATM surcharge: 2% over standard if request &lt;30 min before deadline.</p>
-    </div>
+    <details class="bullcard watch">
+      <summary>
+        <span class="ribbon">Watch</span>
+        <h4>📈 Securities rate doubled to 2%</h4>
+        <div class="one-line">Bank financing still accessible but more expensive.</div>
+      </summary>
+      <div class="detail">
+        <p>Central Bank securities rate went from 1.0% to 2.0% per period. ATM surcharge: 2% extra if requested less than 30 min before deadline.</p>
+        <p><b>Owner:</b> Jeongho — bake into cost-of-capital math.</p>
+      </div>
+    </details>
 
-    <div class="bullcard watch">
-      <span class="ribbon">Watch</span>
-      <h4>⏰ Late-submission penalty</h4>
-      <p><b>$10k per second late</b> on the .xls. Wrong filename / extension / period number = $100k charge. <b>&gt;60 sec late = file not processed.</b> Submit 5 min early.</p>
-    </div>
+    <details class="bullcard watch">
+      <summary>
+        <span class="ribbon">Watch</span>
+        <h4>⏰ Late-submission penalties tightened</h4>
+        <div class="one-line">$10k per second late · wrong filename = $100k · &gt;60s = void.</div>
+      </summary>
+      <div class="detail">
+        <p>The .xls submission window is tight. Wrong filename, extension, or period number = $100k charge. More than 60 seconds late = file not processed.</p>
+        <p><b>Owner:</b> Jeongho — submit with a 5-minute buffer.</p>
+      </div>
+    </details>
 
-    <div class="bullcard skip">
-      <span class="ribbon">Skip</span>
-      <h4>🛡️ CSN strike insurance · 🏭 STM X3 tender · 💼 Industrial restructuring</h4>
-      <p>Insurance EUR $200k / JAP $200k / both $300k — not worth unless strike risk feels acute. STM X3 tender — we don't have grade-3 yet, earliest P8. Restructuring sale — doctrine locks all 5 plants.</p>
-    </div>
+    <details class="bullcard skip">
+      <summary>
+        <span class="ribbon">Skip</span>
+        <h4>🛡️ CSN insurance · STM X3 tender · Restructuring sale</h4>
+        <div class="one-line">Not for us this period — too expensive, wrong timing, or off-doctrine.</div>
+      </summary>
+      <div class="detail">
+        <p><b>CSN strike insurance:</b> EUR $200k / JAP $200k / both $300k. Skip unless strike risk feels acute.</p>
+        <p><b>STM X3 tender:</b> we don't have grade-3 capability yet (earliest P8). Skip.</p>
+        <p><b>Industrial restructuring sale:</b> last chance to sell plants at book value. We're open to consolidating but no clear sell candidate yet — skip this window.</p>
+      </div>
+    </details>
 
   </div>
 </div>
 
 <div class="card">
-  <h3>P8 horizon · prizes to plan for now</h3>
-  <p><b>Liechtenstein Ducal Academy:</b> $300k + Innovation Diploma for first company with X3 OR Y3 patent. <b>Golden Band Diploma:</b> $500k for first with BOTH X3 + Y3. <b>METI prize:</b> $200k per facility producing X3 or Y3 (first period only).</p>
-  <div class="note">
-    If we license X3 + Y3 from Clevers in P8 ($350k + $400k = $750k), we'd be in contention for the $500k Golden Band + $300k Ducal + $400k METI (2 EUR plants × $200k). Kavya to model the payback before P7 lock.
+  <h3>P8 — prizes worth planning for now</h3>
+  <div class="bulletin-grid">
+
+    <details class="bullcard easy">
+      <summary>
+        <span class="ribbon">Prize</span>
+        <h4>🏆 Golden Band Diploma — $500k</h4>
+        <div class="one-line">First company to hold BOTH X3 + Y3 patents.</div>
+      </summary>
+      <div class="detail">
+        <p>Liechtenstein Ministry of Industry prize for the first company achieving patents for both grade-3 product technologies. Apply during the period we have both patents confirmed.</p>
+      </div>
+    </details>
+
+    <details class="bullcard easy">
+      <summary>
+        <span class="ribbon">Prize</span>
+        <h4>🥈 Ducal Academy — $300k</h4>
+        <div class="one-line">First company with X3 OR Y3 patent. Innovation Diploma included.</div>
+      </summary>
+      <div class="detail">
+        <p>Awarded the period we confirm a grade-3 patent. If multiple companies claim it the same period, the prize is split.</p>
+      </div>
+    </details>
+
+    <details class="bullcard easy">
+      <summary>
+        <span class="ribbon">Prize</span>
+        <h4>🇯🇵 METI prize — $200k per plant</h4>
+        <div class="one-line">For each plant producing X3 or Y3 — first period only.</div>
+      </summary>
+      <div class="detail">
+        <p>One-time bonus per plant manufacturing a grade-3 product. With 2 EUR plants we could net $400k if we get both grades up.</p>
+      </div>
+    </details>
+
+    <details class="bullcard decide">
+      <summary>
+        <span class="ribbon">Plan it</span>
+        <h4>📐 Grade-3 sprint via Clevers — $750k</h4>
+        <div class="one-line">X3 ($350k) + Y3 ($400k) in P8 → shot at $500k + $300k + $400k.</div>
+      </summary>
+      <div class="detail">
+        <p>If we license both grade-3 tech from Clevers in P8 ($750k total), we'd be in contention for the Golden Band ($500k), Ducal Academy ($300k), and METI plant bonuses ($400k for 2 EUR plants). Total upside up to $1.2M against $750k cost — but we need to be first.</p>
+        <p><b>Owner:</b> Kavya — model the payback and bring a go/no-go before P7 lock.</p>
+      </div>
+    </details>
+
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     ④ P7 DECISION CHECKLIST
+     ④ P7 ACTION PLAN — grouped by owner
      ═══════════════════════════════════════════════════════════ -->
 <div class="section">
   <span class="num">04</span>
-  <h2>P7 decision checklist</h2>
-  <span class="tag">must-do for the team meeting</span>
+  <h2>P7 action plan</h2>
+  <span class="tag">by person</span>
 </div>
 
 <div class="card">
-  <h3>Must-do this period <span class="sub">refreshed with P6 results</span></h3>
-  <ul class="checklist">
-    <li><b>🚨 PRICE THE STRANDED 25k JAP X-DLx</b> — set JAP X-DLx price in cell M18 of the .xls. Field median $31; we should price <b>$30–32</b> and advertise $50k+. This is the single biggest P7 lever. <span class="owner">Satoshi</span></li>
-    <li>Pay <b>$100k to Co.1</b> via "Payment to Other Cos" row — EU capacity certification (mandatory) <span class="owner">Jeongho</span></li>
-    <li>File <b>EU labor-content subsidy application</b> with administrator — claim <b>$200k</b> (2 EUR plants) <span class="owner">Roberto</span></li>
-    <li>Submit <b>6 × bulletin signature declarations</b> — claim <b>$60k</b> bonus <span class="owner">All directors</span></li>
-    <li><b>Restart R&amp;D in-house</b> — minimum $560k X / $370k Y (doctrine floor; we skipped both in P6) <span class="owner">Kavya</span></li>
-    <li><b>R&amp;D decision: Y2 license $300k vs in-house Y $370k+</b> — Kavya bring recommendation with payback window <span class="owner">Kavya</span></li>
-    <li><b>Re-cost treasury</b> for new 7% sub→HQ tax — EUR has $788k cash, but pulling it costs us $55k in tax. Model leaving more in EUR. <span class="owner">Jeongho</span></li>
-    <li><b>EUR pricing up $1–3</b> — we sold 100% of starting inv on all 4 EUR lines; we left money on the table. EUR X-DLx $31 → $32–33, EUR Y-DLx $42 → $43–44. <span class="owner">Satoshi</span></li>
-    <li><b>JAP X-Std drawdown completion</b> — 20k units remaining at $23. Hold price, finish the line. <span class="owner">Satoshi</span></li>
-    <li><b>USA-Y restructure</b> — operating loss −$66k. Decide: lift price to $32 + push ads + maintain volume, or accept drag. <span class="owner">Satoshi · Febby</span></li>
-    <li><b>P7 production plan</b> — EUR can now do up to 35k X / 30k Y/qtr but DON'T over-build (we did in P6). Match to demand forecast. <span class="owner">Febby</span></li>
-    <li><b>Ad spend fix</b> — from $80k (1 cell) to ~$300–400k across ~10 cells. $2–3/u X, $4–8/u Y rule. <span class="owner">Satoshi</span></li>
-    <li><b>Investigate Supplier Credit growth</b> — $653k → $758k vs doctrine "clear by P5". What's auto-rolling? Design runoff plan. <span class="owner">Jeongho</span></li>
-    <li><b>Submit MBA26Co03_p7.xls</b> with at least <b>5-minute buffer</b> before close · period cell E1 = 7 · double-check filename <span class="owner">Jeongho</span></li>
-  </ul>
-</div>
 
-<div class="card">
-  <h3>Optional / next period</h3>
-  <ul class="checklist">
-    <li>Apply for <b>Info system grant ($400k + $200k/system)</b> — Jeongho prepares CFO presentation 30 min before deadline <span class="owner">Jeongho</span></li>
-    <li>Decide on <b>JAP export quota registration</b> at METI — only if our P7 plan actually ships JAP → USA or JAP → EU <span class="owner">Satoshi</span></li>
-    <li><b>Model the P8 grade-3 sprint</b> — Clevers X3+Y3 = $750k for shot at $500k Golden Band + $300k Ducal + $400k METI <span class="owner">Kavya</span></li>
-    <li>Build <b>P7 close-to-close cash forecast</b> with new 7% tax baked in <span class="owner">Jeongho</span></li>
-  </ul>
+  <div class="owner-group">
+    <div class="owner-head"><span class="name">Satoshi</span><span class="role">Marketing · JAP</span></div>
+    <ul class="checklist">
+      <li><b>🚀 Launch JAP X-DLx grade-2</b> — post price ~$30–32 (field median $31) and advertise $50k+. We have 25,000 units ready.</li>
+      <li><b>Lift EUR prices $1–3</b> — we sold through all 4 lines in P6, money was left on the table. EUR X-DLx $31 → $32–33, EUR Y-DLx $42 → $43–44.</li>
+      <li><b>Finish the JAP X-Std drawdown</b> — 20k left at $23. Hold price, clear the line.</li>
+      <li><b>Fix ad spend</b> — from $80k on one cell to roughly $300–400k spread sensibly. Rule of thumb: $2–3 per unit for X, $4–8 for Y.</li>
+      <li><b>USA-Y decision</b> (with Febby) — lift price + push ads + run capacity, or accept the quarterly drag.</li>
+      <li>(optional) Decide on the METI export-quota registration — only register if we actually plan to ship JAP → USA / EU.</li>
+    </ul>
+  </div>
+
+  <div class="owner-group">
+    <div class="owner-head"><span class="name">Kavya</span><span class="role">R&amp;D</span></div>
+    <ul class="checklist">
+      <li><b>Restart R&amp;D in-house</b> — $560k X / $370k Y per quarter (we skipped both in P6).</li>
+      <li><b>Recommend: Clevers Y2 license $300k vs in-house Y ramp</b> — bring a payback window.</li>
+      <li>(optional) <b>Model the P8 grade-3 sprint</b> — Clevers X3 + Y3 = $750k total, prizes worth up to ~$1.2M. Go/no-go before P7 lock.</li>
+    </ul>
+  </div>
+
+  <div class="owner-group">
+    <div class="owner-head"><span class="name">Jeongho</span><span class="role">Finance</span></div>
+    <ul class="checklist">
+      <li><b>Pay $100k to Co.1</b> — EU capacity certification (Payment to Other Cos row).</li>
+      <li><b>Re-cost the treasury</b> for the new 7% sub → HQ transfer tax. Prefer HQ → subs flows.</li>
+      <li><b>Investigate Supplier Credit growth</b> — $653k → $758k. What's auto-rolling? Design the runoff.</li>
+      <li><b>Submit MBA26Co03_p7.xls</b> with a 5-min buffer · cell E1 = 7 · filename and extension exact.</li>
+      <li>(optional) Apply for the <b>Info-system grant</b> — $400k + $200k per system sold.</li>
+      <li>(optional) Build the <b>P7 close-to-close cash forecast</b> with the 7% tax baked in.</li>
+    </ul>
+  </div>
+
+  <div class="owner-group">
+    <div class="owner-head"><span class="name">Febby</span><span class="role">Operations · USA</span></div>
+    <ul class="checklist">
+      <li><b>P7 production plan</b> — EUR can now do 35k X / 30k Y per quarter, but don't fill the headroom for the sake of it. Match production tightly to forecast demand.</li>
+      <li><b>USA-Y decision</b> (with Satoshi) — push capacity or accept the drag.</li>
+    </ul>
+  </div>
+
+  <div class="owner-group">
+    <div class="owner-head"><span class="name">Roberto</span><span class="role">Strategy · EUR</span></div>
+    <ul class="checklist">
+      <li><b>File the EU labor subsidy</b> — claim $200k (2 EUR plants × $100k) with the EU administrator.</li>
+    </ul>
+  </div>
+
+  <div class="owner-group">
+    <div class="owner-head"><span class="name">All directors</span><span class="role">together</span></div>
+    <ul class="checklist">
+      <li><b>Sign the bulletin declaration</b> — 6 signers × $10k = $60k bonus. First 3 companies only, so move fast.</li>
+    </ul>
+  </div>
+
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
