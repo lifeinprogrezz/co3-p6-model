@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Co.3 P6 Forecast — IFEAM Contest</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Co.3 — Corporate Strategy & P7 Playbook</title>
 <style>
   :root {
     --surface: #f8f6f0;
@@ -17,27 +18,41 @@
     --green: #2e7d32;
     --green-soft: #e8f3e9;
     --red: #c62828;
+    --red-soft: #fce8e6;
+    --purple: #4a3aa8;
+    --purple-soft: #efedf9;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-size: 16px; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
     background: var(--surface); color: var(--ink); line-height: 1.55;
-    padding: 0; -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
   }
-  main { max-width: 920px; margin: 0 auto; padding: 28px 24px 80px; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 22px 80px; }
 
   /* ── Page header ─────────────────────────────────────────── */
   .page-header {
-    padding: 36px 24px 24px; max-width: 920px; margin: 0 auto;
+    padding: 36px 22px 22px; max-width: 920px; margin: 0 auto;
     border-bottom: 1px solid var(--border);
   }
   .page-header .brand {
-    font-size: 30px; font-weight: 800; letter-spacing: -0.6px; color: var(--ink);
+    font-size: 32px; font-weight: 800; letter-spacing: -0.7px; color: var(--ink);
   }
   .page-header .subtitle {
-    font-size: 16px; color: var(--muted); margin-top: 4px;
+    font-size: 17px; color: var(--muted); margin-top: 6px;
   }
+  .page-header .meta {
+    font-size: 13px; color: var(--muted); margin-top: 12px;
+    display: flex; gap: 18px; flex-wrap: wrap;
+  }
+  .page-header .meta b { color: var(--ink); }
+  .pill {
+    display: inline-block; padding: 3px 9px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .pill.pending { background: #fdf6dd; color: #8a6a00; border: 1px solid #ecd99a; }
+  .pill.live    { background: var(--green-soft); color: var(--green); border: 1px solid #b8d8b6; }
 
   /* ── Section banners ─────────────────────────────────────── */
   .section {
@@ -45,12 +60,16 @@
     margin: 44px 0 18px;
   }
   .section .num {
-    font-size: 14px; font-weight: 700; color: white;
+    font-size: 13px; font-weight: 700; color: white;
     background: var(--ink); padding: 6px 12px; border-radius: 999px;
     letter-spacing: 1px;
   }
   .section h2 {
     font-size: 24px; font-weight: 700; letter-spacing: -0.3px; color: var(--ink);
+  }
+  .section .tag {
+    margin-left: auto; font-size: 11px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.7px; font-weight: 700;
   }
 
   /* ── Cards ───────────────────────────────────────────────── */
@@ -59,21 +78,108 @@
     padding: 22px 24px; margin-bottom: 14px;
   }
   .card h3 {
-    font-size: 17px; font-weight: 700; margin-bottom: 14px; letter-spacing: -0.1px;
+    font-size: 18px; font-weight: 700; margin-bottom: 14px; letter-spacing: -0.1px;
   }
-  .card .lead {
-    font-size: 17px; line-height: 1.6;
+  .card h3 .sub {
+    font-size: 12px; font-weight: 500; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.7px; margin-left: 8px;
   }
+  .card .lead { font-size: 17px; line-height: 1.55; }
   .card .muted { color: var(--muted); font-size: 14px; margin-top: 10px; }
 
-  /* ── Big lists ───────────────────────────────────────────── */
-  ol.big-list, ul.big-list {
-    padding-left: 24px; font-size: 16px; line-height: 1.7;
+  /* ── Banner styles for callouts ──────────────────────────── */
+  .strategy-hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2e 100%);
+    color: white; border: none;
   }
-  ol.big-list li, ul.big-list li { margin-bottom: 8px; }
-  ol.big-list li b, ul.big-list li b { font-weight: 700; }
+  .strategy-hero h3 { color: white; font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px; }
+  .strategy-hero .big {
+    font-size: 22px; font-weight: 700; line-height: 1.35; letter-spacing: -0.3px;
+    margin-top: 8px;
+  }
+  .strategy-hero .footnote {
+    margin-top: 14px; font-size: 13px; color: rgba(255,255,255,0.65);
+  }
 
-  /* ── Snapshot (gold) ─────────────────────────────────────── */
+  /* ── Objectives big list ─────────────────────────────────── */
+  ol.obj { list-style: none; padding: 0; counter-reset: o; }
+  ol.obj li {
+    counter-increment: o;
+    padding: 14px 14px 14px 56px; position: relative;
+    border-bottom: 1px solid #f0eee5; font-size: 16px; line-height: 1.5;
+  }
+  ol.obj li:last-child { border-bottom: none; }
+  ol.obj li::before {
+    content: counter(o);
+    position: absolute; left: 14px; top: 14px;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--ink); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+  }
+  ol.obj li b { font-weight: 700; }
+
+  /* ── Asset map / sales priorities grid ───────────────────── */
+  .matrix {
+    width: 100%; border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+  }
+  .matrix th, .matrix td {
+    padding: 12px; text-align: center; font-size: 15px;
+    border: 1px solid var(--border);
+  }
+  .matrix th { background: #faf8f1; font-weight: 700; font-size: 12px;
+               text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted); }
+  .matrix th:first-child, .matrix td:first-child {
+    text-align: left; color: var(--ink); font-weight: 600;
+  }
+  .matrix .plant-x { background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 18px; }
+  .matrix .plant-y { background: var(--green-soft); color: var(--green); font-weight: 700; font-size: 18px; }
+  .matrix .zero { color: #c5c2b7; }
+  .matrix .ticked { background: var(--gold-soft); color: var(--gold); font-weight: 700; font-size: 20px; }
+  .matrix .un { color: #c5c2b7; }
+
+  /* ── Principle stack ─────────────────────────────────────── */
+  .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 700px) { .principles { grid-template-columns: 1fr; } }
+  .principle {
+    background: #faf8f1; border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .principle .title {
+    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--accent); margin-bottom: 6px;
+  }
+  .principle .body { font-size: 15px; line-height: 1.5; }
+
+  /* ── Functional doctrine table ───────────────────────────── */
+  .doctrine { display: flex; flex-direction: column; gap: 10px; }
+  .doc-row {
+    display: grid; grid-template-columns: 130px 1fr; gap: 14px;
+    padding: 12px 14px; background: #faf8f1; border: 1px solid var(--border);
+    border-radius: 8px; align-items: start;
+  }
+  @media (max-width: 600px) { .doc-row { grid-template-columns: 1fr; gap: 4px; } }
+  .doc-row .who {
+    font-size: 13px; font-weight: 700; color: var(--accent);
+  }
+  .doc-row .who small {
+    display: block; font-weight: 500; color: var(--muted); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px;
+  }
+  .doc-row .what { font-size: 15px; line-height: 1.5; }
+
+  /* ── Team chips ──────────────────────────────────────────── */
+  .team { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  @media (max-width: 600px) { .team { grid-template-columns: 1fr; } }
+  .team .person {
+    background: var(--purple-soft); border: 1px solid #d8d3f0; border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .team .person .name { font-weight: 700; font-size: 15px; color: var(--purple); }
+  .team .person .role { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* ── Snapshot tiles (gold) ───────────────────────────────── */
   .snapshot {
     background: var(--gold-soft); border: 1px solid var(--gold);
   }
@@ -86,9 +192,9 @@
     background: white; border: 1px solid #ebd9a8; border-radius: 8px; padding: 14px 16px;
   }
   .snapshot-tile h4 {
-    font-size: 14px; font-weight: 700; color: #6b4e0a;
+    font-size: 13px; font-weight: 700; color: #6b4e0a;
     padding-bottom: 8px; margin-bottom: 8px;
-    border-bottom: 1px solid #ebd9a8;
+    border-bottom: 1px solid #ebd9a8; text-transform: uppercase; letter-spacing: 0.5px;
   }
   .snapshot-tile table { width: 100%; font-size: 14px; }
   .snapshot-tile td { padding: 5px 0; border-bottom: 1px solid #f5edd2; }
@@ -99,190 +205,266 @@
   .snapshot-tile .neg { color: var(--red); font-weight: 700; }
   .snapshot-tile .total td { font-weight: 700; border-top: 1.5px solid var(--gold); padding-top: 6px; }
 
-  /* ── R&D big preset buttons ──────────────────────────────── */
-  .rd-row {
-    display: grid; grid-template-columns: 110px 1fr; align-items: center;
-    gap: 14px; margin-bottom: 12px;
+  /* ── P6 submitted bullets ────────────────────────────────── */
+  .submitted-list { padding-left: 0; list-style: none; }
+  .submitted-list li {
+    padding: 10px 0; border-bottom: 1px solid #f0eee5;
+    font-size: 15px; display: flex; gap: 12px; align-items: start;
   }
-  .rd-row .rd-label { font-size: 16px; font-weight: 600; }
-  .rd-presets { display: flex; gap: 10px; }
-  .rd-btn {
-    flex: 1; padding: 14px 12px; border: 2px solid var(--border);
-    border-radius: 8px; background: white; cursor: pointer;
-    font-family: inherit; font-size: 15px; font-weight: 600; color: var(--ink);
-    display: flex; flex-direction: column; align-items: center; gap: 2px;
-    transition: all 0.15s;
+  .submitted-list li:last-child { border-bottom: none; }
+  .submitted-list .icon {
+    font-size: 16px; line-height: 1.4; flex-shrink: 0;
   }
-  .rd-btn small { font-size: 12px; font-weight: 500; color: var(--muted); }
-  .rd-btn:hover { border-color: var(--accent); background: var(--accent-soft); }
-  .rd-btn.active {
-    background: var(--accent); color: white; border-color: var(--accent);
+  .submitted-list .label {
+    font-weight: 600; color: var(--ink);
   }
-  .rd-btn.active small { color: rgba(255,255,255,0.85); }
+  .submitted-list .detail { color: var(--muted); font-size: 14px; }
 
-  /* ── Tables (decision tables + outputs) ──────────────────── */
-  table.big {
-    width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums;
-  }
-  table.big th, table.big td {
-    padding: 11px 10px; font-size: 14px; text-align: right;
-    border-bottom: 1px solid #eeece4;
-  }
-  table.big th:first-child, table.big td:first-child {
-    text-align: left; color: var(--muted); font-weight: 500;
-  }
-  table.big th {
-    background: #faf8f1; font-weight: 700; color: var(--ink);
-    font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px;
-  }
-  table.big tr:last-child td { border-bottom: none; }
-  table.big tfoot td { font-weight: 700; border-top: 2px solid var(--ink); padding-top: 12px; }
-
-  /* ── Inputs ──────────────────────────────────────────────── */
-  input[type="number"] {
-    width: 92px; padding: 9px 10px; border: 1.5px solid var(--border);
-    border-radius: 6px; background: #fcfbf7;
-    font-family: inherit; font-size: 15px; text-align: right;
-    font-variant-numeric: tabular-nums;
-  }
-  input[type="number"]:focus {
-    outline: none; border-color: var(--accent); background: white;
-  }
-
-  /* ── Scorecard KPIs ──────────────────────────────────────── */
-  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-  @media (max-width: 700px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
-  .kpi {
-    background: #f7f5ee; border: 1px solid var(--border); border-radius: 8px;
+  /* ── P7 bulletin cards grid ──────────────────────────────── */
+  .bulletin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 700px) { .bulletin-grid { grid-template-columns: 1fr; } }
+  .bullcard {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
     padding: 14px 16px;
   }
-  .kpi .label {
-    font-size: 11px; text-transform: uppercase; color: var(--muted);
-    letter-spacing: 0.6px; font-weight: 600;
+  .bullcard.must-do { background: var(--red-soft); border-color: #ecbdba; }
+  .bullcard.easy { background: var(--green-soft); border-color: #b8d8b6; }
+  .bullcard.decide { background: var(--accent-soft); border-color: #b8caec; }
+  .bullcard.watch { background: var(--gold-soft); border-color: #ecd99a; }
+  .bullcard.skip { background: #f3f1e9; border-color: var(--border); opacity: 0.85; }
+  .bullcard .ribbon {
+    display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.7px;
+    text-transform: uppercase; padding: 2px 8px; border-radius: 999px;
+    margin-bottom: 8px;
   }
-  .kpi .value {
-    font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums;
-    margin-top: 4px; letter-spacing: -0.4px;
-  }
-  .kpi.good { background: var(--green-soft); border-color: #b8d8b6; }
-  .kpi.good .value { color: var(--green); }
-  .kpi.warn { background: #fdf6dd; border-color: #ecd99a; }
-  .kpi.warn .value { color: #8a6a00; }
-  .kpi.bad { background: #fce8e6; border-color: #ecbdba; }
-  .kpi.bad .value { color: var(--red); }
-  .stockout { color: var(--red); font-weight: 700; }
-  .ok { color: var(--green); font-weight: 700; }
+  .bullcard.must-do .ribbon { background: var(--red); color: white; }
+  .bullcard.easy .ribbon { background: var(--green); color: white; }
+  .bullcard.decide .ribbon { background: var(--accent); color: white; }
+  .bullcard.watch .ribbon { background: var(--gold); color: white; }
+  .bullcard.skip .ribbon { background: var(--muted); color: white; }
+  .bullcard h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.1px; }
+  .bullcard p { font-size: 14px; line-height: 1.5; color: var(--ink); }
+  .bullcard .amount { font-size: 20px; font-weight: 800; color: var(--ink); }
+  .bullcard .amount.cost { color: var(--red); }
+  .bullcard .amount.gain { color: var(--green); }
 
-  /* ── Note callout ───────────────────────────────────────── */
+  /* ── Checklist ───────────────────────────────────────────── */
+  .checklist { list-style: none; padding: 0; }
+  .checklist li {
+    padding: 12px 0 12px 36px; position: relative;
+    border-bottom: 1px solid #f0eee5; font-size: 15px; line-height: 1.5;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: ""; position: absolute; left: 0; top: 14px;
+    width: 22px; height: 22px; border-radius: 4px;
+    border: 2px solid var(--border); background: white;
+  }
+  .checklist li.done { color: var(--muted); }
+  .checklist li.done::before {
+    background: var(--green); border-color: var(--green);
+  }
+  .checklist li.done::after {
+    content: "✓"; position: absolute; left: 5px; top: 12px;
+    color: white; font-weight: 700; font-size: 14px;
+  }
+  .checklist .owner {
+    font-size: 11px; font-weight: 700; color: var(--purple); background: var(--purple-soft);
+    padding: 2px 8px; border-radius: 999px; margin-left: 6px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  /* ── Note callout ────────────────────────────────────────── */
   .note {
     background: #fdf6dd; border-left: 4px solid var(--gold);
     padding: 12px 14px; font-size: 14px; border-radius: 0 6px 6px 0;
-    margin-top: 14px;
+    margin-top: 14px; line-height: 1.5;
+  }
+  .note.red {
+    background: var(--red-soft); border-left-color: var(--red);
   }
 
-  /* ── Export card ────────────────────────────────────────── */
-  .export {
-    background: var(--green-soft); border: 1.5px solid #b8d8b6;
-  }
-  .export h3 { color: #1e4d22; }
-  .export h4 {
-    font-size: 12px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 1px; color: #4a6a4a; margin-top: 20px; margin-bottom: 10px;
-  }
-
-  /* ── P&L / Cash bridge rows ─────────────────────────────── */
-  table.ledger { width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
-  table.ledger td { padding: 8px 6px; border-bottom: 1px solid #eeece4; }
-  table.ledger td:first-child { color: var(--muted); }
-  table.ledger td:last-child { text-align: right; }
-  table.ledger tr.bold td { font-weight: 800; border-top: 2px solid var(--ink); padding-top: 12px; }
-
-  /* ── Area chip ──────────────────────────────────────────── */
-  .area {
-    background: #efedf9; color: #4a3aa8; font-weight: 700;
-    padding: 3px 7px; border-radius: 4px; font-size: 11px;
-    display: inline-block; margin-right: 6px;
-  }
-
-  /* ── Advanced details ───────────────────────────────────── */
-  details.advanced {
+  /* ── Collapsible legacy model ────────────────────────────── */
+  details.legacy {
     margin-top: 30px; padding: 14px 18px;
     background: #f3f1e9; border: 1px dashed var(--border); border-radius: 8px;
   }
-  details.advanced summary {
+  details.legacy summary {
     cursor: pointer; font-size: 13px; font-weight: 600; color: var(--muted);
     text-transform: uppercase; letter-spacing: 0.7px;
   }
-  details.advanced[open] summary { margin-bottom: 12px; }
-  details.advanced .slider-row {
-    display: grid; grid-template-columns: 160px 1fr 70px;
-    align-items: center; gap: 12px; margin-bottom: 6px;
+  details.legacy[open] summary { margin-bottom: 12px; }
+  details.legacy iframe {
+    width: 100%; height: 600px; border: 1px solid var(--border); border-radius: 6px;
   }
-  details.advanced .slider-row label { font-size: 14px; color: #444; }
-  details.advanced .slider-row .val {
-    text-align: right; font-variant-numeric: tabular-nums; font-weight: 700;
-  }
-  details.advanced input[type="range"] { width: 100%; accent-color: var(--accent); }
-  details.advanced h4 {
-    font-size: 13px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.8px; color: var(--muted); margin-top: 14px; margin-bottom: 6px;
-  }
-  details.advanced .sub { margin-top: 14px; }
 
-  .pos { color: var(--green); }
-  .neg { color: var(--red); }
+  /* ── Footer ──────────────────────────────────────────────── */
+  footer {
+    margin-top: 50px; padding-top: 24px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--muted); text-align: center; line-height: 1.6;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
 </style>
 </head>
 <body>
 
 <header class="page-header">
-  <div class="brand">📊 Co.3 P6 Forecast</div>
-  <div class="subtitle">IFEAM Production Planning Forecast Contest · Period 6 · for the 6-person crew</div>
+  <div class="brand">Co.3 — Corporate Strategy & P7 Playbook</div>
+  <div class="subtitle">Five plants. Three subs + HQ. The plan to swing $4.3M in 6 quarters.</div>
+  <div class="meta">
+    <span><b>P6:</b> submitted 2026-05-18 13:25 <span class="pill pending">results pending</span></span>
+    <span><b>P7:</b> Doc 17 received 2026-05-19 <span class="pill live">decision phase</span></span>
+  </div>
 </header>
 
 <main>
 
 <!-- ═══════════════════════════════════════════════════════════
-     ① CONTEXT
+     ① STRATEGY — durable global frame
      ═══════════════════════════════════════════════════════════ -->
 <div class="section">
   <span class="num">01</span>
-  <h2>Context</h2>
+  <h2>Strategy</h2>
+  <span class="tag">the rules we navigate by · P5–P10</span>
+</div>
+
+<div class="card strategy-hero">
+  <h3>Our binding plan, as approved 2026-05-13</h3>
+  <div class="big">
+    We swing retained earnings from <b style="color:#ff8b8b">−$3.3M</b> to <b style="color:#9be29b">+$1M+</b>
+    over six quarters by running EUR as the treasury hub, defending all five plants,
+    investing aggressively in R&amp;D, and pricing for cash &gt; inventory.
+  </div>
+  <div class="footnote">
+    This is the durable corporate frame — we do not relitigate it period by period.
+    Doc 17+ bulletins are interpreted <i>through</i> this plan, not against it.
+  </div>
 </div>
 
 <div class="card">
-  <h3>🎯 Strategy — 5 working rules</h3>
-  <ol class="big-list">
-    <li><b>Produce where the demand is.</b> Local-only — avoid cross-area transfers.</li>
-    <li><b>Vertical R&amp;D (one P6 exception).</b> Buy the <b>Clevers X2 licence $250k</b> this period — catch-up after zero R&amp;D in P5. From P7 onward: fully in-house, no more licences.</li>
-    <li><b>Old grade — cheap.</b> Price aggressively to clear the JAP-X-Std and USA-Y-Std overhangs.</li>
-    <li><b>New grade — premium.</b> When grade-2 lands, that's where margin lives. DLx + premium pricing.</li>
-    <li><b>Cash &gt; inventory.</b> Match production tightly to forecast. Don't build stock on hope.</li>
+  <h3>5 Corporate Objectives <span class="sub">by P10 unless noted</span></h3>
+  <ol class="obj">
+    <li><b>Retained earnings</b> — swing from −$3.3M (P4) to <b>&gt;+$1M by P10</b>. ($4.3M turnaround / 6 qtrs.)</li>
+    <li><b>Capital structure</b> — Equity / Liabilities <b>≥20/80</b> every quarter; back to <b>≥50/50 by P10</b>.</li>
+    <li><b>Profitability</b> — quarterly <b>ROA growth ≥10% from P8</b> onward.</li>
+    <li><b>Working capital</b> — cut inventory from $3.3M / 232k units to <b>&lt;$500k by P7</b> (≈$2.8M cash released).</li>
+    <li><b>Innovation</b> — position in <b>top 5%</b> of market leaders via sustained R&amp;D.</li>
   </ol>
 </div>
 
 <div class="card">
-  <h3>📰 Bulletin 6 — the 4 decisions that matter this period</h3>
-  <ol class="big-list">
-    <li><b>IFEAM Contest</b> — submit early. <b>+$250k / $150k / $100k</b> + $100k Excellence Grant for first 3 submitters.</li>
-    <li><b>Clevers X2 licence</b> — <b>BUY ($250k)</b>. Catch-up from P5.</li>
-    <li><b>EU Chip Tender</b> — max $35/u, max 25k units/co, $10k participation fee. Bid from EUR-X plant or skip.</li>
-    <li><b>R&amp;D 30% kick-back</b> — file the one-time application this period. Refunds start Q8.</li>
-  </ol>
-  <p class="muted"><b>Constraints:</b> JAP export quota 50k X + 50k Y · grade rule: max 2 grades sold at once. <b>Skipping:</b> METI grant (needs grade-3), Liechtenstein relocation $75k/qtr.</p>
+  <h3>Where we operate <span class="sub">asset map · locked P5–P10</span></h3>
+  <table class="matrix">
+    <thead><tr><th></th><th>USA</th><th>EUROPE</th><th>JAPAN</th></tr></thead>
+    <tbody>
+      <tr><td>X — Chips plants</td><td class="zero">0</td><td class="plant-x">1</td><td class="plant-x">2</td></tr>
+      <tr><td>Y — Boards plants</td><td class="plant-y">2</td><td class="plant-y">1</td><td class="zero">0</td></tr>
+    </tbody>
+  </table>
+  <p class="muted"><b>Locked:</b> no plant divestitures (SDG 8). Each plant stays open even at 30% utilization. New plants only in service of grade-2/3 mix in later periods.</p>
+</div>
+
+<div class="card">
+  <h3>Sales priorities <span class="sub">where we push · Doc 12 ticked boxes</span></h3>
+  <table class="matrix">
+    <thead><tr><th></th><th>USA</th><th>EUROPE</th><th>JAPAN</th></tr></thead>
+    <tbody>
+      <tr><td>X — Chips</td><td class="un">·</td><td class="ticked">✓</td><td class="ticked">✓</td></tr>
+      <tr><td>Y — Boards</td><td class="ticked">✓</td><td class="ticked">✓</td><td class="un">·</td></tr>
+    </tbody>
+  </table>
+  <p class="muted">Local-production-for-local-demand: minimises transport, dodges export quotas. Cross-area transfers only for industrial sales or quota arbitrage.</p>
+</div>
+
+<div class="card">
+  <h3>Operating principles <span class="sub">the four rules</span></h3>
+  <div class="principles">
+    <div class="principle">
+      <div class="title">EUR is the treasury hub</div>
+      <div class="body">Three operating subs (USA, EUR, JAP) + HQ Liechtenstein. EUR is the only cash-positive territory at P5 start — most upstream transfers route through EUR → HQ.</div>
+    </div>
+    <div class="principle">
+      <div class="title">IP-led innovation</div>
+      <div class="body">We own X1/Y1 patents. License higher grades from Clevers <i>only</i> when license cost &lt; in-house R&amp;D burn. Default from P7: in-house.</div>
+    </div>
+    <div class="principle">
+      <div class="title">Cash discipline</div>
+      <div class="body">No new plants in P5. HQ never below $100k floor. Clear Supplier Credit by end-P5. Hunt every quarterly subsidy. Minimize supplier credit reliance.</div>
+    </div>
+    <div class="principle">
+      <div class="title">Preserve employment</div>
+      <div class="body">All 5 inherited plants stay open through P5–P10 (SDG 8). 50% gender parity at C-level. Single-shift in P5 → kWh/unit reporting at P10 audit.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Functional doctrine <span class="sub">how each director plays the plan</span></h3>
+  <div class="doctrine">
+    <div class="doc-row">
+      <div class="who">MARKETING <small>Satoshi</small></div>
+      <div class="what">Short-term: clear inventory + generate cash with aggressive grade-1 pricing. Long-term: <b>EUR = premium DLX margins</b>, <b>JAP = high-volume X + industrial supply</b>, <b>USA = Y-board base</b>. Pursue special opportunities, optimize regional pricing/grades.</div>
+    </div>
+    <div class="doc-row">
+      <div class="who">FINANCE <small>Jeongho</small></div>
+      <div class="what">Minimize high-cost supplier credit. Use ST/LT bank loans for stable liquidity, accounting for regional rate differentials. Hunt quarterly subsidies. <b>Target 50:50 E/L by P10</b> via active financial leverage.</div>
+    </div>
+    <div class="doc-row">
+      <div class="who">R&amp;D <small>Kavya</small></div>
+      <div class="what">Phased: leverage Grade 1 → Grade 2 via internal spend + strategic license → Grade 3 fully internal. Use the one-time 30% R&amp;D reimbursement. Floor from P6: <b>$560k/qtr X, $370k/qtr Y</b>. Goal: best products in market.</div>
+    </div>
+    <div class="doc-row">
+      <div class="who">PRODUCTION <small>Febby</small></div>
+      <div class="what">Reduced utilization in P5 → drain 232k overhang. Progressive ramp as demand normalizes. Plant expansion only when grade-2/3 mix demands it across all regions.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Executive Committee <span class="sub">6 directors · Doc 12 final</span></h3>
+  <div class="team">
+    <div class="person"><div class="name">Billie Doré</div><div class="role">CEO · Stakeholder Mgmt · Holding Co.</div></div>
+    <div class="person"><div class="name">Satoshi Kiyomiya</div><div class="role">Marketing · Japan Country Manager</div></div>
+    <div class="person"><div class="name">Jeongho Park</div><div class="role">Finance &amp; Cash Pooling</div></div>
+    <div class="person"><div class="name">Febby Veronica</div><div class="role">Operations / Sourcing · USA Country Manager</div></div>
+    <div class="person"><div class="name">Kavya Prem</div><div class="role">Innovation &amp; R&amp;D</div></div>
+    <div class="person"><div class="name">Roberto Quintero</div><div class="role">Strategic Planning &amp; Market Intelligence · EUR Country Manager</div></div>
+  </div>
+  <p class="muted">Rhythm: weekly cross-functional decision meeting. CFO drafts cash budget · directors confirm inputs · CEO consolidates.</p>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     ② SNAPSHOT
+     ② WHERE WE ARE — P6 submitted, results pending
      ═══════════════════════════════════════════════════════════ -->
 <div class="section">
   <span class="num">02</span>
-  <h2>Snapshot — going into P6</h2>
+  <h2>Where we are</h2>
+  <span class="tag">P6 locked · awaiting results</span>
+</div>
+
+<div class="card">
+  <h3>P6 — what we shipped <span class="sub">MBA26Co03_p6.xls · saved 2026-05-18 13:25</span></h3>
+  <ul class="submitted-list">
+    <li><span class="icon">🔬</span><div><span class="label">Bought Clevers X2 license $250k</span> <span class="detail">— from Co.1. Used immediately on EUR X-DLx and JAP X-DLx (both ship at grade 2).</span></div></li>
+    <li><span class="icon">🏭</span><div><span class="label">Production restraint</span> <span class="detail">— EUR: 17 X-Std / 25 X-DLx / 10 Y-Std / 10 Y-DLx · JAP: 25 X-DLx only · USA: 20+20 Y-Std (split across 2 plants). Doctrine: drain inventory before pushing volume.</span></div></li>
+    <li><span class="icon">💵</span><div><span class="label">Pricing</span> <span class="detail">— EUR-Y-DLx <b>$42</b> &amp; EUR-X-DLx <b>$31</b> (premium DLX anchor) · USA-Y-Std $31 · JAP-X-Std $23 (volume play).</span></div></li>
+    <li><span class="icon">💸</span><div><span class="label">HQ transfers</span> <span class="detail">— USA +$600k from HQ · EUR −$300k &amp; JAP −$300k to HQ. Net HQ change ≈ 0.</span></div></li>
+    <li><span class="icon">🏦</span><div><span class="label">New Area Bank loans</span> <span class="detail">— EUR +$450k · JAP +$450k. Funds the production ramp without touching HQ floor.</span></div></li>
+    <li><span class="icon">📉</span><div><span class="label">CB long-term</span> <span class="detail">— $250k principal + $35k interest paid as scheduled.</span></div></li>
+    <li><span class="icon">📦</span><div><span class="label">Intracompany</span> <span class="detail">— USA → JAP: 16 units Y-Std @ $30.</span></div></li>
+    <li><span class="icon">📢</span><div><span class="label">Advertising</span> <span class="detail">— $80k total, only on JAP X-Std. <b>Risk:</b> 11 cells at $0 may suppress demand vs forecast.</span></div></li>
+    <li><span class="icon">⚠️</span><div><span class="label">In-house R&amp;D</span> <span class="detail">— $0 X / $0 Y this period. The X2 license substituted; Y has no licence and no in-house spend → must restart in P7.</span></div></li>
+  </ul>
+  <div class="note red">
+    <b>Two gaps vs the doctrine to address in P7:</b><br>
+    1. R&amp;D floor ($560k X / $370k Y) not met this period — Y especially needs to restart.<br>
+    2. Ad spend at $80k total is far below the $2–8/unit rule of thumb — risks under-selling whatever production we did do.
+  </div>
 </div>
 
 <div class="card snapshot">
   <p class="lead"><b style="font-size:20px">Co.3 closed P5 with +$399k</b> — first positive quarter. RE still <span class="neg"><b>−$2.94M</b></span>. HQ cash at <b>$100k</b> floor. Supplier Credit grew to <span class="neg"><b>$653k</b></span>.</p>
-
+  <p style="margin-top:8px;font-size:14px;color:#6b4e0a">These are P5-close numbers carried into P6. P6 results land soon and will refresh these tiles.</p>
   <div class="snapshot-grid">
     <div class="snapshot-tile">
       <h4>💰 Financial position</h4>
@@ -294,9 +476,8 @@
         <tr><td>CB long-term loan</td><td>~$1.75M</td></tr>
       </table>
     </div>
-
     <div class="snapshot-tile">
-      <h4>📦 Inventory by line</h4>
+      <h4>📦 Inventory at P5 close</h4>
       <table>
         <tr><td>JAP-X-Std</td><td><b>76,448u</b></td></tr>
         <tr><td>USA-Y-Std</td><td><b>41,713u</b></td></tr>
@@ -306,540 +487,167 @@
         <tr class="total"><td>TOTAL</td><td>186,629u</td></tr>
       </table>
     </div>
-
     <div class="snapshot-tile">
-      <h4>🏭 Assets &amp; capacity</h4>
+      <h4>🏭 Capacity (pre-Doc 17)</h4>
       <table>
         <tr><td>USA plants</td><td>0 X / <b>2 Y</b></td></tr>
         <tr><td>EUR plants</td><td>1 X / 1 Y</td></tr>
         <tr><td>JAP plants</td><td><b>2 X</b> / 0 Y</td></tr>
         <tr><td>Single-shift max</td><td>~125k u/qtr</td></tr>
-        <tr><td>Patents</td><td>X1, Y1 (grade-1)</td></tr>
+        <tr><td>Patents</td><td>X1, Y1 + <b>X2 (P6)</b></td></tr>
       </table>
     </div>
-
     <div class="snapshot-tile">
-      <h4>⚠️ Obligations &amp; risks</h4>
+      <h4>📊 Macro indices · P6</h4>
       <table>
-        <tr><td>Clear Supplier Credit</td><td>$400 + $300 ABI</td></tr>
-        <tr><td>CB LT debt service</td><td>$290k</td></tr>
-        <tr><td>EU operating subsidy</td><td class="pos">+$200k claim</td></tr>
-        <tr><td>Iran war / Hormuz</td><td class="neg">energy +24%</td></tr>
-        <tr><td>JP tax · ¥156/$ · USA 17%</td><td></td></tr>
+        <tr><td>USA Business Cycle</td><td>101</td></tr>
+        <tr><td>EUR Business Cycle</td><td>102</td></tr>
+        <tr><td>JAP Business Cycle</td><td>101</td></tr>
+        <tr><td>X input prices ↑</td><td class="neg">+6 to +9%</td></tr>
+        <tr><td>Y input prices ↑</td><td class="neg">+6 to +8%</td></tr>
       </table>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     ③ DECIDE
+     ③ P7 — NEW CONTEXT (Doc 17)
      ═══════════════════════════════════════════════════════════ -->
 <div class="section">
   <span class="num">03</span>
-  <h2>Decide</h2>
+  <h2>Period 7 — what changed</h2>
+  <span class="tag">Doc 17 · 2026-05-19</span>
 </div>
 
-<!-- 3.1 R&D ─────────────────────────────────────────────────── -->
 <div class="card">
-  <h3>R&amp;D level — pick one per product</h3>
-  <div class="rd-row">
-    <span class="rd-label">Product X</span>
-    <div class="rd-presets" data-target="rd-X">
-      <button type="button" class="rd-btn" data-value="0">Skip<small>$0</small></button>
-      <button type="button" class="rd-btn active" data-value="280">Min<small>$280k</small></button>
-      <button type="button" class="rd-btn" data-value="560">Optimum<small>$560k</small></button>
+  <h3>The 9 shifts that matter <span class="sub">filtered for our doctrine</span></h3>
+  <div class="bulletin-grid">
+
+    <div class="bullcard must-do">
+      <span class="ribbon">Mandatory</span>
+      <h4>🇪🇺 EU capacity certification</h4>
+      <p><b>Pay $100k to Co.1</b> at start of P7 ($75k per X plant + $25k per Y plant; we have 1+1). Unlocks revised EUR capacity: <b>X = 35,000 / Y = 30,000 units per qtr</b> (~30% increase).</p>
+      <p style="margin-top:8px"><span class="amount cost">−$100k</span> · Penalty if skipped: $250k + cumulative dues.</p>
     </div>
-  </div>
-  <div class="rd-row">
-    <span class="rd-label">Product Y</span>
-    <div class="rd-presets" data-target="rd-Y">
-      <button type="button" class="rd-btn" data-value="0">Skip<small>$0</small></button>
-      <button type="button" class="rd-btn active" data-value="185">Min<small>$185k</small></button>
-      <button type="button" class="rd-btn" data-value="370">Optimum<small>$370k</small></button>
+
+    <div class="bullcard easy">
+      <span class="ribbon">Easy money</span>
+      <h4>🇪🇺 EU labor-content subsidy</h4>
+      <p><b>$100k per plant per quarter</b>, for companies owning EUR plants (excl. USA-only sourcing). We have 2 EUR plants → apply with administrator before deadline.</p>
+      <p style="margin-top:8px"><span class="amount gain">+$200k</span> · Continues from Doc 16.</p>
     </div>
+
+    <div class="bullcard easy">
+      <span class="ribbon">Easy money</span>
+      <h4>✍️ Bulletin-read $10k bonus</h4>
+      <p>Each of our 6 signing managers submits a one-page "I declare I have read this bulletin" declaration. First 3 companies eligible — submit fast.</p>
+      <p style="margin-top:8px"><span class="amount gain">+$60k</span> · 6 signers × $10k.</p>
+    </div>
+
+    <div class="bullcard must-do">
+      <span class="ribbon">New tax</span>
+      <h4>📤 7% transfer tax · sub → HQ</h4>
+      <p><b>EUR/JAP → HQ transfers now taxed 7% at origin</b> (G7/Japan-EU agreement, mirrored on US side). HQ → subs unaffected. Treasury hub math changes: every $100k EUR→HQ now costs us $7k.</p>
+      <p style="margin-top:8px">Requires CEO/CFO declaration certifying transfer = current activities.</p>
+    </div>
+
+    <div class="bullcard decide">
+      <span class="ribbon">Decide</span>
+      <h4>🔬 Clevers Y2 license now available</h4>
+      <p><b>$300k</b> for Y grade-2 (new this period). Our doctrine says "vertical from P7" — so default is to start in-house Y R&amp;D ($370k/qtr floor) instead of licensing. Kavya: argue if license window is shorter.</p>
+      <p style="margin-top:8px;font-size:13px;color:var(--muted)">X3/Y3 land in P8 at $350k/$400k via Clevers — keep dry powder for the grade-3 race.</p>
+    </div>
+
+    <div class="bullcard decide">
+      <span class="ribbon">Optional</span>
+      <h4>🇯🇵 METI export quota</h4>
+      <p>JAP can export up to <b>300k X + 300k Y to USA</b> AND same to EU during P7. Register quarterly plan at METI — first-come-first-served. Only register if our P7 plan actually uses it.</p>
+      <p style="margin-top:8px;font-size:13px;color:var(--muted)">Most local-production doctrine: don't reach for this. Use only if JAP-X overhang persists.</p>
+    </div>
+
+    <div class="bullcard watch">
+      <span class="ribbon">Watch</span>
+      <h4>📈 Securities rate ↑ 2.0%</h4>
+      <p>Central Bank Securities Interest doubled (was 1.0%). Bank financing still accessible but pricier. ATM surcharge: 2% over standard if request &lt;30 min before deadline.</p>
+    </div>
+
+    <div class="bullcard watch">
+      <span class="ribbon">Watch</span>
+      <h4>⏰ Late-submission penalty</h4>
+      <p><b>$10k per second late</b> on the .xls. Wrong filename / extension / period number = $100k charge. <b>&gt;60 sec late = file not processed.</b> Submit 5 min early.</p>
+    </div>
+
+    <div class="bullcard skip">
+      <span class="ribbon">Skip</span>
+      <h4>🛡️ CSN strike insurance · 🏭 STM X3 tender · 💼 Industrial restructuring</h4>
+      <p>Insurance EUR $200k / JAP $200k / both $300k — not worth unless strike risk feels acute. STM X3 tender — we don't have grade-3 yet, earliest P8. Restructuring sale — doctrine locks all 5 plants.</p>
+    </div>
+
   </div>
-  <input type="hidden" id="rd-X" value="280">
-  <input type="hidden" id="rd-Y" value="185">
-  <span id="rd-X-v" style="display:none">$280k</span>
-  <span id="rd-Y-v" style="display:none">$185k</span>
-  <p class="muted">Plus the one-off <b>Clevers X2 licence $250k</b> this period — separate from the in-house budget above.</p>
 </div>
 
-<!-- 3.2 Advertising ─────────────────────────────────────────── -->
 <div class="card">
-  <h3>Advertising spend ($k per area · product)</h3>
-  <table class="big">
-    <thead><tr><th></th><th>USA</th><th>EUR</th><th>JAP</th></tr></thead>
-    <tbody>
-      <tr><td>X (chips)</td>
-        <td><input type="number" id="ad-USA-X" value="20" step="5"></td>
-        <td><input type="number" id="ad-EUR-X" value="20" step="5"></td>
-        <td><input type="number" id="ad-JAP-X" value="30" step="5"></td>
-      </tr>
-      <tr><td>Y (boards)</td>
-        <td><input type="number" id="ad-USA-Y" value="50" step="5"></td>
-        <td><input type="number" id="ad-EUR-Y" value="20" step="5"></td>
-        <td><input type="number" id="ad-JAP-Y" value="10" step="5"></td>
-      </tr>
-    </tbody>
-  </table>
-  <p class="muted">Total: <b id="ad-total">$150k</b> · rule of thumb $2–3/u for X, $4–8/u for Y.</p>
-</div>
-
-<!-- 3.3 12 product lines ────────────────────────────────────── -->
-<div class="card">
-  <h3>12 product lines — set price and production for P6</h3>
-  <p class="muted" style="margin-top:-4px;margin-bottom:14px"><b>Timing:</b> every number you set here applies to <b>P6</b>. Units sell during P6 at the price below; production runs during P6 and joins the P5-close inventory as the pool available to sell.</p>
-  <table id="lines-table" class="big">
-    <thead>
-      <tr>
-        <th>Line</th>
-        <th>Start inv<br><span style="font-weight:500;color:var(--muted);text-transform:none;letter-spacing:0">P5 close</span></th>
-        <th>P6 sell price $</th>
-        <th>P6 production<br><span style="font-weight:500;color:var(--muted);text-transform:none;letter-spacing:0">units</span></th>
-        <th>Cohort $<br><span style="font-weight:500;color:var(--muted);text-transform:none;letter-spacing:0">benchmark</span></th>
-      </tr>
-    </thead>
-    <tbody id="lines-input-body"></tbody>
-  </table>
-  <p class="muted">Start inv is the P5 close — only edit if you're calibrating against the actual SIMP05C03 numbers.</p>
-</div>
-
-<!-- 3.4 Live scorecard ──────────────────────────────────────── -->
-<div class="card">
-  <h3>📊 Live scorecard</h3>
-  <div class="kpi-grid">
-    <div class="kpi" id="kpi-nosto"><div class="label">Lines not stocking out</div><div class="value">12 / 12</div></div>
-    <div class="kpi" id="kpi-drawdown"><div class="label">Inventory drawdown</div><div class="value">0%</div></div>
-    <div class="kpi" id="kpi-acc"><div class="label">Forecast match</div><div class="value">100%</div></div>
-    <div class="kpi" id="kpi-rank"><div class="label">Est. prize tier</div><div class="value">$0</div></div>
+  <h3>P8 horizon · prizes to plan for now</h3>
+  <p><b>Liechtenstein Ducal Academy:</b> $300k + Innovation Diploma for first company with X3 OR Y3 patent. <b>Golden Band Diploma:</b> $500k for first with BOTH X3 + Y3. <b>METI prize:</b> $200k per facility producing X3 or Y3 (first period only).</p>
+  <div class="note">
+    If we license X3 + Y3 from Clevers in P8 ($350k + $400k = $750k), we'd be in contention for the $500k Golden Band + $300k Ducal + $400k METI (2 EUR plants × $200k). Kavya to model the payback before P7 lock.
   </div>
-  <div class="note" id="contest-msg">Adjust prices and production until every line is non-stockout AND we sell &gt;90% of starting inventory.</div>
-</div>
-
-<!-- 3.5 Per-line results ────────────────────────────────────── -->
-<div class="card">
-  <h3>Per-line P6 results (forecast)</h3>
-  <table id="lines-out-table" class="big">
-    <thead><tr>
-      <th>Line</th><th>P6 demand</th><th>P6 sales</th><th>End inv<br><span style="font-weight:500;color:var(--muted);text-transform:none;letter-spacing:0">P6 close</span></th><th>Rev $k</th><th>GM $k</th><th>Stock?</th>
-    </tr></thead>
-    <tbody id="lines-output-body"></tbody>
-    <tfoot id="lines-output-totals"></tfoot>
-  </table>
-</div>
-
-<!-- 3.6 P&L + cash ──────────────────────────────────────────── -->
-<div class="card">
-  <h3>P&amp;L summary ($k)</h3>
-  <table id="pnl" class="ledger">
-    <tbody>
-      <tr><td>Revenue</td><td id="pnl-rev">0</td></tr>
-      <tr><td>− Variable cost</td><td id="pnl-vc">0</td></tr>
-      <tr><td>− Transport</td><td id="pnl-tc">0</td></tr>
-      <tr><td>− Sales commission</td><td id="pnl-comm">0</td></tr>
-      <tr class="bold"><td>= Gross margin</td><td id="pnl-gm">0</td></tr>
-      <tr><td>− Fixed production</td><td id="pnl-fp">0</td></tr>
-      <tr><td>− Fixed sales offices</td><td id="pnl-fs">0</td></tr>
-      <tr><td>− Advertising</td><td id="pnl-ad">0</td></tr>
-      <tr><td>− R&amp;D</td><td id="pnl-rd">0</td></tr>
-      <tr><td>+ EU operating subsidy</td><td id="pnl-sub">+200</td></tr>
-      <tr class="bold"><td>= EBIT</td><td id="pnl-ebit">0</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="card">
-  <h3>HQ cash bridge ($k)</h3>
-  <table id="cash" class="ledger">
-    <tbody>
-      <tr><td>Opening HQ cash (P5 close)</td><td id="cash-open">100</td></tr>
-      <tr><td>Operating cash (EBIT × 70%)</td><td id="cash-op">0</td></tr>
-      <tr><td>EUR → HO interco transfer</td><td id="cash-ic">+290</td></tr>
-      <tr><td>CB loan service (P+I)</td><td id="cash-debt">−290</td></tr>
-      <tr><td>Supplier Credit clearance</td><td id="cash-sc">−400</td></tr>
-      <tr class="bold"><td>Closing HQ cash</td><td id="cash-close">0</td></tr>
-    </tbody>
-  </table>
-  <p class="muted">Floor covenant: <b>≥$100k</b>. If closing falls below, lift EUR→HO transfer or cut production.</p>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     ④ EXPORT
+     ④ P7 DECISION CHECKLIST
      ═══════════════════════════════════════════════════════════ -->
 <div class="section">
   <span class="num">04</span>
-  <h2>Export to MBA26Co03.xls</h2>
+  <h2>P7 decision checklist</h2>
+  <span class="tag">must-do for the team meeting</span>
 </div>
 
-<div class="card export">
-  <h3>✅ Copy these numbers into the .xls — Period = 6</h3>
+<div class="card">
+  <h3>Must-do this period</h3>
+  <ul class="checklist">
+    <li>Pay <b>$100k to Co.1</b> via "Payment to Other Cos" row — EU capacity certification (mandatory) <span class="owner">Jeongho</span></li>
+    <li>File <b>EU labor-content subsidy application</b> with administrator — claim <b>$200k</b> (2 EUR plants) <span class="owner">Roberto</span></li>
+    <li>Submit <b>6 × bulletin signature declarations</b> — claim <b>$60k</b> bonus <span class="owner">All directors</span></li>
+    <li><b>Restart R&amp;D in-house</b> — minimum $560k X (per doctrine; in-house arm to push beyond X2) <span class="owner">Kavya</span></li>
+    <li><b>R&amp;D decision: Y2 license $300k vs in-house Y $370k+</b> — Kavya bring recommendation with payback window <span class="owner">Kavya</span></li>
+    <li><b>Re-cost treasury</b> for new 7% sub→HQ tax — model: leave more cash in subs, route HQ→subs first <span class="owner">Jeongho</span></li>
+    <li><b>P7 production plan</b> — EUR can now do up to 35k X / 30k Y per qtr; match to demand forecast, don't fill headroom <span class="owner">Febby</span></li>
+    <li><b>Pricing</b> — old grade cheap (drain remaining JAP-X-Std overhang), new grade premium (EUR/JAP X-DLx at grade 2 now) <span class="owner">Satoshi</span></li>
+    <li><b>Ad spend</b> — fix the $80k → 11 cells underspend from P6. Apply $2–3/u X, $4–8/u Y rule. <span class="owner">Satoshi</span></li>
+    <li><b>Submit MBA26Co03_p7.xls</b> with at least <b>5-minute buffer</b> before close · period cell E1 = 7 · double-check filename <span class="owner">Jeongho</span></li>
+  </ul>
+</div>
 
-  <h4>Pricing ($, rows 17 Std / 18 DLx)</h4>
-  <table id="dec-pricing" class="big"><thead><tr><th></th><th>USA X</th><th>USA Y</th><th>EUR X</th><th>EUR Y</th><th>JAP X</th><th>JAP Y</th></tr></thead><tbody>
-    <tr><td>Std</td><td id="dec-p-USA-X-Std">–</td><td id="dec-p-USA-Y-Std">–</td><td id="dec-p-EUR-X-Std">–</td><td id="dec-p-EUR-Y-Std">–</td><td id="dec-p-JAP-X-Std">–</td><td id="dec-p-JAP-Y-Std">–</td></tr>
-    <tr><td>DLx</td><td id="dec-p-USA-X-DLx">–</td><td id="dec-p-USA-Y-DLx">–</td><td id="dec-p-EUR-X-DLx">–</td><td id="dec-p-EUR-Y-DLx">–</td><td id="dec-p-JAP-X-DLx">–</td><td id="dec-p-JAP-Y-DLx">–</td></tr>
-  </tbody></table>
-
-  <h4>Advertising $k (row 19)</h4>
-  <table id="dec-ads" class="big"><thead><tr><th></th><th>USA X</th><th>USA Y</th><th>EUR X</th><th>EUR Y</th><th>JAP X</th><th>JAP Y</th></tr></thead><tbody>
-    <tr><td>Ad $k</td><td id="dec-a-USA-X">–</td><td id="dec-a-USA-Y">–</td><td id="dec-a-EUR-X">–</td><td id="dec-a-EUR-Y">–</td><td id="dec-a-JAP-X">–</td><td id="dec-a-JAP-Y">–</td></tr>
-  </tbody></table>
-
-  <h4>Production (units) — split USA-Y / JAP-X 50/50 across the 2 plants</h4>
-  <table id="dec-prod" class="big"><thead><tr><th></th><th>USA X</th><th>USA Y</th><th>EUR X</th><th>EUR Y</th><th>JAP X</th><th>JAP Y</th></tr></thead><tbody>
-    <tr><td>Std</td><td id="dec-prod-USA-X-Std">–</td><td id="dec-prod-USA-Y-Std">–</td><td id="dec-prod-EUR-X-Std">–</td><td id="dec-prod-EUR-Y-Std">–</td><td id="dec-prod-JAP-X-Std">–</td><td id="dec-prod-JAP-Y-Std">–</td></tr>
-    <tr><td>DLx</td><td id="dec-prod-USA-X-DLx">–</td><td id="dec-prod-USA-Y-DLx">–</td><td id="dec-prod-EUR-X-DLx">–</td><td id="dec-prod-EUR-Y-DLx">–</td><td id="dec-prod-JAP-X-DLx">–</td><td id="dec-prod-JAP-Y-DLx">–</td></tr>
-  </tbody></table>
-
-  <h4>R&amp;D $k (row 28)</h4>
-  <table class="big"><tbody>
-    <tr><td>R&amp;D X</td><td id="dec-rd-X">–</td></tr>
-    <tr><td>R&amp;D Y</td><td id="dec-rd-Y">–</td></tr>
-  </tbody></table>
-
-  <h4>Cash &amp; financing rows — defaults to review</h4>
-  <table class="big"><tbody>
-    <tr><td>Row 21 · Transfer from HO (EUR)</td><td>−290</td></tr>
-    <tr><td>Row 22 · Area Bank Loans (USA / EUR / JAP)</td><td>+400 / 0 / +300</td></tr>
-    <tr><td>Row 33 · CB LT principal</td><td>+250</td></tr>
-    <tr><td>Row 35 · CB LT interest</td><td>+40</td></tr>
-    <tr><td>Row 26 · Dividends</td><td>0</td></tr>
-    <tr><td>Row 29 · Arthur de Big consult</td><td>0</td></tr>
-    <tr><td>Row 30 · Market research (3 slots)</td><td>40 / 5 / 8</td></tr>
-    <tr><td>Cell E1 · Period</td><td>6</td></tr>
-  </tbody></table>
-
-  <p class="muted" style="margin-top:18px"><b>Submission reminder:</b> file name = <code>MBA26Co03.xls</code> (renaming = $40k penalty) · save before close · first 3 submitters get +$100k Excellence Grant.</p>
+<div class="card">
+  <h3>Optional / next period</h3>
+  <ul class="checklist">
+    <li>Apply for <b>Info system grant ($400k + $200k/system)</b> — Jeongho prepares CFO presentation 30 min before deadline <span class="owner">Jeongho</span></li>
+    <li>Decide on <b>JAP export quota registration</b> at METI — only if our P7 plan actually ships JAP → USA or JAP → EU <span class="owner">Satoshi</span></li>
+    <li><b>Model the P8 grade-3 sprint</b> — Clevers X3+Y3 = $750k for shot at $500k Golden Band + $300k Ducal + $400k METI <span class="owner">Kavya</span></li>
+    <li>Build <b>P7 close-to-close cash forecast</b> with new 7% tax baked in <span class="owner">Jeongho</span></li>
+  </ul>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     ADVANCED CALIBRATION (collapsed)
+     ⑤ LEGACY MODEL
      ═══════════════════════════════════════════════════════════ -->
-<details class="advanced">
-  <summary>Advanced calibration — macro, market size, DLx share, costs (Bulletin 6 defaults pre-set)</summary>
-
-  <h4>Macro &amp; market structure</h4>
-  <div class="slider-row"><label>USA Business Cycle</label><input type="range" id="bc-USA" min="80" max="125" step="1" value="101"><span class="val" id="bc-USA-v">101</span></div>
-  <div class="slider-row"><label>EUR Business Cycle</label><input type="range" id="bc-EUR" min="80" max="125" step="1" value="103"><span class="val" id="bc-EUR-v">103</span></div>
-  <div class="slider-row"><label>JAP Business Cycle</label><input type="range" id="bc-JAP" min="80" max="125" step="1" value="102"><span class="val" id="bc-JAP-v">102</span></div>
-  <div class="slider-row"><label>Active competitors / segment</label><input type="range" id="ncomp" min="3" max="12" step="1" value="8"><span class="val" id="ncomp-v">8</span></div>
-  <div class="slider-row"><label>Price elasticity ε</label><input type="range" id="elast" min="10" max="35" step="1" value="20"><span class="val" id="elast-v">2.0</span></div>
-
-  <h4>Market base size (units / period)</h4>
-  <div class="slider-row"><label>USA-X market</label><input type="range" id="mb-USA-X" min="100000" max="900000" step="20000" value="500000"><span class="val" id="mb-USA-X-v">500k</span></div>
-  <div class="slider-row"><label>USA-Y market</label><input type="range" id="mb-USA-Y" min="100000" max="700000" step="20000" value="350000"><span class="val" id="mb-USA-Y-v">350k</span></div>
-  <div class="slider-row"><label>EUR-X market</label><input type="range" id="mb-EUR-X" min="80000" max="600000" step="20000" value="320000"><span class="val" id="mb-EUR-X-v">320k</span></div>
-  <div class="slider-row"><label>EUR-Y market</label><input type="range" id="mb-EUR-Y" min="80000" max="500000" step="20000" value="240000"><span class="val" id="mb-EUR-Y-v">240k</span></div>
-  <div class="slider-row"><label>JAP-X market</label><input type="range" id="mb-JAP-X" min="80000" max="500000" step="20000" value="280000"><span class="val" id="mb-JAP-X-v">280k</span></div>
-  <div class="slider-row"><label>JAP-Y market</label><input type="range" id="mb-JAP-Y" min="80000" max="400000" step="20000" value="180000"><span class="val" id="mb-JAP-Y-v">180k</span></div>
-
-  <h4>DLx share of segment</h4>
-  <div class="slider-row"><label>USA DLx share</label><input type="range" id="dlx-USA" min="20" max="60" value="35"><span class="val" id="dlx-USA-v">35%</span></div>
-  <div class="slider-row"><label>EUR DLx share</label><input type="range" id="dlx-EUR" min="20" max="60" value="45"><span class="val" id="dlx-EUR-v">45%</span></div>
-  <div class="slider-row"><label>JAP DLx share</label><input type="range" id="dlx-JAP" min="20" max="60" value="30"><span class="val" id="dlx-JAP-v">30%</span></div>
-
-  <div class="sub">
-    <h4>Costs (Bulletin 6 — read-only)</h4>
-    <table class="big"><thead><tr><th>Var cost</th><th>X</th><th>Y</th></tr></thead><tbody>
-      <tr><td>USA</td><td>$2.2</td><td>$4.4</td></tr>
-      <tr><td>EUR</td><td>$3.0</td><td>$5.4</td></tr>
-      <tr><td>JAP</td><td>$2.8</td><td>$4.8</td></tr>
-    </tbody></table>
-    <table class="big" style="margin-top:10px"><thead><tr><th>Transport</th><th>X</th><th>Y</th></tr></thead><tbody>
-      <tr><td>USA</td><td>$0.50</td><td>$0.60</td></tr>
-      <tr><td>EUR</td><td>$0.95</td><td>$1.00</td></tr>
-      <tr><td>JAP</td><td>$0.40</td><td>$0.70</td></tr>
-    </tbody></table>
-    <table class="big" style="margin-top:10px"><thead><tr><th>Commission</th><th>X</th><th>Y</th></tr></thead><tbody>
-      <tr><td>USA</td><td>$2.4</td><td>$3.6</td></tr>
-      <tr><td>EUR</td><td>$3.4</td><td>$4.2</td></tr>
-      <tr><td>JAP</td><td>$3.0</td><td>$4.3</td></tr>
-    </tbody></table>
-    <table class="big" style="margin-top:10px"><thead><tr><th>Fixed prod / period</th><th>X</th><th>Y</th></tr></thead><tbody>
-      <tr><td>USA</td><td>$68k</td><td>$130k</td></tr>
-      <tr><td>EUR</td><td>$71k</td><td>$109k</td></tr>
-      <tr><td>JAP</td><td>$84k</td><td>$185k</td></tr>
-    </tbody></table>
-    <table class="big" style="margin-top:10px"><thead><tr><th>Sales office</th><th>$/period</th></tr></thead><tbody>
-      <tr><td>USA</td><td>$15k</td></tr>
-      <tr><td>EUR</td><td>$18k</td></tr>
-      <tr><td>JAP</td><td>$26k</td></tr>
-    </tbody></table>
-  </div>
+<details class="legacy">
+  <summary>P6 interactive scenario model — kept for reference (uses P5-close inventory)</summary>
+  <p style="margin:10px 0;font-size:14px;color:var(--muted)">
+    This is the calculator we used to prep P6. Once P6 results land, we'll rebuild a P7 version with the actual P6-close inventory and the new EUR 35k/30k capacity. Until then, leave it parked here.
+  </p>
+  <p style="font-size:13px;color:var(--muted)">
+    (The interactive UI was removed from the main page to keep the strategy frame front and center. The full P6 model is preserved in git history at commit <code>703fecb</code> if you need to re-run a P6 scenario.)
+  </p>
 </details>
 
+<footer>
+  Co.3 · Strategic Business Simulation · ESADE MBA 2025–2026<br>
+  Strategy approved 2026-05-13 · P6 submitted 2026-05-18 · P7 in flight 2026-05-19<br>
+  <a href="https://github.com/lifeinprogrezz/esade-mba-private">repo</a>
+</footer>
+
 </main>
-
-<script>
-// ---------------------------------------------------------------------------
-// CONSTANTS (Bulletin 6)
-// ---------------------------------------------------------------------------
-const AREAS = ['USA', 'EUR', 'JAP'];
-const PRODUCTS = ['X', 'Y'];
-const GRADES = ['Std', 'DLx'];
-
-const VAR_COST = {
-  USA: { X: 2.2, Y: 4.4 },
-  EUR: { X: 3.0, Y: 5.4 },
-  JAP: { X: 2.8, Y: 4.8 }
-};
-const TRANSPORT_LOCAL = {
-  USA: { X: 0.50, Y: 0.60 },
-  EUR: { X: 0.95, Y: 1.00 },
-  JAP: { X: 0.40, Y: 0.70 }
-};
-const COMMISSION = {
-  USA: { X: 2.4, Y: 3.6 },
-  EUR: { X: 3.4, Y: 4.2 },
-  JAP: { X: 3.0, Y: 4.3 }
-};
-const FIXED_PROD = {
-  USA: { X: 68, Y: 130 },
-  EUR: { X: 71, Y: 109 },
-  JAP: { X: 84, Y: 185 }
-};
-const PLANTS = {
-  USA: { X: 0, Y: 2 },
-  EUR: { X: 1, Y: 1 },
-  JAP: { X: 2, Y: 0 }
-};
-const FIXED_SALES = { USA: 15, EUR: 18, JAP: 26 };
-
-const PRICE_BENCH = {
-  USA: { X: { Std: 25, DLx: 30 }, Y: { Std: 32, DLx: 40 } },
-  EUR: { X: { Std: 25, DLx: 30 }, Y: { Std: 32, DLx: 42 } },
-  JAP: { X: { Std: 25, DLx: 30 }, Y: { Std: 32, DLx: 40 } }
-};
-const OUR_PRICE_DEFAULT = {
-  USA: { X: { Std: 22, DLx: 30 }, Y: { Std: 28, DLx: 40 } },
-  EUR: { X: { Std: 22, DLx: 32 }, Y: { Std: 28, DLx: 44 } },
-  JAP: { X: { Std: 21, DLx: 30 }, Y: { Std: 28, DLx: 40 } }
-};
-
-// Starting inventory P6 — actual P5 close from SIMP05C03.xlsx
-const START_INV_DEFAULT = {
-  USA: { X: { Std: 21275, DLx: 0     }, Y: { Std: 41713, DLx: 0     } },
-  EUR: { X: { Std: 14693, DLx: 12500 }, Y: { Std: 10000, DLx: 10000 } },
-  JAP: { X: { Std: 76448, DLx: 0     }, Y: { Std: 0,     DLx: 0     } }
-};
-const INIT_PROD = {
-  USA: { X: { Std: 0,     DLx: 0     }, Y: { Std: 8000,  DLx: 0     } },
-  EUR: { X: { Std: 10000, DLx: 8000  }, Y: { Std: 8000,  DLx: 6000  } },
-  JAP: { X: { Std: 5000,  DLx: 0     }, Y: { Std: 0,     DLx: 0     } }
-};
-
-const LINES = [];
-for (const a of AREAS) for (const p of PRODUCTS) for (const g of GRADES) LINES.push({a, p, g, key: `${a}-${p}-${g}`});
-
-function buildInputs() {
-  const tbody = document.getElementById('lines-input-body');
-  tbody.innerHTML = LINES.map(L => `
-    <tr>
-      <td><span class="area">${L.a}</span>${L.p}-${L.g}</td>
-      <td><input type="number" id="inv-${L.key}" value="${START_INV_DEFAULT[L.a][L.p][L.g]}" step="1000"></td>
-      <td><input type="number" id="price-${L.key}" value="${OUR_PRICE_DEFAULT[L.a][L.p][L.g]}" step="0.5"></td>
-      <td><input type="number" id="prod-${L.key}" value="${INIT_PROD[L.a][L.p][L.g]}" step="1000"></td>
-      <td>${PRICE_BENCH[L.a][L.p][L.g]}</td>
-    </tr>
-  `).join('');
-}
-
-function fmt(n, dp = 0) {
-  if (isNaN(n) || n === null) return '—';
-  return n.toLocaleString(undefined, { minimumFractionDigits: dp, maximumFractionDigits: dp });
-}
-function fmtK(n) {
-  if (n >= 1000) return (n/1000).toFixed(0) + 'M';
-  return n + 'k';
-}
-
-function recompute() {
-  const bc = {};
-  for (const a of AREAS) {
-    bc[a] = +document.getElementById(`bc-${a}`).value;
-    document.getElementById(`bc-${a}-v`).textContent = bc[a];
-  }
-  const ncomp = +document.getElementById('ncomp').value;
-  const elast = +document.getElementById('elast').value / 10;
-  document.getElementById('ncomp-v').textContent = ncomp;
-  document.getElementById('elast-v').textContent = elast.toFixed(1);
-
-  const MARKET_BASE = {};
-  for (const a of AREAS) {
-    MARKET_BASE[a] = {};
-    for (const p of PRODUCTS) {
-      MARKET_BASE[a][p] = +document.getElementById(`mb-${a}-${p}`).value;
-      document.getElementById(`mb-${a}-${p}-v`).textContent = fmtK(Math.round(MARKET_BASE[a][p]/1000));
-    }
-  }
-  const DLX_SHARE = {};
-  for (const a of AREAS) {
-    DLX_SHARE[a] = +document.getElementById(`dlx-${a}`).value / 100;
-    document.getElementById(`dlx-${a}-v`).textContent = (DLX_SHARE[a]*100).toFixed(0) + '%';
-  }
-
-  const adSpend = {};
-  let adTotal = 0;
-  for (const a of AREAS) for (const p of PRODUCTS) {
-    adSpend[`${a}-${p}`] = +document.getElementById(`ad-${a}-${p}`).value;
-    adTotal += adSpend[`${a}-${p}`];
-  }
-  document.getElementById('ad-total').textContent = `$${adTotal}k`;
-
-  let totalRev = 0, totalVC = 0, totalTC = 0, totalComm = 0;
-  let nonSO = 0, totalStart = 0, totalSales = 0, totalDemand = 0;
-
-  const outRows = LINES.map(L => {
-    const startInv = +document.getElementById(`inv-${L.key}`).value;
-    const price = +document.getElementById(`price-${L.key}`).value;
-    const prod = +document.getElementById(`prod-${L.key}`).value;
-
-    const segShare = L.g === 'DLx' ? DLX_SHARE[L.a] : (1 - DLX_SHARE[L.a]);
-    const segmentDemand = MARKET_BASE[L.a][L.p] * segShare;
-    const ourBase = segmentDemand / ncomp;
-
-    const priceFactor = Math.pow(PRICE_BENCH[L.a][L.p][L.g] / Math.max(price, 1), elast);
-
-    const adv = adSpend[`${L.a}-${L.p}`] * 1000;
-    const adOptimum = ourBase * (L.p === 'X' ? 2.5 : 6);
-    const adRatio = adv / Math.max(adOptimum, 1);
-    const adFactor = Math.max(0.6, Math.min(1.4, 0.7 + 0.4 * Math.log2(1 + adRatio)));
-
-    const bcFactor = bc[L.a] / 100;
-
-    const demand = Math.max(0, Math.round(ourBase * priceFactor * adFactor * bcFactor));
-    const available = startInv + prod;
-    const sales = Math.min(demand, available);
-    const endInv = available - sales;
-    const stockout = sales < demand && demand > 0;
-
-    const revenue = sales * price / 1000;
-    const varCost = sales * VAR_COST[L.a][L.p] / 1000;
-    const transport = sales * TRANSPORT_LOCAL[L.a][L.p] / 1000;
-    const commission = sales * COMMISSION[L.a][L.p] / 1000;
-    const gm = revenue - varCost - transport - commission;
-
-    totalRev += revenue;
-    totalVC += varCost;
-    totalTC += transport;
-    totalComm += commission;
-    if (!stockout) nonSO++;
-    totalStart += startInv;
-    totalSales += sales;
-    totalDemand += demand;
-
-    return `<tr>
-      <td><span class="area">${L.a}</span>${L.p}-${L.g}</td>
-      <td>${fmt(demand)}</td>
-      <td>${fmt(sales)}</td>
-      <td>${fmt(endInv)}</td>
-      <td>${revenue.toFixed(0)}</td>
-      <td style="color:${gm >= 0 ? 'var(--green)' : 'var(--red)'}">${gm.toFixed(0)}</td>
-      <td>${stockout ? '<span class="stockout">SO</span>' : '<span class="ok">✓</span>'}</td>
-    </tr>`;
-  });
-  document.getElementById('lines-output-body').innerHTML = outRows.join('');
-  document.getElementById('lines-output-totals').innerHTML = `<tr>
-    <td>TOTAL</td>
-    <td>${fmt(totalDemand)}</td>
-    <td>${fmt(totalSales)}</td>
-    <td>—</td>
-    <td>${totalRev.toFixed(0)}</td>
-    <td>${(totalRev - totalVC - totalTC - totalComm).toFixed(0)}</td>
-    <td>${nonSO}/12</td>
-  </tr>`;
-
-  document.getElementById('kpi-nosto').querySelector('.value').textContent = `${nonSO} / 12`;
-  document.getElementById('kpi-nosto').className = 'kpi ' + (nonSO === 12 ? 'good' : (nonSO >= 10 ? 'warn' : 'bad'));
-  const drawdown = totalStart > 0 ? totalSales / totalStart : 0;
-  document.getElementById('kpi-drawdown').querySelector('.value').textContent = `${(drawdown * 100).toFixed(0)}%`;
-  document.getElementById('kpi-drawdown').className = 'kpi ' + (drawdown >= 0.9 ? 'good' : (drawdown >= 0.7 ? 'warn' : 'bad'));
-  document.getElementById('kpi-acc').querySelector('.value').textContent = `100%`;
-  document.getElementById('kpi-acc').className = 'kpi good';
-  let prize = 0, msg = '';
-  if (nonSO === 12 && drawdown >= 0.9) { prize = 250; msg = '🏆 Hitting contest win conditions. Submit early for +$100k Excellence Grant.'; }
-  else if (nonSO === 12 && drawdown >= 0.8) { prize = 150; msg = '🥈 Strong second-tier — bump production down or prices up to drain more inventory.'; }
-  else if (nonSO >= 11 && drawdown >= 0.75) { prize = 100; msg = '🥉 Podium-eligible — close the gap on the stocked-out line and lift drawdown.'; }
-  else if (nonSO < 10) { msg = '⚠️ Too many stockouts — lower price or raise production on red lines.'; }
-  else { msg = '⚠️ Inventory drawdown too low — sales aren\'t consuming 90% of starting stock.'; }
-  document.getElementById('kpi-rank').querySelector('.value').textContent = `$${prize}k`;
-  document.getElementById('kpi-rank').className = 'kpi ' + (prize >= 250 ? 'good' : prize >= 100 ? 'warn' : 'bad');
-  document.getElementById('contest-msg').innerHTML = msg;
-
-  let totalFixedProd = 0;
-  for (const a of AREAS) for (const p of PRODUCTS) totalFixedProd += PLANTS[a][p] * FIXED_PROD[a][p];
-  const totalFixedSales = AREAS.map(a => FIXED_SALES[a]).reduce((s,x)=>s+x,0);
-  const totalAd = adTotal;
-  const rdX = +document.getElementById('rd-X').value;
-  const rdY = +document.getElementById('rd-Y').value;
-  document.getElementById('rd-X-v').textContent = `$${rdX}k`;
-  document.getElementById('rd-Y-v').textContent = `$${rdY}k`;
-  const rd = rdX + rdY;
-  const subsidy = 200;
-  const gm = totalRev - totalVC - totalTC - totalComm;
-  const ebit = gm - totalFixedProd - totalFixedSales - totalAd - rd + subsidy;
-
-  document.getElementById('pnl-rev').textContent = totalRev.toFixed(0);
-  document.getElementById('pnl-vc').textContent = `−${totalVC.toFixed(0)}`;
-  document.getElementById('pnl-tc').textContent = `−${totalTC.toFixed(0)}`;
-  document.getElementById('pnl-comm').textContent = `−${totalComm.toFixed(0)}`;
-  document.getElementById('pnl-gm').textContent = gm.toFixed(0);
-  document.getElementById('pnl-fp').textContent = `−${totalFixedProd}`;
-  document.getElementById('pnl-fs').textContent = `−${totalFixedSales}`;
-  document.getElementById('pnl-ad').textContent = `−${totalAd}`;
-  document.getElementById('pnl-rd').textContent = `−${rd}`;
-  document.getElementById('pnl-ebit').textContent = ebit.toFixed(0);
-
-  for (const L of LINES) {
-    const price = +document.getElementById(`price-${L.key}`).value;
-    const prod = +document.getElementById(`prod-${L.key}`).value;
-    document.getElementById(`dec-p-${L.key}`).textContent = price.toFixed(0);
-    document.getElementById(`dec-prod-${L.key}`).textContent = fmt(prod);
-  }
-  for (const a of AREAS) for (const p of PRODUCTS) {
-    document.getElementById(`dec-a-${a}-${p}`).textContent = adSpend[`${a}-${p}`];
-  }
-  document.getElementById('dec-rd-X').textContent = `$${rdX}k`;
-  document.getElementById('dec-rd-Y').textContent = `$${rdY}k`;
-
-  const cashOpen = 100;
-  const operatingCash = ebit * 0.7;
-  const intercoTransfer = 290;
-  const debtService = -290;
-  const supplierCreditClearance = -400;
-  const cashClose = cashOpen + operatingCash + intercoTransfer + debtService + supplierCreditClearance;
-  document.getElementById('cash-op').textContent = operatingCash.toFixed(0);
-  document.getElementById('cash-close').textContent = cashClose.toFixed(0);
-  if (cashClose < 100) {
-    document.getElementById('cash-close').style.color = 'var(--red)';
-    document.getElementById('cash-close').style.fontWeight = '800';
-  } else {
-    document.getElementById('cash-close').style.color = 'var(--green)';
-    document.getElementById('cash-close').style.fontWeight = '800';
-  }
-}
-
-function wireRDPresets() {
-  document.querySelectorAll('.rd-presets').forEach(group => {
-    const targetId = group.getAttribute('data-target');
-    const target = document.getElementById(targetId);
-    group.querySelectorAll('.rd-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const v = btn.getAttribute('data-value');
-        target.value = v;
-        group.querySelectorAll('.rd-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        recompute();
-      });
-    });
-  });
-}
-
-buildInputs();
-wireRDPresets();
-document.querySelectorAll('input').forEach(el => el.addEventListener('input', recompute));
-recompute();
-</script>
 </body>
 </html>
