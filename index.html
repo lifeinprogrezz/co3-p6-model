@@ -283,6 +283,125 @@
   .note.red {
     background: var(--red-soft); border-left-color: var(--red);
   }
+  .note.green {
+    background: var(--green-soft); border-left-color: var(--green);
+  }
+
+  /* ── P6 results hero strip ───────────────────────────────── */
+  .results-hero {
+    background: var(--card); border: 2px solid var(--ink); border-radius: 10px;
+    padding: 22px 24px; margin-bottom: 14px;
+  }
+  .results-hero .verdict {
+    font-size: 13px; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
+  }
+  .results-hero .headline {
+    font-size: 24px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.3;
+  }
+  .results-hero .headline .neg { color: var(--red); }
+  .results-hero .headline .pos { color: var(--green); }
+  .results-hero .subhead {
+    font-size: 16px; color: var(--muted); margin-top: 8px; line-height: 1.5;
+  }
+  .results-headline-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    margin-top: 18px;
+  }
+  @media (max-width: 700px) { .results-headline-grid { grid-template-columns: repeat(2, 1fr); } }
+  .results-kpi {
+    background: #faf8f1; border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .results-kpi .label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted);
+    font-weight: 700;
+  }
+  .results-kpi .value {
+    font-size: 22px; font-weight: 800; letter-spacing: -0.3px; margin-top: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .results-kpi.good { background: var(--green-soft); border-color: #b8d8b6; }
+  .results-kpi.good .value { color: var(--green); }
+  .results-kpi.bad { background: var(--red-soft); border-color: #ecbdba; }
+  .results-kpi.bad .value { color: var(--red); }
+  .results-kpi.warn { background: #fdf6dd; border-color: #ecd99a; }
+  .results-kpi.warn .value { color: #8a6a00; }
+
+  /* ── Per-area P&L grid ───────────────────────────────────── */
+  .area-pl-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    margin-top: 14px;
+  }
+  @media (max-width: 700px) { .area-pl-grid { grid-template-columns: 1fr; } }
+  .area-pl {
+    border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px;
+    background: white;
+  }
+  .area-pl h5 {
+    font-size: 13px; font-weight: 700; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--border);
+  }
+  .area-pl table { width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
+  .area-pl td { padding: 4px 0; }
+  .area-pl td:last-child { text-align: right; font-weight: 600; }
+  .area-pl tr.total td {
+    border-top: 1.5px solid var(--ink); padding-top: 8px; margin-top: 4px;
+    font-size: 15px; font-weight: 800;
+  }
+  .area-pl .pos { color: var(--green); }
+  .area-pl .neg { color: var(--red); }
+
+  /* ── Per-line results table ──────────────────────────────── */
+  table.results {
+    width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums;
+    font-size: 13px;
+  }
+  table.results th, table.results td {
+    padding: 8px 6px; text-align: right;
+    border-bottom: 1px solid #eeece4;
+  }
+  table.results th:first-child, table.results td:first-child {
+    text-align: left;
+  }
+  table.results th {
+    background: #faf8f1; font-weight: 700; color: var(--muted);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  table.results tr.cell-good { background: rgba(46, 125, 50, 0.05); }
+  table.results tr.cell-bad { background: rgba(198, 40, 40, 0.05); }
+  table.results .badge {
+    display: inline-block; padding: 1px 8px; border-radius: 999px;
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px;
+  }
+  table.results .badge.sold-out { background: var(--green); color: white; }
+  table.results .badge.overstock { background: var(--gold); color: white; }
+  table.results .badge.stranded { background: var(--red); color: white; }
+  table.results .badge.ok { background: #e0dfd5; color: var(--muted); }
+
+  /* ── Insight callouts ────────────────────────────────────── */
+  .insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 700px) { .insight-grid { grid-template-columns: 1fr; } }
+  .insight {
+    border-radius: 8px; padding: 14px 16px; border: 1px solid var(--border);
+    background: var(--card);
+  }
+  .insight.win { background: var(--green-soft); border-color: #b8d8b6; }
+  .insight.miss { background: var(--red-soft); border-color: #ecbdba; }
+  .insight.watch { background: var(--gold-soft); border-color: #ecd99a; }
+  .insight .icon {
+    font-size: 18px; margin-bottom: 4px;
+  }
+  .insight h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .insight p { font-size: 14px; line-height: 1.5; }
+  .insight .num {
+    font-size: 22px; font-weight: 800; letter-spacing: -0.3px;
+    font-variant-numeric: tabular-nums;
+  }
+  .insight.win .num { color: var(--green); }
+  .insight.miss .num { color: var(--red); }
+  .insight.watch .num { color: #8a6a00; }
 
   /* ── Collapsible legacy model ────────────────────────────── */
   details.legacy {
@@ -312,8 +431,8 @@
   <div class="brand">Co.3 — Corporate Strategy & P7 Playbook</div>
   <div class="subtitle">Five plants. Three subs + HQ. The plan to swing $4.3M in 6 quarters.</div>
   <div class="meta">
-    <span><b>P6:</b> submitted 2026-05-18 13:25 <span class="pill pending">results pending</span></span>
-    <span><b>P7:</b> Doc 17 received 2026-05-19 <span class="pill live">decision phase</span></span>
+    <span><b>P6:</b> submitted 2026-05-18 · <span class="pill live">results delivered 2026-05-19</span></span>
+    <span><b>P7:</b> Doc 17 received 2026-05-19 · <span class="pill live">decision phase</span></span>
   </div>
 </header>
 
@@ -439,7 +558,7 @@
 <div class="section">
   <span class="num">02</span>
   <h2>Where we are</h2>
-  <span class="tag">P6 locked · awaiting results</span>
+  <span class="tag">P6 results in · 2026-05-19</span>
 </div>
 
 <div class="card">
@@ -462,39 +581,198 @@
   </div>
 </div>
 
+<!-- ─── P6 results landed ──────────────────────────────────── -->
+<div class="results-hero">
+  <div class="verdict">📊 P6 results · delivered 2026-05-19</div>
+  <div class="headline">
+    Operating <span class="pos">+$524k</span> · consolidated <span class="neg">−$50k</span>
+    — the Clevers X2 license and HQ interest absorbed our operating gain. <b>One-period investment drag</b>, not a structural miss.
+  </div>
+  <div class="subhead">
+    EUR and JAP each profitable; USA-Y operating loss; <b>25k JAP X-DLx units stranded</b> (built at grade 2, no price posted, zero sales). RE now <b>−$2.99M</b> (vs −$2.94M prior). Cash position improved to <b>$1.46M</b> consolidated. We have one big leak to plug and three soft tactical issues.
+  </div>
+  <div class="results-headline-grid">
+    <div class="results-kpi warn">
+      <div class="label">Net earnings</div>
+      <div class="value">−$50k</div>
+    </div>
+    <div class="results-kpi good">
+      <div class="label">Operating earnings</div>
+      <div class="value">+$524k</div>
+    </div>
+    <div class="results-kpi good">
+      <div class="label">Consol. cash</div>
+      <div class="value">$1.46M</div>
+    </div>
+    <div class="results-kpi bad">
+      <div class="label">Stranded $ (JAP X-DLx)</div>
+      <div class="value">$447k</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>P6 P&amp;L by area &amp; product <span class="sub">net operating earnings $k</span></h3>
+  <div class="area-pl-grid">
+    <div class="area-pl">
+      <h5>🇺🇸 USA</h5>
+      <table>
+        <tr><td>USA-X (no plant)</td><td class="pos">+$54</td></tr>
+        <tr><td>USA-Y</td><td class="neg">−$66</td></tr>
+        <tr class="total"><td>Sub total</td><td class="neg">−$13</td></tr>
+      </table>
+    </div>
+    <div class="area-pl">
+      <h5>🇪🇺 EUR · best sub</h5>
+      <table>
+        <tr><td>EUR-X</td><td class="pos">+$293</td></tr>
+        <tr><td>EUR-Y</td><td class="pos">+$129</td></tr>
+        <tr class="total"><td>Sub total</td><td class="pos">+$422</td></tr>
+      </table>
+    </div>
+    <div class="area-pl">
+      <h5>🇯🇵 JAP</h5>
+      <table>
+        <tr><td>JAP-X</td><td class="pos">+$114</td></tr>
+        <tr><td>JAP-Y (no plant)</td><td>$0</td></tr>
+        <tr class="total"><td>Sub total</td><td class="pos">+$114</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="note">
+    <b>HQ drag:</b> −$250k Clevers X2 license + −$134k interest − $0 misc income = <b>−$384k HQ result</b>.
+    Plus −$185k taxes on profitable subs (EUR + JAP). Net consolidated −$50k.
+    <b>The X2 license was a deliberate one-period bet</b> — the upside is the grade-2 X stock we now hold.
+  </div>
+</div>
+
+<div class="card">
+  <h3>P6 results by line <span class="sub">12 cells × decision vs outcome</span></h3>
+  <table class="results">
+    <thead>
+      <tr><th>Line</th><th>Start inv</th><th>Produced</th><th>Price posted</th><th>Sold</th><th>End inv</th><th>Result</th></tr>
+    </thead>
+    <tbody>
+      <tr class="cell-bad"><td><b>USA</b> X-Std</td><td>21,275</td><td>0</td><td>$25</td><td>9,645</td><td>11,630</td><td><span class="badge ok">slow</span></td></tr>
+      <tr><td><b>USA</b> X-DLx</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td><span class="badge ok">no plant</span></td></tr>
+      <tr><td><b>USA</b> Y-Std</td><td>41,713</td><td>40,000</td><td>$31</td><td>25,686 + 16,000 intra</td><td>40,028</td><td><span class="badge overstock">over-built</span></td></tr>
+      <tr><td><b>USA</b> Y-DLx</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td><span class="badge ok">—</span></td></tr>
+      <tr class="cell-good"><td><b>EUR</b> X-Std</td><td>14,693</td><td>17,000</td><td>$27</td><td>14,639</td><td>10,174</td><td><span class="badge sold-out">100% starting</span></td></tr>
+      <tr class="cell-good"><td><b>EUR</b> X-DLx <small style="color:var(--muted)">grade 2</small></td><td>12,500</td><td>14,881</td><td>$31</td><td>12,500</td><td>14,881</td><td><span class="badge sold-out">100% starting</span></td></tr>
+      <tr class="cell-good"><td><b>EUR</b> Y-Std</td><td>10,000</td><td>10,000</td><td>$33</td><td>10,000</td><td>10,000</td><td><span class="badge sold-out">100% starting</span></td></tr>
+      <tr class="cell-good"><td><b>EUR</b> Y-DLx <small style="color:var(--muted)">grade 1</small></td><td>10,000</td><td>10,000</td><td>$42</td><td>10,000</td><td>10,000</td><td><span class="badge sold-out">100% starting</span></td></tr>
+      <tr class="cell-good"><td><b>JAP</b> X-Std</td><td>76,448</td><td>0</td><td>$23</td><td>56,217</td><td>20,231</td><td><span class="badge sold-out">overhang drained</span></td></tr>
+      <tr class="cell-bad"><td><b>JAP</b> X-DLx <small style="color:var(--muted)">grade 2</small></td><td>0</td><td>25,000</td><td><b style="color:var(--red)">none posted</b></td><td>0</td><td>25,000</td><td><span class="badge stranded">$447k stranded</span></td></tr>
+      <tr><td><b>JAP</b> Y-Std (via USA intra)</td><td>0</td><td>0</td><td>$32 (no plant)</td><td>0</td><td>16,000 received</td><td><span class="badge ok">received via intra</span></td></tr>
+      <tr><td><b>JAP</b> Y-DLx</td><td>0</td><td>0</td><td>—</td><td>0</td><td>0</td><td><span class="badge ok">—</span></td></tr>
+    </tbody>
+  </table>
+  <p class="muted" style="margin-top:12px"><b>Inventory move:</b> 186,629 → 157,944 units (−15%). But dollar inventory <i>grew</i> $2.43M → $2.99M because the mix shifted to high-cost DLx (esp. the stranded JAP X-DLx + over-built EUR DLx). The 232k → &lt;$500k by P7 objective is now unreachable this quarter — need a 3-period plan.</p>
+</div>
+
+<div class="card">
+  <h3>Three wins + four issues from P6</h3>
+  <div class="insight-grid">
+    <div class="insight win">
+      <div class="icon">🏆</div>
+      <h4>EUR sold 100% of starting inventory on all 4 lines</h4>
+      <p>The premium DLx anchor worked: <b>$31 X-DLx and $42 Y-DLx both cleared</b>. EUR was our most profitable sub at <span class="num">+$422k</span> operating. Doctrine validated.</p>
+    </div>
+    <div class="insight win">
+      <div class="icon">📉</div>
+      <h4>JAP X-Std overhang drained</h4>
+      <p>Sold <b>56,217 units</b> of the 76k JAP-X-Std overhang at $23. Down to <span class="num">20,231</span> ending. One more period of similar action clears the line completely.</p>
+    </div>
+    <div class="insight win">
+      <div class="icon">💰</div>
+      <h4>Cash position strengthened</h4>
+      <p>Consolidated cash <b>$1.46M</b> (EUR $788k, JAP $461k, USA $115k, HQ $100k floor). All subs cash-positive. Area Bank Loans gave us the runway without HQ stress.</p>
+    </div>
+    <div class="insight miss">
+      <div class="icon">🚨</div>
+      <h4>JAP X-DLx — 25,000 units stranded</h4>
+      <p>We built grade-2 X-DLx in JAP for <b>$447k production cost</b> + drew on $250k license — but <b>posted no price</b>, so zero consumer sales. Now sitting on 25,000 units of fresh grade-2 inventory in JAP. <b>P7 absolute must: price them and advertise.</b></p>
+    </div>
+    <div class="insight miss">
+      <div class="icon">📦</div>
+      <h4>EUR over-built across all 4 DLx/Std lines</h4>
+      <p>Sold 100% of <i>starting</i> inventory but built equivalent volume on top — so end inventory ≈ start inventory. We left margin on the table by not raising prices. <b>Push EUR prices up $1–3 in P7</b>, especially DLx.</p>
+    </div>
+    <div class="insight miss">
+      <div class="icon">⚖️</div>
+      <h4>USA-Y operating loss −$66k</h4>
+      <p>Two Y plants in USA carry $333k fixed cost vs only $796k revenue. Either ramp volume hard (push price $29–30 + ads + production at capacity) or accept it as a quarterly drag while doctrine forbids plant divestiture.</p>
+    </div>
+    <div class="insight watch">
+      <div class="icon">💳</div>
+      <h4>Supplier Credit grew to $758k</h4>
+      <p>Doctrine was: clear by end-P5. Instead it grew from $653k → $758k (+$105k). <b>Jeongho:</b> identify what's auto-rolling and design the runoff schedule for P7-P8.</p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Competitive intel · P6 prices posted</h3>
+  <p class="lead" style="font-size:15px">18 active companies (Co.19/20 inactive). We sit mid-pack on every price.</p>
+  <table class="results" style="margin-top:12px">
+    <thead><tr><th>Market</th><th>Lowest</th><th>Median</th><th>Highest</th><th>Co.3</th><th>Position</th></tr></thead>
+    <tbody>
+      <tr><td>USA X-Std</td><td>$20 · Co.13</td><td>$25</td><td>$27 · Co.6</td><td>$25</td><td>median</td></tr>
+      <tr><td>USA Y-Std</td><td>$29 · Co.12,13</td><td>$32</td><td>$35</td><td>$31</td><td>median-low</td></tr>
+      <tr><td>EUR X-Std</td><td>$20 · Co.13</td><td>$26</td><td>$34 · Co.15</td><td>$27</td><td>median</td></tr>
+      <tr><td>EUR X-DLx</td><td>$29 · Co.16</td><td>$32</td><td>$35 · Co.6,17,18</td><td>$31</td><td>median-low</td></tr>
+      <tr><td>EUR Y-Std</td><td>$30</td><td>$33</td><td>$44 · Co.15</td><td>$33</td><td>median</td></tr>
+      <tr><td>EUR Y-DLx</td><td>$35 · Co.6</td><td>$42</td><td>$50 · Co.17,18</td><td>$42</td><td>median</td></tr>
+      <tr><td>JAP X-Std</td><td>$20 · Co.13</td><td>$24</td><td>$27 · Co.4,6</td><td>$23</td><td>aggressive (intended)</td></tr>
+      <tr class="cell-bad"><td>JAP X-DLx</td><td>$23 · Co.6</td><td>$31</td><td>$33 · Co.13,15</td><td><b>no offer</b></td><td>missed market</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <b>P7 grade-2 race:</b> ~half the field is now producing X-DLx at grade 2 (Co.3, Co.4, Co.5, Co.8, Co.9, Co.10, Co.12, Co.13, Co.15 — per their P7 production grades posted). <b>We are no longer ahead</b>; we're median in the grade-2 cluster. The window for our X2 premium is narrowing — need to push the inventory we have now and start in-house Y R&amp;D to reach grade-2 Y next.<br><br>
+    <b>Notable:</b> Co.13 plays aggressive low-price ($20–22 X across all markets) — likely an overhang-clearing strategy similar to ours. Co.17 and Co.18 have <b>identical pricing</b> across all 12 lines (possible coordination or copy).
+  </div>
+</div>
+
 <div class="card snapshot">
-  <p class="lead"><b style="font-size:20px">Co.3 closed P5 with +$399k</b> — first positive quarter. RE still <span class="neg"><b>−$2.94M</b></span>. HQ cash at <b>$100k</b> floor. Supplier Credit grew to <span class="neg"><b>$653k</b></span>.</p>
-  <p style="margin-top:8px;font-size:14px;color:#6b4e0a">These are P5-close numbers carried into P6. P6 results land soon and will refresh these tiles.</p>
+  <p class="lead"><b style="font-size:20px">Position at P6 close</b> — RE worsened to <span class="neg"><b>−$2.99M</b></span> (Clevers license drag). HQ cash held at <b>$100k</b> floor. Consolidated cash up to <b>$1.46M</b>. Supplier Credit grew to <span class="neg"><b>$758k</b></span> — open issue. E/L ratio 56/44, ahead of 20/80 target but still short of the 50/50 by P10.</p>
   <div class="snapshot-grid">
     <div class="snapshot-tile">
-      <h4>💰 Financial position</h4>
+      <h4>💰 Financial position · P6 close</h4>
       <table>
-        <tr><td>P5 net earnings</td><td class="pos">+$399k</td></tr>
-        <tr><td>Retained earnings</td><td class="neg">−$2.94M</td></tr>
+        <tr><td>P6 net earnings</td><td class="neg">−$50k</td></tr>
+        <tr><td>P6 operating earnings</td><td class="pos">+$524k</td></tr>
+        <tr><td>Retained earnings</td><td class="neg">−$2.99M</td></tr>
         <tr><td>HQ cash</td><td>$100k (floor)</td></tr>
-        <tr><td>Supplier Credit</td><td class="neg">$653k</td></tr>
-        <tr><td>CB long-term loan</td><td>~$1.75M</td></tr>
+        <tr><td>Consolidated cash</td><td class="pos">$1.46M</td></tr>
+        <tr><td>Supplier Credit</td><td class="neg">$758k ↑</td></tr>
+        <tr><td>Area Bank Loans</td><td>$900k (new)</td></tr>
+        <tr><td>CB long-term loan</td><td>$1.5M</td></tr>
+        <tr><td>Equity / Liabilities</td><td>56 / 44</td></tr>
       </table>
     </div>
     <div class="snapshot-tile">
-      <h4>📦 Inventory at P5 close</h4>
+      <h4>📦 Inventory at P6 close</h4>
       <table>
-        <tr><td>JAP-X-Std</td><td><b>76,448u</b></td></tr>
-        <tr><td>USA-Y-Std</td><td><b>41,713u</b></td></tr>
-        <tr><td>USA-X-Std</td><td>21,275u</td></tr>
-        <tr><td>EUR-X-Std / DLx</td><td>14.7k / 12.5k</td></tr>
+        <tr><td>JAP-X-DLx <span style="color:var(--red)">grade 2</span></td><td class="neg"><b>25,000u</b></td></tr>
+        <tr><td>JAP-X-Std</td><td>20,231u</td></tr>
+        <tr><td>USA-Y-Std</td><td><b>40,028u</b></td></tr>
+        <tr><td>USA-X-Std</td><td>11,630u</td></tr>
+        <tr><td>EUR-X-Std / DLx</td><td>10.2k / 14.9k</td></tr>
         <tr><td>EUR-Y-Std / DLx</td><td>10k / 10k</td></tr>
-        <tr class="total"><td>TOTAL</td><td>186,629u</td></tr>
+        <tr><td>JAP-Y-Std (via intra)</td><td>16,000u</td></tr>
+        <tr class="total"><td>TOTAL</td><td>157,944u</td></tr>
+        <tr><td>vs P5 close 186,629u</td><td class="pos">−15%</td></tr>
       </table>
     </div>
     <div class="snapshot-tile">
-      <h4>🏭 Capacity (pre-Doc 17)</h4>
+      <h4>🏭 Capacity · post Doc 17</h4>
       <table>
         <tr><td>USA plants</td><td>0 X / <b>2 Y</b></td></tr>
         <tr><td>EUR plants</td><td>1 X / 1 Y</td></tr>
         <tr><td>JAP plants</td><td><b>2 X</b> / 0 Y</td></tr>
-        <tr><td>Single-shift max</td><td>~125k u/qtr</td></tr>
-        <tr><td>Patents</td><td>X1, Y1 + <b>X2 (P6)</b></td></tr>
+        <tr><td>EUR new cap (after $100k cert)</td><td class="pos">35k X / 30k Y/qtr</td></tr>
+        <tr><td>Patents owned</td><td>X1, Y1</td></tr>
+        <tr><td>Licenses held</td><td class="pos">X2 (Clevers)</td></tr>
       </table>
     </div>
     <div class="snapshot-tile">
@@ -503,6 +781,9 @@
         <tr><td>USA Business Cycle</td><td>101</td></tr>
         <tr><td>EUR Business Cycle</td><td>102</td></tr>
         <tr><td>JAP Business Cycle</td><td>101</td></tr>
+        <tr><td>USA Co. Earnings</td><td>92</td></tr>
+        <tr><td>EUR Co. Earnings</td><td>99</td></tr>
+        <tr><td>JAP Co. Earnings</td><td>92</td></tr>
         <tr><td>X input prices ↑</td><td class="neg">+6 to +9%</td></tr>
         <tr><td>Y input prices ↑</td><td class="neg">+6 to +8%</td></tr>
       </table>
@@ -604,17 +885,21 @@
 </div>
 
 <div class="card">
-  <h3>Must-do this period</h3>
+  <h3>Must-do this period <span class="sub">refreshed with P6 results</span></h3>
   <ul class="checklist">
+    <li><b>🚨 PRICE THE STRANDED 25k JAP X-DLx</b> — set JAP X-DLx price in cell M18 of the .xls. Field median $31; we should price <b>$30–32</b> and advertise $50k+. This is the single biggest P7 lever. <span class="owner">Satoshi</span></li>
     <li>Pay <b>$100k to Co.1</b> via "Payment to Other Cos" row — EU capacity certification (mandatory) <span class="owner">Jeongho</span></li>
     <li>File <b>EU labor-content subsidy application</b> with administrator — claim <b>$200k</b> (2 EUR plants) <span class="owner">Roberto</span></li>
     <li>Submit <b>6 × bulletin signature declarations</b> — claim <b>$60k</b> bonus <span class="owner">All directors</span></li>
-    <li><b>Restart R&amp;D in-house</b> — minimum $560k X (per doctrine; in-house arm to push beyond X2) <span class="owner">Kavya</span></li>
+    <li><b>Restart R&amp;D in-house</b> — minimum $560k X / $370k Y (doctrine floor; we skipped both in P6) <span class="owner">Kavya</span></li>
     <li><b>R&amp;D decision: Y2 license $300k vs in-house Y $370k+</b> — Kavya bring recommendation with payback window <span class="owner">Kavya</span></li>
-    <li><b>Re-cost treasury</b> for new 7% sub→HQ tax — model: leave more cash in subs, route HQ→subs first <span class="owner">Jeongho</span></li>
-    <li><b>P7 production plan</b> — EUR can now do up to 35k X / 30k Y per qtr; match to demand forecast, don't fill headroom <span class="owner">Febby</span></li>
-    <li><b>Pricing</b> — old grade cheap (drain remaining JAP-X-Std overhang), new grade premium (EUR/JAP X-DLx at grade 2 now) <span class="owner">Satoshi</span></li>
-    <li><b>Ad spend</b> — fix the $80k → 11 cells underspend from P6. Apply $2–3/u X, $4–8/u Y rule. <span class="owner">Satoshi</span></li>
+    <li><b>Re-cost treasury</b> for new 7% sub→HQ tax — EUR has $788k cash, but pulling it costs us $55k in tax. Model leaving more in EUR. <span class="owner">Jeongho</span></li>
+    <li><b>EUR pricing up $1–3</b> — we sold 100% of starting inv on all 4 EUR lines; we left money on the table. EUR X-DLx $31 → $32–33, EUR Y-DLx $42 → $43–44. <span class="owner">Satoshi</span></li>
+    <li><b>JAP X-Std drawdown completion</b> — 20k units remaining at $23. Hold price, finish the line. <span class="owner">Satoshi</span></li>
+    <li><b>USA-Y restructure</b> — operating loss −$66k. Decide: lift price to $32 + push ads + maintain volume, or accept drag. <span class="owner">Satoshi · Febby</span></li>
+    <li><b>P7 production plan</b> — EUR can now do up to 35k X / 30k Y/qtr but DON'T over-build (we did in P6). Match to demand forecast. <span class="owner">Febby</span></li>
+    <li><b>Ad spend fix</b> — from $80k (1 cell) to ~$300–400k across ~10 cells. $2–3/u X, $4–8/u Y rule. <span class="owner">Satoshi</span></li>
+    <li><b>Investigate Supplier Credit growth</b> — $653k → $758k vs doctrine "clear by P5". What's auto-rolling? Design runoff plan. <span class="owner">Jeongho</span></li>
     <li><b>Submit MBA26Co03_p7.xls</b> with at least <b>5-minute buffer</b> before close · period cell E1 = 7 · double-check filename <span class="owner">Jeongho</span></li>
   </ul>
 </div>
