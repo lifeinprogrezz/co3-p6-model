@@ -421,6 +421,72 @@
   table.results .badge.ready { background: var(--accent); color: white; }
   table.results .badge.ok { background: #e0dfd5; color: var(--muted); }
 
+  /* ── Grade chips for grade × price matrix ────────────────── */
+  .grade-chip {
+    display: inline-block; padding: 2px 9px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.3px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .grade-chip.g2 { background: var(--accent); color: white; }
+  .grade-chip.g1 { background: var(--green); color: white; }
+  .grade-chip.g0 { background: #e0dfd5; color: var(--muted); }
+  .grade-chip.gnone { background: transparent; color: var(--muted); }
+
+  details.matrix-line {
+    border: 1px solid var(--border); border-radius: 8px;
+    margin-bottom: 8px; background: white;
+  }
+  details.matrix-line > summary {
+    list-style: none; cursor: pointer;
+    padding: 12px 16px; position: relative;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px;
+  }
+  details.matrix-line > summary::-webkit-details-marker { display: none; }
+  details.matrix-line > summary::after {
+    content: "▾"; position: absolute; right: 14px; top: 12px;
+    font-size: 12px; color: var(--muted); transition: transform 0.15s;
+  }
+  details.matrix-line[open] > summary::after { transform: rotate(180deg); }
+  details.matrix-line .line-name {
+    font-weight: 700; font-size: 15px; letter-spacing: -0.1px;
+  }
+  details.matrix-line .line-stats {
+    font-size: 12px; color: var(--muted); flex: 1;
+  }
+  details.matrix-line .line-stats b { color: var(--ink); font-weight: 700; }
+  details.matrix-line .ours-tag {
+    font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+    background: var(--ink); color: white; letter-spacing: 0.3px;
+  }
+  details.matrix-line .body {
+    padding: 0 16px 16px;
+  }
+  table.matrix-tbl {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+    font-variant-numeric: tabular-nums; margin-top: 6px;
+  }
+  table.matrix-tbl th, table.matrix-tbl td {
+    padding: 6px 8px; text-align: left;
+    border-bottom: 1px solid #eeece4;
+  }
+  table.matrix-tbl th {
+    background: #faf8f1; font-size: 10px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;
+  }
+  table.matrix-tbl td.price { text-align: right; font-weight: 600; }
+  table.matrix-tbl td.grade { width: 90px; white-space: nowrap; }
+  table.matrix-tbl td.co { width: 130px; }
+  table.matrix-tbl tr.ours {
+    background: rgba(74, 58, 168, 0.12);
+  }
+  table.matrix-tbl tr.ours td { font-weight: 700; }
+  table.matrix-tbl tr.no-offer td { color: var(--muted); }
+  table.matrix-tbl tr.no-offer td.price { color: var(--muted); font-weight: 500; }
+  .matrix-divider {
+    border-top: 1px dashed var(--border); margin: 6px 0;
+  }
+
   /* ── Insight callouts ────────────────────────────────────── */
   .insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (max-width: 700px) { .insight-grid { grid-template-columns: 1fr; } }
@@ -756,6 +822,214 @@
   </table>
   <div class="note">
     <b>P7 grade-2 race:</b> roughly half the field is producing X-DLx at grade 2. We're median, not ahead. Push our inventory and start in-house Y R&amp;D to reach grade-2 Y next.
+  </div>
+</div>
+
+<div class="card">
+  <h3>Grade × price by line <span class="sub">click any line to expand</span></h3>
+  <p class="lead" style="font-size:15px">A $30 price at grade 2 isn't the same as $30 at grade 1. Pair grade with price before we set ours.</p>
+  <div class="note green">
+    <b>Headline insight:</b> in P6, <b>grade-2 sellers are NOT charging a premium over grade-1 sellers</b>. On JAP X-DLx, Co.10 (grade 1) is at $33 while Co.7 / Co.15 (grade 2) are at $30. The market hasn't priced the tech upgrade — yet. So matching the grade-2 cluster price is the safe play; pushing $1–2 above is plausible but not data-backed.
+  </div>
+
+  <div style="margin-top:16px">
+
+    <details class="matrix-line">
+      <summary>
+        <span class="line-name">🇯🇵 JAP X-DLx</span>
+        <span class="line-stats">P7 grade-2: <b>9 cos</b> · grade-1: <b>7 cos</b> · P6 median price <b>$30</b></span>
+        <span class="ours-tag">us: grade 2 · launching</span>
+      </summary>
+      <div class="body">
+        <table class="matrix-tbl">
+          <thead><tr><th>Company</th><th>P7 grade</th><th>P6 price</th></tr></thead>
+          <tbody>
+            <tr><td class="co">Co.7</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">$30</td></tr>
+            <tr><td class="co">Co.15</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">$30</td></tr>
+            <tr><td class="co">Co.13</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">$31</td></tr>
+            <tr class="ours"><td class="co">Co.3 (us)</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">— (launching P7)</td></tr>
+            <tr class="no-offer"><td class="co">Co.4</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">no offer P6</td></tr>
+            <tr class="no-offer"><td class="co">Co.5</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">no offer P6</td></tr>
+            <tr class="no-offer"><td class="co">Co.9</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">no offer P6</td></tr>
+            <tr class="no-offer"><td class="co">Co.11</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">no offer P6</td></tr>
+            <tr class="no-offer"><td class="co">Co.12</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">no offer P6</td></tr>
+            <tr><td colspan="3" class="matrix-divider"></td></tr>
+            <tr><td class="co">Co.6</td><td class="grade"><span class="grade-chip g1">grade 1</span></td><td class="price">$23 <small style="color:var(--muted)">(value)</small></td></tr>
+            <tr><td class="co">Co.17</td><td class="grade"><span class="grade-chip g1">grade 1</span></td><td class="price">$30</td></tr>
+            <tr><td class="co">Co.18</td><td class="grade"><span class="grade-chip g1">grade 1</span></td><td class="price">$30</td></tr>
+            <tr><td class="co">Co.8</td><td class="grade"><span class="grade-chip g1">grade 1</span></td><td class="price">$32</td></tr>
+            <tr><td class="co">Co.10</td><td class="grade"><span class="grade-chip g1">grade 1</span></td><td class="price">$33 <small style="color:var(--muted)">(highest)</small></td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:10px;font-size:13px"><b>Pricing read:</b> grade-2 cluster sits at <b>$30–31</b>. Co.10 (grade 1!) is at $33. Sweet spot for us: <b>$30–32</b>. Going to $33+ puts us against a grade-1 player who's already there — not impossible if our advertising frames the grade-2 upgrade clearly.</p>
+      </div>
+    </details>
+
+    <details class="matrix-line">
+      <summary>
+        <span class="line-name">🇪🇺 EUR X-DLx</span>
+        <span class="line-stats">P7 grade-2: <b>10 cos</b> · grade-1: <b>6 cos</b> · P6 median <b>$31</b></span>
+        <span class="ours-tag">us: grade 2 · $31 in P6</span>
+      </summary>
+      <div class="body">
+        <table class="matrix-tbl">
+          <thead><tr><th>Company</th><th>P7 grade</th><th>P6 price</th></tr></thead>
+          <tbody>
+            <tr><td class="co">Co.7</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$30</td></tr>
+            <tr><td class="co">Co.8</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$30</td></tr>
+            <tr><td class="co">Co.13</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$30</td></tr>
+            <tr class="ours"><td class="co">Co.3 (us)</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$31</td></tr>
+            <tr><td class="co">Co.5</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$32</td></tr>
+            <tr class="no-offer"><td class="co">Co.4, 9, 10, 12, 15</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">no offer P6</td></tr>
+            <tr><td colspan="3" class="matrix-divider"></td></tr>
+            <tr><td class="co">Co.11</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$30</td></tr>
+            <tr><td class="co">Co.14</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$34</td></tr>
+            <tr><td class="co">Co.6</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$35</td></tr>
+            <tr><td class="co">Co.17</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$35</td></tr>
+            <tr><td class="co">Co.18</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$35</td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:10px;font-size:13px"><b>Pricing read:</b> grade-2 cluster $30–32. Grade-1 players (Co.6, 17, 18) sit at $35. Our P6 $31 was right in the cluster. <b>Room to push to $32–33</b> in P7 since grade-1 competitors are already at $35.</p>
+      </div>
+    </details>
+
+    <details class="matrix-line">
+      <summary>
+        <span class="line-name">🇪🇺 EUR Y-DLx</span>
+        <span class="line-stats">P7 grade-2: <b>3 cos</b> · grade-1: <b>12 cos</b> · P6 median <b>$42</b></span>
+        <span class="ours-tag">us: grade 1 · $42 in P6</span>
+      </summary>
+      <div class="body">
+        <table class="matrix-tbl">
+          <thead><tr><th>Company</th><th>P7 grade</th><th>P6 price</th></tr></thead>
+          <tbody>
+            <tr><td class="co">Co.16</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$39 <small style="color:var(--muted)">(undercutting!)</small></td></tr>
+            <tr><td class="co">Co.6</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$48 <small style="color:var(--muted)">(premium)</small></td></tr>
+            <tr class="no-offer"><td class="co">Co.14</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">no offer P6</td></tr>
+            <tr><td colspan="3" class="matrix-divider"></td></tr>
+            <tr><td class="co">Co.11</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$35 <small style="color:var(--muted)">(low)</small></td></tr>
+            <tr><td class="co">Co.13</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$41</td></tr>
+            <tr class="ours"><td class="co">Co.3 (us)</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$42</td></tr>
+            <tr><td class="co">Co.4</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$42</td></tr>
+            <tr><td class="co">Co.2</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$44</td></tr>
+            <tr><td class="co">Co.5</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$44</td></tr>
+            <tr><td class="co">Co.17</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$49</td></tr>
+            <tr><td class="co">Co.18</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$49</td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:10px;font-size:13px"><b>⚠️ Pricing risk:</b> Co.16 (grade 2!) is at $39 — <b>undercutting all grade-1 players</b> with a higher-grade product. If demand prices on quality, Co.16 wins. Two responses: (1) hold $42 and trust the cohort, (2) drop to $40 to defend share. Our Y-grade-2 ramp gets more urgent — license $300k or in-house?</p>
+      </div>
+    </details>
+
+    <details class="matrix-line">
+      <summary>
+        <span class="line-name">🇪🇺 EUR X-Std</span>
+        <span class="line-stats">P7 grade-1: <b>7 cos</b> · grade-0: <b>7 cos</b> · P6 median <b>$26</b></span>
+        <span class="ours-tag">us: grade 1 · $27 in P6</span>
+      </summary>
+      <div class="body">
+        <table class="matrix-tbl">
+          <thead><tr><th>Company</th><th>P7 grade</th><th>P6 price</th></tr></thead>
+          <tbody>
+            <tr><td class="co">Co.5</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$24</td></tr>
+            <tr><td class="co">Co.16</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$25</td></tr>
+            <tr><td class="co">Co.7</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$26</td></tr>
+            <tr class="ours"><td class="co">Co.3 (us)</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$27</td></tr>
+            <tr><td class="co">Co.4</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$28</td></tr>
+            <tr><td class="co">Co.15</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$34</td></tr>
+            <tr><td colspan="3" class="matrix-divider"></td></tr>
+            <tr><td class="co">Co.13</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$20</td></tr>
+            <tr><td class="co">Co.10</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$25</td></tr>
+            <tr><td class="co">Co.11</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$25</td></tr>
+            <tr><td class="co">Co.6</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$28</td></tr>
+            <tr><td class="co">Co.17, 18</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$28</td></tr>
+            <tr><td class="co">Co.9</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$32 <small style="color:var(--muted)">(outlier)</small></td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:10px;font-size:13px"><b>Pricing read:</b> grade-1 sellers $24–34, median $27. We sit in the middle — fine. Co.6 / Co.17 / Co.18 at $28 with <b>grade 0</b> are overcharging vs their tech.</p>
+      </div>
+    </details>
+
+    <details class="matrix-line">
+      <summary>
+        <span class="line-name">🇯🇵 JAP X-Std</span>
+        <span class="line-stats">P7 grade-1: <b>3 cos</b> · grade-0: <b>13 cos</b> · P6 median <b>$24</b></span>
+        <span class="ours-tag">us: grade 0 · $23 in P6</span>
+      </summary>
+      <div class="body">
+        <table class="matrix-tbl">
+          <thead><tr><th>Company</th><th>P7 grade</th><th>P6 price</th></tr></thead>
+          <tbody>
+            <tr><td class="co">Co.15</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$23</td></tr>
+            <tr><td class="co">Co.5</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$24</td></tr>
+            <tr><td class="co">Co.7</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$26</td></tr>
+            <tr><td colspan="3" class="matrix-divider"></td></tr>
+            <tr><td class="co">Co.13</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$20 <small style="color:var(--muted)">(value)</small></td></tr>
+            <tr><td class="co">Co.9, 12</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$22</td></tr>
+            <tr class="ours"><td class="co">Co.3 (us)</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$23</td></tr>
+            <tr><td class="co">Co.2, 14</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$23</td></tr>
+            <tr><td class="co">Co.10, 17, 18</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$24</td></tr>
+            <tr><td class="co">Co.8, 11, 16</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$25</td></tr>
+            <tr><td class="co">Co.4, 6</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$27</td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:10px;font-size:13px"><b>Pricing read:</b> we're in the value cluster ($20–23) clearing 20k remaining overhang. Co.15 has grade-1 at $23 — a real threat. Hold price, finish drawdown.</p>
+      </div>
+    </details>
+
+    <details class="matrix-line">
+      <summary>
+        <span class="line-name">🇪🇺 EUR Y-Std</span>
+        <span class="line-stats">P7 grade-1: <b>2 cos</b> · grade-0: <b>15 cos</b> · P6 median <b>$33</b></span>
+        <span class="ours-tag">us: grade 0 · $33 in P6</span>
+      </summary>
+      <div class="body">
+        <table class="matrix-tbl">
+          <thead><tr><th>Company</th><th>P7 grade</th><th>P6 price</th></tr></thead>
+          <tbody>
+            <tr><td class="co">Co.6</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$35</td></tr>
+            <tr><td class="co">Co.15</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$44 <small style="color:var(--muted)">(premium)</small></td></tr>
+            <tr><td colspan="3" class="matrix-divider"></td></tr>
+            <tr><td class="co">Co.12</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$30</td></tr>
+            <tr><td class="co">Co.16</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$31</td></tr>
+            <tr><td class="co">Co.8, 10, 11</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$32</td></tr>
+            <tr class="ours"><td class="co">Co.3 (us)</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$33</td></tr>
+            <tr><td class="co">Co.13</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$33</td></tr>
+            <tr><td class="co">Co.7</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$34</td></tr>
+            <tr><td class="co">Co.2, 4, 5, 14</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$35</td></tr>
+            <tr><td class="co">Co.9</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$37</td></tr>
+            <tr><td class="co">Co.17, 18</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$42</td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:10px;font-size:13px"><b>Pricing read:</b> at $33 we're at the median for grade-0. Several grade-0 players at $35. We could lift to $34–35 without losing position.</p>
+      </div>
+    </details>
+
+    <details class="matrix-line">
+      <summary>
+        <span class="line-name">🇺🇸 USA Y-Std</span>
+        <span class="line-stats">P7 grade-1: <b>2 cos</b> · grade-0: <b>15 cos</b> · P6 median <b>$32</b></span>
+        <span class="ours-tag">us: grade 0 · $31 in P6</span>
+      </summary>
+      <div class="body">
+        <table class="matrix-tbl">
+          <thead><tr><th>Company</th><th>P7 grade</th><th>P6 price</th></tr></thead>
+          <tbody>
+            <tr><td class="co">Co.15</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$30</td></tr>
+            <tr><td class="co">Co.6</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$35</td></tr>
+            <tr><td colspan="3" class="matrix-divider"></td></tr>
+            <tr><td class="co">Co.12, 13</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$29</td></tr>
+            <tr class="ours"><td class="co">Co.3 (us)</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$31</td></tr>
+            <tr><td class="co">Co.8</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$31</td></tr>
+            <tr><td class="co">Co.4, 7, 9, 10, 11, 16</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$32</td></tr>
+            <tr><td class="co">Co.2, 5, 14</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$33</td></tr>
+            <tr><td class="co">Co.17, 18</td><td><span class="grade-chip g0">grade 0</span></td><td class="price">$34</td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:10px;font-size:13px"><b>Pricing read:</b> we're slightly below median. To fix the −$66k operating loss, push price to $32–33 (in the cluster) AND advertise hard to drive volume.</p>
+      </div>
+    </details>
+
   </div>
 </div>
 
