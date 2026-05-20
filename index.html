@@ -551,7 +551,7 @@
 <header class="page-header">
   <div class="brand">Co.3 — Daily Briefing</div>
   <div class="meta">
-    <span><b>P7:</b> submitted 2026-05-19 13:26 · <span class="pill pending">awaiting results</span></span>
+    <span><b>P7:</b> results delivered 2026-05-20 · <span class="pill live">live</span></span>
   </div>
 </header>
 
@@ -691,10 +691,10 @@
     </div>
   </div>
   <div class="note green">
-    <b>EUR capacity unlocked ✓</b> — $100k Co.1 cert paid in P7. EUR plants now run at <b>35k X / 30k Y</b> per quarter (was 25k X / 22k Y, ~+30% headroom). Both EUR plants ran at 100% in the P7 submission.
+    <b>EUR capacity unlocked ✓</b> — $100k Co.1 cert paid &amp; processed in P7. EUR plants now run at <b>35k X / 30k Y</b> per quarter (was 25k X / 22k Y, ~+30% headroom). Both EUR plants ran at <b>100%</b> in P7 and every EUR cell was profitable.
   </div>
-  <div class="note">
-    <b>Idle plants — fixed cost still incurring:</b> USA-Y Plant 2 and JAP-X Plant 2 produced 0 units in P7 but were not formally closed via the Doc 17 restructuring window. The fixed cost on both shows up in P7 results.
+  <div class="note red">
+    <b>Idle plants — confirmed fixed-cost drag:</b> USA-Y Plant 2 and JAP-X Plant 2 produced 0 units in P7. The fixed cost hit P&amp;L anyway. USA-Y came in at <b>−$200k operating</b> largely because of this. <b>Decision needed before P8:</b> close, sell, repurpose, or fill the idle plants.
   </div>
   <p class="muted">We're open to consolidating plants if the math says so. The edge is the tech, not the local footprint — we can ship anywhere.</p>
 </div>
@@ -722,7 +722,7 @@
 <div class="section">
   <span class="num">04</span>
   <h2>Where we are</h2>
-  <span class="tag">P7 submitted · awaiting results · 2026-05-19 13:26</span>
+  <span class="tag">P7 results delivered · 2026-05-20</span>
 </div>
 
 <div class="card">
@@ -745,91 +745,171 @@
   </div>
 </div>
 
-<!-- ─── P7 results awaiting ─────────────────────────────────── -->
+<!-- ─── P7 results delivered ────────────────────────────────── -->
 <div class="results-hero">
-  <div class="verdict">⏳ P7 results · awaiting delivery</div>
+  <div class="verdict">📉 P7 results · delivered 2026-05-20</div>
   <div class="headline">
-    Results expected next session — the big tests are <span class="pos">premium DLx pricing</span> (EUR Y-DLx $44, EUR X-DLx $31), <span class="pos">grade-2 X-DLx launch</span> (55k JAP + 35k EUR), and whether <span class="neg">$0 ad spend</span> drags volume below forecast.
+    Operating <span class="pos">+$332k</span> — every consumer area but USA-Y made money. But the headline is dominated by <span class="neg">−$1.36M net</span>: $930k in-house R&amp;D + a <b>$300k Y2 license surprise</b> (we expected $115k from Co.9; system charged the new $300k tariff) + interest + the idle USA-Y P2 fixed cost.
   </div>
   <div class="subhead">
-    What we're watching: did our grade-2 ramp clear inventory · did the $0 ad gamble hurt demand · how the engine treated the two $0 USA-Y prices · whether the idle USA-Y P2 + JAP-X P2 plants kept dragging fixed cost.
+    What worked: JAP X-DLx 25k stranded grade-2 inventory <b>cleared in full</b>; EUR plants ran at 100% on the new caps; cash actually <b>grew to $2.86M</b> (supplier credit financed the burn). What didn't: USA-Y bled <b>−$200k operating</b> (idle Plant 2 + thin Y-Std intra margin) and JAP-Y barely covered cost ($31 ASP on $30 transfer-in). RE down to <b>−$4.61M</b>; we still pass the 20/80 E/L floor (40%).
   </div>
   <div class="results-headline-grid">
-    <div class="results-kpi warn">
-      <div class="label">P7 net earnings</div>
-      <div class="value">pending</div>
+    <div class="results-kpi bad">
+      <div class="label">Net earnings</div>
+      <div class="value">−$1.36M</div>
+    </div>
+    <div class="results-kpi good">
+      <div class="label">Operating earnings</div>
+      <div class="value">+$332k</div>
+    </div>
+    <div class="results-kpi good">
+      <div class="label">JAP X-DLx 25k stranded</div>
+      <div class="value">CLEARED ✓</div>
     </div>
     <div class="results-kpi warn">
-      <div class="label">P7 operating earnings</div>
-      <div class="value">pending</div>
+      <div class="label">Total inventory</div>
+      <div class="value">$3.57M ↑</div>
     </div>
-    <div class="results-kpi warn">
-      <div class="label">Inventory drawdown</div>
-      <div class="value">pending</div>
+  </div>
+</div>
+
+<!-- ─── Per-area P&L ────────────────────────────────────────── -->
+<div class="card">
+  <h3>Per-area operating P&amp;L <span class="sub">where the money came from this period</span></h3>
+  <div class="area-pl-grid">
+    <div class="area-pl">
+      <h5>🇺🇸 USA</h5>
+      <table>
+        <tr><td>X-Std (no plant)</td><td class="pos">+$100k</td></tr>
+        <tr><td>Y total <small style="color:var(--muted)">(P1 + P2 idle)</small></td><td class="neg">−$200k</td></tr>
+        <tr class="total"><td>USA net</td><td class="neg">−$100k</td></tr>
+      </table>
     </div>
-    <div class="results-kpi warn">
-      <div class="label">Grade-2 X-DLx sold</div>
-      <div class="value">pending</div>
+    <div class="area-pl">
+      <h5>🇪🇺 EUROPE</h5>
+      <table>
+        <tr><td>X (Std $174k · DLx incl.)</td><td class="pos">+$174k</td></tr>
+        <tr><td>Y (Std + DLx)</td><td class="pos">+$133k</td></tr>
+        <tr class="total"><td>EUR net</td><td class="pos">+$307k</td></tr>
+      </table>
+    </div>
+    <div class="area-pl">
+      <h5>🇯🇵 JAPAN</h5>
+      <table>
+        <tr><td>X (Std + DLx 25k cleared)</td><td class="pos">+$171k</td></tr>
+        <tr><td>Y-Std (intra-only, thin)</td><td class="neg">−$46k</td></tr>
+        <tr class="total"><td>JAP net</td><td class="pos">+$125k</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="note">
+    <b>Reads:</b> EUR is our reliable cash engine (every cell profitable, +$307k). JAP X is our biggest revenue + decent margin (+$171k). The big drag is <b>USA-Y</b>: −$200k from one idle plant + thin Y-Std intra margin. <b>JAP-Y</b> as a cross-shipped Y-Std vehicle barely covers transfer cost — needs price discipline next period.
+  </div>
+</div>
+
+<!-- ─── Wins / Misses / Watch ──────────────────────────────── -->
+<div class="card">
+  <h3>P7 wins · misses · what to watch</h3>
+  <div class="insight-grid">
+    <div class="insight win">
+      <div class="icon">✅</div>
+      <h4>JAP X-DLx 25k stranded — fully cleared</h4>
+      <p><span class="num">25,000u</span> sold at $30 grade-2 · $750k revenue · $303k margin. The P6 overhang is gone.</p>
+    </div>
+    <div class="insight win">
+      <div class="icon">✅</div>
+      <h4>EUR cap unlock landed</h4>
+      <p>$100k Co.1 cert processed · both EUR plants ran <span class="num">100%</span> at 35k X / 30k Y · all EUR cells profitable.</p>
+    </div>
+    <div class="insight win">
+      <div class="icon">💰</div>
+      <h4>Cash grew despite the loss</h4>
+      <p>Consolidated cash <span class="num">$1.46M → $2.86M</span>. Supplier credit financed it ($758k → $2.54M).</p>
+    </div>
+    <div class="insight miss">
+      <div class="icon">❌</div>
+      <h4>Y2 license surprise: paid $300k, not $115k</h4>
+      <p>We targeted Co.9 at $115k; the engine charged the new bulletin tariff. <span class="num">−$185k</span> vs plan.</p>
+    </div>
+    <div class="insight miss">
+      <div class="icon">❌</div>
+      <h4>USA-Y Plant 2 idle drag</h4>
+      <p>Fixed cost on the idle plant still hit P&amp;L · USA-Y net <span class="num">−$200k</span> operating. Close it or fill it.</p>
+    </div>
+    <div class="insight miss">
+      <div class="icon">❌</div>
+      <h4>JAP-Y razor-thin margin</h4>
+      <p>16,000u sold at $31 on $30 transfer-in = <span class="num">$1/u</span> · −$46k after admin. Price too low.</p>
+    </div>
+    <div class="insight watch">
+      <div class="icon">⚠️</div>
+      <h4>Supplier credit ballooned</h4>
+      <p>$758k → <span class="num">$2.54M</span>. Cheap working-capital lifeline but it stacks up interest fast. Finance to investigate.</p>
+    </div>
+    <div class="insight watch">
+      <div class="icon">⚠️</div>
+      <h4>Inventory $3.0M → $3.57M</h4>
+      <p>Obj 4 says inventory should go down; it went up. New g2 production = future revenue but balance-sheet drag now.</p>
     </div>
   </div>
 </div>
 
 <div class="card snapshot">
-  <p class="lead"><b style="font-size:20px">Position at P7 submission</b> — last-known financials are from P6 close (RE <span class="neg"><b>−$2.99M</b></span>, consolidated cash <b>$1.46M</b>, supplier credit <span class="neg"><b>$758k</b></span>). P7 added <b>$1.5M Area Bank Loans</b>, paid <b>$250k CB principal</b>, sent <b>$1.8M HQ → subs</b>, paid <b>$100k Co.1 cert</b> + <b>$115k Y2 license</b> + <b>$930k R&amp;D</b>. True P7-close numbers land with results.</p>
+  <p class="lead"><b style="font-size:20px">Position at P7 close</b> — operating <b class="pos">+$332k</b>, net <b class="neg">−$1.36M</b>. RE worsens to <b class="neg">−$4.61M</b> but liquidity actually improved: consolidated cash grew <b>$1.46M → $2.86M</b> as supplier credit ballooned <b>$758k → $2.54M</b>. E/L holds at <b>40%</b> (above the 20/80 floor, below the 50/50 target).</p>
   <div class="snapshot-grid">
     <div class="snapshot-tile">
-      <h4>💰 Financial position · last known + P7 actions</h4>
+      <h4>💰 Financial position · P7 close (actuals)</h4>
       <table>
-        <tr><td>P7 net earnings</td><td style="color:#8a6a00;font-weight:700">pending</td></tr>
-        <tr><td>P7 operating earnings</td><td style="color:#8a6a00;font-weight:700">pending</td></tr>
-        <tr><td>Retained earnings <small style="color:var(--muted)">(P6 close)</small></td><td class="neg">−$2.99M</td></tr>
-        <tr><td>HQ cash <small style="color:var(--muted)">(P6 close)</small></td><td>$100k floor</td></tr>
-        <tr><td>Consolidated cash <small style="color:var(--muted)">(P6 close)</small></td><td class="pos">$1.46M</td></tr>
-        <tr><td>Supplier Credit <small style="color:var(--muted)">(P6 close)</small></td><td class="neg">$758k ↑</td></tr>
-        <tr><td>Area Bank Loans <small style="color:var(--muted)">(post-P7)</small></td><td>$2.4M <small style="color:var(--muted)">($900k + new $1.5M)</small></td></tr>
-        <tr><td>CB long-term loan <small style="color:var(--muted)">(post-P7)</small></td><td>$1.25M <small style="color:var(--muted)">(was $1.5M, −$250k)</small></td></tr>
-        <tr><td>Equity / Liabilities</td><td>pending re-calc</td></tr>
+        <tr><td>Net earnings</td><td class="neg">−$1,357k</td></tr>
+        <tr><td>Operating earnings</td><td class="pos">+$332k</td></tr>
+        <tr><td>Retained earnings</td><td class="neg">−$4,606k</td></tr>
+        <tr><td>Consolidated cash</td><td class="pos">$2,860k ↑</td></tr>
+        <tr><td>Supplier credit</td><td class="neg">$2,540k ↑↑</td></tr>
+        <tr><td>Area bank loans</td><td>$1,500k</td></tr>
+        <tr><td>CB long-term</td><td>$1,250k</td></tr>
+        <tr><td>Total equity</td><td>$5,394k</td></tr>
+        <tr><td>E / L</td><td>40 / 60</td></tr>
+        <tr class="total"><td>Total assets</td><td>$13,513k</td></tr>
       </table>
     </div>
     <div class="snapshot-tile">
-      <h4>📦 Inventory available · pre-P7 sales</h4>
+      <h4>📦 Ending inventory · P7 close</h4>
       <table>
-        <tr><td>JAP-X-DLx <span style="color:var(--accent)">grade 2</span></td><td class="pos"><b>55,000u</b></td></tr>
-        <tr><td>EUR-X-DLx <span style="color:var(--accent)">grade 2</span></td><td class="pos"><b>34,881u</b></td></tr>
-        <tr><td>JAP-Y-Std <small style="color:var(--muted)">(P6 + new intra)</small></td><td>31,000u</td></tr>
-        <tr><td>USA-Y-Std <small style="color:var(--muted)">(post 15k intra out)</small></td><td>25,028u</td></tr>
-        <tr><td>EUR-X-Std / Y-Std</td><td>25.2k / 25.0k</td></tr>
-        <tr><td>JAP-X-Std</td><td>20,231u</td></tr>
-        <tr><td>USA-X-Std <small style="color:var(--muted)">(no plant)</small></td><td>11,630u</td></tr>
-        <tr><td>EUR-Y-DLx <span class="grade-chip g1" style="font-size:9px;padding:0 4px">g1</span> saleable</td><td>10,000u</td></tr>
-        <tr><td>Locked for P8 <small style="color:var(--muted)">(USA-Y-DLx 24k + EUR-Y-DLx 15k, new g2 N+1)</small></td><td class="neg">39,000u</td></tr>
-        <tr class="total"><td>TOTAL in system</td><td>~277k</td></tr>
-        <tr><td>vs P6 close 157,944u</td><td class="neg">+75%</td></tr>
+        <tr><td>USA-Y-Std <small style="color:var(--muted)">(stranded)</small></td><td class="neg"><b>25,028u</b></td></tr>
+        <tr><td>USA-Y-DLx <span class="grade-chip g2" style="font-size:9px;padding:0 4px">g2</span> <small style="color:var(--muted)">(P8 sale)</small></td><td class="pos">24,000u</td></tr>
+        <tr><td>EUR-X-Std <span class="grade-chip g1" style="font-size:9px;padding:0 4px">g1</span></td><td>15,000u</td></tr>
+        <tr><td>EUR-X-DLx <span class="grade-chip g2" style="font-size:9px;padding:0 4px">g2</span></td><td>20,000u</td></tr>
+        <tr><td>EUR-Y-Std <span class="grade-chip g1" style="font-size:9px;padding:0 4px">g1</span></td><td>15,000u</td></tr>
+        <tr><td>EUR-Y-DLx <span class="grade-chip g2" style="font-size:9px;padding:0 4px">g2</span> <small style="color:var(--muted)">(P8 sale)</small></td><td class="pos">15,000u</td></tr>
+        <tr><td>JAP-X-DLx <span class="grade-chip g2" style="font-size:9px;padding:0 4px">g2</span> <small style="color:var(--muted)">(P8 sale)</small></td><td class="pos">30,000u</td></tr>
+        <tr><td>JAP-Y-Std <small style="color:var(--muted)">(imported)</small></td><td>15,000u</td></tr>
+        <tr><td>USA-X / JAP-X-Std cleared</td><td class="pos">0 / 0 ✓</td></tr>
+        <tr class="total"><td>TOTAL units</td><td>159,028</td></tr>
       </table>
     </div>
     <div class="snapshot-tile">
-      <h4>🏭 Capacity · post P7 utilization</h4>
+      <h4>🏭 Capacity · what we used</h4>
       <table>
-        <tr><td>USA plants</td><td>0 X / <b>2 Y</b> <small style="color:var(--red)">(P2 idle)</small></td></tr>
-        <tr><td>EUR plants</td><td>1 X / 1 Y <small style="color:var(--green)">(100%)</small></td></tr>
-        <tr><td>JAP plants</td><td><b>2 X</b> <small style="color:var(--red)">(P2 idle)</small> / 0 Y</td></tr>
+        <tr><td>USA plants</td><td>1 of 2 Y <small style="color:var(--red)">(P2 idle)</small></td></tr>
+        <tr><td>EUR plants</td><td>1 X + 1 Y <small style="color:var(--green)">(100%)</small></td></tr>
+        <tr><td>JAP plants</td><td>1 of 2 X <small style="color:var(--red)">(P2 idle)</small></td></tr>
         <tr><td>EUR cap unlocked</td><td class="pos">35k X / 30k Y/qtr ✓</td></tr>
         <tr><td>Patents owned</td><td>X1, Y1</td></tr>
-        <tr><td>Licenses held</td><td class="pos">X2 (Clevers) + Y2 (Co.9)</td></tr>
-        <tr><td>R&amp;D running</td><td class="pos">$560k X · $370k Y</td></tr>
+        <tr><td>Licenses held</td><td class="pos">X2 (Clevers) + Y2</td></tr>
+        <tr><td>R&amp;D this period</td><td class="pos">$560k X · $370k Y</td></tr>
       </table>
     </div>
     <div class="snapshot-tile">
-      <h4>📊 Macro indices · last known (P6)</h4>
+      <h4>🎯 Objectives · P7 scorecard</h4>
       <table>
-        <tr><td>USA Business Cycle</td><td>101</td></tr>
-        <tr><td>EUR Business Cycle</td><td>102</td></tr>
-        <tr><td>JAP Business Cycle</td><td>101</td></tr>
-        <tr><td>USA Co. Earnings</td><td>92</td></tr>
-        <tr><td>EUR Co. Earnings</td><td>99</td></tr>
-        <tr><td>JAP Co. Earnings</td><td>92</td></tr>
-        <tr><td>X input prices ↑</td><td class="neg">+6 to +9%</td></tr>
-        <tr><td>Y input prices ↑</td><td class="neg">+6 to +8%</td></tr>
+        <tr><td>Obj 1: RE positive</td><td class="neg">−$4.61M ✗</td></tr>
+        <tr><td>Obj 2: E/L ≥20/80</td><td class="pos">40/60 ✓</td></tr>
+        <tr><td>Obj 2: target 50/50</td><td style="color:#8a6a00;font-weight:700">progress</td></tr>
+        <tr><td>Obj 3: ROA growth ≥10%</td><td class="neg">net negative ✗</td></tr>
+        <tr><td>Obj 4: inventory ↓ &lt;$500k</td><td class="neg">$3.57M ✗</td></tr>
+        <tr><td>Obj 5: top 5% innovation</td><td class="pos">X2+Y2 in use ✓</td></tr>
+        <tr><td>Bonus: 25k stranded cleared</td><td class="pos">JAP X-DLx ✓</td></tr>
       </table>
     </div>
   </div>
@@ -1299,15 +1379,16 @@
 </div>
 
 <div class="card">
-  <h3>Verify when P7 results land <span class="sub">our regression watchlist</span></h3>
+  <h3>Verified — what the P7 results actually showed</h3>
   <ul class="checklist">
-    <li><b>USA-Y-Std $0 price behavior</b> — did the engine treat it as "no offering" or as a literal $0? If the latter, large unfulfilled demand may show on the line.</li>
-    <li><b>USA-Y-DLx $0 + 24k g2 production</b> — confirm N+1 rule applies (units land in P8 inventory, no P7 sales).</li>
-    <li><b>EUR cap unlocked</b> — confirm the 35k X / 30k Y per plant is live (means $100k Co.1 payment processed).</li>
-    <li><b>Y2 license counterparty</b> — confirm Co.9 received $115k from us and we hold the Y2 license.</li>
-    <li><b>Intra USA → JAP Y-Std 15k @ $30</b> — confirm JAP inventory increased ~15k.</li>
-    <li><b>HQ → subs transfers tax-free</b> — confirm no 7% tax applied (direction matters).</li>
-    <li><b>Idle plants fixed cost</b> — JAP-X Plant 2 + USA-Y Plant 2 produced 0 units; check whether fixed cost still hit P&amp;L.</li>
+    <li class="done"><b>USA-Y-Std $0 price = no offering</b> — engine read $0 as "skip the market," no demand fulfilled, 25,028 units still in inventory. Confirmed: $0 is safe.</li>
+    <li class="done"><b>USA-Y-DLx N+1 confirmed</b> — 24,000 grade-2 units produced, 0 sold in P7, sitting in P8-saleable inventory. Plant-2 fixed cost still hit P&amp;L though.</li>
+    <li class="done"><b>EUR cap unlock processed</b> — both EUR plants ran 100% at the new caps (35k X + 30k Y). $100k Co.1 cert applied.</li>
+    <li><b>Y2 license — paid $300k, not $115k</b> ⚠️ — engine applied the new $300k bulletin tariff. Co.9 still received $115k from another company. <b>−$185k vs plan.</b></li>
+    <li class="done"><b>Intra USA → JAP Y-Std 15,000 @ $30 — $450k</b> — JAP received 15k units; sold 16k Y-Std consumer at $31 (1k from prior). Margin razor-thin.</li>
+    <li class="done"><b>HQ → subs $1.8M tax-free</b> — direction correctly tax-free; only sub→HQ would have triggered the 7%.</li>
+    <li><b>Idle plants drag confirmed</b> ⚠️ — USA-Y Plant 2 + JAP-X Plant 2 both 0 production but fixed cost showed up in operating expense. USA-Y −$200k operating, JAP-X still +$171k thanks to volume.</li>
+    <li class="done"><b>JAP X-DLx 25k stranded cleared</b> — sold all 25k at $30 grade-2 ($303k gross margin). The P6 overhang is gone.</li>
   </ul>
 </div>
 
@@ -1315,7 +1396,7 @@
 
 <footer>
   Co.3 · Strategic Business Simulation · ESADE MBA 2025–2026<br>
-  Strategy approved 2026-05-13 · P6 submitted 2026-05-18 · P7 submitted 2026-05-19<br>
+  Strategy approved 2026-05-13 · P6 results 2026-05-19 · P7 submitted 2026-05-19 · P7 results delivered 2026-05-20<br>
   <a href="https://github.com/lifeinprogrezz/esade-mba-private">repo</a>
 </footer>
 
