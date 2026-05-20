@@ -237,6 +237,13 @@
   /* ── P7 bulletin cards (expandable) ──────────────────────── */
   .bulletin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (max-width: 700px) { .bulletin-grid { grid-template-columns: 1fr; } }
+  h5.opt-group {
+    font-size: 12px; font-weight: 700; color: var(--ink);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin-top: 18px; margin-bottom: 10px;
+    padding-bottom: 6px; border-bottom: 2px solid var(--ink);
+  }
+  h5.opt-group:first-of-type { margin-top: 4px; }
   details.bullcard {
     background: var(--card); border: 1px solid var(--border); border-radius: 8px;
     padding: 0; overflow: hidden;
@@ -406,6 +413,10 @@
   }
   .area-pl .pos { color: var(--green); }
   .area-pl .neg { color: var(--red); }
+  .area-pl .area-note {
+    margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border);
+    font-size: 12.5px; line-height: 1.45; color: var(--muted);
+  }
 
   /* ── Per-line results table ──────────────────────────────── */
   table.results {
@@ -690,15 +701,6 @@
       <div style="font-size:12px;color:var(--muted);margin-top:2px">24k USA + 30k EUR</div>
     </div>
   </div>
-  <div class="note green">
-    <b>EUR cap unlocked ✓</b> — $100k Co.1 cert processed. Caps now <b>35k X / 30k Y</b> (was 25k / 22k). Both EUR plants ran 100% in P7; every EUR cell profitable.
-  </div>
-  <div class="note green">
-    <b>USA-Y Plant 2 written off ✓</b> — USA net P&amp;E $1,050k → $472.5k (−$577k); Plant 2 is gone from the books, no Doc 09B needed. Fixed cost $333k → $182.5k (−$150k). JAP-X stayed flat at $267k — its Plant 2 was already idle in P6, so the disposal didn't trigger. <b>Implication:</b> the P7 USA-Y −$200k is N+1 inventory cycle on Plant 1 (made 24k Y-DLx g2 for P8 sale), not closure drag.
-  </div>
-  <div class="note">
-    <b>Where we sell</b> — X in EUR + JAP · Y in USA + EUR (no JAP-Y plant; we cross-ship Y-Std USA→JAP). Default: local production. <b>P7 intra:</b> USA→JAP 15k Y-Std @ $30 → $450k. JAP resold at $31 (thin $1/u, −$46k operating). P8: stop importing OR price higher.
-  </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
@@ -726,35 +728,29 @@
     <li><span class="icon">📊</span><div><span class="label">Market research — USA X-Std study</span> <span class="detail">— confirmed full inventory drawdown.</span></div></li>
     <li><span class="icon">📢</span><div><span class="label">Advertising $0</span> <span class="detail">— same gap as P6. Lines still cleared, but EUR Y-DLx priced below the $45 median. P8: ad support could lift $4–6/u.</span></div></li>
   </ul>
-  <div class="note">
-    <b>vs draft:</b> R&amp;D restored to floor · intra switched to USA-Y-Std · added $1.8M sub→HQ repatriation (blocked — declaration not filed). Lesson logged for P8.
-  </div>
 </div>
 
 <!-- ─── P7 results delivered ────────────────────────────────── -->
 <div class="results-hero">
   <div class="verdict">📉 P7 results · delivered 2026-05-20</div>
   <div class="headline">
-    Operating <span class="pos">+$332k</span> · net <span class="neg">−$1.36M</span>. Loss = $930k R&amp;D + $185k Y2 tariff surprise + $461k interest. Two structural events: <b>USA-Y Plant 2 written off</b> (P&amp;E −$577k) and <b>$1.8M sub→HQ repatriation blocked</b> (declaration not filed → SC covered $1.33M of HQ obligations).
-  </div>
-  <div class="subhead">
-    Worked: JAP X-DLx 25k stranded cleared · EUR plants 100% · subs cash-rich (EUR $1.17M, JAP $1.09M). Missed: USA-Y −$200k (Plant 1 made 24k g2 Y-DLx for P8, only 15k intra carried P7 vs $182.5k fixed cost) · JAP-Y $1/u margin · HQ stuck at $100k floor, SC $758k → $2.54M. RE −$4.61M; E/L holds at 40%.
+    Investment quarter: operating positive, R&amp;D + Y2 tariff drove the headline loss.
   </div>
   <div class="results-headline-grid">
+    <div class="results-kpi good">
+      <div class="label">Operating</div>
+      <div class="value">+$332k</div>
+    </div>
     <div class="results-kpi bad">
-      <div class="label">Net earnings</div>
+      <div class="label">Net</div>
       <div class="value">−$1.36M</div>
     </div>
     <div class="results-kpi good">
-      <div class="label">Operating earnings</div>
-      <div class="value">+$332k</div>
-    </div>
-    <div class="results-kpi good">
-      <div class="label">JAP X-DLx 25k stranded</div>
+      <div class="label">25k stranded</div>
       <div class="value">CLEARED ✓</div>
     </div>
     <div class="results-kpi warn">
-      <div class="label">Total inventory</div>
+      <div class="label">Inventory</div>
       <div class="value">$3.57M ↑</div>
     </div>
   </div>
@@ -762,46 +758,47 @@
 
 <!-- ─── Per-area P&L ────────────────────────────────────────── -->
 <div class="card">
-  <h3>Per-area operating P&amp;L <span class="sub">where the money came from this period</span></h3>
+  <h3>Per-area P&amp;L</h3>
   <div class="area-pl-grid">
     <div class="area-pl">
       <h5>🇺🇸 USA</h5>
       <table>
         <tr><td>X-Std (no plant)</td><td class="pos">+$100k</td></tr>
-        <tr><td>Y total <small style="color:var(--muted)">(1 plant — P2 written off)</small></td><td class="neg">−$200k</td></tr>
-        <tr class="total"><td>USA net</td><td class="neg">−$100k</td></tr>
+        <tr><td>Y total <small style="color:var(--muted)">(1 plant)</small></td><td class="neg">−$200k</td></tr>
+        <tr class="total"><td>Net</td><td class="neg">−$100k</td></tr>
       </table>
+      <p class="area-note">N+1 drag: Plant 1 made 24k g2 Y-DLx for P8 sale. Only 15k intra carried P7. Flips positive once g2 hits market.</p>
     </div>
     <div class="area-pl">
       <h5>🇪🇺 EUROPE</h5>
       <table>
-        <tr><td>X (Std $174k · DLx incl.)</td><td class="pos">+$174k</td></tr>
+        <tr><td>X (Std + DLx)</td><td class="pos">+$174k</td></tr>
         <tr><td>Y (Std + DLx)</td><td class="pos">+$133k</td></tr>
-        <tr class="total"><td>EUR net</td><td class="pos">+$307k</td></tr>
+        <tr class="total"><td>Net</td><td class="pos">+$307k</td></tr>
       </table>
+      <p class="area-note">Reliable engine: every cell profitable, plants at 100% on the new caps.</p>
     </div>
     <div class="area-pl">
       <h5>🇯🇵 JAPAN</h5>
       <table>
-        <tr><td>X (Std + DLx 25k cleared)</td><td class="pos">+$171k</td></tr>
-        <tr><td>Y-Std (intra-only, thin)</td><td class="neg">−$46k</td></tr>
-        <tr class="total"><td>JAP net</td><td class="pos">+$125k</td></tr>
+        <tr><td>X (Std + DLx)</td><td class="pos">+$171k</td></tr>
+        <tr><td>Y-Std (imports)</td><td class="neg">−$46k</td></tr>
+        <tr class="total"><td>Net</td><td class="pos">+$125k</td></tr>
       </table>
+      <p class="area-note">JAP-X biggest revenue + 25k stranded cleared. JAP-Y imports at $1/u — fix P8.</p>
     </div>
-  </div>
-  <div class="note">
-    <b>Reads:</b> EUR is the reliable engine (+$307k, every cell profitable). JAP-X is biggest revenue + decent margin (+$171k). <b>USA-Y −$200k</b> is N+1 inventory cycle on Plant 1: 24k g2 Y-DLx sits for P8, only 15k intra-Y-Std carried P7 against $182.5k fixed cost. Plant 2 already off the cost base. Flips positive in P8 once Y-DLx g2 hits market. <b>JAP-Y</b> imports at $1/u — needs P8 price discipline.
   </div>
 </div>
 
 <!-- ─── Wins / Misses / Watch ──────────────────────────────── -->
 <div class="card">
-  <h3>P7 wins · misses · what to watch</h3>
+  <h3>P7 wins · watch · misses <span class="sub">sorted by status</span></h3>
   <div class="insight-grid">
+    <!-- WINS -->
     <div class="insight win">
       <div class="icon">✅</div>
       <h4>JAP X-DLx 25k stranded — cleared</h4>
-      <p><span class="num">25,000u</span> at $30 g2 · $750k revenue · $303k margin. P6 overhang gone.</p>
+      <p><span class="num">25,000u</span> at $30 g2 · $750k revenue · $303k margin.</p>
     </div>
     <div class="insight win">
       <div class="icon">✅</div>
@@ -811,46 +808,48 @@
     <div class="insight win">
       <div class="icon">🧪</div>
       <h4>X3 patent achieved (in-house)</h4>
-      <p>Max grade X = <span class="num">3</span>, in-house. Prize-eligible for <b>Ducal Academy $300k</b>. Others may also have it — file P8, prize splits if shared.</p>
+      <p>Max grade X = <span class="num">3</span>. Eligible for <b>Ducal Academy $300k</b> — file P8.</p>
     </div>
+    <div class="insight win">
+      <div class="icon">✅</div>
+      <h4>USA-Y Plant 2 written off</h4>
+      <p>USA net P&amp;E <span class="num">−$577k</span>. Fixed cost $333k → $182.5k. 1 USA-Y plant now.</p>
+    </div>
+    <!-- WATCH -->
+    <div class="insight watch">
+      <div class="icon">⚠️</div>
+      <h4>Supplier credit ballooned</h4>
+      <p>HQ SC $758k → <span class="num">$2.54M</span>. P8: file declaration + start SC runoff.</p>
+    </div>
+    <div class="insight watch">
+      <div class="icon">⚠️</div>
+      <h4>Inventory ↑ $3.0M → $3.57M</h4>
+      <p>New g2 stock = P8 revenue, drag today.</p>
+    </div>
+    <!-- MISSES -->
     <div class="insight miss">
       <div class="icon">❌</div>
       <h4>$1.8M sub→HQ blocked</h4>
-      <p>Doc 17 declaration not filed → transfers ignored. HQ covered $1.33M of obligations via SC (+<span class="num">$1.78M</span>, $758k → $2.54M).</p>
+      <p>Doc 17 declaration not filed → transfers ignored. HQ covered via SC.</p>
     </div>
     <div class="insight miss">
       <div class="icon">❌</div>
       <h4>Y2 license: $300k, not $115k</h4>
       <p>Co.9 matched another buyer; we fell back to Clevers list. <span class="num">−$185k</span> vs plan.</p>
     </div>
-    <div class="insight win">
-      <div class="icon">✅</div>
-      <h4>USA-Y Plant 2 written off</h4>
-      <p>USA net P&amp;E <span class="num">$1,050k → $472.5k</span> (−$577k). Fixed cost $333k → $182.5k. 1 USA-Y plant now.</p>
-    </div>
     <div class="insight miss">
       <div class="icon">❌</div>
       <h4>JAP-Y thin margin</h4>
-      <p>16k @ $31 on $30 cost = <span class="num">$1/u</span> · −$46k. Price too low.</p>
-    </div>
-    <div class="insight watch">
-      <div class="icon">⚠️</div>
-      <h4>Supplier credit at HQ</h4>
-      <p>$758k → <span class="num">$2.54M</span>. ~$1.78M = the blocked sub→HQ. 15% interest stacks fast. P8: file declaration + start SC runoff.</p>
-    </div>
-    <div class="insight watch">
-      <div class="icon">⚠️</div>
-      <h4>Inventory ↑ $3.0M → $3.57M</h4>
-      <p>Obj 4 says down; went up. New g2 stock = P8 revenue, drag today.</p>
+      <p>16k @ $31 on $30 cost = <span class="num">$1/u</span> · −$46k.</p>
     </div>
   </div>
 </div>
 
 <div class="card snapshot">
-  <p class="lead"><b style="font-size:20px">Position at P7 close</b> — operating <b class="pos">+$332k</b>, net <b class="neg">−$1.36M</b>, RE <b class="neg">−$4.61M</b>. Consolidated cash $1.46M → $2.86M, but it's stuck in the subs (repatriation blocked). HQ at $100k floor; SC $758k → $2.54M to cover obligations. E/L 40/60.</p>
+  <h3 style="font-size:18px;margin-bottom:14px">P7 close — financials &amp; inventory</h3>
   <div class="snapshot-grid">
     <div class="snapshot-tile">
-      <h4>💰 Financial position · P7 close (actuals)</h4>
+      <h4>💰 Financial position</h4>
       <table>
         <tr><td>Net earnings</td><td class="neg">−$1,357k</td></tr>
         <tr><td>Operating earnings</td><td class="pos">+$332k</td></tr>
@@ -865,7 +864,7 @@
       </table>
     </div>
     <div class="snapshot-tile">
-      <h4>📦 Ending inventory · P7 close</h4>
+      <h4>📦 Ending inventory</h4>
       <table>
         <tr><td>USA-Y-Std <small style="color:var(--muted)">(stranded)</small></td><td class="neg"><b>25,028u</b></td></tr>
         <tr><td>USA-Y-DLx <span class="grade-chip g2" style="font-size:9px;padding:0 4px">g2</span> <small style="color:var(--muted)">(P8 sale)</small></td><td class="pos">24,000u</td></tr>
@@ -879,40 +878,12 @@
         <tr class="total"><td>TOTAL units</td><td>159,028</td></tr>
       </table>
     </div>
-    <div class="snapshot-tile">
-      <h4>🏭 Capacity · what we used</h4>
-      <table>
-        <tr><td>USA plants</td><td>1 Y <small style="color:var(--muted)">(P2 written off P7)</small></td></tr>
-        <tr><td>EUR plants</td><td>1 X + 1 Y <small style="color:var(--green)">(100%)</small></td></tr>
-        <tr><td>JAP plants</td><td>1 of 2 X <small style="color:var(--red)">(P2 idle, still on books)</small></td></tr>
-        <tr><td>EUR cap unlocked</td><td class="pos">35k X / 30k Y/qtr ✓</td></tr>
-        <tr><td>Patents owned</td><td class="pos">X1, <b>X3</b> ✓, Y1</td></tr>
-        <tr><td>Licenses held</td><td>X2 + Y2 (Clevers)</td></tr>
-        <tr><td>R&amp;D this period</td><td class="pos">$560k X · $370k Y</td></tr>
-      </table>
-    </div>
-    <div class="snapshot-tile">
-      <h4>🎯 Objectives · P7 scorecard</h4>
-      <table>
-        <tr><td>Obj 1: RE positive</td><td class="neg">−$4.61M ✗</td></tr>
-        <tr><td>Obj 2: E/L ≥20/80</td><td class="pos">40/60 ✓</td></tr>
-        <tr><td>Obj 2: target 50/50</td><td style="color:#8a6a00;font-weight:700">progress</td></tr>
-        <tr><td>Obj 3: ROA growth ≥10%</td><td class="neg">net negative ✗</td></tr>
-        <tr><td>Obj 4: inventory ↓ &lt;$500k</td><td class="neg">$3.57M ✗</td></tr>
-        <tr><td>Obj 5: top 5% innovation</td><td class="pos">X2+Y2 in use ✓</td></tr>
-        <tr><td>Bonus: 25k stranded cleared</td><td class="pos">JAP X-DLx ✓</td></tr>
-      </table>
-    </div>
   </div>
 </div>
 
 <div class="card">
-  <h3>Competitive intel <span class="sub">prices + grades · 14 real competitors (Co.1–Co.15) · P7 actual</span></h3>
-  <p class="lead" style="font-size:15px">14 active competitor teams. Each market: where we sit on price and the grade mix of sellers. Click a market for full per-company breakdown including P8 production plan. <small style="color:var(--muted)">Co.16–18 excluded — system bots, not real teams.</small></p>
-  <div class="note green">
-    <b>Our tech:</b> <b>X3 in-house</b> (P7 confirmed) · Y at g2 license. We can't see what other teams have — same way they can't see ours. We'll learn at P8 results who else has X3 (anyone producing g3, or claiming Ducal). <b>File Ducal Academy $300k in P8</b> regardless; prize splits if more than one claims.
-  </div>
-  <table class="results" style="margin-top:14px">
+  <h3>Competitive intel <span class="sub">P7 actual · Co.1–Co.15 (bots excluded)</span></h3>
+  <table class="results" style="margin-top:6px">
     <thead><tr><th>Market</th><th>Lo</th><th>Med</th><th>Hi</th><th>Co.3 P7</th><th>Grade mix</th><th>Position</th></tr></thead>
     <tbody>
       <tr><td><b>🇺🇸 USA X-Std</b></td><td>$20</td><td>$24</td><td>$28</td><td>$26 <span class="grade-chip g0">—</span></td><td><small style="color:var(--muted)">g0:12</small></td><td><span style="color:var(--accent)">high</span></td></tr>
@@ -929,15 +900,11 @@
       <tr><td><b>🇯🇵 JAP Y-DLx</b></td><td>$38</td><td>$44</td><td>$50</td><td><span style="color:var(--muted)">no offer</span></td><td><small style="color:var(--muted)">g2:3</small></td><td>—</td></tr>
     </tbody>
   </table>
-  <div class="note">
-    <b>P7 read:</b> we under-priced on most g2 lines — EUR Y-DLx ($44 vs median, g2 majority), EUR X-DLx ($31 below cluster), JAP X-DLx ($30 below cluster). $0 USA-Y bets worked. +$1 lift to EUR X-Std was right.
-  </div>
   <div class="note green">
-    <b>P8 direction:</b> EUR Y-DLx $46–48 · EUR X-DLx $33–35 · JAP X-DLx $32–34 (new 30k g2 online) · JAP Y-Std $33–34 or stop importing · USA-Y-DLx debut $42–45 (24k g2 saleable).
+    <b>P8 pricing:</b> EUR Y-DLx <b>$46–48</b> · EUR X-DLx <b>$33–35</b> · JAP X-DLx <b>$32–34</b> · JAP Y-Std <b>$33–34</b> (or stop importing) · USA-Y-DLx debut <b>$42–45</b>.
   </div>
 
-  <h5 style="font-size:12px;text-transform:uppercase;letter-spacing:0.7px;color:var(--muted);font-weight:700;margin-top:24px;margin-bottom:8px">Per-market breakdown · click to expand</h5>
-  <p class="muted" style="font-size:13px;margin-bottom:10px">Tech grade = each company's P8 production plan grade for the line (proxy for current capability). Sorted by P7 price.</p>
+  <h5 style="font-size:12px;text-transform:uppercase;letter-spacing:0.7px;color:var(--muted);font-weight:700;margin-top:22px;margin-bottom:8px">Per-market breakdown · click to expand</h5>
   <div style="margin-top:8px">
     <details class="matrix-line">
       <summary>
@@ -1176,106 +1143,71 @@
 </div>
 
 <div class="card">
-  <h3>The flow we play <span class="sub">tech → capacity → demand</span></h3>
-  <p class="lead">Three constraints set the P&amp;L. <b>Technology</b> caps the grade we can sell. <b>Capacity</b> caps units we can make. <b>Demand</b> caps units we can sell at our price. The best move each period is wherever the binding constraint sits.</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px">
-    <div style="background:var(--accent-soft);border:1px solid #b8caec;border-radius:8px;padding:14px 16px">
-      <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px">① Technology</div>
-      <div style="font-size:15px;margin-top:6px;font-weight:600">What grade we can make.</div>
-      <div style="font-size:13px;color:var(--muted);margin-top:4px">X3 in-house ✓ · Y2 license · Y3 open.</div>
-    </div>
-    <div style="background:var(--green-soft);border:1px solid #b8d8b6;border-radius:8px;padding:14px 16px">
-      <div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.5px">② Capacity</div>
-      <div style="font-size:15px;margin-top:6px;font-weight:600">How many we can produce.</div>
-      <div style="font-size:13px;color:var(--muted);margin-top:4px">X 105k · Y 54k per qtr.</div>
-    </div>
-    <div style="background:var(--gold-soft);border:1px solid #ecd99a;border-radius:8px;padding:14px 16px">
-      <div style="font-size:11px;font-weight:700;color:#8a6a00;text-transform:uppercase;letter-spacing:0.5px">③ Demand</div>
-      <div style="font-size:15px;margin-top:6px;font-weight:600">How many we sell at our price.</div>
-      <div style="font-size:13px;color:var(--muted);margin-top:4px">P7: 4 lines drawn down · 1 stuck.</div>
-    </div>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Technology — us vs the field</h3>
+  <h3>Technology · us vs the field <span class="sub">our stack + where we stand</span></h3>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
     <div style="background:var(--accent-soft);border:1px solid #b8caec;border-radius:8px;padding:14px 16px">
       <h4 style="font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">X line</h4>
       <table style="width:100%;font-size:14px;font-variant-numeric:tabular-nums">
-        <tr><td>X1 patent</td><td style="text-align:right" class="pos">✓ in-house</td></tr>
-        <tr><td>X2 license</td><td style="text-align:right">✓ Clevers (P6)</td></tr>
-        <tr><td><b>X3 patent</b></td><td style="text-align:right" class="pos"><b>✓ in-house (P7)</b></td></tr>
-        <tr><td>X4 path</td><td style="text-align:right;color:var(--muted)">in-house R&amp;D running</td></tr>
+        <tr><td>X1</td><td style="text-align:right" class="pos">✓ patent in-house</td></tr>
+        <tr><td>X2</td><td style="text-align:right">✓ Clevers license</td></tr>
+        <tr><td><b>X3</b></td><td style="text-align:right" class="pos"><b>✓ patent in-house</b></td></tr>
+        <tr><td>X4</td><td style="text-align:right;color:var(--muted)">R&amp;D running</td></tr>
       </table>
     </div>
     <div style="background:var(--green-soft);border:1px solid #b8d8b6;border-radius:8px;padding:14px 16px">
       <h4 style="font-size:13px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Y line</h4>
       <table style="width:100%;font-size:14px;font-variant-numeric:tabular-nums">
-        <tr><td>Y1 patent</td><td style="text-align:right" class="pos">✓ in-house</td></tr>
-        <tr><td>Y2 license</td><td style="text-align:right">✓ Clevers (P7)</td></tr>
+        <tr><td>Y1</td><td style="text-align:right" class="pos">✓ patent in-house</td></tr>
+        <tr><td>Y2</td><td style="text-align:right">✓ Clevers license</td></tr>
         <tr><td><b>Y3</b></td><td style="text-align:right;color:var(--red)"><b>open</b></td></tr>
-        <tr><td>Y3 path</td><td style="text-align:right;color:var(--muted)">in-house OR $400k Clevers P8</td></tr>
+        <tr><td>Y3 path</td><td style="text-align:right;color:var(--muted)">in-house or $400k P8</td></tr>
       </table>
     </div>
   </div>
-
-  <div class="note green">
-    <b>Field snapshot (P8 production plans, real teams Co.1–15 only):</b> of 13 producing competitors, <b>12 plan g2 X · 11 plan g2 Y</b>. Behind: Co.2 + Co.4 (g1 Y), Co.14 (g1 X). Y2 in-house sellers: Co.5, Co.9. The P8 plan only shows what each team intends to produce next — it doesn't reveal whether they hold patents above their planned grade. We'll learn the actual X3 field at P8 results. <span class="muted">(Per-market grade breakdown lives in ④ Competitive intel.)</span>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Capacity vs demand — P7 signal</h3>
-  <table class="results" style="margin-top:8px;font-size:13px">
-    <thead><tr><th>Cell</th><th>Made / sold</th><th>Signal</th></tr></thead>
-    <tbody>
-      <tr class="cell-good"><td><b>JAP X-DLx g2</b></td><td>30k made · 25k sold (P6 inv)</td><td><span class="badge sold-out">drawn down</span></td></tr>
-      <tr class="cell-good"><td><b>JAP X-Std</b></td><td>0 made · 20k sold (inv)</td><td><span class="badge sold-out">drawn down</span></td></tr>
-      <tr class="cell-good"><td><b>USA X-Std</b></td><td>0 made · 11.6k sold (inv)</td><td><span class="badge sold-out">drawn down</span></td></tr>
-      <tr><td><b>JAP Y-Std</b></td><td>16k imported · 16k sold</td><td><span class="badge sold-out">sold $1/u</span></td></tr>
-      <tr><td><b>EUR X-Std g1</b></td><td>15k made · 10.2k sold</td><td><span class="badge ok">15k → P8 inv</span></td></tr>
-      <tr><td><b>EUR X-DLx g2</b></td><td>20k made · 14.9k sold</td><td><span class="badge ok">20k → P8 inv</span></td></tr>
-      <tr><td><b>EUR Y-Std g1</b></td><td>15k made · 10k sold</td><td><span class="badge ok">15k → P8 inv</span></td></tr>
-      <tr><td><b>EUR Y-DLx g2</b></td><td>15k made · 10k g1 sold</td><td><span class="badge ready">15k g2 → P8</span></td></tr>
-      <tr><td><b>USA Y-DLx g2</b></td><td>24k made · 0 sold (N+1)</td><td><span class="badge ready">24k g2 → P8</span></td></tr>
-      <tr class="cell-bad"><td><b>USA Y-Std</b></td><td>0 made · 0 consumer (15k intra→JAP)</td><td><span class="badge stranded">25k STUCK</span></td></tr>
-    </tbody>
-  </table>
   <div class="note">
-    <b>Engine pattern (verified):</b> P7 sales = opening inventory (P6 ending). New P7 production becomes P8 opening inventory. So "kept half the stock" on EUR isn't demand failure — it's the N+1 mechanic. <b>Real demand failures:</b> USA-Y-Std (25k still stuck) and JAP-Y (importing at $1/u doesn't work).
+    <b>Field intent (P8 production plans, Co.1–15):</b> 12 of 13 plan g2 X · 11 of 13 plan g2 Y. None plan g3 — but plans don't reveal patents. We learn the real X3 field at P8 results.
   </div>
 </div>
 
 <div class="card">
-  <h3>Options to weigh <span class="sub">click any to expand</span></h3>
-  <div class="bulletin-grid">
+  <h3>Options to weigh <span class="sub">P8 decisions · click any to expand</span></h3>
 
+  <h5 class="opt-group">💰 Cash on the table</h5>
+  <div class="bulletin-grid" style="margin-bottom:16px">
     <details class="bullcard easy" open>
       <summary>
-        <span class="ribbon" style="background:var(--green);color:white">Cash now</span>
-        <h4>🥈 File Ducal Academy — $300k</h4>
-        <div class="one-line">We have X3. File P8 alongside .xls — prize splits if others also claim.</div>
+        <span class="ribbon" style="background:var(--green);color:white">File P8</span>
+        <h4>🥈 Ducal Academy — $300k</h4>
+        <div class="one-line">We have X3. One-page filing P8. Splits if others also claim.</div>
       </summary>
       <div class="detail">
-        <p>One-period bonus, $300k against zero incremental cost. Kavya files.</p>
+        <p>$300k against zero incremental cost. Kavya files.</p>
       </div>
     </details>
-
-    <details class="bullcard decide">
+    <details class="bullcard easy">
       <summary>
-        <span class="ribbon">Decide P8</span>
-        <h4>🔑 License X3 OUT to peers?</h4>
-        <div class="one-line">Peer market exists. $200–300k × buyers vs holding the moat.</div>
+        <span class="ribbon">Prize · later</span>
+        <h4>🏆 Golden Band — $500k</h4>
+        <div class="one-line">First with BOTH X3 + Y3 patents (in-house). Y3 still open.</div>
       </summary>
       <div class="detail">
-        <p>Y2 peer-license precedent: Co.5, Co.9, Co.16 each sold one Y2 license at $115k–$300k. If we underprice Clevers X3 (P8 list $350k), we could sell to 1–3 buyers still at g2.</p>
-        <p><b>Pro:</b> $200–700k cash in P8 with minimal effort.</p>
-        <p><b>Con:</b> hands X3 to competitors → loses Golden Band moat ($500k requires being first at X3 + Y3) and erodes X-DLx premium pricing.</p>
-        <p><b>Default:</b> hold P8. Revisit P9 once Y3 status is set.</p>
+        <p>X3 already locked. Y3 path decision in "Tech &amp; moat" below.</p>
       </div>
     </details>
+    <details class="bullcard easy">
+      <summary>
+        <span class="ribbon">Prize · later</span>
+        <h4>🇯🇵 METI — $200k per plant</h4>
+        <div class="one-line">Per plant producing X3 or Y3. First period only.</div>
+      </summary>
+      <div class="detail">
+        <p>2 EUR plants → up to $400k if we get both grades up.</p>
+      </div>
+    </details>
+  </div>
 
+  <h5 class="opt-group">🧪 Tech &amp; moat</h5>
+  <div class="bulletin-grid" style="margin-bottom:16px">
     <details class="bullcard decide">
       <summary>
         <span class="ribbon">Decide P8</span>
@@ -1283,13 +1215,27 @@
         <div class="one-line">In-house keeps Golden Band; Clevers $400k P8 is faster.</div>
       </summary>
       <div class="detail">
-        <p><b>In-house:</b> cumulative Y R&amp;D, slow, prize-eligible (Golden Band $500k + Ducal Y3 $300k if first).</p>
-        <p><b>License Clevers $400k:</b> Y3 production faster, forfeits both Liechtenstein prizes.</p>
-        <p><b>Math:</b> in-house path nets up to +$800k prize potential vs license's $0 — but only if we get there FIRST.</p>
-        <p><b>Owner:</b> Kavya. Bring a P8 model.</p>
+        <p><b>In-house:</b> slower, keeps Golden Band ($500k) + Ducal Y3 ($300k).</p>
+        <p><b>Clevers $400k:</b> faster, forfeits both prizes.</p>
+        <p><b>Math:</b> up to +$800k prize upside if we're first. Kavya brings a P8 model.</p>
       </div>
     </details>
+    <details class="bullcard decide">
+      <summary>
+        <span class="ribbon">Decide P8</span>
+        <h4>🔑 License X3 OUT to peers?</h4>
+        <div class="one-line">$200–300k per buyer vs holding the moat.</div>
+      </summary>
+      <div class="detail">
+        <p><b>Pro:</b> $200–700k cash in P8.</p>
+        <p><b>Con:</b> hands X3 to competitors → kills Golden Band moat + erodes premium pricing.</p>
+        <p><b>Default:</b> hold P8. Revisit P9 once Y3 path is set.</p>
+      </div>
+    </details>
+  </div>
 
+  <h5 class="opt-group">🏭 Operations</h5>
+  <div class="bulletin-grid">
     <details class="bullcard decide">
       <summary>
         <span class="ribbon">Decide P8</span>
@@ -1297,36 +1243,32 @@
         <div class="one-line">EUR-produced Y → ship to JAP, vs USA imports at $1/u.</div>
       </summary>
       <div class="detail">
-        <p>JAP-Y took −$46k on USA-imported Y-Std at $1/u. With Y2 license live in EUR, we could ship EUR → JAP via the METI quota.</p>
-        <p><b>Trade-off:</b> EUR is at 100% utilization. Freeing Y for export means cutting EUR consumer sales OR expanding EUR Y capacity (capex) OR killing JAP-Y entirely.</p>
-        <p><b>Owner:</b> Satoshi + Febby. Model the three sub-options.</p>
+        <p>P7: JAP-Y took −$46k importing USA Y-Std at $1/u. Y2 license live in EUR — could ship EUR→JAP via METI quota.</p>
+        <p><b>Trade-off:</b> EUR at 100% utilization. Free Y export = cut EUR consumer sales OR expand EUR Y capacity OR kill JAP-Y.</p>
+        <p><b>Owner:</b> Satoshi + Febby.</p>
       </div>
     </details>
-
     <details class="bullcard watch">
       <summary>
         <span class="ribbon">Plant calls</span>
         <h4>🏗️ JAP-X P2 closure · USA-Y P1 fill</h4>
-        <div class="one-line">JAP-X P2 still costs $267k/qtr. USA-Y P1 has 24k g2 for P8.</div>
+        <div class="one-line">JAP-X P2 still costs $267k/qtr. USA-Y P1 has 24k g2 ready.</div>
       </summary>
       <div class="detail">
-        <p><b>JAP-X P2:</b> idle since P6, never written off (the active→idle disposal didn't trigger because it was already idle). $267k recurring. Doc 09B in P8 is the only way to drop it.</p>
-        <p><b>USA-Y P1:</b> 24k g2 Y-DLx batch sells P8 at $42–45. Flips USA-Y from −$200k to positive on its own. Keep running.</p>
+        <p><b>JAP-X P2:</b> idle since P6, never written off. $267k recurring. Doc 09B in P8 unlocks it.</p>
+        <p><b>USA-Y P1:</b> 24k g2 Y-DLx sells P8 at $42–45 → flips area to positive. Keep running.</p>
       </div>
     </details>
-
     <details class="bullcard skip">
       <summary>
         <span class="ribbon">Off-doctrine</span>
-        <h4>💰 Sell USA-Y P1 at book value?</h4>
-        <div class="one-line">Doctrine says no. Math says reconsider once Y3 path is set.</div>
+        <h4>💰 Sell USA-Y P1 at book?</h4>
+        <div class="one-line">Doctrine: no. Math: revisit once Y3 path is set.</div>
       </summary>
       <div class="detail">
-        <p>USA-Y P1 net book ~$472.5k. Restructuring window may still be open.</p>
-        <p><b>Skip default:</b> the 24k g2 Y-DLx batch from P7 produces $1M+ revenue at $42–45 in P8 alone. Selling the plant forfeits that.</p>
+        <p>USA-Y P1 net book ~$472.5k. The 24k g2 batch alone is worth ~$1M revenue at $42–45 — selling the plant forfeits that.</p>
       </div>
     </details>
-
   </div>
 </div>
 
@@ -1433,70 +1375,76 @@
   </div>
 </div>
 
-<div class="card">
-  <h3>P8 — prizes worth planning for now</h3>
-  <div class="bulletin-grid">
-
-    <details class="bullcard easy">
-      <summary>
-        <span class="ribbon">Prize</span>
-        <h4>🏆 Golden Band Diploma — $500k</h4>
-        <div class="one-line">First company holding BOTH X3 + Y3 patents.</div>
-      </summary>
-      <div class="detail">
-        <p>Liechtenstein prize. Apply the period both patents confirmed. In-house R&amp;D only — license route forfeits eligibility.</p>
-      </div>
-    </details>
-
-    <details class="bullcard easy" open>
-      <summary>
-        <span class="ribbon" style="background:var(--green);color:white">We qualify</span>
-        <h4>🥈 Ducal Academy — $300k</h4>
-        <div class="one-line">First with X3 OR Y3. We have X3 in-house — file P8.</div>
-      </summary>
-      <div class="detail">
-        <p>Awarded the period we confirm a g3 patent (in-house R&amp;D only). Split if multiple companies claim in the same period. <b>Our X3 confirmed in P7</b> — Kavya files P8. We won't know whether others also claim until results land.</p>
-      </div>
-    </details>
-
-    <details class="bullcard easy">
-      <summary>
-        <span class="ribbon">Prize</span>
-        <h4>🇯🇵 METI prize — $200k per plant</h4>
-        <div class="one-line">Per plant producing X3 or Y3 — first period only.</div>
-      </summary>
-      <div class="detail">
-        <p>One-time bonus. 2 EUR plants → $400k if both grades up.</p>
-      </div>
-    </details>
-
-    <details class="bullcard decide">
-      <summary>
-        <span class="ribbon">Plan it</span>
-        <h4>📐 Grade-3 path — license vs in-house</h4>
-        <div class="one-line">Clevers X3+Y3 license = $750k but forfeits Liechtenstein prizes.</div>
-      </summary>
-      <div class="detail">
-        <p>License-only: $750k cost, only METI ($400k) eligible. Net negative on prize math.</p>
-        <p>In-house: slower but keeps Golden Band ($500k) + Ducal ($300k) + METI ($400k) = up to $1.2M.</p>
-        <p><b>Owner:</b> Kavya — model the path; go/no-go before P8 lock.</p>
-      </div>
-    </details>
-
-  </div>
-</div>
 
 <!-- ═══════════════════════════════════════════════════════════
      ⑦ P7 RETROSPECTIVE — canvas + verified outcomes + P8 actions
      ═══════════════════════════════════════════════════════════ -->
 <div class="section">
   <span class="num">07</span>
-  <h2>P7 retrospective + P8 actions</h2>
-  <span class="tag">canvas · verified · what's next</span>
+  <h2>Ahead of P8 lock</h2>
+  <span class="tag">what each owner does next</span>
 </div>
 
 <div class="card">
-  <h3>Production canvas <span class="sub">what's in the submitted .xls + P7 sales</span></h3>
+  <h3>Owner checklist <span class="sub">decisions + non-.xls actions for P8</span></h3>
+
+  <div class="owner-group">
+    <div class="owner-head"><span class="name">Jeongho + Billie</span><span class="role">Finance · treasury — URGENT</span></div>
+    <ul class="checklist">
+      <li><b>File the CEO/CFO declaration BEFORE P8 .xls lock</b> — one signed page to Administration. Without it, sub→HQ entries are ignored. <span style="color:var(--red);font-weight:700">Cost us $1.78M in supplier credit last quarter.</span></li>
+      <li><b>P8 treasury map</b> — size sub→HQ pull to match HQ obligations. Budget 7% tax (~$63k per $900k).</li>
+      <li><b>SC runoff</b> — $2.54M is unsustainable. Refinance to bank loans. Target &lt;$1M by P9.</li>
+    </ul>
+  </div>
+
+  <div class="owner-group">
+    <div class="owner-head"><span class="name">Febby + Billie</span><span class="role">Ops · USA + JAP plants</span></div>
+    <ul class="checklist">
+      <li><b>USA-Y P8 monetization</b> — price 24k Y-DLx g2 at $42–45 + clear 25k Y-Std overhang. Flips USA-Y positive.</li>
+      <li><b>JAP-X Plant 2 closure?</b> — idle since P6, still costs $267k/qtr. Only Doc 09B in P8 unlocks the saving. Decide.</li>
+    </ul>
+  </div>
+
+  <div class="owner-group">
+    <div class="owner-head"><span class="name">Satoshi</span><span class="role">Marketing · JAP-Y</span></div>
+    <ul class="checklist">
+      <li><b>JAP-Y price / sourcing</b> — $1/u is unsustainable. Price 15k stock at $34–36 OR source from EUR (Y2 license live).</li>
+    </ul>
+  </div>
+
+  <div class="owner-group">
+    <div class="owner-head"><span class="name">Roberto</span><span class="role">Strategy · EUR + bulletins</span></div>
+    <ul class="checklist">
+      <li><b>P8 EU labor subsidy</b> — re-file the $200k claim.</li>
+      <li><b>P8 pricing brief</b> — EUR Y-DLx $46–48 · EUR X-DLx $33–35 · JAP X-DLx $32–34 · USA-Y-DLx debut $42–45.</li>
+    </ul>
+  </div>
+
+  <div class="owner-group">
+    <div class="owner-head"><span class="name">Kavya</span><span class="role">R&amp;D · grade-3</span></div>
+    <ul class="checklist">
+      <li><b>File Ducal Academy claim — $300k</b> — one-page filing alongside P8 .xls. Submit early; prize splits if others also claim X3 or Y3.</li>
+      <li><b>Y3 path decision</b> — keep $370k Y R&amp;D running for in-house Y3 (slow, prize-eligible) OR license Y3 Clevers $400k (fast, forfeits Golden Band). Bring go/no-go.</li>
+    </ul>
+  </div>
+
+  <div class="owner-group">
+    <div class="owner-head"><span class="name">All directors</span><span class="role">when P8 bulletin lands</span></div>
+    <ul class="checklist">
+      <li><b>Re-sign × 6</b> → $60k bonus.</li>
+    </ul>
+  </div>
+</div>
+
+<details class="section-collapse" style="margin-top:14px">
+  <summary>
+    <span class="num" style="background:var(--muted);font-size:11px">REF</span>
+    <h2 style="font-size:18px">P7 production canvas</h2>
+    <span class="tag">click to expand · historical reference</span>
+  </summary>
+  <div class="body">
+<div class="card">
+  <h3>Production canvas <span class="sub">what we shipped P7 + actual sales</span></h3>
   <table class="results">
     <thead>
       <tr>
@@ -1525,79 +1473,12 @@
     </tbody>
   </table>
   <div class="note">
-    <b>Utilization:</b> EUR 100% · JAP-X 43% (P2 idle, on books) · USA-Y 100% of remaining capacity (P2 written off). Total P7 production ~119k units.
-  </div>
-  <div class="note green">
-    <b>$0 = skip:</b> verified. Engine reads $0 as "do not offer" — USA-Y-Std no demand fulfilled (25k still in inventory), USA-Y-DLx held 24k g2 for P8 (N+1). Safe shorthand.
+    <b>Utilization:</b> EUR 100% · JAP-X 43% (P2 idle, on books) · USA-Y 100% of remaining (P2 written off). Total P7 production ~119k units.
   </div>
 </div>
-
-<div class="card">
-  <h3>Ahead of P8 lock <span class="sub">decisions + non-.xls actions for next period</span></h3>
-  <p class="muted" style="margin-bottom:12px;font-size:14px">P7 is closed. These are the open threads going into P8.</p>
-
-  <div class="owner-group">
-    <div class="owner-head"><span class="name">Febby + Billie</span><span class="role">Ops · USA + JAP plants</span></div>
-    <ul class="checklist">
-      <li><b>USA-Y P8 monetization</b> — price 24k Y-DLx g2 at $42–45 + clear 25k Y-Std overhang. Flips USA-Y positive.</li>
-      <li><b>JAP-X Plant 2 closure?</b> — idle since P6, still costs $267k/qtr. Only Doc 09B in P8 unlocks the saving. Decide.</li>
-    </ul>
   </div>
+</details>
 
-  <div class="owner-group">
-    <div class="owner-head"><span class="name">Satoshi</span><span class="role">Marketing · JAP-Y</span></div>
-    <ul class="checklist">
-      <li><b>JAP-Y price / sourcing</b> — $1/u is unsustainable. Price 15k stock at $34–36 OR source from EUR (Y2 license live).</li>
-    </ul>
-  </div>
-
-  <div class="owner-group">
-    <div class="owner-head"><span class="name">Roberto</span><span class="role">Strategy · EUR + bulletins</span></div>
-    <ul class="checklist">
-      <li><b>P8 EU labor subsidy</b> — re-file the $200k claim.</li>
-      <li><b>P8 pricing brief</b> — EUR Y-DLx $46–48 · EUR X-DLx $33–35 · JAP X-DLx $32–34 · USA-Y-DLx debut $42–45.</li>
-    </ul>
-  </div>
-
-  <div class="owner-group">
-    <div class="owner-head"><span class="name">Kavya</span><span class="role">R&amp;D · grade-3</span></div>
-    <ul class="checklist">
-      <li><b>File Ducal Academy claim — $300k</b> — we have X3 in-house (confirmed P7). One-page filing to Administration alongside P8 .xls. Submit early; prize splits if other teams also achieved X3 or Y3 this period.</li>
-      <li><b>Y3 path decision</b> — keep $370k Y R&amp;D running for in-house Y3 (slow, prize-eligible) OR license Y3 from Clevers in P8 at $400k (fast, but forfeits Golden Band $500k). Bring a go/no-go.</li>
-    </ul>
-  </div>
-
-  <div class="owner-group">
-    <div class="owner-head"><span class="name">Jeongho + Billie</span><span class="role">Finance · treasury</span></div>
-    <ul class="checklist">
-      <li><b>File the CEO/CFO declaration BEFORE P8 .xls lock — URGENT</b> — one signed page to Administration. Without it, sub→HQ entries are ignored.</li>
-      <li><b>P8 treasury map</b> — size sub→HQ pull to match HQ obligations. Budget 7% tax (~$63k per $900k).</li>
-      <li><b>SC runoff — URGENT</b> — $2.54M is unsustainable. Refinance to bank loans. Target &lt;$1M by P9.</li>
-    </ul>
-  </div>
-
-  <div class="owner-group">
-    <div class="owner-head"><span class="name">All directors</span><span class="role">P8 bulletin</span></div>
-    <ul class="checklist">
-      <li><b>Re-sign × 6</b> when P8 bulletin lands → $60k.</li>
-    </ul>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Verified — what the P7 results actually showed</h3>
-  <ul class="checklist">
-    <li class="done"><b>$0 = skip the market</b> — USA-Y-Std no demand fulfilled (25k still in inventory). Safe.</li>
-    <li class="done"><b>N+1 confirmed</b> — USA-Y-DLx 24k g2 produced, 0 sold, sitting for P8.</li>
-    <li class="done"><b>EUR cap unlock processed</b> — both plants 100% at 35k X / 30k Y; cert applied.</li>
-    <li><b>Y2 license $300k, not $115k</b> ⚠️ — Co.9 matched another buyer; our purchase fell back to Clevers list. $115k Co.9 entry was not charged. <b>−$185k vs plan.</b></li>
-    <li class="done"><b>X3 patent achieved (in-house) ✓</b> — Max grade X = 3 in our INFO sheet, from in-house R&amp;D. Ducal Academy $300k eligible. Whether others also have X3 stays unknown until P8 results.</li>
-    <li class="done"><b>Intra USA→JAP Y-Std 15k @ $30</b> — $450k. JAP resold 16k at $31, $1/u margin.</li>
-    <li><b>Sub→HQ $1.8M BLOCKED</b> ⚠️ — declaration not filed. Subs hold cash (EUR $1.17M, JAP $1.09M); HQ at $100k floor, SC filled the gap. P8: file the declaration + budget 7% tax.</li>
-    <li class="done"><b>USA-Y Plant 2 written off ✓</b> — net P&amp;E $1,050k → $472.5k (−$577k), fixed cost $333k → $182.5k. Engine disposes at the active→idle transition only; JAP-X (already idle) didn't get the saving. The USA-Y −$200k is N+1 inventory cycle, not closure drag.</li>
-    <li class="done"><b>JAP X-DLx 25k stranded cleared</b> — all 25k at $30 g2, $303k gross margin.</li>
-  </ul>
-</div>
 
 
 
