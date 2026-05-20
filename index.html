@@ -510,6 +510,53 @@
   table.cells-tbl .neg { color: var(--red); }
   table.cells-tbl small.muted { color: var(--muted); font-weight: 400; }
 
+  /* Inventory grade-ladder matrix (Per-area drill-down) */
+  .cells-intro {
+    font-size: 12.5px; color: var(--muted); line-height: 1.5;
+    margin: 0 0 12px;
+  }
+  .cells-foot {
+    font-size: 12.5px; color: var(--ink); line-height: 1.5;
+    margin: 12px 0 0; padding: 10px 12px;
+    background: white; border-radius: 6px; border: 1px solid var(--border);
+  }
+  table.inv-matrix {
+    width: 100%; font-size: 13px; border-collapse: collapse;
+    font-variant-numeric: tabular-nums; background: white;
+    border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+  }
+  table.inv-matrix th {
+    text-align: center; padding: 8px 4px;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--muted); font-weight: 700; background: #faf8f1;
+    border-bottom: 1px solid var(--border);
+  }
+  table.inv-matrix th:first-child { text-align: left; padding-left: 12px; }
+  table.inv-matrix th:last-child { text-align: left; padding-left: 12px; }
+  table.inv-matrix td {
+    padding: 10px 4px; text-align: center; color: var(--muted);
+    border-bottom: 1px solid #f0eee5;
+  }
+  table.inv-matrix tr:last-child td { border-bottom: none; }
+  table.inv-matrix td:first-child {
+    text-align: left; padding-left: 12px;
+    font-weight: 700; color: var(--ink); width: 60px;
+  }
+  table.inv-matrix td.inv {
+    color: var(--ink); border-radius: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  table.inv-matrix td.inv.live    { background: var(--accent-soft); color: var(--accent); }
+  table.inv-matrix td.inv.ready   { background: var(--green-soft); color: var(--green); }
+  table.inv-matrix td.inv.stranded { background: var(--red-soft); color: var(--red); }
+  table.inv-matrix td.inv.cleared { color: var(--muted); }
+  table.inv-matrix td.row-note {
+    text-align: left; padding-left: 12px;
+    font-size: 11.5px; color: var(--muted);
+  }
+  table.inv-matrix tr.row-noplant td { color: #c5c2b7; }
+  table.inv-matrix tr.row-noplant td:first-child { color: var(--muted); font-weight: 500; }
+
   /* ── Per-line results table ──────────────────────────────── */
   table.results {
     width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums;
@@ -607,9 +654,9 @@
   /* ── Competitive intel unified rows ──────────────────────── */
   .ci-header, .ci-row > summary {
     display: grid;
-    grid-template-columns: 1.5fr 1.4fr 1.4fr 1.2fr 0.7fr 24px;
-    gap: 10px; align-items: center;
-    padding: 10px 14px;
+    grid-template-columns: 1.4fr 1.5fr 1.4fr 1.7fr;
+    gap: 14px; align-items: center;
+    padding: 12px 16px;
     font-variant-numeric: tabular-nums;
   }
   .ci-header {
@@ -620,44 +667,52 @@
     font-size: 10.5px; font-weight: 700; color: var(--muted);
     text-transform: uppercase; letter-spacing: 0.6px;
   }
-  .ci-header span:last-child { display: none; }
   @media (max-width: 700px) {
     .ci-header { display: none; }
   }
   .ci-list {
     border: 1px solid var(--border); border-radius: 0 0 8px 8px; background: white;
   }
-  details.ci-row {
-    border-top: 1px solid var(--border);
-  }
+  details.ci-row { border-top: 1px solid var(--border); }
   details.ci-row:first-child { border-top: none; }
   details.ci-row > summary {
     list-style: none; cursor: pointer;
-    font-size: 13.5px;
+    font-size: 14px;
     transition: background 0.1s;
+    position: relative;
   }
   details.ci-row > summary::-webkit-details-marker { display: none; }
+  details.ci-row > summary::after {
+    content: "▾"; position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+    color: var(--muted); font-size: 11px; transition: transform 0.15s;
+  }
+  details.ci-row[open] > summary::after { transform: translateY(-50%) rotate(180deg); }
   details.ci-row > summary:hover { background: #faf8f1; }
   details.ci-row[open] > summary { background: #faf8f1; border-bottom: 1px solid var(--border); }
-  details.ci-row > summary::after {
-    content: "▾"; color: var(--muted); font-size: 11px;
-    transition: transform 0.15s; justify-self: end;
-  }
-  details.ci-row[open] > summary::after { transform: rotate(180deg); }
   .ci-market { font-weight: 700; color: var(--ink); }
-  .ci-range { color: var(--ink); }
-  .ci-range b { font-weight: 800; }
-  .ci-mix { color: var(--muted); font-size: 12px; }
-  .ci-ours { font-weight: 600; }
+  .ci-range { color: var(--muted); font-size: 13px; }
+  .ci-range b { font-weight: 800; color: var(--ink); font-size: 15px; }
+  .ci-range .ci-lo, .ci-range .ci-hi { font-size: 12px; }
+  .ci-mix { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
+  .ci-ours { display: flex; gap: 6px; align-items: center; font-weight: 700; padding-right: 24px; }
   .ci-ours-skip { color: var(--muted); font-weight: 500; }
+  .g-pip {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 22px; padding: 0 8px; border-radius: 11px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .g-pip.g0 { background: #e0dfd5; color: var(--muted); }
+  .g-pip.g1 { background: var(--green); color: white; }
+  .g-pip.g2 { background: var(--accent); color: white; }
+  .g-pip.g3 { background: var(--purple); color: white; }
   .ci-pos {
-    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
-    padding: 3px 8px; border-radius: 999px; justify-self: start;
+    font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    padding: 2px 6px; border-radius: 4px;
   }
   .ci-pos.median { background: #e0dfd5; color: var(--muted); }
   .ci-pos.low    { background: var(--gold-soft); color: var(--gold); }
   .ci-pos.high   { background: var(--accent-soft); color: var(--accent); }
-  .ci-pos.none   { background: transparent; color: var(--muted); }
   details.ci-row > .ci-body {
     padding: 14px 18px 18px;
     background: #fbfaf4;
@@ -665,10 +720,10 @@
   @media (max-width: 700px) {
     .ci-header, .ci-row > summary {
       grid-template-columns: 1fr 1fr;
-      grid-auto-rows: auto;
+      grid-auto-rows: auto; gap: 8px;
     }
-    .ci-row > summary::after { display: none; }
-    .ci-market { grid-column: 1 / -1; padding-bottom: 4px; }
+    .ci-row > summary::after { right: 10px; top: 16px; transform: none; }
+    .ci-market { grid-column: 1 / -1; padding-bottom: 4px; padding-right: 28px; }
   }
 
   /* ── Insight callouts ────────────────────────────────────── */
@@ -936,15 +991,17 @@
         <p class="area-note">N+1 drag: Plant 1 made 24k g2 Y-DLx for P8 sale. Only 15k intra carried P7. Flips positive once g2 hits market.</p>
       </summary>
       <div class="area-cells">
-        <table class="cells-tbl">
-          <thead><tr><th>Cell</th><th>Cap</th><th>P6 inv</th><th>Made</th><th>Sold</th><th>Grade</th><th>Price</th></tr></thead>
+        <p class="cells-intro">Inventory at P7 close, by grade. Each market sells 1 Std + 1 DLx variant per period — units in a grade we no longer offer become <b>stuck</b>.</p>
+        <table class="inv-matrix">
+          <thead><tr><th></th><th>g0</th><th>g1</th><th>g2</th><th>g3</th><th>this period</th></tr></thead>
           <tbody>
-            <tr><td>X-Std</td><td class="muted">no plant</td><td>11,630</td><td>—</td><td><b>11,630</b> <small class="pos">cleared</small></td><td><span class="grade-chip g0">g0</span></td><td>$26</td></tr>
-            <tr class="muted-row"><td>X-DLx</td><td class="muted">no plant</td><td>0</td><td>—</td><td>—</td><td>—</td><td>$32 <small class="muted">(no stock)</small></td></tr>
-            <tr><td>Y-Std</td><td>24k</td><td>40,028 <small class="muted">(−15k intra)</small></td><td>0</td><td>15,000 <small class="muted">intra→JAP</small></td><td><span class="grade-chip g0">g0</span></td><td class="neg"><b>$0</b> ⚠️</td></tr>
-            <tr><td>Y-DLx</td><td>24k</td><td>0</td><td><b>24,000</b></td><td>0 <small class="muted">(N+1, P8)</small></td><td><span class="grade-chip g2">g2</span></td><td class="neg"><b>$0</b> ⚠️</td></tr>
+            <tr class="row-noplant"><td>X-Std</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="row-note">no plant</td></tr>
+            <tr class="row-noplant"><td>X-DLx</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="row-note">no plant</td></tr>
+            <tr><td>Y-Std</td><td class="inv stranded"><b>25,028</b> ⚠️</td><td>—</td><td>—</td><td>—</td><td class="row-note">offered $0 (skip)</td></tr>
+            <tr><td>Y-DLx</td><td>—</td><td>—</td><td class="inv ready"><b>24,000</b> ✓</td><td>—</td><td class="row-note">N+1, sells P8</td></tr>
           </tbody>
         </table>
+        <p class="cells-foot"><b>Stuck this period:</b> 25,028u Y-Std g0 (stranded — engine skipped market). <b>P8 ready:</b> 24,000u Y-DLx g2 → debut at $42–45.</p>
       </div>
     </details>
 
@@ -959,15 +1016,17 @@
         <p class="area-note">Reliable engine: every cell profitable, plants at 100% on the new caps.</p>
       </summary>
       <div class="area-cells">
-        <table class="cells-tbl">
-          <thead><tr><th>Cell</th><th>Cap</th><th>P6 inv</th><th>Made</th><th>Sold</th><th>Grade</th><th>Price</th></tr></thead>
+        <p class="cells-intro">Inventory at P7 close, by grade. Each market sells 1 Std + 1 DLx variant per period — units in a grade we no longer offer become <b>stuck</b>.</p>
+        <table class="inv-matrix">
+          <thead><tr><th></th><th>g0</th><th>g1</th><th>g2</th><th>g3</th><th>this period</th></tr></thead>
           <tbody>
-            <tr><td>X-Std</td><td>35k</td><td>10,174</td><td><b>15,000</b></td><td><b>10,174</b></td><td><span class="grade-chip g1">g1</span></td><td>$27</td></tr>
-            <tr><td>X-DLx</td><td>35k</td><td>14,881</td><td><b>20,000</b></td><td><b>14,881</b></td><td><span class="grade-chip g2">g2</span></td><td>$31</td></tr>
-            <tr><td>Y-Std</td><td>30k</td><td>10,000</td><td><b>15,000</b></td><td><b>10,000</b></td><td><span class="grade-chip g1">g1</span></td><td>$33</td></tr>
-            <tr><td>Y-DLx</td><td>30k</td><td>10,000</td><td><b>15,000</b></td><td><b>10,000</b> <small class="muted">(g1 carryover)</small></td><td><span class="grade-chip g2">g2</span></td><td>$44</td></tr>
+            <tr><td>X-Std</td><td>—</td><td class="inv live"><b>15,000</b> 🔄</td><td>—</td><td>—</td><td class="row-note">selling g1 @ $27</td></tr>
+            <tr><td>X-DLx</td><td>—</td><td>—</td><td class="inv live"><b>20,000</b> 🔄</td><td>—</td><td class="row-note">selling g2 @ $31</td></tr>
+            <tr><td>Y-Std</td><td>—</td><td class="inv live"><b>15,000</b> 🔄</td><td>—</td><td>—</td><td class="row-note">upgraded g0→g1, selling @ $33</td></tr>
+            <tr><td>Y-DLx</td><td>—</td><td>—</td><td class="inv ready"><b>15,000</b> ✓</td><td>—</td><td class="row-note">upgraded g1→g2, sells P8</td></tr>
           </tbody>
         </table>
+        <p class="cells-foot"><b>No stuck inventory.</b> P6→P7 grade upgrades cleared old stock; new g2 EUR Y-DLx unlocks P8 at $46–48.</p>
       </div>
     </details>
 
@@ -982,15 +1041,17 @@
         <p class="area-note">JAP-X biggest revenue + 25k stranded cleared. JAP-Y imports at $1/u — fix P8.</p>
       </summary>
       <div class="area-cells">
-        <table class="cells-tbl">
-          <thead><tr><th>Cell</th><th>Cap</th><th>P6 inv</th><th>Made</th><th>Sold</th><th>Grade</th><th>Price</th></tr></thead>
+        <p class="cells-intro">Inventory at P7 close, by grade. Each market sells 1 Std + 1 DLx variant per period — units in a grade we no longer offer become <b>stuck</b>.</p>
+        <table class="inv-matrix">
+          <thead><tr><th></th><th>g0</th><th>g1</th><th>g2</th><th>g3</th><th>this period</th></tr></thead>
           <tbody>
-            <tr><td>X-Std</td><td>70k <small class="muted">(2 plants)</small></td><td>20,231</td><td>0</td><td><b>20,231</b> <small class="pos">cleared</small></td><td><span class="grade-chip g0">g0</span></td><td>$23</td></tr>
-            <tr><td>X-DLx</td><td>70k</td><td>25,000</td><td><b>30,000</b></td><td><b>25,000</b> <small class="pos">cleared</small></td><td><span class="grade-chip g2">g2</span></td><td>$30</td></tr>
-            <tr><td>Y-Std</td><td class="muted">no plant</td><td>16,000 <small class="muted">(+15k intra)</small></td><td>—</td><td><b>16,000</b></td><td><span class="grade-chip g0">g0</span></td><td>$31</td></tr>
-            <tr class="muted-row"><td>Y-DLx</td><td class="muted">no plant</td><td>0</td><td>—</td><td>—</td><td>—</td><td class="muted">$0 (no stock)</td></tr>
+            <tr><td>X-Std</td><td class="inv cleared">0 ✅</td><td>—</td><td>—</td><td>—</td><td class="row-note">cleared at $23 (sold 20.2k)</td></tr>
+            <tr><td>X-DLx</td><td>—</td><td>—</td><td class="inv ready"><b>30,000</b> ✓</td><td>—</td><td class="row-note">25k stranded cleared, 30k new for P8</td></tr>
+            <tr><td>Y-Std</td><td class="inv live"><b>15,000</b> 🔄</td><td>—</td><td>—</td><td>—</td><td class="row-note">imported, sold 16k @ $31 thin</td></tr>
+            <tr class="row-noplant"><td>Y-DLx</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="row-note">no plant · no stock</td></tr>
           </tbody>
         </table>
+        <p class="cells-foot"><b>Stuck this period:</b> 15k Y-Std imported sitting (margin too thin to push). <b>P8 ready:</b> 30k X-DLx g2 → push to $32–34.</p>
       </div>
     </details>
 
@@ -1092,25 +1153,23 @@
 </div>
 
 <div class="card">
-  <h3>Competitive intel <span class="sub">P7 actual · Co.1–Co.15 · click any market to expand</span></h3>
+  <h3>Competitive intel <span class="sub">P7 actual · 14 real teams (bots excluded) · click a market to expand</span></h3>
   <div class="note green" style="margin-top:6px">
     <b>P8 pricing:</b> EUR Y-DLx <b>$46–48</b> · EUR X-DLx <b>$33–35</b> · JAP X-DLx <b>$32–34</b> · JAP Y-Std <b>$33–34</b> (or stop importing) · USA-Y-DLx debut <b>$42–45</b>.
   </div>
   <div class="ci-header">
     <span>Market</span>
-    <span>Lo · Med · Hi</span>
-    <span>Grade mix</span>
-    <span>Co.3 P7</span>
-    <span>Position</span>
+    <span>Market price (lo · med · hi)</span>
+    <span>Grade mix of sellers</span>
+    <span>Us</span>
   </div>
   <div class="ci-list">
     <details class="ci-row">
       <summary>
         <span class="ci-market">🇯🇵 JAP X-DLx</span>
-        <span class="ci-range">$29 · <b>$34</b> · $46</span>
-        <span class="ci-mix">g2:10 · g1:1</span>
-        <span class="ci-ours"><b>$30</b> <span class="grade-chip g2">g2</span></span>
-        <span class="ci-pos low">low</span>
+        <span class="ci-range"><span class="ci-lo">$29</span> · <b>$34</b> · <span class="ci-hi">$46</span></span>
+        <span class="ci-mix"><span class="g-pip g2" title="10 sellers at grade 2">2×10</span> <span class="g-pip g1" title="1 sellers at grade 1">1×1</span></span>
+        <span class="ci-ours"><b>$30</b> <span class="grade-chip g2">g2</span> <span class="ci-pos low">low</span></span>
       </summary>
       <div class="ci-body">
         <table class="matrix-tbl">
@@ -1138,10 +1197,9 @@
     <details class="ci-row">
       <summary>
         <span class="ci-market">🇪🇺 EUR X-DLx</span>
-        <span class="ci-range">$29 · <b>$35</b> · $44</span>
-        <span class="ci-mix">g2:9</span>
-        <span class="ci-ours"><b>$31</b> <span class="grade-chip g2">g2</span></span>
-        <span class="ci-pos low">low</span>
+        <span class="ci-range"><span class="ci-lo">$29</span> · <b>$35</b> · <span class="ci-hi">$44</span></span>
+        <span class="ci-mix"><span class="g-pip g2" title="9 sellers at grade 2">2×9</span></span>
+        <span class="ci-ours"><b>$31</b> <span class="grade-chip g2">g2</span> <span class="ci-pos low">low</span></span>
       </summary>
       <div class="ci-body">
         <table class="matrix-tbl">
@@ -1168,10 +1226,9 @@
     <details class="ci-row">
       <summary>
         <span class="ci-market">🇪🇺 EUR Y-DLx</span>
-        <span class="ci-range">$40 · <b>$44</b> · $54</span>
-        <span class="ci-mix">g2:6 · g1:2 · g0:1</span>
-        <span class="ci-ours"><b>$44</b> <span class="grade-chip g2">g2</span></span>
-        <span class="ci-pos median">median</span>
+        <span class="ci-range"><span class="ci-lo">$40</span> · <b>$44</b> · <span class="ci-hi">$54</span></span>
+        <span class="ci-mix"><span class="g-pip g2" title="6 sellers at grade 2">2×6</span> <span class="g-pip g1" title="2 sellers at grade 1">1×2</span> <span class="g-pip g0" title="1 sellers at grade 0">0×1</span></span>
+        <span class="ci-ours"><b>$44</b> <span class="grade-chip g2">g2</span> <span class="ci-pos median">median</span></span>
       </summary>
       <div class="ci-body">
         <table class="matrix-tbl">
@@ -1199,10 +1256,9 @@
     <details class="ci-row">
       <summary>
         <span class="ci-market">🇺🇸 USA Y-DLx</span>
-        <span class="ci-range">$32 · <b>$40</b> · $51</span>
-        <span class="ci-mix">g2:6 · g1:2 · g0:1</span>
+        <span class="ci-range"><span class="ci-lo">$32</span> · <b>$40</b> · <span class="ci-hi">$51</span></span>
+        <span class="ci-mix"><span class="g-pip g2" title="6 sellers at grade 2">2×6</span> <span class="g-pip g1" title="2 sellers at grade 1">1×2</span> <span class="g-pip g0" title="1 sellers at grade 0">0×1</span></span>
         <span class="ci-ours"><span class="ci-ours-skip">no offer</span> <span class="grade-chip g2">g2</span></span>
-        <span class="ci-pos none">—</span>
       </summary>
       <div class="ci-body">
         <table class="matrix-tbl">
@@ -1228,10 +1284,9 @@
     <details class="ci-row">
       <summary>
         <span class="ci-market">🇪🇺 EUR X-Std</span>
-        <span class="ci-range">$19 · <b>$27</b> · $38</span>
-        <span class="ci-mix">g2:1 · g1:6 · g0:7</span>
-        <span class="ci-ours"><b>$27</b> <span class="grade-chip g1">g1</span></span>
-        <span class="ci-pos median">median</span>
+        <span class="ci-range"><span class="ci-lo">$19</span> · <b>$27</b> · <span class="ci-hi">$38</span></span>
+        <span class="ci-mix"><span class="g-pip g2" title="1 sellers at grade 2">2×1</span> <span class="g-pip g1" title="6 sellers at grade 1">1×6</span> <span class="g-pip g0" title="7 sellers at grade 0">0×7</span></span>
+        <span class="ci-ours"><b>$27</b> <span class="grade-chip g1">g1</span> <span class="ci-pos median">median</span></span>
       </summary>
       <div class="ci-body">
         <table class="matrix-tbl">
@@ -1258,10 +1313,9 @@
     <details class="ci-row">
       <summary>
         <span class="ci-market">🇪🇺 EUR Y-Std</span>
-        <span class="ci-range">$32 · <b>$35</b> · $45</span>
-        <span class="ci-mix">g1:8 · g0:6</span>
-        <span class="ci-ours"><b>$33</b> <span class="grade-chip g1">g1</span></span>
-        <span class="ci-pos low">low</span>
+        <span class="ci-range"><span class="ci-lo">$32</span> · <b>$35</b> · <span class="ci-hi">$45</span></span>
+        <span class="ci-mix"><span class="g-pip g1" title="8 sellers at grade 1">1×8</span> <span class="g-pip g0" title="6 sellers at grade 0">0×6</span></span>
+        <span class="ci-ours"><b>$33</b> <span class="grade-chip g1">g1</span> <span class="ci-pos low">low</span></span>
       </summary>
       <div class="ci-body">
         <table class="matrix-tbl">
@@ -1288,10 +1342,9 @@
     <details class="ci-row">
       <summary>
         <span class="ci-market">🇯🇵 JAP X-Std</span>
-        <span class="ci-range">$18 · <b>$25</b> · $42</span>
-        <span class="ci-mix">g1:7 · g0:7</span>
-        <span class="ci-ours"><b>$23</b> <span class="grade-chip g0">&mdash;</span></span>
-        <span class="ci-pos low">low</span>
+        <span class="ci-range"><span class="ci-lo">$18</span> · <b>$25</b> · <span class="ci-hi">$42</span></span>
+        <span class="ci-mix"><span class="g-pip g1" title="7 sellers at grade 1">1×7</span> <span class="g-pip g0" title="7 sellers at grade 0">0×7</span></span>
+        <span class="ci-ours"><b>$23</b> <span class="grade-chip g0">&mdash;</span> <span class="ci-pos low">low</span></span>
       </summary>
       <div class="ci-body">
         <table class="matrix-tbl">
@@ -1318,10 +1371,9 @@
     <details class="ci-row">
       <summary>
         <span class="ci-market">🇯🇵 JAP Y-Std</span>
-        <span class="ci-range">$29 · <b>$34</b> · $46</span>
-        <span class="ci-mix">g1:2 · g0:8</span>
-        <span class="ci-ours"><b>$31</b> <span class="grade-chip g0">&mdash;</span></span>
-        <span class="ci-pos low">low</span>
+        <span class="ci-range"><span class="ci-lo">$29</span> · <b>$34</b> · <span class="ci-hi">$46</span></span>
+        <span class="ci-mix"><span class="g-pip g1" title="2 sellers at grade 1">1×2</span> <span class="g-pip g0" title="8 sellers at grade 0">0×8</span></span>
+        <span class="ci-ours"><b>$31</b> <span class="grade-chip g0">&mdash;</span> <span class="ci-pos low">low</span></span>
       </summary>
       <div class="ci-body">
         <table class="matrix-tbl">
@@ -1347,10 +1399,9 @@
     <details class="ci-row">
       <summary>
         <span class="ci-market">🇺🇸 USA X-Std</span>
-        <span class="ci-range">$20 · <b>$24</b> · $28</span>
-        <span class="ci-mix">g0:12</span>
-        <span class="ci-ours"><b>$26</b> <span class="grade-chip g0">&mdash;</span></span>
-        <span class="ci-pos high">high</span>
+        <span class="ci-range"><span class="ci-lo">$20</span> · <b>$24</b> · <span class="ci-hi">$28</span></span>
+        <span class="ci-mix"><span class="g-pip g0" title="12 sellers at grade 0">0×12</span></span>
+        <span class="ci-ours"><b>$26</b> <span class="grade-chip g0">&mdash;</span> <span class="ci-pos high">high</span></span>
       </summary>
       <div class="ci-body">
         <table class="matrix-tbl">
@@ -1375,10 +1426,9 @@
     <details class="ci-row">
       <summary>
         <span class="ci-market">🇺🇸 USA X-DLx</span>
-        <span class="ci-range">$29 · <b>$32</b> · $35</span>
-        <span class="ci-mix">g2:1 · g0:1</span>
+        <span class="ci-range"><span class="ci-lo">$29</span> · <b>$32</b> · <span class="ci-hi">$35</span></span>
+        <span class="ci-mix"><span class="g-pip g2" title="1 sellers at grade 2">2×1</span> <span class="g-pip g0" title="1 sellers at grade 0">0×1</span></span>
         <span class="ci-ours"><span class="ci-ours-skip">no offer</span></span>
-        <span class="ci-pos none">—</span>
       </summary>
       <div class="ci-body">
         <table class="matrix-tbl">
@@ -1393,10 +1443,9 @@
     <details class="ci-row">
       <summary>
         <span class="ci-market">🇺🇸 USA Y-Std</span>
-        <span class="ci-range">$27 · <b>$32</b> · $44</span>
-        <span class="ci-mix">g1:3 · g0:9</span>
+        <span class="ci-range"><span class="ci-lo">$27</span> · <b>$32</b> · <span class="ci-hi">$44</span></span>
+        <span class="ci-mix"><span class="g-pip g1" title="3 sellers at grade 1">1×3</span> <span class="g-pip g0" title="9 sellers at grade 0">0×9</span></span>
         <span class="ci-ours"><span class="ci-ours-skip">no offer</span></span>
-        <span class="ci-pos none">—</span>
       </summary>
       <div class="ci-body">
         <table class="matrix-tbl">
@@ -1421,10 +1470,9 @@
     <details class="ci-row">
       <summary>
         <span class="ci-market">🇯🇵 JAP Y-DLx</span>
-        <span class="ci-range">$38 · <b>$44</b> · $50</span>
-        <span class="ci-mix">g2:3</span>
+        <span class="ci-range"><span class="ci-lo">$38</span> · <b>$44</b> · <span class="ci-hi">$50</span></span>
+        <span class="ci-mix"><span class="g-pip g2" title="3 sellers at grade 2">2×3</span></span>
         <span class="ci-ours"><span class="ci-ours-skip">no offer</span></span>
-        <span class="ci-pos none">—</span>
       </summary>
       <div class="ci-body">
         <table class="matrix-tbl">
