@@ -35,6 +35,10 @@
   .page-header {
     padding: 36px 22px 22px; max-width: 920px; margin: 0 auto;
     border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: end;
+  }
+  @media (max-width: 600px) {
+    .page-header { grid-template-columns: 1fr; }
   }
   .page-header .brand {
     font-size: 32px; font-weight: 800; letter-spacing: -0.7px; color: var(--ink);
@@ -42,11 +46,28 @@
   .page-header .subtitle {
     font-size: 17px; color: var(--muted); margin-top: 6px;
   }
-  .page-header .meta {
-    font-size: 13px; color: var(--muted); margin-top: 12px;
-    display: flex; gap: 18px; flex-wrap: wrap;
+  .page-header .period-badge {
+    display: inline-flex; flex-direction: column; align-items: flex-end; gap: 4px;
+    text-align: right;
   }
-  .page-header .meta b { color: var(--ink); }
+  .page-header .period-badge .period-num {
+    font-size: 28px; font-weight: 900; letter-spacing: -0.5px; line-height: 1;
+    color: var(--ink);
+  }
+  .page-header .period-badge .period-num .p {
+    color: var(--muted); font-weight: 700;
+  }
+  .page-header .period-badge .period-state {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase;
+    color: var(--green); display: inline-flex; align-items: center; gap: 5px;
+  }
+  .page-header .period-badge .period-state::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.18);
+  }
+  .page-header .period-badge .period-date {
+    font-size: 11px; color: var(--muted); margin-top: 2px;
+  }
   .pill {
     display: inline-block; padding: 3px 9px; border-radius: 999px;
     font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
@@ -262,7 +283,9 @@
   details.bullcard.easy { background: var(--green-soft); border-color: #b8d8b6; }
   details.bullcard.decide { background: var(--accent-soft); border-color: #b8caec; }
   details.bullcard.watch { background: var(--gold-soft); border-color: #ecd99a; }
-  details.bullcard.skip { background: #f3f1e9; border-color: var(--border); opacity: 0.85; }
+  details.bullcard.skip { background: #f3f1e9; border-color: var(--border); }
+  details.bullcard.skip h4 { color: var(--muted); }
+  details.bullcard.skip .one-line { color: var(--muted); }
   .bullcard .ribbon {
     display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.7px;
     text-transform: uppercase; padding: 2px 8px; border-radius: 999px;
@@ -371,23 +394,33 @@
   }
   @media (max-width: 700px) { .results-headline-grid { grid-template-columns: repeat(2, 1fr); } }
   .results-kpi {
-    background: #faf8f1; border: 1px solid var(--border); border-radius: 8px;
-    padding: 12px 14px;
+    background: #faf8f1; border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px; position: relative; overflow: hidden;
+  }
+  .results-kpi::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: transparent;
   }
   .results-kpi .label {
-    font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted);
     font-weight: 700;
   }
   .results-kpi .value {
-    font-size: 22px; font-weight: 800; letter-spacing: -0.3px; margin-top: 4px;
+    font-size: 24px; font-weight: 900; letter-spacing: -0.4px; margin-top: 4px;
     font-variant-numeric: tabular-nums;
   }
-  .results-kpi.good { background: var(--green-soft); border-color: #b8d8b6; }
+  .results-kpi.good { background: var(--green-soft); border-color: #a4cca7; }
+  .results-kpi.good::before { background: var(--green); }
   .results-kpi.good .value { color: var(--green); }
-  .results-kpi.bad { background: var(--red-soft); border-color: #ecbdba; }
+  .results-kpi.good .label { color: var(--green); }
+  .results-kpi.bad { background: var(--red-soft); border-color: #e2a8a4; }
+  .results-kpi.bad::before { background: var(--red); }
   .results-kpi.bad .value { color: var(--red); }
-  .results-kpi.warn { background: #fdf6dd; border-color: #ecd99a; }
+  .results-kpi.bad .label { color: var(--red); }
+  .results-kpi.warn { background: #fdf6dd; border-color: #ddc679; }
+  .results-kpi.warn::before { background: var(--gold); }
   .results-kpi.warn .value { color: #8a6a00; }
+  .results-kpi.warn .label { color: #8a6a00; }
 
   /* ── Per-area P&L grid ───────────────────────────────────── */
   .area-pl-grid {
@@ -560,9 +593,14 @@
 <body>
 
 <header class="page-header">
-  <div class="brand">Co.3 — Daily Briefing</div>
-  <div class="meta">
-    <span><b>P7:</b> results delivered 2026-05-20 · <span class="pill live">live</span></span>
+  <div>
+    <div class="brand">Co.3 — Daily Briefing</div>
+    <div class="subtitle">Strategic Business Simulation · ESADE MBA 2025–2026</div>
+  </div>
+  <div class="period-badge">
+    <div class="period-num"><span class="p">Period</span> 7</div>
+    <div class="period-state">Results delivered</div>
+    <div class="period-date">2026-05-20</div>
   </div>
 </header>
 
@@ -1285,7 +1323,7 @@
   <h3>P7 — bulletin items resolved <span class="sub">how P7 opportunities landed</span></h3>
   <div class="bulletin-grid">
 
-    <details class="bullcard easy">
+    <details class="bullcard skip">
       <summary>
         <span class="ribbon">Resolved</span>
         <h4>🇪🇺 EU labor subsidy — $200k claim</h4>
@@ -1296,7 +1334,7 @@
       </div>
     </details>
 
-    <details class="bullcard easy">
+    <details class="bullcard skip">
       <summary>
         <span class="ribbon">Resolved</span>
         <h4>✍️ Sign the bulletin — $60k bonus</h4>
@@ -1339,7 +1377,7 @@
       </div>
     </details>
 
-    <details class="bullcard watch">
+    <details class="bullcard skip">
       <summary>
         <span class="ribbon">Confirmed live</span>
         <h4>📈 Securities rate at 2%</h4>
@@ -1350,7 +1388,7 @@
       </div>
     </details>
 
-    <details class="bullcard watch">
+    <details class="bullcard skip">
       <summary>
         <span class="ribbon">No incident</span>
         <h4>⏰ Late-submission penalties</h4>
@@ -1483,9 +1521,7 @@
 
 
 <footer>
-  Co.3 · Strategic Business Simulation · ESADE MBA 2025–2026<br>
-  Strategy approved 2026-05-13 · P6 results 2026-05-19 · P7 submitted 2026-05-19 · P7 results delivered 2026-05-20<br>
-  <a href="https://github.com/lifeinprogrezz/esade-mba-private">repo</a>
+  P5–P7 played · <a href="https://github.com/lifeinprogrezz/esade-mba-private">repo</a>
 </footer>
 
 </main>
