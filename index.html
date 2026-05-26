@@ -35,10 +35,6 @@
   .page-header {
     padding: 36px 22px 22px; max-width: 920px; margin: 0 auto;
     border-bottom: 1px solid var(--border);
-    display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: end;
-  }
-  @media (max-width: 600px) {
-    .page-header { grid-template-columns: 1fr; }
   }
   .page-header .brand {
     font-size: 32px; font-weight: 800; letter-spacing: -0.7px; color: var(--ink);
@@ -46,28 +42,11 @@
   .page-header .subtitle {
     font-size: 17px; color: var(--muted); margin-top: 6px;
   }
-  .page-header .period-badge {
-    display: inline-flex; flex-direction: column; align-items: flex-end; gap: 4px;
-    text-align: right;
+  .page-header .meta {
+    font-size: 13px; color: var(--muted); margin-top: 12px;
+    display: flex; gap: 18px; flex-wrap: wrap;
   }
-  .page-header .period-badge .period-num {
-    font-size: 28px; font-weight: 900; letter-spacing: -0.5px; line-height: 1;
-    color: var(--ink);
-  }
-  .page-header .period-badge .period-num .p {
-    color: var(--muted); font-weight: 700;
-  }
-  .page-header .period-badge .period-state {
-    font-size: 11px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase;
-    color: var(--green); display: inline-flex; align-items: center; gap: 5px;
-  }
-  .page-header .period-badge .period-state::before {
-    content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green);
-    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.18);
-  }
-  .page-header .period-badge .period-date {
-    font-size: 11px; color: var(--muted); margin-top: 2px;
-  }
+  .page-header .meta b { color: var(--ink); }
   .pill {
     display: inline-block; padding: 3px 9px; border-radius: 999px;
     font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
@@ -258,13 +237,6 @@
   /* ── P7 bulletin cards (expandable) ──────────────────────── */
   .bulletin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (max-width: 700px) { .bulletin-grid { grid-template-columns: 1fr; } }
-  h5.opt-group {
-    font-size: 12px; font-weight: 700; color: var(--ink);
-    text-transform: uppercase; letter-spacing: 0.8px;
-    margin-top: 18px; margin-bottom: 10px;
-    padding-bottom: 6px; border-bottom: 2px solid var(--ink);
-  }
-  h5.opt-group:first-of-type { margin-top: 4px; }
   details.bullcard {
     background: var(--card); border: 1px solid var(--border); border-radius: 8px;
     padding: 0; overflow: hidden;
@@ -283,9 +255,7 @@
   details.bullcard.easy { background: var(--green-soft); border-color: #b8d8b6; }
   details.bullcard.decide { background: var(--accent-soft); border-color: #b8caec; }
   details.bullcard.watch { background: var(--gold-soft); border-color: #ecd99a; }
-  details.bullcard.skip { background: #f3f1e9; border-color: var(--border); }
-  details.bullcard.skip h4 { color: var(--muted); }
-  details.bullcard.skip .one-line { color: var(--muted); }
+  details.bullcard.skip { background: #f3f1e9; border-color: var(--border); opacity: 0.85; }
   .bullcard .ribbon {
     display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.7px;
     text-transform: uppercase; padding: 2px 8px; border-radius: 999px;
@@ -394,33 +364,23 @@
   }
   @media (max-width: 700px) { .results-headline-grid { grid-template-columns: repeat(2, 1fr); } }
   .results-kpi {
-    background: #faf8f1; border: 1px solid var(--border); border-radius: 10px;
-    padding: 14px 16px; position: relative; overflow: hidden;
-  }
-  .results-kpi::before {
-    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
-    width: 3px; background: transparent;
+    background: #faf8f1; border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 14px;
   }
   .results-kpi .label {
-    font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted);
     font-weight: 700;
   }
   .results-kpi .value {
-    font-size: 24px; font-weight: 900; letter-spacing: -0.4px; margin-top: 4px;
+    font-size: 22px; font-weight: 800; letter-spacing: -0.3px; margin-top: 4px;
     font-variant-numeric: tabular-nums;
   }
-  .results-kpi.good { background: var(--green-soft); border-color: #a4cca7; }
-  .results-kpi.good::before { background: var(--green); }
+  .results-kpi.good { background: var(--green-soft); border-color: #b8d8b6; }
   .results-kpi.good .value { color: var(--green); }
-  .results-kpi.good .label { color: var(--green); }
-  .results-kpi.bad { background: var(--red-soft); border-color: #e2a8a4; }
-  .results-kpi.bad::before { background: var(--red); }
+  .results-kpi.bad { background: var(--red-soft); border-color: #ecbdba; }
   .results-kpi.bad .value { color: var(--red); }
-  .results-kpi.bad .label { color: var(--red); }
-  .results-kpi.warn { background: #fdf6dd; border-color: #ddc679; }
-  .results-kpi.warn::before { background: var(--gold); }
+  .results-kpi.warn { background: #fdf6dd; border-color: #ecd99a; }
   .results-kpi.warn .value { color: #8a6a00; }
-  .results-kpi.warn .label { color: #8a6a00; }
 
   /* ── Per-area P&L grid ───────────────────────────────────── */
   .area-pl-grid {
@@ -446,116 +406,6 @@
   }
   .area-pl .pos { color: var(--green); }
   .area-pl .neg { color: var(--red); }
-  .area-pl .area-note {
-    margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border);
-    font-size: 12.5px; line-height: 1.45; color: var(--muted);
-  }
-  /* Per-area drill-down to production cells */
-  details.area-pl { padding: 0; }
-  details.area-pl > summary {
-    list-style: none; cursor: pointer; padding: 14px 16px;
-    border-radius: 8px; position: relative;
-    transition: background 0.1s;
-  }
-  details.area-pl > summary::-webkit-details-marker { display: none; }
-  details.area-pl > summary::after {
-    content: "▾ cells"; position: absolute; right: 12px; top: 14px;
-    font-size: 10px; font-weight: 700; color: var(--muted);
-    text-transform: uppercase; letter-spacing: 0.5px;
-    transition: transform 0.15s;
-  }
-  details.area-pl[open] > summary::after { content: "▴ hide"; }
-  details.area-pl > summary:hover { background: #faf8f1; }
-  details.area-pl[open] > summary { border-bottom: 1px solid var(--border); }
-  details.area-pl[open] {
-    background: #fbfaf4;
-    grid-column: 1 / -1;
-  }
-  details.area-pl[open] > summary {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 24px; align-items: start;
-  }
-  details.area-pl[open] > summary > h5 { grid-column: 1 / -1; }
-  details.area-pl[open] > summary > table { grid-column: 1; }
-  details.area-pl[open] > summary > .area-note { grid-column: 2; margin-top: 0; padding-top: 0; border-top: none; align-self: center; }
-  @media (max-width: 700px) {
-    details.area-pl[open] > summary { grid-template-columns: 1fr; }
-    details.area-pl[open] > summary > .area-note { grid-column: 1; }
-  }
-  details.area-pl > summary h5 { padding-right: 60px; }
-  details.area-pl .area-cells {
-    grid-column: 1 / -1;
-    padding: 12px 16px 14px;
-    overflow-x: auto;
-  }
-  table.cells-tbl {
-    width: 100%; font-size: 12.5px; border-collapse: collapse;
-    font-variant-numeric: tabular-nums;
-  }
-  table.cells-tbl th {
-    text-align: left; padding: 6px 8px 6px 0;
-    font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;
-    color: var(--muted); font-weight: 700;
-    border-bottom: 1px solid var(--border);
-  }
-  table.cells-tbl td {
-    padding: 7px 8px 7px 0; border-bottom: 1px solid #f0eee5;
-  }
-  table.cells-tbl tr:last-child td { border-bottom: none; }
-  table.cells-tbl td:first-child { font-weight: 700; }
-  table.cells-tbl td.muted, table.cells-tbl tr.muted-row td { color: var(--muted); }
-  table.cells-tbl tr.muted-row { opacity: 0.6; }
-  table.cells-tbl .pos { color: var(--green); font-weight: 600; }
-  table.cells-tbl .neg { color: var(--red); }
-  table.cells-tbl small.muted { color: var(--muted); font-weight: 400; }
-
-  /* Inventory grade-ladder matrix (Per-area drill-down) */
-  .cells-intro {
-    font-size: 12.5px; color: var(--muted); line-height: 1.5;
-    margin: 0 0 12px;
-  }
-  .cells-foot {
-    font-size: 12.5px; color: var(--ink); line-height: 1.5;
-    margin: 12px 0 0; padding: 10px 12px;
-    background: white; border-radius: 6px; border: 1px solid var(--border);
-  }
-  table.inv-matrix {
-    width: 100%; font-size: 13px; border-collapse: collapse;
-    font-variant-numeric: tabular-nums; background: white;
-    border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
-  }
-  table.inv-matrix th {
-    text-align: center; padding: 8px 4px;
-    font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;
-    color: var(--muted); font-weight: 700; background: #faf8f1;
-    border-bottom: 1px solid var(--border);
-  }
-  table.inv-matrix th:first-child { text-align: left; padding-left: 12px; }
-  table.inv-matrix th:last-child { text-align: left; padding-left: 12px; }
-  table.inv-matrix td {
-    padding: 10px 4px; text-align: center; color: var(--muted);
-    border-bottom: 1px solid #f0eee5;
-  }
-  table.inv-matrix tr:last-child td { border-bottom: none; }
-  table.inv-matrix td:first-child {
-    text-align: left; padding-left: 12px;
-    font-weight: 700; color: var(--ink); width: 60px;
-  }
-  table.inv-matrix td.inv {
-    color: var(--ink); border-radius: 4px;
-    font-variant-numeric: tabular-nums;
-  }
-  table.inv-matrix td.inv.live    { background: var(--accent-soft); color: var(--accent); }
-  table.inv-matrix td.inv.ready   { background: var(--green-soft); color: var(--green); }
-  table.inv-matrix td.inv.stranded { background: var(--red-soft); color: var(--red); }
-  table.inv-matrix td.inv.cleared { color: var(--muted); }
-  table.inv-matrix td.row-note {
-    text-align: left; padding-left: 12px;
-    font-size: 11.5px; color: var(--muted);
-  }
-  table.inv-matrix tr.row-noplant td { color: #c5c2b7; }
-  table.inv-matrix tr.row-noplant td:first-child { color: var(--muted); font-weight: 500; }
 
   /* ── Per-line results table ──────────────────────────────── */
   table.results {
@@ -651,81 +501,6 @@
     border-top: 1px dashed var(--border); margin: 6px 0;
   }
 
-  /* ── Competitive intel unified rows ──────────────────────── */
-  .ci-header, .ci-row > summary {
-    display: grid;
-    grid-template-columns: 1.4fr 1.5fr 1.4fr 1.7fr;
-    gap: 14px; align-items: center;
-    padding: 12px 16px;
-    font-variant-numeric: tabular-nums;
-  }
-  .ci-header {
-    background: #faf8f1;
-    border: 1px solid var(--border); border-bottom: none;
-    border-radius: 8px 8px 0 0;
-    margin-top: 14px;
-    font-size: 10.5px; font-weight: 700; color: var(--muted);
-    text-transform: uppercase; letter-spacing: 0.6px;
-  }
-  @media (max-width: 700px) {
-    .ci-header { display: none; }
-  }
-  .ci-list {
-    border: 1px solid var(--border); border-radius: 0 0 8px 8px; background: white;
-  }
-  details.ci-row { border-top: 1px solid var(--border); }
-  details.ci-row:first-child { border-top: none; }
-  details.ci-row > summary {
-    list-style: none; cursor: pointer;
-    font-size: 14px;
-    transition: background 0.1s;
-    position: relative;
-  }
-  details.ci-row > summary::-webkit-details-marker { display: none; }
-  details.ci-row > summary::after {
-    content: "▾"; position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-    color: var(--muted); font-size: 11px; transition: transform 0.15s;
-  }
-  details.ci-row[open] > summary::after { transform: translateY(-50%) rotate(180deg); }
-  details.ci-row > summary:hover { background: #faf8f1; }
-  details.ci-row[open] > summary { background: #faf8f1; border-bottom: 1px solid var(--border); }
-  .ci-market { font-weight: 700; color: var(--ink); }
-  .ci-range { color: var(--muted); font-size: 13px; }
-  .ci-range b { font-weight: 800; color: var(--ink); font-size: 15px; }
-  .ci-range .ci-lo, .ci-range .ci-hi { font-size: 12px; }
-  .ci-mix { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
-  .ci-ours { display: flex; gap: 6px; align-items: center; font-weight: 700; padding-right: 24px; }
-  .ci-ours-skip { color: var(--muted); font-weight: 500; }
-  .g-pip {
-    display: inline-flex; align-items: center; justify-content: center;
-    height: 22px; padding: 0 8px; border-radius: 11px;
-    font-size: 11px; font-weight: 700; letter-spacing: 0.2px;
-    font-variant-numeric: tabular-nums;
-  }
-  .g-pip.g0 { background: #e0dfd5; color: var(--muted); }
-  .g-pip.g1 { background: var(--green); color: white; }
-  .g-pip.g2 { background: var(--accent); color: white; }
-  .g-pip.g3 { background: var(--purple); color: white; }
-  .ci-pos {
-    font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
-    padding: 2px 6px; border-radius: 4px;
-  }
-  .ci-pos.median { background: #e0dfd5; color: var(--muted); }
-  .ci-pos.low    { background: var(--gold-soft); color: var(--gold); }
-  .ci-pos.high   { background: var(--accent-soft); color: var(--accent); }
-  details.ci-row > .ci-body {
-    padding: 14px 18px 18px;
-    background: #fbfaf4;
-  }
-  @media (max-width: 700px) {
-    .ci-header, .ci-row > summary {
-      grid-template-columns: 1fr 1fr;
-      grid-auto-rows: auto; gap: 8px;
-    }
-    .ci-row > summary::after { right: 10px; top: 16px; transform: none; }
-    .ci-market { grid-column: 1 / -1; padding-bottom: 4px; padding-right: 28px; }
-  }
-
   /* ── Insight callouts ────────────────────────────────────── */
   .insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (max-width: 700px) { .insight-grid { grid-template-columns: 1fr; } }
@@ -774,14 +549,10 @@
 <body>
 
 <header class="page-header">
-  <div>
-    <div class="brand">Co.3 — Daily Briefing</div>
-    <div class="subtitle">Strategic Business Simulation · ESADE MBA 2025–2026</div>
-  </div>
-  <div class="period-badge">
-    <div class="period-num"><span class="p">Period</span> 8</div>
-    <div class="period-state">Bulletin landed · planning</div>
-    <div class="period-date">2026-05-21</div>
+  <div class="brand">Co.3 — Daily Briefing</div>
+  <div class="meta">
+    <span><b>P9:</b> bulletin landed 2026-05-26 · planning · <span class="pill pending">awaiting P9 .xls</span></span>
+    <span><b>P8:</b> results delivered 2026-05-26 · <span class="pill live">net +$143k</span></span>
   </div>
 </header>
 
@@ -813,7 +584,7 @@
         <li><b>Retained earnings</b> — swing from negative back to positive.</li>
         <li><b>Capital structure</b> — Equity / Liabilities <b>≥20/80</b> every quarter; target <b>50/50</b>.</li>
         <li><b>Profitability</b> — quarterly <b>ROA growth ≥10%</b>.</li>
-        <li><b>Working capital</b> — original target &lt;$500k inventory by P7; P7 close $3.57M / 159k units (missed, g2 stock now sitting). Revised P8: hold or trim while clearing g2.</li>
+        <li><b>Working capital</b> — original target was &lt;$500k inventory by P7. <b>P8 close: $3.27M / 148k units</b> (improved from P7 $3.57M; EUR g1 cleared everywhere, USA-Y-Std overhang cleared; 35k JAP g3 + remaining g2 stocks now the working inventory). <b>P9 ambition: monetize JAP g3 + clear remaining g2.</b></li>
         <li><b>Innovation</b> — position in <b>top 5%</b> of market leaders via sustained R&amp;D.</li>
       </ol>
     </div>
@@ -837,19 +608,19 @@
       <div class="doctrine">
         <div class="doc-row">
           <div class="who">MARKETING <small>Satoshi</small></div>
-          <div class="what"><b>EUR = premium DLx margins · JAP = high-volume X · USA = Y-board base.</b> Clear inventory near-term at grade-1 prices.</div>
+          <div class="what">Short-term: clear inventory + generate cash with grade-1 pricing. Long-term: <b>EUR = premium DLX margins</b>, <b>JAP = high-volume X</b>, <b>USA = Y-board base</b>.</div>
         </div>
         <div class="doc-row">
           <div class="who">FINANCE <small>Jeongho</small></div>
-          <div class="what">Cut supplier credit. Bank loans for stable liquidity. Hunt quarterly subsidies. Target 50/50 E/L.</div>
+          <div class="what">Minimize high-cost supplier credit. Use ST/LT bank loans for stable liquidity. Hunt quarterly subsidies. Target 50:50 E/L via active leverage.</div>
         </div>
         <div class="doc-row">
           <div class="who">R&amp;D <small>Kavya</small></div>
-          <div class="what">Phased: G1 → G2 in-house + strategic license → G3 in-house. Use the 30% reimbursement. Floor <b>$560k X · $370k Y</b>.</div>
+          <div class="what">Phased: leverage Grade 1 → Grade 2 internal + strategic license → Grade 3 internal. Use the 30% R&amp;D reimbursement. Floor: <b>$560k/qtr X, $370k/qtr Y</b>.</div>
         </div>
         <div class="doc-row">
           <div class="who">PRODUCTION <small>Febby</small></div>
-          <div class="what">Build to demand. JAP-X-Std drawdown complete. EUR at 100% — hold. P8 priority: monetize USA-Y Plant 1 (24k g2 Y-DLx).</div>
+          <div class="what">Match production tightly to demand — don't over-build. JAP-X-Std drawdown <b>complete</b> (0 ending P7). EUR ran 100% on the new caps — keep it there if demand holds. Next priority: fill USA-Y Plant 1 with g2 Y-DLx in P8 (the 24k g2 batch becomes saleable).</div>
         </div>
       </div>
     </div>
@@ -917,1062 +688,893 @@
     <div style="background:var(--green-soft);border:1px solid #b8d8b6;border-radius:8px;padding:12px 14px">
       <div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.5px">Total Y capacity</div>
       <div style="font-size:22px;font-weight:800;letter-spacing:-0.3px;margin-top:2px">60,000 <small style="font-size:13px;font-weight:500;color:var(--muted)">units/qtr</small></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:2px">30k USA + 30k EUR <small style="color:#8a6a00">(USA bumped via Doc 22)</small></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:2px">30k USA + 30k EUR <small style="color:#8a6a00">(USA bumped to 30k via Doc 22)</small></div>
     </div>
+  </div>
+  <div class="note green">
+    <b>EUR capacity unlocked ✓</b> — $100k Co.1 cert paid &amp; processed in P7. EUR plants now run at <b>35k X / 30k Y</b> per quarter (was 25k X / 22k Y, ~+30% headroom). Both EUR plants ran at <b>100%</b> in P7 and every EUR cell was profitable.
+  </div>
+  <div class="note green">
+    <b>USA-Y Plant 2 — written off ✓ (Brunat confirmed):</b> USA net P&amp;E dropped <b>$1,050k → $472.5k (−$577k)</b> P6→P7 — far beyond depreciation (EUR dropped $80k, JAP $112k from depreciation alone). Plant 2 is gone from the books. Fixed cost followed: <b>$333k → $182.5k (−$150k saving)</b>. JAP-X stayed flat at $267k — its Plant 2 (idle since P6) is still on the books and still billing. <b>Rule:</b> the engine disposed of USA-Y P2 at the active→idle transition (no Doc 09B needed) but won't touch a plant that's been steady-state idle. Implication: the USA-Y <b>−$200k</b> P7 loss is NOT closure drag — it's the N+1 inventory cycle on the one remaining plant. Plant 1 made 24k Y-DLx g2 that sells in P8; only 15k Y-Std intra revenue carried P7.
+  </div>
+  <p class="muted">We're open to consolidating plants if the math says so. The edge is the tech, not the local footprint — we can ship anywhere.</p>
+</div>
+
+<div class="card">
+  <h3>Sales priorities <span class="sub">where we push · what's selling now</span></h3>
+  <table class="matrix">
+    <thead><tr><th></th><th>USA</th><th>EUROPE</th><th>JAPAN</th></tr></thead>
+    <tbody>
+      <tr><td>X — Chips</td><td class="un">·</td><td class="ticked">✓</td><td class="ticked">✓</td></tr>
+      <tr><td>Y — Boards</td><td class="ticked">✓</td><td class="ticked">✓</td><td class="un">·</td></tr>
+    </tbody>
+  </table>
+  <p class="muted">Default: produce locally to keep transport low. If long-term it's cheaper to ship across regions than to produce locally, we'll do that.</p>
+
+  <h5 style="font-size:12px;text-transform:uppercase;letter-spacing:0.7px;color:var(--muted);font-weight:700;margin-top:18px;margin-bottom:8px">Cross-shipping — intracompany transfers</h5>
+  <div style="background:var(--accent-soft);border:1px solid #b8caec;border-radius:8px;padding:12px 14px;font-size:13px">
+    <div><b>P7 actual:</b> USA → JAP, <b>Y-Std 15,000 units @ $30</b> — $450k revenue · drew USA-Y-Std overhang from ~40k to <b>25,028u</b>. JAP then sold 16k Y-Std consumer at $31 — <b>razor-thin $1/u margin, −$46k operating</b>. P8 decision: stop importing OR price the resale higher.</div>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     ④ WHERE WE ARE — P7 results delivered
+     ④ WHERE WE ARE — P8 results delivered
      ═══════════════════════════════════════════════════════════ -->
 <div class="section">
   <span class="num">04</span>
   <h2>Where we are</h2>
-  <span class="tag">P7 results delivered · 2026-05-20</span>
+  <span class="tag">P8 results delivered · 2026-05-26</span>
 </div>
 
-<div class="card">
-  <h3>P7 — what we shipped <span class="sub">MBA26Co03_period7.xls · 2026-05-19 13:26</span></h3>
-  <ul class="submitted-list">
-    <li><span class="icon">🏭</span><div><span class="label">Production ~119k units · 7 cells</span> <span class="detail">— EUR full at new caps (X-Std 15k g1 · X-DLx 20k g2 · Y-Std 15k g1 · Y-DLx 15k g2) · JAP X-DLx 30k g2 (Plant 1) · USA Y-DLx 24k g2 (Plant 1 — Plant 2 written off).</span></div></li>
-    <li><span class="icon">💵</span><div><span class="label">Pricing</span> <span class="detail">— EUR: X-Std $27 · X-DLx $31 · Y-Std $33 · Y-DLx $44. JAP: X-Std $23 · X-DLx $30 · Y-Std $31. USA: X-Std $26 · X-DLx $32.</span></div></li>
-    <li><span class="icon">🔬</span><div><span class="label">In-house R&amp;D $930k</span> <span class="detail">— $560k X + $370k Y, back on doctrine floor. Keeps Liechtenstein / Ducal / Golden Band prize eligibility.</span></div></li>
-    <li><span class="icon">🔑</span><div><span class="label">Y2 license — paid $300k (target was $115k Co.9)</span> <span class="detail">⚠️ — Co.9 matched another buyer; our purchase fell back to Clevers at the $300k list price. Our $115k Co.9 entry was not charged. <b>−$185k vs plan.</b> Unlocks EUR Y-DLx 15k g2 for P8.</span></div></li>
-    <li><span class="icon">🧪</span><div><span class="label">X3 patent achieved (in-house) ✓</span> <span class="detail">— P7 INFO sheet shows Max Grade of Improvement X = 3, from in-house R&amp;D. <b>Eligible for Ducal Academy $300k</b> (first company with X3 OR Y3 — prize splits if more than one claims in the same period). We don't know what other teams have until P8 results land; file P8 and find out.</span></div></li>
-    <li><span class="icon">📦</span><div><span class="label">Intra USA→JAP — Y-Std 15k @ $30</span> <span class="detail">— $450k. Drew USA-Y-Std overhang down to 25k.</span></div></li>
-    <li><span class="icon">💸</span><div><span class="label">$100k Co.1 — EU cap cert ✓</span> <span class="detail">— mandatory Doc 17 payment. Unlocked 35k X / 30k Y EUR caps.</span></div></li>
-    <li><span class="icon">🏦</span><div><span class="label">Sub→HQ repatriation $1.8M <span style="color:var(--red)">— BLOCKED</span></span> <span class="detail">— required CEO/CFO declaration not filed; transfers ignored. HQ covered obligations via +$1.78M supplier credit instead.</span></div></li>
-    <li><span class="icon">🏛️</span><div><span class="label">Bank loans · EUR +$700k · JAP +$800k</span> <span class="detail">— funded local ramp. USA didn't borrow.</span></div></li>
-    <li><span class="icon">📉</span><div><span class="label">CB LT — $250k principal + $30k interest</span> <span class="detail">— scheduled payment.</span></div></li>
-    <li><span class="icon">📊</span><div><span class="label">Market research — USA X-Std study</span> <span class="detail">— confirmed full inventory drawdown.</span></div></li>
-    <li><span class="icon">📢</span><div><span class="label">Advertising $0</span> <span class="detail">— same gap as P6. Lines still cleared, but EUR Y-DLx priced below the $45 median. P8: ad support could lift $4–6/u.</span></div></li>
-  </ul>
-</div>
-
-<!-- ─── P7 results delivered ────────────────────────────────── -->
 <div class="results-hero">
-  <div class="verdict">📉 P7 results · delivered 2026-05-20</div>
+  <div class="verdict">🎯 P8 results · delivered 2026-05-26</div>
   <div class="headline">
-    Investment quarter: operating positive, R&amp;D + Y2 tariff drove the headline loss.
+    First <span class="pos">net positive quarter</span> in the company's history: <b class="pos">+$143k net</b> · operating <b class="pos">+$342k</b>. Two structural wins drove the period — <b>METI tender won</b> (15k g2 @ $29 = $435k industrial revenue) and <b>supplier credit fully cleared</b> ($2.54M → $0, saving $411k in quarterly interest). <b>JAP-X Plant 2 reactivated</b> on plan, and Plant 1 produced our first <b>35k g3 X-DLx batch</b> — N+1 saleable in P9 + eligible for the METI plant bonus ($200k receivable filed P9).
+  </div>
+  <div class="subhead">
+    What worked: clean execution on plan — EUR fully cleared g1 across both X and Y (15k Std @ each cell), USA-Y-Std stranded overhang cleared (25,028u @ $24), JAP-X Plant 2 reactivation ran clean. EUR-Y was the strongest cell (+$211k). What didn't: USA-Y still <b>−$60k operating</b> — only 17k of the 24k Y-DLx g2 batch sold; 7k carries to P9 + the engine consolidated unsold to "Std" book value $929k. JAP-Y <b>−$43k</b> on final import (exit confirmed). Y3 in-house R&amp;D <b>did NOT deliver</b> (INFO max Y grade still 2) — Clevers Y3 $350k license now back on the table for P9. RE improved to <b>−$4.46M</b>, E/L holds at 46% (above 20/80 floor).
   </div>
   <div class="results-headline-grid">
     <div class="results-kpi good">
-      <div class="label">Operating</div>
-      <div class="value">+$332k</div>
-    </div>
-    <div class="results-kpi bad">
-      <div class="label">Net</div>
-      <div class="value">−$1.36M</div>
+      <div class="label">Net earnings</div>
+      <div class="value">+$143k</div>
     </div>
     <div class="results-kpi good">
-      <div class="label">25k stranded</div>
-      <div class="value">CLEARED ✓</div>
+      <div class="label">Operating earnings</div>
+      <div class="value">+$342k</div>
     </div>
-    <div class="results-kpi warn">
-      <div class="label">Inventory</div>
-      <div class="value">$3.57M ↑</div>
+    <div class="results-kpi good">
+      <div class="label">Supplier credit</div>
+      <div class="value">$0 ✓</div>
+    </div>
+    <div class="results-kpi good">
+      <div class="label">METI tender won</div>
+      <div class="value">15k @ $29</div>
     </div>
   </div>
 </div>
 
-<!-- ─── Per-area P&L (with drill-down to production cells) ───── -->
+<!-- ─── Per-area P&L ────────────────────────────────────────── -->
 <div class="card">
-  <h3>Per-area P&amp;L <span class="sub">click an area to see the production cells</span></h3>
+  <h3>Per-area operating P&amp;L <span class="sub">where the money came from this period</span></h3>
   <div class="area-pl-grid">
-
-    <details class="area-pl">
-      <summary>
-        <h5>🇺🇸 USA</h5>
-        <table>
-          <tr><td>X-Std (no plant)</td><td class="pos">+$100k</td></tr>
-          <tr><td>Y total <small style="color:var(--muted)">(1 plant)</small></td><td class="neg">−$200k</td></tr>
-          <tr class="total"><td>Net</td><td class="neg">−$100k</td></tr>
-        </table>
-        <p class="area-note">N+1 drag: Plant 1 made 24k g2 Y-DLx for P8 sale. Only 15k intra carried P7. Flips positive once g2 hits market.</p>
-      </summary>
-      <div class="area-cells">
-        <p class="cells-intro">Inventory at P7 close, by grade. Each market sells 1 Std + 1 DLx variant per period — units in a grade we no longer offer become <b>stuck</b>.</p>
-        <table class="inv-matrix">
-          <thead><tr><th></th><th>g0</th><th>g1</th><th>g2</th><th>g3</th><th>this period</th></tr></thead>
-          <tbody>
-            <tr class="row-noplant"><td>X-Std</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="row-note">no plant</td></tr>
-            <tr class="row-noplant"><td>X-DLx</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="row-note">no plant</td></tr>
-            <tr><td>Y-Std</td><td class="inv stranded"><b>25,028</b> ⚠️</td><td>—</td><td>—</td><td>—</td><td class="row-note">offered $0 (skip)</td></tr>
-            <tr><td>Y-DLx</td><td>—</td><td>—</td><td class="inv ready"><b>24,000</b> ✓</td><td>—</td><td class="row-note">N+1, sells P8</td></tr>
-          </tbody>
-        </table>
-        <p class="cells-foot"><b>Stuck this period:</b> 25,028u Y-Std g0 (stranded — engine skipped market). <b>P8 ready:</b> 24,000u Y-DLx g2 → debut at $42–45.</p>
-      </div>
-    </details>
-
-    <details class="area-pl">
-      <summary>
-        <h5>🇪🇺 EUROPE</h5>
-        <table>
-          <tr><td>X (Std + DLx)</td><td class="pos">+$174k</td></tr>
-          <tr><td>Y (Std + DLx)</td><td class="pos">+$133k</td></tr>
-          <tr class="total"><td>Net</td><td class="pos">+$307k</td></tr>
-        </table>
-        <p class="area-note">Reliable engine: every cell profitable, plants at 100% on the new caps.</p>
-      </summary>
-      <div class="area-cells">
-        <p class="cells-intro">Inventory at P7 close, by grade. Each market sells 1 Std + 1 DLx variant per period — units in a grade we no longer offer become <b>stuck</b>.</p>
-        <table class="inv-matrix">
-          <thead><tr><th></th><th>g0</th><th>g1</th><th>g2</th><th>g3</th><th>this period</th></tr></thead>
-          <tbody>
-            <tr><td>X-Std</td><td>—</td><td class="inv live"><b>15,000</b> 🔄</td><td>—</td><td>—</td><td class="row-note">selling g1 @ $27</td></tr>
-            <tr><td>X-DLx</td><td>—</td><td>—</td><td class="inv live"><b>20,000</b> 🔄</td><td>—</td><td class="row-note">selling g2 @ $31</td></tr>
-            <tr><td>Y-Std</td><td>—</td><td class="inv live"><b>15,000</b> 🔄</td><td>—</td><td>—</td><td class="row-note">upgraded g0→g1, selling @ $33</td></tr>
-            <tr><td>Y-DLx</td><td>—</td><td>—</td><td class="inv ready"><b>15,000</b> ✓</td><td>—</td><td class="row-note">upgraded g1→g2, sells P8</td></tr>
-          </tbody>
-        </table>
-        <p class="cells-foot"><b>No stuck inventory.</b> P6→P7 grade upgrades cleared old stock; new g2 EUR Y-DLx unlocks P8 at $46–48.</p>
-      </div>
-    </details>
-
-    <details class="area-pl">
-      <summary>
-        <h5>🇯🇵 JAPAN</h5>
-        <table>
-          <tr><td>X (Std + DLx)</td><td class="pos">+$171k</td></tr>
-          <tr><td>Y-Std (imports)</td><td class="neg">−$46k</td></tr>
-          <tr class="total"><td>Net</td><td class="pos">+$125k</td></tr>
-        </table>
-        <p class="area-note">JAP-X biggest revenue + 25k stranded cleared. JAP-Y imports at $1/u — fix P8.</p>
-      </summary>
-      <div class="area-cells">
-        <p class="cells-intro">Inventory at P7 close, by grade. Each market sells 1 Std + 1 DLx variant per period — units in a grade we no longer offer become <b>stuck</b>.</p>
-        <table class="inv-matrix">
-          <thead><tr><th></th><th>g0</th><th>g1</th><th>g2</th><th>g3</th><th>this period</th></tr></thead>
-          <tbody>
-            <tr><td>X-Std</td><td class="inv cleared">0 ✅</td><td>—</td><td>—</td><td>—</td><td class="row-note">cleared at $23 (sold 20.2k)</td></tr>
-            <tr><td>X-DLx</td><td>—</td><td>—</td><td class="inv ready"><b>30,000</b> ✓</td><td>—</td><td class="row-note">25k stranded cleared, 30k new for P8</td></tr>
-            <tr><td>Y-Std</td><td class="inv live"><b>15,000</b> 🔄</td><td>—</td><td>—</td><td>—</td><td class="row-note">imported, sold 16k @ $31 thin</td></tr>
-            <tr class="row-noplant"><td>Y-DLx</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="row-note">no plant · no stock</td></tr>
-          </tbody>
-        </table>
-        <p class="cells-foot"><b>Stuck this period:</b> 15k Y-Std imported sitting (margin too thin to push). <b>P8 ready:</b> 30k X-DLx g2 → push to $32–34.</p>
-      </div>
-    </details>
-
+    <div class="area-pl">
+      <h5>🇺🇸 USA</h5>
+      <table>
+        <tr><td>Y-Std (25k g0 cleared @$24)</td><td class="pos">+$57k GM</td></tr>
+        <tr><td>Y-DLx (17k g2 sold @$43)</td><td class="pos">+$231k GM</td></tr>
+        <tr><td>− Opex (incl $182k fixed)</td><td class="neg">−$348k</td></tr>
+        <tr class="total"><td>USA net</td><td class="neg">−$60k</td></tr>
+      </table>
+    </div>
+    <div class="area-pl">
+      <h5>🇪🇺 EUROPE</h5>
+      <table>
+        <tr><td>X (Std g1 + DLx g2)</td><td class="pos">+$170k</td></tr>
+        <tr><td>Y (Std g1 + DLx g2)</td><td class="pos">+$211k</td></tr>
+        <tr class="total"><td>EUR net</td><td class="pos">+$381k</td></tr>
+      </table>
+    </div>
+    <div class="area-pl">
+      <h5>🇯🇵 JAPAN</h5>
+      <table>
+        <tr><td>X-Std consumer + METI tender</td><td class="pos">+$64k</td></tr>
+        <tr><td>Y-Std (15k g0 @$31 · final)</td><td class="neg">−$43k</td></tr>
+        <tr class="total"><td>JAP net</td><td class="pos">+$21k</td></tr>
+      </table>
+    </div>
   </div>
-  <div class="note" style="margin-top:14px">
-    <b>Utilization:</b> EUR 100% · JAP-X 43% (P2 idle, on books) · USA-Y 100% of remaining (P2 written off). Total P7 production ~119k units.
+  <div class="note">
+    <b>Reads:</b> <b>EUR is the cash engine</b> — +$381k, both X and Y profitable, every cell cleared g1. <b>JAP swung positive</b> (+$21k) thanks to the METI tender slot. <b>USA-Y still bleeds</b> at −$60k — the 24k g2 DLx batch only cleared 71% in P8; the unsold 7k + recategorized inventory keeps Plant 1's $182k fixed cost from being absorbed. <b>JAP-Y exit confirmed</b> — no more imports going forward.
   </div>
 </div>
 
 <!-- ─── Wins / Misses / Watch ──────────────────────────────── -->
 <div class="card">
-  <h3>P7 wins · watch · misses <span class="sub">sorted by status</span></h3>
+  <h3>P8 wins · misses · what to watch</h3>
   <div class="insight-grid">
-    <!-- WINS -->
     <div class="insight win">
       <div class="icon">✅</div>
-      <h4>JAP X-DLx 25k stranded — cleared</h4>
-      <p><span class="num">25,000u</span> at $30 g2 · $750k revenue · $303k margin.</p>
-    </div>
-    <div class="insight win">
-      <div class="icon">✅</div>
-      <h4>EUR cap unlock landed</h4>
-      <p>Both plants at <span class="num">100%</span> (35k X / 30k Y). All EUR cells profitable.</p>
-    </div>
-    <div class="insight win">
-      <div class="icon">🧪</div>
-      <h4>X3 patent achieved (in-house)</h4>
-      <p>Max grade X = <span class="num">3</span>. Eligible for <b>Ducal Academy $300k</b> — file P8.</p>
+      <h4>First net positive quarter</h4>
+      <p>Net <span class="num">+$143k</span> vs P7's <b>−$1.36M</b> · $1.5M swing. RE improves to −$4.46M (from −$4.61M).</p>
     </div>
     <div class="insight win">
       <div class="icon">✅</div>
-      <h4>USA-Y Plant 2 written off</h4>
-      <p>USA net P&amp;E <span class="num">−$577k</span>. Fixed cost $333k → $182.5k. 1 USA-Y plant now.</p>
+      <h4>Supplier credit fully cleared</h4>
+      <p><span class="num">$2.54M → $0</span>. Refinanced into Area Bank Loans (+$1M to $2.5M) at 1.0% SI. Total interest dropped <b>$461k → $50k</b> in one quarter.</p>
     </div>
-    <!-- WATCH -->
+    <div class="insight win">
+      <div class="icon">✅</div>
+      <h4>METI X tender won</h4>
+      <p>15k g2 @ $29 = <span class="num">$435k</span> industrial revenue. Engine accepted the bid.</p>
+    </div>
+    <div class="insight win">
+      <div class="icon">✅</div>
+      <h4>JAP-X Plant 2 reactivated</h4>
+      <p>25k g2 Std produced ($450k cost · $18/u). Plant disposal rule didn't trigger — Plant 2 carried clean into active production.</p>
+    </div>
+    <div class="insight win">
+      <div class="icon">✅</div>
+      <h4>35k g3 X-DLx in inventory</h4>
+      <p>Plant 1 produced <span class="num">35,000u</span> grade-3 X-DLx — N+1 saleable in P9. At competitor median g3 prices ($45–55+), this is <b>$1.6–1.9M potential P9 revenue</b> + METI plant bonus $200k.</p>
+    </div>
+    <div class="insight win">
+      <div class="icon">✅</div>
+      <h4>EUR g1 cleared everywhere</h4>
+      <p>15k EUR-X-Std + 15k EUR-Y-Std cleared at <b>$24 / $38</b>. Both EUR Std cells ended period empty.</p>
+    </div>
+    <div class="insight miss">
+      <div class="icon">❌</div>
+      <h4>Y3 in-house R&amp;D did NOT deliver</h4>
+      <p>INFO max Y grade = 2. The Y3 patent isn't ours yet. Clevers Y3 $350k (Doc 23 price) becomes the practical P9 option.</p>
+    </div>
+    <div class="insight miss">
+      <div class="icon">❌</div>
+      <h4>USA-Y still −$60k operating</h4>
+      <p>Only 17,073 of 24k DLx batch sold — 7k g2 remains + recategorized inventory at $929k Std book value. Plant 1's $182k fixed cost couldn't be absorbed.</p>
+    </div>
     <div class="insight watch">
       <div class="icon">⚠️</div>
-      <h4>Supplier credit ballooned</h4>
-      <p>HQ SC $758k → <span class="num">$2.54M</span>. P8: file declaration + start SC runoff.</p>
+      <h4>R&amp;D under doctrine</h4>
+      <p>$200k X + $185k Y = <b>$385k vs $930k doctrine floor</b>. Saved ~$545k cash but the Y3 patent didn't deliver; was the budget the cause? Kavya to recommend P9 R&amp;D allocation.</p>
     </div>
     <div class="insight watch">
       <div class="icon">⚠️</div>
-      <h4>Inventory ↑ $3.0M → $3.57M</h4>
-      <p>New g2 stock = P8 revenue, drag today.</p>
+      <h4>Competitors leapfrogging to g3 in EUR</h4>
+      <p>MARKET1 row 40+ shows <b>Co.4, Co.5, Co.6, Co.8, Co.10, Co.12, Co.13, Co.14</b> all planning g3 EUR-X-DLx for P9. We're holding at g2. Either license X4 ($200k Doc 23) or accept margin compression.</p>
     </div>
-    <!-- MISSES -->
-    <div class="insight miss">
-      <div class="icon">❌</div>
-      <h4>$1.8M sub→HQ blocked</h4>
-      <p>Doc 17 declaration not filed → transfers ignored. HQ covered via SC.</p>
+    <div class="insight win">
+      <div class="icon">✅</div>
+      <h4>First advertising spend ever</h4>
+      <p>$100k in EUR ($50k X + $50k Y). Unlocks future Cannes Gala eligibility (needs ad spend 2 prior periods).</p>
     </div>
-    <div class="insight miss">
-      <div class="icon">❌</div>
-      <h4>Y2 license: $300k, not $115k</h4>
-      <p>Co.9 matched another buyer; we fell back to Clevers list. <span class="num">−$185k</span> vs plan.</p>
-    </div>
-    <div class="insight miss">
-      <div class="icon">❌</div>
-      <h4>JAP-Y thin margin</h4>
-      <p>16k @ $31 on $30 cost = <span class="num">$1/u</span> · −$46k.</p>
+    <div class="insight watch">
+      <div class="icon">⚠️</div>
+      <h4>Inventory book value $3.27M</h4>
+      <p>Slight improvement vs P7 $3.57M. 148k units sitting — most as new g2 production. The 35k JAP g3 + 31k EUR-X g2 are the most valuable for P9 monetization.</p>
     </div>
   </div>
 </div>
 
 <div class="card snapshot">
-  <h3 style="font-size:18px;margin-bottom:14px">P7 close — financials &amp; inventory</h3>
+  <p class="lead"><b style="font-size:20px">Position at P8 close</b> — net <b class="pos">+$143k</b>, operating <b class="pos">+$342k</b>. Retained earnings <b class="neg">−$4.46M</b> (improved from −$4.61M). Cash recycled aggressively to clear supplier credit: consolidated cash <b>$2.86M → $1.36M</b> but the obligation that drove it is gone. HQ holds <b>$650k</b> — comfortable above the new Liechtenstein <b>$250k</b> floor. <b>E/L now 46/54</b> (above the 20/80 floor, closing the gap to the 50/50 target).</p>
   <div class="snapshot-grid">
     <div class="snapshot-tile">
-      <h4>💰 Financial position</h4>
+      <h4>💰 Financial position · P8 close (actuals)</h4>
       <table>
-        <tr><td>Net earnings</td><td class="neg">−$1,357k</td></tr>
-        <tr><td>Operating earnings</td><td class="pos">+$332k</td></tr>
-        <tr><td>Retained earnings</td><td class="neg">−$4,606k</td></tr>
-        <tr><td>Consolidated cash</td><td class="pos">$2,860k ↑</td></tr>
-        <tr><td>Supplier credit</td><td class="neg">$2,540k ↑↑</td></tr>
-        <tr><td>Area bank loans</td><td>$1,500k</td></tr>
-        <tr><td>CB long-term</td><td>$1,250k</td></tr>
-        <tr><td>Total equity</td><td>$5,394k</td></tr>
-        <tr><td>E / L</td><td>40 / 60</td></tr>
-        <tr class="total"><td>Total assets</td><td>$13,513k</td></tr>
+        <tr><td>Net earnings</td><td class="pos">+$143k</td></tr>
+        <tr><td>Operating earnings</td><td class="pos">+$342k</td></tr>
+        <tr><td>Retained earnings</td><td class="neg">−$4,463k</td></tr>
+        <tr><td>Consolidated cash</td><td>$1,362k ↓</td></tr>
+        <tr><td>HQ cash</td><td class="pos">$650k ✓</td></tr>
+        <tr><td>Supplier credit</td><td class="pos">$0 ✓✓</td></tr>
+        <tr><td>Area bank loans</td><td>$2,500k ↑</td></tr>
+        <tr><td>LT loans payable</td><td>$1,000k</td></tr>
+        <tr><td>Total equity</td><td>$5,537k</td></tr>
+        <tr><td>E / L</td><td>46 / 54</td></tr>
+        <tr class="total"><td>Total assets</td><td>$11,929k</td></tr>
       </table>
     </div>
     <div class="snapshot-tile">
-      <h4>📦 Ending inventory</h4>
+      <h4>📦 Ending inventory · P8 close</h4>
       <table>
-        <tr><td>USA-Y-Std <small style="color:var(--muted)">(stranded)</small></td><td class="neg"><b>25,028u</b></td></tr>
-        <tr><td>USA-Y-DLx <span class="grade-chip g2" style="font-size:9px;padding:0 4px">g2</span> <small style="color:var(--muted)">(P8 sale)</small></td><td class="pos">24,000u</td></tr>
-        <tr><td>EUR-X-Std <span class="grade-chip g1" style="font-size:9px;padding:0 4px">g1</span></td><td>15,000u</td></tr>
-        <tr><td>EUR-X-DLx <span class="grade-chip g2" style="font-size:9px;padding:0 4px">g2</span></td><td>20,000u</td></tr>
-        <tr><td>EUR-Y-Std <span class="grade-chip g1" style="font-size:9px;padding:0 4px">g1</span></td><td>15,000u</td></tr>
-        <tr><td>EUR-Y-DLx <span class="grade-chip g2" style="font-size:9px;padding:0 4px">g2</span> <small style="color:var(--muted)">(P8 sale)</small></td><td class="pos">15,000u</td></tr>
-        <tr><td>JAP-X-DLx <span class="grade-chip g2" style="font-size:9px;padding:0 4px">g2</span> <small style="color:var(--muted)">(P8 sale)</small></td><td class="pos">30,000u</td></tr>
-        <tr><td>JAP-Y-Std <small style="color:var(--muted)">(imported)</small></td><td>15,000u</td></tr>
-        <tr><td>USA-X / JAP-X-Std cleared</td><td class="pos">0 / 0 ✓</td></tr>
-        <tr class="total"><td>TOTAL units</td><td>159,028</td></tr>
+        <tr><td>USA-Y-Std <span class="grade-chip g2" style="font-size:9px;padding:0 4px">g2</span> <small style="color:var(--muted)">(unsold DLx recat.)</small></td><td>30,927u</td></tr>
+        <tr><td>EUR-X-Std <span class="grade-chip g2" style="font-size:9px;padding:0 4px">g2</span></td><td>31,000u</td></tr>
+        <tr><td>EUR-Y-Std <span class="grade-chip g2" style="font-size:9px;padding:0 4px">g2</span></td><td>26,000u</td></tr>
+        <tr><td>JAP-X-Std <span class="grade-chip g2" style="font-size:9px;padding:0 4px">g2</span></td><td>25,000u</td></tr>
+        <tr><td><b>JAP-X-DLx</b> <span style="background:var(--accent);color:white;font-size:9px;padding:0 4px;border-radius:999px;font-weight:700">g3 ★</span> <small style="color:var(--muted)">(P9 saleable)</small></td><td class="pos"><b>35,000u</b></td></tr>
+        <tr><td>USA-Y-Std g0 cleared</td><td class="pos">0 ✓</td></tr>
+        <tr><td>EUR g1 cleared (both)</td><td class="pos">0 ✓</td></tr>
+        <tr><td>JAP-Y exited</td><td class="pos">0 ✓</td></tr>
+        <tr class="total"><td>TOTAL units</td><td>147,927</td></tr>
+      </table>
+    </div>
+    <div class="snapshot-tile">
+      <h4>🏭 Capacity · what we used in P8</h4>
+      <table>
+        <tr><td>USA Y P1</td><td>24k DLx g2 (cap)</td></tr>
+        <tr><td>EUR X P1</td><td>31k DLx g2 (89% cap)</td></tr>
+        <tr><td>EUR Y P1</td><td>26k DLx g2 (87% cap)</td></tr>
+        <tr><td>JAP X P1</td><td class="pos">35k DLx <b>g3</b> (cap) ★</td></tr>
+        <tr><td>JAP X P2</td><td class="pos">25k Std g2 (71% cap, REACTIVATED)</td></tr>
+        <tr><td>Patents owned</td><td>X1, X2, X3</td></tr>
+        <tr><td>Y patents</td><td>Y1, Y2 (Y3 not delivered)</td></tr>
+        <tr><td>Total production</td><td><b>141,000u</b></td></tr>
+      </table>
+    </div>
+    <div class="snapshot-tile">
+      <h4>🎯 Objectives · P8 scorecard</h4>
+      <table>
+        <tr><td>Obj 1: RE positive</td><td class="neg">−$4.46M ✗</td></tr>
+        <tr><td>Obj 2: E/L ≥20/80</td><td class="pos">46/54 ✓</td></tr>
+        <tr><td>Obj 2: target 50/50</td><td class="pos">closing gap ↑</td></tr>
+        <tr><td>Obj 3: net positive</td><td class="pos">+$143k ✓✓</td></tr>
+        <tr><td>Obj 4: inventory ↓ &lt;$500k</td><td class="neg">$3.27M ✗</td></tr>
+        <tr><td>Obj 5: top 5% innovation</td><td class="pos">X3 + g3 production ✓</td></tr>
+        <tr><td>METI tender won</td><td class="pos">15k @ $29 ✓</td></tr>
+        <tr><td>SC cleared</td><td class="pos">$0 ✓✓</td></tr>
       </table>
     </div>
   </div>
 </div>
 
 <div class="card">
-  <h3>Competitive intel <span class="sub">P7 actual · 14 real teams (bots excluded) · click a market to expand</span></h3>
-  <div class="note green" style="margin-top:6px">
-    <b>P8 pricing:</b> EUR Y-DLx <b>$46–48</b> · EUR X-DLx <b>$33–35</b> · JAP X-DLx <b>$32–34</b> · JAP Y-Std <b>$33–34</b> (or stop importing) · USA-Y-DLx debut <b>$42–45</b>.
-  </div>
-  <div class="ci-header">
-    <span>Market</span>
-    <span>Market price (lo · med · hi)</span>
-    <span>Grade mix of sellers</span>
-    <span>Us</span>
-  </div>
-  <div class="ci-list">
-    <details class="ci-row">
-      <summary>
-        <span class="ci-market">🇯🇵 JAP X-DLx</span>
-        <span class="ci-range"><span class="ci-lo">$29</span> · <b>$34</b> · <span class="ci-hi">$46</span></span>
-        <span class="ci-mix"><span class="g-pip g2" title="10 sellers at grade 2">2×10</span> <span class="g-pip g1" title="1 sellers at grade 1">1×1</span></span>
-        <span class="ci-ours"><b>$30</b> <span class="grade-chip g2">g2</span> <span class="ci-pos low">low</span></span>
-      </summary>
-      <div class="ci-body">
-        <table class="matrix-tbl">
-          <thead><tr><th>Company</th><th>Tech grade</th><th>P7 price</th></tr></thead>
-          <tbody>
-            <tr><td class="co">Co.6</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$29</td></tr>
-            <tr><td class="co">Co.2</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$30</td></tr>
-            <tr class="ours"><td class="co">Co.3 (us)</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$30</td></tr>
-            <tr><td class="co">Co.14</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$30</td></tr>
-            <tr><td class="co">Co.15</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$33</td></tr>
-            <tr><td class="co">Co.12</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$34</td></tr>
-            <tr><td class="co">Co.7</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$35</td></tr>
-            <tr><td class="co">Co.11</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$35</td></tr>
-            <tr><td class="co">Co.8</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$38</td></tr>
-            <tr><td class="co">Co.13</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$38</td></tr>
-            <tr><td class="co">Co.5</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$46</td></tr>
-            <tr><td colspan="3" class="matrix-divider"></td></tr>
-            <tr class="no-offer"><td class="co">Co.4</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-            <tr class="no-offer"><td class="co">Co.9</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-            <tr class="no-offer"><td class="co">Co.10</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-    <details class="ci-row">
-      <summary>
-        <span class="ci-market">🇪🇺 EUR X-DLx</span>
-        <span class="ci-range"><span class="ci-lo">$29</span> · <b>$35</b> · <span class="ci-hi">$44</span></span>
-        <span class="ci-mix"><span class="g-pip g2" title="9 sellers at grade 2">2×9</span></span>
-        <span class="ci-ours"><b>$31</b> <span class="grade-chip g2">g2</span> <span class="ci-pos low">low</span></span>
-      </summary>
-      <div class="ci-body">
-        <table class="matrix-tbl">
-          <thead><tr><th>Company</th><th>Tech grade</th><th>P7 price</th></tr></thead>
-          <tbody>
-            <tr><td class="co">Co.6</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$29</td></tr>
-            <tr class="ours"><td class="co">Co.3 (us)</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$31</td></tr>
-            <tr><td class="co">Co.2</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$32</td></tr>
-            <tr><td class="co">Co.8</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$33</td></tr>
-            <tr><td class="co">Co.4</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$35</td></tr>
-            <tr><td class="co">Co.7</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$35</td></tr>
-            <tr><td class="co">Co.15</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$35</td></tr>
-            <tr><td class="co">Co.9</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$36</td></tr>
-            <tr><td class="co">Co.5</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$44</td></tr>
-            <tr><td colspan="3" class="matrix-divider"></td></tr>
-            <tr class="no-offer"><td class="co">Co.10</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-            <tr class="no-offer"><td class="co">Co.12</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-            <tr class="no-offer"><td class="co">Co.13</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-            <tr class="no-offer"><td class="co">Co.14</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">no P7 offer</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-    <details class="ci-row">
-      <summary>
-        <span class="ci-market">🇪🇺 EUR Y-DLx</span>
-        <span class="ci-range"><span class="ci-lo">$40</span> · <b>$44</b> · <span class="ci-hi">$54</span></span>
-        <span class="ci-mix"><span class="g-pip g2" title="6 sellers at grade 2">2×6</span> <span class="g-pip g1" title="2 sellers at grade 1">1×2</span> <span class="g-pip g0" title="1 sellers at grade 0">0×1</span></span>
-        <span class="ci-ours"><b>$44</b> <span class="grade-chip g2">g2</span> <span class="ci-pos median">median</span></span>
-      </summary>
-      <div class="ci-body">
-        <table class="matrix-tbl">
-          <thead><tr><th>Company</th><th>Tech grade</th><th>P7 price</th></tr></thead>
-          <tbody>
-            <tr><td class="co">Co.2</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$40</td></tr>
-            <tr><td class="co">Co.4</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$41</td></tr>
-            <tr><td class="co">Co.13</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$42</td></tr>
-            <tr class="ours"><td class="co">Co.3 (us)</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$44</td></tr>
-            <tr><td class="co">Co.14</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$44</td></tr>
-            <tr><td class="co">Co.8</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$45</td></tr>
-            <tr><td class="co">Co.5</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$46</td></tr>
-            <tr><td class="co">Co.12</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$47</td></tr>
-            <tr><td class="co">Co.6</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$54</td></tr>
-            <tr><td colspan="3" class="matrix-divider"></td></tr>
-            <tr class="no-offer"><td class="co">Co.7</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-            <tr class="no-offer"><td class="co">Co.9</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-            <tr class="no-offer"><td class="co">Co.10</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-            <tr class="no-offer"><td class="co">Co.11</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-            <tr class="no-offer"><td class="co">Co.15</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-    <details class="ci-row">
-      <summary>
-        <span class="ci-market">🇺🇸 USA Y-DLx</span>
-        <span class="ci-range"><span class="ci-lo">$32</span> · <b>$40</b> · <span class="ci-hi">$51</span></span>
-        <span class="ci-mix"><span class="g-pip g2" title="6 sellers at grade 2">2×6</span> <span class="g-pip g1" title="2 sellers at grade 1">1×2</span> <span class="g-pip g0" title="1 sellers at grade 0">0×1</span></span>
-        <span class="ci-ours"><span class="ci-ours-skip">no offer</span> <span class="grade-chip g2">g2</span></span>
-      </summary>
-      <div class="ci-body">
-        <table class="matrix-tbl">
-          <thead><tr><th>Company</th><th>Tech grade</th><th>P7 price</th></tr></thead>
-          <tbody>
-            <tr><td class="co">Co.10</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$32</td></tr>
-            <tr><td class="co">Co.13</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$38</td></tr>
-            <tr><td class="co">Co.14</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$39</td></tr>
-            <tr><td class="co">Co.2</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$40</td></tr>
-            <tr><td class="co">Co.7</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$40</td></tr>
-            <tr><td class="co">Co.8</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$43</td></tr>
-            <tr><td class="co">Co.12</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$43</td></tr>
-            <tr><td class="co">Co.5</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$45</td></tr>
-            <tr><td class="co">Co.6</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$51</td></tr>
-            <tr><td colspan="3" class="matrix-divider"></td></tr>
-            <tr class="ours"><td class="co">Co.3 (us)</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-            <tr class="no-offer"><td class="co">Co.9</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-            <tr class="no-offer"><td class="co">Co.15</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-    <details class="ci-row">
-      <summary>
-        <span class="ci-market">🇪🇺 EUR X-Std</span>
-        <span class="ci-range"><span class="ci-lo">$19</span> · <b>$27</b> · <span class="ci-hi">$38</span></span>
-        <span class="ci-mix"><span class="g-pip g2" title="1 sellers at grade 2">2×1</span> <span class="g-pip g1" title="6 sellers at grade 1">1×6</span> <span class="g-pip g0" title="7 sellers at grade 0">0×7</span></span>
-        <span class="ci-ours"><b>$27</b> <span class="grade-chip g1">g1</span> <span class="ci-pos median">median</span></span>
-      </summary>
-      <div class="ci-body">
-        <table class="matrix-tbl">
-          <thead><tr><th>Company</th><th>Tech grade</th><th>P7 price</th></tr></thead>
-          <tbody>
-            <tr><td class="co">Co.6</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$19</td></tr>
-            <tr><td class="co">Co.4</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$25</td></tr>
-            <tr><td class="co">Co.5</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$25</td></tr>
-            <tr><td class="co">Co.8</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$25</td></tr>
-            <tr><td class="co">Co.2</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$26</td></tr>
-            <tr><td class="co">Co.14</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$26</td></tr>
-            <tr class="ours"><td class="co">Co.3 (us)</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$27</td></tr>
-            <tr><td class="co">Co.7</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$28</td></tr>
-            <tr><td class="co">Co.11</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$30</td></tr>
-            <tr><td class="co">Co.9</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$32</td></tr>
-            <tr><td class="co">Co.12</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$32</td></tr>
-            <tr><td class="co">Co.15</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$33</td></tr>
-            <tr><td class="co">Co.10</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$35</td></tr>
-            <tr><td class="co">Co.13</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$38</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-    <details class="ci-row">
-      <summary>
-        <span class="ci-market">🇪🇺 EUR Y-Std</span>
-        <span class="ci-range"><span class="ci-lo">$32</span> · <b>$35</b> · <span class="ci-hi">$45</span></span>
-        <span class="ci-mix"><span class="g-pip g1" title="8 sellers at grade 1">1×8</span> <span class="g-pip g0" title="6 sellers at grade 0">0×6</span></span>
-        <span class="ci-ours"><b>$33</b> <span class="grade-chip g1">g1</span> <span class="ci-pos low">low</span></span>
-      </summary>
-      <div class="ci-body">
-        <table class="matrix-tbl">
-          <thead><tr><th>Company</th><th>Tech grade</th><th>P7 price</th></tr></thead>
-          <tbody>
-            <tr><td class="co">Co.8</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$32</td></tr>
-            <tr><td class="co">Co.2</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$33</td></tr>
-            <tr class="ours"><td class="co">Co.3 (us)</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$33</td></tr>
-            <tr><td class="co">Co.12</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$33</td></tr>
-            <tr><td class="co">Co.13</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$33</td></tr>
-            <tr><td class="co">Co.4</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$35</td></tr>
-            <tr><td class="co">Co.5</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$35</td></tr>
-            <tr><td class="co">Co.14</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$35</td></tr>
-            <tr><td class="co">Co.15</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$40</td></tr>
-            <tr><td class="co">Co.6</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$42</td></tr>
-            <tr><td class="co">Co.11</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$43</td></tr>
-            <tr><td class="co">Co.7</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$44</td></tr>
-            <tr><td class="co">Co.9</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$44</td></tr>
-            <tr><td class="co">Co.10</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$45</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-    <details class="ci-row">
-      <summary>
-        <span class="ci-market">🇯🇵 JAP X-Std</span>
-        <span class="ci-range"><span class="ci-lo">$18</span> · <b>$25</b> · <span class="ci-hi">$42</span></span>
-        <span class="ci-mix"><span class="g-pip g1" title="7 sellers at grade 1">1×7</span> <span class="g-pip g0" title="7 sellers at grade 0">0×7</span></span>
-        <span class="ci-ours"><b>$23</b> <span class="grade-chip g0">&mdash;</span> <span class="ci-pos low">low</span></span>
-      </summary>
-      <div class="ci-body">
-        <table class="matrix-tbl">
-          <thead><tr><th>Company</th><th>Tech grade</th><th>P7 price</th></tr></thead>
-          <tbody>
-            <tr><td class="co">Co.13</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$18</td></tr>
-            <tr><td class="co">Co.6</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$19</td></tr>
-            <tr><td class="co">Co.2</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$23</td></tr>
-            <tr class="ours"><td class="co">Co.3 (us)</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$23</td></tr>
-            <tr><td class="co">Co.11</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$23</td></tr>
-            <tr><td class="co">Co.12</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$24</td></tr>
-            <tr><td class="co">Co.8</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$25</td></tr>
-            <tr><td class="co">Co.14</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$25</td></tr>
-            <tr><td class="co">Co.7</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$27</td></tr>
-            <tr><td class="co">Co.15</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$28</td></tr>
-            <tr><td class="co">Co.10</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$33</td></tr>
-            <tr><td class="co">Co.5</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$34</td></tr>
-            <tr><td class="co">Co.4</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$35</td></tr>
-            <tr><td class="co">Co.9</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$42</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-    <details class="ci-row">
-      <summary>
-        <span class="ci-market">🇯🇵 JAP Y-Std</span>
-        <span class="ci-range"><span class="ci-lo">$29</span> · <b>$34</b> · <span class="ci-hi">$46</span></span>
-        <span class="ci-mix"><span class="g-pip g1" title="2 sellers at grade 1">1×2</span> <span class="g-pip g0" title="8 sellers at grade 0">0×8</span></span>
-        <span class="ci-ours"><b>$31</b> <span class="grade-chip g0">&mdash;</span> <span class="ci-pos low">low</span></span>
-      </summary>
-      <div class="ci-body">
-        <table class="matrix-tbl">
-          <thead><tr><th>Company</th><th>Tech grade</th><th>P7 price</th></tr></thead>
-          <tbody>
-            <tr><td class="co">Co.8</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$29</td></tr>
-            <tr class="ours"><td class="co">Co.3 (us)</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$31</td></tr>
-            <tr><td class="co">Co.6</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$31</td></tr>
-            <tr><td class="co">Co.15</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$33</td></tr>
-            <tr><td class="co">Co.4</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$34</td></tr>
-            <tr><td class="co">Co.9</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$34</td></tr>
-            <tr><td class="co">Co.11</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$34</td></tr>
-            <tr><td class="co">Co.14</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$34</td></tr>
-            <tr><td class="co">Co.12</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$35</td></tr>
-            <tr><td class="co">Co.7</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$46</td></tr>
-            <tr><td colspan="3" class="matrix-divider"></td></tr>
-            <tr class="no-offer"><td class="co">Co.5</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">no P7 offer</td></tr>
-            <tr class="no-offer"><td class="co">Co.10</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-    <details class="ci-row">
-      <summary>
-        <span class="ci-market">🇺🇸 USA X-Std</span>
-        <span class="ci-range"><span class="ci-lo">$20</span> · <b>$24</b> · <span class="ci-hi">$28</span></span>
-        <span class="ci-mix"><span class="g-pip g0" title="12 sellers at grade 0">0×12</span></span>
-        <span class="ci-ours"><b>$26</b> <span class="grade-chip g0">&mdash;</span> <span class="ci-pos high">high</span></span>
-      </summary>
-      <div class="ci-body">
-        <table class="matrix-tbl">
-          <thead><tr><th>Company</th><th>Tech grade</th><th>P7 price</th></tr></thead>
-          <tbody>
-            <tr><td class="co">Co.4</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$20</td></tr>
-            <tr><td class="co">Co.6</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$21</td></tr>
-            <tr><td class="co">Co.12</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$22</td></tr>
-            <tr><td class="co">Co.15</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$22</td></tr>
-            <tr><td class="co">Co.7</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$23</td></tr>
-            <tr><td class="co">Co.5</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$24</td></tr>
-            <tr><td class="co">Co.11</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$24</td></tr>
-            <tr><td class="co">Co.8</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$25</td></tr>
-            <tr><td class="co">Co.2</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$26</td></tr>
-            <tr class="ours"><td class="co">Co.3 (us)</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$26</td></tr>
-            <tr><td class="co">Co.10</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$26</td></tr>
-            <tr><td class="co">Co.9</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$28</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-    <details class="ci-row">
-      <summary>
-        <span class="ci-market">🇺🇸 USA X-DLx</span>
-        <span class="ci-range"><span class="ci-lo">$29</span> · <b>$32</b> · <span class="ci-hi">$35</span></span>
-        <span class="ci-mix"><span class="g-pip g2" title="1 sellers at grade 2">2×1</span> <span class="g-pip g0" title="1 sellers at grade 0">0×1</span></span>
-        <span class="ci-ours"><span class="ci-ours-skip">no offer</span></span>
-      </summary>
-      <div class="ci-body">
-        <table class="matrix-tbl">
-          <thead><tr><th>Company</th><th>Tech grade</th><th>P7 price</th></tr></thead>
-          <tbody>
-            <tr><td class="co">Co.15</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$29</td></tr>
-            <tr><td class="co">Co.7</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$35</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-    <details class="ci-row">
-      <summary>
-        <span class="ci-market">🇺🇸 USA Y-Std</span>
-        <span class="ci-range"><span class="ci-lo">$27</span> · <b>$32</b> · <span class="ci-hi">$44</span></span>
-        <span class="ci-mix"><span class="g-pip g1" title="3 sellers at grade 1">1×3</span> <span class="g-pip g0" title="9 sellers at grade 0">0×9</span></span>
-        <span class="ci-ours"><span class="ci-ours-skip">no offer</span></span>
-      </summary>
-      <div class="ci-body">
-        <table class="matrix-tbl">
-          <thead><tr><th>Company</th><th>Tech grade</th><th>P7 price</th></tr></thead>
-          <tbody>
-            <tr><td class="co">Co.4</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$27</td></tr>
-            <tr><td class="co">Co.10</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$28</td></tr>
-            <tr><td class="co">Co.13</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$28</td></tr>
-            <tr><td class="co">Co.12</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$30</td></tr>
-            <tr><td class="co">Co.6</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$31</td></tr>
-            <tr><td class="co">Co.7</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$32</td></tr>
-            <tr><td class="co">Co.8</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$32</td></tr>
-            <tr><td class="co">Co.14</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$32</td></tr>
-            <tr><td class="co">Co.2</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$33</td></tr>
-            <tr><td class="co">Co.5</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">$35</td></tr>
-            <tr><td class="co">Co.15</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$37</td></tr>
-            <tr><td class="co">Co.9</td><td class="grade"><span class="grade-chip g0">&mdash;</span></td><td class="price">$44</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-    <details class="ci-row">
-      <summary>
-        <span class="ci-market">🇯🇵 JAP Y-DLx</span>
-        <span class="ci-range"><span class="ci-lo">$38</span> · <b>$44</b> · <span class="ci-hi">$50</span></span>
-        <span class="ci-mix"><span class="g-pip g2" title="3 sellers at grade 2">2×3</span></span>
-        <span class="ci-ours"><span class="ci-ours-skip">no offer</span></span>
-      </summary>
-      <div class="ci-body">
-        <table class="matrix-tbl">
-          <thead><tr><th>Company</th><th>Tech grade</th><th>P7 price</th></tr></thead>
-          <tbody>
-            <tr><td class="co">Co.8</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$38</td></tr>
-            <tr><td class="co">Co.11</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$44</td></tr>
-            <tr><td class="co">Co.12</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">$50</td></tr>
-            <tr><td colspan="3" class="matrix-divider"></td></tr>
-            <tr class="no-offer"><td class="co">Co.5</td><td class="grade"><span class="grade-chip g2">g2</span></td><td class="price">no P7 offer</td></tr>
-            <tr class="no-offer"><td class="co">Co.7</td><td class="grade"><span class="grade-chip g1">g1</span></td><td class="price">no P7 offer</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-  </div>
-</div>
-<div class="section">
-  <span class="num">05</span>
-  <h2>Strategic playbook</h2>
-  <span class="tag">tech · capacity · demand · options</span>
-</div>
-
-<div class="card" style="border:2px solid var(--ink)">
-  <h3>P8 plan — confirmed <span class="sub">huddle source of truth · pricing · production · tender</span></h3>
-  <p class="lead" style="font-size:15px;margin-bottom:14px">Core moves: clear g1 in EUR + g0 strands in USA and JAP, lift g2 pricing to absorb the +10% var cost and 31% EU corp tax, run JAP-X both plants (Plant 1 X3 for the $200k METI bonus, Plant 2 X2 for the tender + consumer), then set up EUR's X4 leap for P9.</p>
-
-  <h5 style="font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-top:8px;margin-bottom:6px">🇺🇸 USA</h5>
-  <table style="width:100%;font-size:13px;border-collapse:collapse;margin-bottom:14px">
-    <thead style="background:#faf8f1"><tr><th style="text-align:left;padding:6px;border-bottom:1px solid var(--border)">Cell</th><th style="text-align:right;padding:6px;border-bottom:1px solid var(--border)">Price</th><th style="text-align:left;padding:6px;border-bottom:1px solid var(--border)">Grade</th><th style="text-align:left;padding:6px;border-bottom:1px solid var(--border)">Production</th></tr></thead>
+  <h3>Market intel · P8 actual competitor prices</h3>
+  <p class="lead" style="font-size:15px">17 active companies (Co.18 dismantled). Our position re-checked against actuals.</p>
+  <table class="results" style="margin-top:12px">
+    <thead><tr><th>Market</th><th>Lowest</th><th>Median</th><th>Highest</th><th>Co.3 P8</th><th>Position</th></tr></thead>
     <tbody>
-      <tr><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">USA Y-Std</td><td style="text-align:right;padding:5px 6px;border-bottom:1px solid #f0eee5"><b>$22</b></td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">g0 (clear)</td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">—</td></tr>
-      <tr><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">USA Y-DLx</td><td style="text-align:right;padding:5px 6px;border-bottom:1px solid #f0eee5"><b>$42–45</b></td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">g2</td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">Plant 1: 15–18k g2 Y-DLx</td></tr>
+      <tr><td>USA X-Std</td><td>$19 · Co.10</td><td>$30</td><td>$65 · Co.9</td><td class="muted">no plant</td><td>—</td></tr>
+      <tr><td>USA X-DLx</td><td>$31 · Co.17</td><td>$55</td><td>$66 · Co.10 (g3)</td><td class="muted">no plant</td><td>—</td></tr>
+      <tr><td>USA Y-Std</td><td>$28 · Co.13</td><td>$39</td><td>$51 · Co.8/10</td><td>$24</td><td>aggressive (cleared all)</td></tr>
+      <tr><td>USA Y-DLx</td><td>$38 · Co.13</td><td>$43</td><td>$50 · Co.5</td><td>$43</td><td>median</td></tr>
+      <tr><td>EUR X-Std</td><td>$25 · Co.2/13</td><td>$32</td><td>$56 · Co.10</td><td>$24</td><td>low (cleared g1)</td></tr>
+      <tr><td>EUR X-DLx</td><td>$33 · Co.17 (g1)</td><td>$40</td><td>$55 · Co.6 (g3)</td><td>$32</td><td>low</td></tr>
+      <tr><td>EUR Y-Std</td><td>$33 · Co.2</td><td>$44</td><td>$57 · Co.4</td><td>$38</td><td>low-mid (cleared g1)</td></tr>
+      <tr><td>EUR Y-DLx</td><td>$45 · Co.2</td><td>$51</td><td>$66 · Co.10</td><td>$47</td><td>low</td></tr>
+      <tr><td>JAP X-Std</td><td>$23 · Co.12</td><td>$33</td><td>$48 · Co.10</td><td>$32</td><td>median (g2)</td></tr>
+      <tr><td>JAP X-DLx</td><td>$33 · Co.17 (g1)</td><td>$40</td><td>$56 · Co.10</td><td class="muted">held for P9 g3</td><td>—</td></tr>
+      <tr><td>JAP Y-Std</td><td>$35 · Co.12</td><td>$44</td><td>$66 · Co.10</td><td>$31</td><td>aggressive (final import)</td></tr>
+      <tr><td>JAP Y-DLx</td><td>$44 · Co.7</td><td>$50</td><td>$54 · Co.6</td><td class="muted">no plant</td><td>—</td></tr>
     </tbody>
   </table>
-
-  <h5 style="font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-top:8px;margin-bottom:6px">🇪🇺 Europe</h5>
-  <table style="width:100%;font-size:13px;border-collapse:collapse;margin-bottom:14px">
-    <thead style="background:#faf8f1"><tr><th style="text-align:left;padding:6px;border-bottom:1px solid var(--border)">Cell</th><th style="text-align:right;padding:6px;border-bottom:1px solid var(--border)">Price</th><th style="text-align:left;padding:6px;border-bottom:1px solid var(--border)">Grade</th><th style="text-align:left;padding:6px;border-bottom:1px solid var(--border)">Production</th></tr></thead>
-    <tbody>
-      <tr><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">EUR X-Std</td><td style="text-align:right;padding:5px 6px;border-bottom:1px solid #f0eee5"><b>$24</b></td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">g1 (clear)</td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">EUR-X: 18–20k g2 X-DLx</td></tr>
-      <tr><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">EUR X-DLx</td><td style="text-align:right;padding:5px 6px;border-bottom:1px solid #f0eee5"><b>$34</b></td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">g2</td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">(no g3 — going g4 in P9)</td></tr>
-      <tr><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">EUR Y-Std</td><td style="text-align:right;padding:5px 6px;border-bottom:1px solid #f0eee5"><b>$34</b></td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">g1 (clear)</td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">EUR-Y: 15–18k g2 Y-DLx</td></tr>
-      <tr><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">EUR Y-DLx</td><td style="text-align:right;padding:5px 6px;border-bottom:1px solid #f0eee5"><b>$46</b></td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">g2</td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">—</td></tr>
-    </tbody>
-  </table>
-
-  <h5 style="font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-top:8px;margin-bottom:6px">🇯🇵 Japan</h5>
-  <table style="width:100%;font-size:13px;border-collapse:collapse;margin-bottom:14px">
-    <thead style="background:#faf8f1"><tr><th style="text-align:left;padding:6px;border-bottom:1px solid var(--border)">Cell</th><th style="text-align:right;padding:6px;border-bottom:1px solid var(--border)">Price</th><th style="text-align:left;padding:6px;border-bottom:1px solid var(--border)">Grade</th><th style="text-align:left;padding:6px;border-bottom:1px solid var(--border)">Production</th></tr></thead>
-    <tbody>
-      <tr><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">JAP X-Std</td><td style="text-align:right;padding:5px 6px;border-bottom:1px solid #f0eee5">$0 skip</td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">—</td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">Plant 1: 30k <b>g3 X-DLx</b> → P9 saleable</td></tr>
-      <tr><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">JAP X-DLx</td><td style="text-align:right;padding:5px 6px;border-bottom:1px solid #f0eee5"><b>$34</b></td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">g2</td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">Plant 2: 25k g2 X-DLx (reactivated)</td></tr>
-      <tr><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">JAP Y-Std</td><td style="text-align:right;padding:5px 6px;border-bottom:1px solid #f0eee5"><b>$30</b></td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">g0 (clear + exit)</td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">—</td></tr>
-      <tr><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">JAP Y-DLx</td><td style="text-align:right;padding:5px 6px;border-bottom:1px solid #f0eee5">$0 skip</td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">—</td><td style="padding:5px 6px;border-bottom:1px solid #f0eee5">No plant</td></tr>
-    </tbody>
-  </table>
-
-  <h5 style="font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.5px;margin-top:8px;margin-bottom:6px">🏛️ Bulletin + administrative actions</h5>
-  <ul style="padding-left:18px;font-size:13px;line-height:1.6">
-    <li><b>METI tender bid:</b> 15,000 units of X2 (g2) at <b>$29/u</b> — sealed envelope 1h before close. Drawn from our 55k g2 stock (30k P7 + 25k Plant 2).</li>
-    <li><b>METI plant bonus claim:</b> +$200k for JAP-X Plant 1 producing X3. Filed P9 via Grants Request to Administrator (blank paper, after P8 results confirm production). Plant 2 producing g2 doesn't qualify.</li>
-    <li><b>Sub→HQ repatriation:</b> clean execute, no declaration, no 7% tax (Doc 22 reversed Doc 17). Pull what HQ needs to fund R&amp;D + interest.</li>
-    <li><b>SC runoff:</b> refinance bulk of $2.54M supplier credit to area bank loans at the new SI 1.0% rate. Target SC under $1M by P9.</li>
-    <li><b>Bulletin signature × 6:</b> $60k bonus, same ritual as P7.</li>
-  </ul>
-
-  <h5 style="font-size:13px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.5px;margin-top:14px;margin-bottom:6px">❌ Passed on / not doing</h5>
-  <ul style="padding-left:18px;font-size:13px;line-height:1.6">
-    <li><b>Yakuza JAP insurance ($300k)</b> — saves cash; accept the ~20% disruption risk on JAP plants.</li>
-    <li><b>Industrial Restructuring (Plant 2 sale at 90% book)</b> — keep Plant 2 active for the second-product play (consumer + tender).</li>
-    <li><b>Cannes IFEAM Ad Gala</b> — ineligible (no Q6/Q7 ad spend).</li>
-    <li><b>China license auction</b> — ineligible (need 2 USA factories; we have 1).</li>
-  </ul>
-
-  <h5 style="font-size:13px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:0.5px;margin-top:14px;margin-bottom:6px">❓ Still open at team level</h5>
-  <ul style="padding-left:18px;font-size:13px;line-height:1.6">
-    <li><b>Y3 path</b> — in-house R&amp;D ($370k for ~50%, keeps Golden Band $500k eligibility) vs Clevers Y3 license ($400k guaranteed, forfeits Golden Band). Kavya brings recommendation before P8 lock.</li>
-    <li><b>Co.X auction</b> — $40k for the Tender Information Pack only if Billie + Jeongho commit to actually bidding.</li>
-  </ul>
-
-  <p class="muted" style="margin-top:14px;font-size:13px"><b>Looking ahead — EUR g4 leap:</b> P8 clears all g1 in EUR. P9: buy Clevers X4 license ($200k) + start g4 X production in EUR-X Plant. P10: EUR ships g4 X-DLx as premium product. Skip g3 entirely in EUR — JAP carries the g3 story for METI bonus.</p>
-</div>
-
-<div class="card">
-  <h3>Technology · us vs the field <span class="sub">our stack + where we stand</span></h3>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
-    <div style="background:var(--accent-soft);border:1px solid #b8caec;border-radius:8px;padding:14px 16px">
-      <h4 style="font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">X line</h4>
-      <table style="width:100%;font-size:14px;font-variant-numeric:tabular-nums">
-        <tr><td>X1</td><td style="text-align:right" class="pos">✓ patent in-house</td></tr>
-        <tr><td>X2</td><td style="text-align:right">✓ Clevers license</td></tr>
-        <tr><td><b>X3</b></td><td style="text-align:right" class="pos"><b>✓ patent in-house</b></td></tr>
-        <tr><td>X4</td><td style="text-align:right;color:var(--muted)">R&amp;D running</td></tr>
-      </table>
-    </div>
-    <div style="background:var(--green-soft);border:1px solid #b8d8b6;border-radius:8px;padding:14px 16px">
-      <h4 style="font-size:13px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Y line</h4>
-      <table style="width:100%;font-size:14px;font-variant-numeric:tabular-nums">
-        <tr><td>Y1</td><td style="text-align:right" class="pos">✓ patent in-house</td></tr>
-        <tr><td>Y2</td><td style="text-align:right">✓ Clevers license</td></tr>
-        <tr><td><b>Y3</b></td><td style="text-align:right;color:var(--red)"><b>open</b></td></tr>
-        <tr><td>Y3 path</td><td style="text-align:right;color:var(--muted)">in-house or $400k P8</td></tr>
-      </table>
-    </div>
-  </div>
   <div class="note">
-    <b>Field intent (P8 production plans, Co.1–15):</b> 12 of 13 plan g2 X · 11 of 13 plan g2 Y. None plan g3 — but plans don't reveal patents. We learn the real X3 field at P8 results.
+    <b>P8 pricing read:</b> EUR cells still under-priced vs median — EUR Y-DLx at $47 vs median $51 (Co.10 hit $66). EUR X-DLx at $32 vs median $40, Co.6 at $55 g3. <b>We left material margin on the table again.</b> JAP-Y Std at $31 was lowest in market but the play was an exit, not optimization. <b>USA-Y-Std at $24 cleared all 25k</b> — aggressive worked here.
+  </div>
+  <div class="note green">
+    <b>P9 pricing direction:</b> EUR Y-DLx → push to $50–52 (median $51), EUR X-DLx → $38–42 (median $40), JAP X-Std → $35–37 (we have 25k g2 left to clear). <b>JAP X-DLx debut at $48–55</b> for the 35k g3 batch (premium positioning available: Co.6 g3 $41 too cheap, Co.10 $56). USA-Y-DLx → lift to $45–48 to clear remaining g2.
   </div>
 </div>
 
 <div class="card">
-  <h3>Options to weigh <span class="sub">P8 decisions · click any to expand</span></h3>
+  <h3>Grade × price by line <span class="sub">P8 actuals · click any line to expand</span></h3>
+  <p class="lead" style="font-size:15px">Several competitors moved to g3 grade in EUR X-DLx and JAP X-DLx during P8 — Co.5, Co.6, Co.10. P9 will be a grade-3 cohort. Our differentiator: 35k JAP g3 batch ready, but EUR still g2.</p>
 
-  <h5 class="opt-group">💰 Cash on the table</h5>
-  <div class="bulletin-grid" style="margin-bottom:16px">
-    <details class="bullcard easy" open>
-      <summary>
-        <span class="ribbon" style="background:var(--green);color:white">File P8</span>
-        <h4>🥈 Ducal Academy — $300k</h4>
-        <div class="one-line">We have X3. One-page filing P8. Splits if others also claim.</div>
-      </summary>
-      <div class="detail">
-        <p>$300k against zero incremental cost. Kavya files.</p>
-      </div>
-    </details>
-    <details class="bullcard easy">
-      <summary>
-        <span class="ribbon">Prize · later</span>
-        <h4>🏆 Golden Band — $500k</h4>
-        <div class="one-line">First with BOTH X3 + Y3 patents (in-house). Y3 still open.</div>
-      </summary>
-      <div class="detail">
-        <p>X3 already locked. Y3 path decision in "Tech &amp; moat" below.</p>
-      </div>
-    </details>
-    <details class="bullcard easy">
-      <summary>
-        <span class="ribbon">Prize · JAP only</span>
-        <h4>🇯🇵 METI plant bonus — $200k per Japanese facility</h4>
-        <div class="one-line">JAP-X Plant 1 producing X3 in P8 = $200k. Works with license route, but timing-gated.</div>
-      </summary>
-      <div class="detail">
-        <p><b>Source:</b> Doc 17 p8 (originally Doc 15). <b>Rule:</b> $200k per manufacturing facility producing X3 or Y3 — only in the FIRST period of g3 manufacturing within the industry. Apply via <i>Grants Request</i> on blank paper to the Administrator, AFTER producing the g3 product.</p>
-        <p><b>What we can realistically claim:</b></p>
-        <ul style="padding-left:18px;font-size:13px">
-          <li><b>JAP-X Plant 1 → X3</b>: $200k if we set Plant 1 to produce X3 in P8 (we hold the X3 patent ✓).</li>
-          <li><b>JAP-X Plant 2 → X3</b>: another $200k only if we reactivate — directly conflicts with the Industrial Restructuring 90%-book sale option.</li>
-          <li><b>EUR / USA plants</b>: <span style="color:var(--red);font-weight:600">ineligible</span> — METI is the Japanese Ministry; the grant is for Japanese facilities.</li>
-          <li><b>Y3 from EUR / USA plants</b>: ineligible (no Japanese Y plant).</li>
-        </ul>
-        <p><b>Catch:</b> "first period in the industry" — if another Co produces X3 the same period, both qualify; in subsequent periods the window is closed for X3. P7 MARKET1 sheet showed no Co planning g3 production, but plans ≠ patents. Race condition.</p>
-      </div>
-    </details>
-  </div>
+  <div style="margin-top:16px">
 
-  <h5 class="opt-group">🧪 Tech &amp; moat</h5>
-  <div class="bulletin-grid" style="margin-bottom:16px">
-    <details class="bullcard decide">
+    <details class="matrix-line" open>
       <summary>
-        <span class="ribbon">Decide P8</span>
-        <h4>🧪 Y3 path — in-house vs license</h4>
-        <div class="one-line">In-house keeps Golden Band. Clevers Y3 now $400k (Doc 22 confirms list price).</div>
+        <span class="line-name">🇯🇵 JAP X-DLx</span>
+        <span class="line-stats">P8 sold: <b>11 cos</b> · median <b>$40</b> · range <b>$33–56</b></span>
+        <span class="ours-tag">us: held g3 35k for P9</span>
       </summary>
-      <div class="detail">
-        <p><b>In-house ($370k+):</b> probabilistic R&amp;D outcome, keeps Golden Band ($500k) + Ducal Y3 share. Total upside up to +$800k.</p>
-        <p><b>Clevers $400k:</b> guaranteed g3 capability, forfeits Golden Band + Ducal. Only METI plant bonuses (~$400k upside).</p>
-        <p><b>Math:</b> in-house wins on EV — the $30k extra spend buys 2 prize tracks. Kavya brings go/no-go before P8 lock.</p>
+      <div class="body">
+        <table class="matrix-tbl">
+          <thead><tr><th>Company</th><th>P8 grade sold</th><th>P8 price</th></tr></thead>
+          <tbody>
+            <tr><td class="co">Co.17</td><td class="grade"><span class="grade-chip g1">grade 1</span></td><td class="price">$33</td></tr>
+            <tr><td class="co">Co.12</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">$34</td></tr>
+            <tr><td class="co">Co.7</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">$36</td></tr>
+            <tr><td class="co">Co.2</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">$38</td></tr>
+            <tr><td class="co">Co.11</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">$40</td></tr>
+            <tr><td class="co">Co.6</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">$41</td></tr>
+            <tr><td class="co">Co.4</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">$50</td></tr>
+            <tr><td class="co">Co.5</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">$50</td></tr>
+            <tr><td class="co">Co.10</td><td class="grade"><span class="grade-chip g2">grade 2</span></td><td class="price">$56 <small style="color:var(--muted)">(premium)</small></td></tr>
+            <tr><td colspan="3" class="matrix-divider"></td></tr>
+            <tr class="ours"><td class="co">Co.3 (us)</td><td class="grade"><span style="background:var(--accent);color:white;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700">P9 grade 3 ★</span></td><td class="price">35k saleable P9</td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:10px;font-size:13px"><b>P8 read + P9 direction:</b> g2 cluster $34–56 wide. We held back the 35k g3 batch for P9 (N+1 rule). <b>P9 debut at $48–55</b> — Co.10 already taking $56 at g2; we should command parity-plus with a true grade-3 product. With ad support and METI plant bonus claim, this is the biggest single bet for P9.</p>
       </div>
     </details>
-  </div>
 
-  <h5 class="opt-group">🇯🇵 Japan plant strategy <small style="color:var(--muted);font-weight:500;text-transform:none;letter-spacing:0">— restructuring vs METI tender are mutually exclusive</small></h5>
-  <div class="bulletin-grid" style="margin-bottom:16px">
-    <details class="bullcard decide" open>
+    <details class="matrix-line">
       <summary>
-        <span class="ribbon">Decide P8</span>
-        <h4>🏭 Industrial Restructuring — sell JAP-X P2 at 90% book</h4>
-        <div class="one-line">Doc 22 THIS QUARTER ONLY. Frees $267k/qtr fixed cost + cash. But makes us ineligible for the METI tender.</div>
+        <span class="line-name">🇪🇺 EUR X-DLx</span>
+        <span class="line-stats">P8 sold: <b>11 cos</b> · median <b>$40</b> · range <b>$32–55</b></span>
+        <span class="ours-tag">us: $32 g2 · 20k sold</span>
       </summary>
-      <div class="detail">
-        <p>New one-period program: sell idle productive assets at <b>90% of book value</b>. JAP-X P2 (idle since P6, $267k/qtr) is the candidate. Request "Dismantling a Used Plant" 30 min before close.</p>
-        <p><b>Trap:</b> METI Japan X tender needs ≥2 JAP factories. Sell P2 → drop to 1 plant → ineligible for the tender below.</p>
+      <div class="body">
+        <table class="matrix-tbl">
+          <thead><tr><th>Company</th><th>P8 grade sold</th><th>P8 price</th></tr></thead>
+          <tbody>
+            <tr class="ours"><td class="co">Co.3 (us)</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$32 <small style="color:var(--muted)">(under-priced)</small></td></tr>
+            <tr><td class="co">Co.17</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$33</td></tr>
+            <tr><td class="co">Co.7</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$36</td></tr>
+            <tr><td class="co">Co.16</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$36</td></tr>
+            <tr><td class="co">Co.2</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$37</td></tr>
+            <tr><td class="co">Co.12</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$38</td></tr>
+            <tr><td class="co">Co.15</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$38</td></tr>
+            <tr><td class="co">Co.9</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$39</td></tr>
+            <tr><td class="co">Co.13</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$40</td></tr>
+            <tr><td class="co">Co.5</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$45</td></tr>
+            <tr><td class="co">Co.4</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$48</td></tr>
+            <tr><td class="co">Co.6</td><td><span style="background:var(--accent);color:white;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700">grade 3 ★</span></td><td class="price">$55 <small style="color:var(--muted)">(g3 premium)</small></td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:10px;font-size:13px"><b>P8 read + P9 direction:</b> <b>we sat at the bottom of the g2 cluster again at $32</b> — left $8/u on the table vs median. Co.6 already landed g3 at $55. <b>P9 lift to $38–42 on our g2 stock</b>. Decision pair: license Clevers X4 ($200k Doc 23) to leapfrog to g4 in P10, or hold g2 + push pricing. With <b>10 competitors planning g3 EUR-X-DLx in P9</b> (per MARKET1 row 40+), we'll be alone at g2 unless we license up.</p>
       </div>
     </details>
-    <details class="bullcard decide" open>
-      <summary>
-        <span class="ribbon">Decide P8</span>
-        <h4>🇯🇵 METI Japan X tender — 200k units X2/X3</h4>
-        <div class="one-line">Max 50k per Co · $10k entry per offer · sealed bid 1h before close. Need ≥2 JAP plants ✓ if we DON'T sell.</div>
-      </summary>
-      <div class="detail">
-        <p>Lots of 5,000. Tech adjust $5/grade (comparison only). We have 30k JAP X-DLx g2 in inventory + Plant 1 cap for new production. If we hold X3 in JAP production for P8, an X3 bid at moderate price could win a 50k slot.</p>
-        <p><b>Pick one:</b> sell P2 for cash + drop fixed cost, OR keep P2 and try to win the tender slot. Coordinate Febby + Billie + Satoshi before P8 lock.</p>
-      </div>
-    </details>
-    <details class="bullcard decide">
-      <summary>
-        <span class="ribbon">Decide P8</span>
-        <h4>🛡️ Yakuza JAP insurance — $300k</h4>
-        <div class="one-line">Covers 100% JAP output against raw-material disruption. Without it, ~20% haircut.</div>
-      </summary>
-      <div class="detail">
-        <p>Doc 22 warns of raw-material / labor shortage hitting EUR + JAP output (unless insured). $300k payable to Co.1 guarantees full JAP capacity for the quarter.</p>
-        <p><b>Borderline at current scale:</b> 20% haircut on Plant 1's 30k = 6k units at ~$30 = ~$180k revenue at risk. <b>Trigger:</b> if we bid METI tender (need to deliver), the insurance is what makes the bid credible.</p>
-      </div>
-    </details>
-    <details class="bullcard decide">
-      <summary>
-        <span class="ribbon">Decide P8</span>
-        <h4>🏭 Outsource Y for JAP via EUR?</h4>
-        <div class="one-line">EUR-produced Y → ship to JAP, vs USA imports at $1/u. Export quotas abolished now.</div>
-      </summary>
-      <div class="detail">
-        <p>P7: JAP-Y took −$46k importing USA Y-Std at $1/u. Doc 22 abolished the JAP export-quota registration → EUR→JAP shipping unrestricted.</p>
-        <p><b>Trade-off:</b> EUR at 100% utilization in P7. Diverting Y to JAP = cut EUR consumer sales OR raise prices in EUR. <b>Owner:</b> Satoshi + Febby.</p>
-      </div>
-    </details>
-  </div>
 
-  <h5 class="opt-group">💼 Strategic M&amp;A</h5>
-  <div class="bulletin-grid" style="margin-bottom:16px">
-    <details class="bullcard decide">
+    <details class="matrix-line">
       <summary>
-        <span class="ribbon">Decide P8</span>
-        <h4>💼 Co.X auction — $40k for Tender Information Pack</h4>
-        <div class="one-line">Russian-oligarch-owned Co.X being broken up. Assets sold at 80% book. P8 + P9 windows.</div>
+        <span class="line-name">🇪🇺 EUR Y-DLx</span>
+        <span class="line-stats">P8 sold: <b>12 cos</b> · median <b>$51</b> · range <b>$45–66</b></span>
+        <span class="ours-tag">us: $47 g2 · 15k sold</span>
       </summary>
-      <div class="detail">
-        <p>Liechtenstein + WTO + US intervention. Co.1 claimed in court. The encrypted tender pack file (<code>SIMP07CoX.xlsx</code>) is already with us — decodes once Co.1 receives the $40k.</p>
-        <p><b>What could be useful for Co.3:</b> a JAP-Y plant (we have none), an EUR factory at a discount, USA-Y capacity to backstop our single plant. <b>Only pay $40k if Billie + Jeongho commit to actually bid.</b> Otherwise sunk.</p>
+      <div class="body">
+        <table class="matrix-tbl">
+          <thead><tr><th>Company</th><th>P8 grade sold</th><th>P8 price</th></tr></thead>
+          <tbody>
+            <tr><td class="co">Co.2</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$45</td></tr>
+            <tr class="ours"><td class="co">Co.3 (us)</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$47</td></tr>
+            <tr><td class="co">Co.12</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$47</td></tr>
+            <tr><td class="co">Co.13</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$50</td></tr>
+            <tr><td class="co">Co.14</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$50</td></tr>
+            <tr><td class="co">Co.16</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$50</td></tr>
+            <tr><td class="co">Co.11</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$51</td></tr>
+            <tr><td class="co">Co.5</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$52</td></tr>
+            <tr><td class="co">Co.7</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$52</td></tr>
+            <tr><td class="co">Co.17</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$52</td></tr>
+            <tr><td class="co">Co.8</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$61</td></tr>
+            <tr><td class="co">Co.6</td><td><span style="background:var(--accent);color:white;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700">grade 3 ★</span></td><td class="price">$56 <small style="color:var(--muted)">(g3)</small></td></tr>
+            <tr><td class="co">Co.10</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$66 <small style="color:var(--muted)">(outlier)</small></td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:10px;font-size:13px"><b>P8 read + P9 direction:</b> we sat at $47 vs median $51 — left $4/u. Co.8 at $61 and Co.10 at $66 show the ceiling is at least $55. <b>P9 lift to $50–53</b> on our 26k g2 stock + new production. Watch the EU Y tender bid sizing — our retail price now anchors the max-allowed tender bid.</p>
       </div>
     </details>
-  </div>
 
-  <h5 class="opt-group">🏭 Operations baseline</h5>
-  <div class="bulletin-grid">
-    <details class="bullcard watch" open>
+    <details class="matrix-line">
       <summary>
-        <span class="ribbon">Plant call · P8 confirmed</span>
-        <h4>🏗️ USA-Y P1 — clear both inventories in parallel</h4>
-        <div class="one-line">Sell g0 Y-Std at $22 (test) + g2 Y-DLx at $42–45. No g3 attempt — we don't hold Y3.</div>
+        <span class="line-name">🇪🇺 EUR Y-Std</span>
+        <span class="line-stats">P8 sold: <b>16 cos</b> · median <b>$44</b> · range <b>$33–57</b></span>
+        <span class="ours-tag">us: $38 g1 · 15k cleared</span>
       </summary>
-      <div class="detail">
-        <p><b>P8 plan:</b> Plant 1 sells both stranded grades simultaneously — different slots, no rule conflict, 2 grades of Y in USA (g0 + g2) stays at the cap.</p>
-        <ul style="padding-left:18px;font-size:13px">
-          <li><b>USA Y-Std slot</b> → 25k g0 at $22 (aggressive g0 test below the P7 market low of $27). If buyers take g0 → margin-positive vs ~$20 cost basis. If they don't → engine just doesn't sell, no penalty.</li>
-          <li><b>USA Y-DLx slot</b> → 24k g2 at $42–45. Existing batch, N+1 already cleared, ready for revenue.</li>
-        </ul>
-        <p><b>Why no g3:</b> we don't hold Y3 patent or license. Acquiring Y3 in P8 (Clevers $400k) would forfeit Golden Band $500k eligibility, give no METI bonus (USA isn't Japanese), and the g3 batch wouldn't sell until P9 anyway (N+1). Cleaner: keep USA-Y producing more g2 to back up the DLx slot if needed; revisit Y3 once the path (in-house vs license) is settled in Section 05.</p>
+      <div class="body">
+        <table class="matrix-tbl">
+          <thead><tr><th>Company</th><th>P8 grade sold</th><th>P8 price</th></tr></thead>
+          <tbody>
+            <tr><td class="co">Co.2</td><td><span class="grade-chip g0">—</span></td><td class="price">$33</td></tr>
+            <tr><td class="co">Co.13</td><td><span class="grade-chip g0">—</span></td><td class="price">$37</td></tr>
+            <tr class="ours"><td class="co">Co.3 (us)</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$38 <small style="color:var(--muted)">(engine adj. from $34 plan)</small></td></tr>
+            <tr><td class="co">Co.12</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$40</td></tr>
+            <tr><td class="co">Co.15</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$42</td></tr>
+            <tr><td class="co">Co.11</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$43</td></tr>
+            <tr><td class="co">Co.14</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$43</td></tr>
+            <tr><td class="co">Co.16</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$44</td></tr>
+            <tr><td class="co">Co.17</td><td><span class="grade-chip g0">—</span></td><td class="price">$44</td></tr>
+            <tr><td class="co">Co.5</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$45</td></tr>
+            <tr><td class="co">Co.7</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$45</td></tr>
+            <tr><td class="co">Co.6</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$46</td></tr>
+            <tr><td class="co">Co.10</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$49</td></tr>
+            <tr><td class="co">Co.8</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$50</td></tr>
+            <tr><td class="co">Co.9</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$50</td></tr>
+            <tr><td class="co">Co.4</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$57 <small style="color:var(--muted)">(outlier)</small></td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:10px;font-size:13px"><b>P8 read + P9 direction:</b> we sold at $38 (engine adjusted up from our $34 plan) — still well below median $44. Engine's pricing flexibility was unexpected; check our submission file vs the result. <b>P9: lift to $42–44</b> if we have g1 stock left, or shift the Std cell to g2 if production allowed.</p>
       </div>
     </details>
-    <details class="bullcard skip">
+
+    <details class="matrix-line">
       <summary>
-        <span class="ribbon">Off-doctrine</span>
-        <h4>💰 Sell USA-Y P1 at book?</h4>
-        <div class="one-line">Doctrine: no. Math: revisit once Y3 path is set.</div>
+        <span class="line-name">🇺🇸 USA Y-DLx</span>
+        <span class="line-stats">P8 sold: <b>9 cos</b> · median <b>$43</b> · range <b>$38–50</b></span>
+        <span class="ours-tag">us: $43 g2 · 17k of 24k sold</span>
       </summary>
-      <div class="detail">
-        <p>USA-Y P1 net book ~$472.5k. The 24k g2 batch alone is worth ~$1M revenue at $42–45 — selling the plant forfeits that.</p>
+      <div class="body">
+        <table class="matrix-tbl">
+          <thead><tr><th>Company</th><th>P8 grade sold</th><th>P8 price</th></tr></thead>
+          <tbody>
+            <tr><td class="co">Co.13</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$38</td></tr>
+            <tr><td class="co">Co.2</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$40</td></tr>
+            <tr><td class="co">Co.17</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$42</td></tr>
+            <tr class="ours"><td class="co">Co.3 (us)</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$43</td></tr>
+            <tr><td class="co">Co.9</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$43</td></tr>
+            <tr><td class="co">Co.12</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$43</td></tr>
+            <tr><td class="co">Co.7</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$48</td></tr>
+            <tr><td class="co">Co.6</td><td><span style="background:var(--accent);color:white;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700">grade 3 ★</span></td><td class="price">$48</td></tr>
+            <tr><td class="co">Co.5</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$50</td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:10px;font-size:13px"><b>P8 read + P9 direction:</b> we landed at median g2 ($43) but only cleared 71% (17k of 24k). Co.6 g3 at $48 and Co.5/7 at $48-50 suggest the ceiling has $5 more room. <b>P9: lift to $45–48</b> on remaining g2 stock — clearing volume matters more than maximizing per-unit since USA-Y is bleeding −$60k operating.</p>
       </div>
     </details>
+
+    <details class="matrix-line">
+      <summary>
+        <span class="line-name">🇯🇵 JAP X-Std</span>
+        <span class="line-stats">P8 sold: <b>15 cos</b> · median <b>$33</b> · range <b>$23–48</b></span>
+        <span class="ours-tag">us: $32 g2 · 15k consumer + 15k METI</span>
+      </summary>
+      <div class="body">
+        <table class="matrix-tbl">
+          <thead><tr><th>Company</th><th>P8 grade sold</th><th>P8 price</th></tr></thead>
+          <tbody>
+            <tr><td class="co">Co.12</td><td><span class="grade-chip g0">—</span></td><td class="price">$23</td></tr>
+            <tr><td class="co">Co.17</td><td><span class="grade-chip g0">—</span></td><td class="price">$27</td></tr>
+            <tr><td class="co">Co.14</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$30</td></tr>
+            <tr><td class="co">Co.11</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$31</td></tr>
+            <tr><td class="co">Co.6</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$31</td></tr>
+            <tr><td class="co">Co.7</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$31</td></tr>
+            <tr class="ours"><td class="co">Co.3 (us)</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$32</td></tr>
+            <tr><td class="co">Co.2</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$33</td></tr>
+            <tr><td class="co">Co.9</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$34</td></tr>
+            <tr><td class="co">Co.16</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$35</td></tr>
+            <tr><td class="co">Co.15</td><td><span style="background:var(--accent);color:white;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700">grade 3 ★</span></td><td class="price">$34 <small style="color:var(--muted)">(g3 underpriced)</small></td></tr>
+            <tr><td class="co">Co.13</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$38</td></tr>
+            <tr><td class="co">Co.4</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$40</td></tr>
+            <tr><td class="co">Co.5</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$40</td></tr>
+            <tr><td class="co">Co.8</td><td><span class="grade-chip g2">grade 2</span></td><td class="price">$42</td></tr>
+            <tr><td class="co">Co.10</td><td><span class="grade-chip g1">grade 1</span></td><td class="price">$48</td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:10px;font-size:13px"><b>P8 read + P9 direction:</b> METI tender went at $29 industrial — accepted. Consumer at $32 g2 cleared 15k. We have 25k g2 left for P9. <b>P9: lift to $34–37 on remaining g2 stock</b> — Co.8 g2 at $42 shows the ceiling.</p>
+      </div>
+    </details>
+
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     ⑥ BULLETIN OPPORTUNITIES (Doc 17)
+     ⑤ BULLETIN OPPORTUNITIES (Doc 23 / P9)
      ═══════════════════════════════════════════════════════════ -->
 <div class="section">
-  <span class="num">06</span>
+  <span class="num">05</span>
   <h2>Bulletin opportunities</h2>
   <span class="tag">click any card to expand</span>
 </div>
 
 <div class="card">
-  <h3>P8 — bulletin items <span class="sub">Doc 22 · landed 2026-05-21</span></h3>
+  <h3>P9 — bulletin items <span class="sub">Doc 23 · landed 2026-05-26</span></h3>
   <div class="bulletin-grid">
 
-    <details class="bullcard easy" open>
+    <details class="bullcard must-do" open>
       <summary>
-        <span class="ribbon">Easy / win</span>
-        <h4>✅ Sub→HQ — declaration + 7% tax DROPPED</h4>
-        <div class="one-line">Doc 22 reverses Doc 17. Our P7 blocker is gone — repatriate clean.</div>
+        <span class="ribbon" style="background:var(--red);color:white">Must do</span>
+        <h4>📦 Door-to-Door Service — apply with $100k bet</h4>
+        <div class="one-line">IFEAM industry subsidy. Tiered cost trap: non-applicants pay MORE in 4 of 5 outcomes. File "Payment to Co.1" 1h before close.</div>
       </summary>
       <div class="detail">
-        <p>Doc 22 explicitly: <i>"previously required transfer declaration is no longer required. Accordingly, the different Governments have dropped the 7% taxing applied to transfers to the Home Office."</i> Russian-funds restriction stays — doesn't affect us.</p>
-        <p><b>What this unblocks:</b> in the P8 .xls, sub→HQ row-21 negatives go through without paperwork and without tax. The $1.8M that got stuck in P7 can flow back to fund R&amp;D + Clevers + interest. Supplier credit runoff becomes a clean execute.</p>
+        <p>IFEAM-contracted "door-to-door" delivery service designed to <b>protect demand for Chips and Boards</b> from war-induced disruption. Failure to apply triggers explicit warning: <i>"Serious risk of further collapse in demand / sales for this period expected in major SIM markets."</i></p>
+        <p><b>Fee schedule</b> (final tier confirmed minutes before deadline):</p>
+        <ul style="padding-left:18px;font-size:13px">
+          <li><b>5+ applicants:</b> ALL cos pay $200k each</li>
+          <li><b>4 applicants:</b> applying $120k, non-applicants $200k</li>
+          <li><b>3 applicants:</b> applying $100k, rest not charged</li>
+          <li><b>1–2 applicants:</b> applying $100k, non-applicants $250k</li>
+          <li><b>No applicants:</b> demand collapse risk in major markets</li>
+        </ul>
+        <p><b>Co.3 read:</b> applying is the dominant strategy. In <b>4 of 5 outcomes the non-applicants pay more than applicants</b>. Floor cost of applying $100k; floor cost of not applying $200k (and only if 5+ apply, otherwise $250k). File as a <b>Payment to Co.1</b> for $200k (auto-adjusts down if tier resolves lower) — +100% surcharge if filed wrong.</p>
       </div>
     </details>
 
-    <details class="bullcard easy">
+    <details class="bullcard decide" open>
       <summary>
-        <span class="ribbon">Easy / win</span>
-        <h4>📉 Securities rate cut to 1.0%</h4>
-        <div class="one-line">Was 2% in P7. Bank-loan cost drops materially next period.</div>
+        <span class="ribbon">Decide</span>
+        <h4>🇪🇺 EU Y-product Tender — 250k Y2 + 250k Y3</h4>
+        <div class="one-line">Lots of 10k · max 100k per Co · EU origin · $20k fee per offer · we have 2 EUR plants ✓</div>
       </summary>
       <div class="detail">
-        <p>New ministry team replaced Duke E.C. Komysigo. Latest bond auction set Securities Interests to 1.0%. ST/LT bank loan spreads ride on top — Jeongho to re-cost the loan stack vs supplier credit. Combined with JAP BoJ rate 0.20% (up from 0.15%) + WCR raised to 95%.</p>
-      </div>
-    </details>
-
-    <details class="bullcard easy">
-      <summary>
-        <span class="ribbon">Continues</span>
-        <h4>✍️ Sign the bulletin — $60k bonus</h4>
-        <div class="one-line">6 managers × $10k. Re-collect signatures for P8.</div>
-      </summary>
-      <div class="detail">
-        <p>Same ritual as P7 — each manager submits the "I declare I have read this bulletin" page before the .xls deadline. Net $60k for the team.</p>
+        <p>EU Commission centralizes Y purchases for the 27 partner governments to keep European chip manufacturers competitive in the AI race. Origin must be Area 2 (Europe, excl. Russia/Belarus). Companies with ≥2 EU facilities (we qualify: 1 EUR-X + 1 EUR-Y) <b>can also supply from abroad</b>.</p>
+        <ul style="padding-left:18px;font-size:13px">
+          <li><b>Volume:</b> 250,000 Y2 + 250,000 Y3 · lots of 10,000 · max 100,000 per Co</li>
+          <li><b>Bid fee:</b> $20,000 per offer (Intercompany payment to Co.1)</li>
+          <li><b>Anti-cherry:</b> EU may declare bid null if our offered price &gt; retail price in same market</li>
+          <li><b>Alternative-grade offer:</b> can offer different grade with "substantial discount" up to 20k non-tendered units</li>
+          <li><b>Deadline:</b> 1 hour before P9 decision closing</li>
+        </ul>
+        <p><b>Co.3 sizing (post P8):</b> EUR-Y plant capacity 30k/qtr. <b>26k g2 in EUR-Y inventory</b> at P8 close. Y3 in-house R&amp;D did NOT deliver in P8 (max Y grade still 2) — so Y3 means buying Clevers Y3 $350k license. <b>Realistic bid:</b> 30–50k Y2 g2 (drawing from inventory + new production) at $42–45 (defensible discount vs our P9 retail $50+); <b>optionally</b> add a 10–20k alternative Y3 slot if we take the $350k Clevers Y3 license. Roberto + Satoshi + Kavya to size before lock.</p>
       </div>
     </details>
 
     <details class="bullcard must-do" open>
       <summary>
         <span class="ribbon" style="background:var(--red);color:white">Must know</span>
-        <h4>❌ EU labor subsidy — PROGRAM ENDED</h4>
-        <div class="one-line">"EU subsidies for European based factories come to an end." −$200k/qtr vs P7.</div>
+        <h4>🏛️ New Liechtenstein government — 5 changes hit HQ</h4>
+        <div class="one-line">Tax 10% · Bonds 1.5% · ST loans 1.25% · HQ floor $250k · HQ→sub transfers 7% tax</div>
       </summary>
       <div class="detail">
-        <p>The $200k/qtr we filed at the EU administrator in P5–P7 is over. Doc 22 lists it as part of the G7 / EU-USA trade reset (alongside EU corp tax cut to 31% and 50% tariff reduction with USA).</p>
-        <p><b>Cash impact:</b> remove $200k from the P8+ HQ inflow plan. The EUR sub no longer gets that windfall.</p>
+        <p>President Klaus Aushterritaten replaces Duke E.C. Komysigo. Doc 23 spells out:</p>
+        <ul style="padding-left:18px;font-size:13px">
+          <li><b>Corporate/Income Tax: 10%</b> (was 0%) — HQ Liechtenstein-based earnings now taxed</li>
+          <li><b>Securities (Bonds): 1.5%/qtr</b> (was 1.0% in Doc 22)</li>
+          <li><b>Short-Term Loans: 1.25%/qtr</b></li>
+          <li><b>HQ cash floor: $250,000</b> (up from $100k) — minimum cash balance</li>
+          <li><b>Money transfer tax: 7% on Liechtenstein → other country</b> — i.e. HQ → sub direction now taxed (sub → HQ remains free per Doc 22)</li>
+          <li>Recycling incentives maintained</li>
+        </ul>
+        <p><b>Reads:</b> (1) Holding excess cash at HQ now costs 10% tax annually — repatriating from subs and parking it has a cost. (2) HQ → sub transfers cost 7% — so funding subs by transfers is now expensive; better to fund via local sub loans where possible. (3) The $250k HQ floor is 2.5× higher — need a wider buffer above it.</p>
       </div>
     </details>
 
-    <details class="bullcard must-do">
+    <details class="bullcard easy">
       <summary>
-        <span class="ribbon" style="background:var(--red);color:white">Must know</span>
-        <h4>⚠️ Variable costs +10% &amp; EU corp tax 31%</h4>
-        <div class="one-line">Inflation pass-through on every factory · EUR sub income taxed at the new rate.</div>
+        <span class="ribbon">Continues</span>
+        <h4>✍️ Sign the bulletin — $60k bonus (assumed)</h4>
+        <div class="one-line">6 managers × $10k. Same ritual as P7/P8; not explicitly re-confirmed in Doc 23 — file anyway.</div>
       </summary>
       <div class="detail">
-        <p>All 4 plants get a +10% bump in per-unit variable cost. Our P7 cost assumptions are no longer the right floor for pricing. EUR P&amp;L projections need the new 31% tax rate. Arthur de Big offers a free updated Production Optimum study to anyone with an original (outdated) one — Febby pulls it.</p>
+        <p>Doc 23 doesn't re-list the signature bonus, but it's been a standing item since Doc 17. Default: every director signs and files before the P9 .xls deadline. Net $60k if it still applies; zero cost if not.</p>
       </div>
     </details>
 
-    <details class="bullcard must-do">
+    <details class="bullcard decide" open>
       <summary>
-        <span class="ribbon" style="background:var(--red);color:white">Must know</span>
-        <h4>⚠️ Raw materials shortage — EUR &amp; JAP output at risk</h4>
-        <div class="one-line">Without "Cosa Nostra" / Yakuza insurance, plants take ~20% output haircut.</div>
+        <span class="ribbon">Decide</span>
+        <h4>📐 Clevers refresh — Y2 down to $150k · X4 NEW $200k · Y4 NEW $800k</h4>
+        <div class="one-line">X3 $300k available · Y3 $350k available · X4 cheap, Y4 expensive (asymmetric)</div>
       </summary>
       <div class="detail">
-        <p>Doc 22 states tight supply on raw materials and personnel will reduce output in EU and JAP facilities — except for companies under Cosa Nostra (EUR) / Yakuza Services (JAP) insurance. USA unaffected. Without coverage, expect ~20% capacity haircut on EUR and JAP plants.</p>
-        <p>Trigger to take the Yakuza $300k insurance decision in Section 05 seriously.</p>
+        <p>Doc 23 Clevers price card:</p>
+        <ul style="padding-left:18px;font-size:13px">
+          <li>Chips X: g2 $100k · g3 $300k · <b>g4 $200k NEW</b> · g5 $998k under study</li>
+          <li>Boards Y: g2 $150k · g3 $350k · <b>g4 $800k NEW</b> · g5 $851k under study</li>
+        </ul>
+        <p><b>Surprise pricing on X4:</b> at $200k it's <b>cheaper than X3 license ($300k)</b> — Clevers wants the X4 cluster filled. Y4 stays expensive at $800k.</p>
+        <p><b>Strategic read:</b> consistent with our pre-P8 plan to <b>skip g3 X and jump g2→g4 in EUR</b>. X4 license $200k is the cheapest path to a grade-4 product. <b>BUT</b> in-house R&amp;D X3 was confirmed in our P7 INFO — license-purchased X4 forfeits Ducal/Golden Band, while in-house X3 path keeps prize eligibility. <b>Decision: license route gives speed, in-house route gives prizes.</b> Kavya + Roberto to re-time the bet given P8 results.</p>
+        <p><b>Y4 at $800k</b> = uneconomic vs in-house. Y3 license at $350k is the realistic Y upgrade lever this period if our Y3 R&amp;D pipeline isn't ready.</p>
+      </div>
+    </details>
+
+    <details class="bullcard decide">
+      <summary>
+        <span class="ribbon">Decide</span>
+        <h4>🏷️ Administrator buyback — 90% of book for grade 0/1 inventory</h4>
+        <div class="one-line">Locally produced only · first 4 cos / first 200k units · $3k fee per order · payable to Co.1</div>
+      </summary>
+      <div class="detail">
+        <p>Administrator exceptionally buys excess stock at 90% of variable cost (locally produced) / 70% (imported). Only grades 0 or 1. Includes shipping spec ("origin, product X/Y, grade, classification STD/DLX, volume and resulting price" — example: USA X0 STD 10000 $20").</p>
+        <p><b>Co.3 candidates (post P8 inventory, locally produced grade 0/1 only):</b></p>
+        <ul style="padding-left:18px;font-size:13px">
+          <li><b>Eligible only if at grade 0 or 1.</b> Per P8 INFO sheet, our ending inventory is ALL at grade 2 or 3 — nothing qualifies for buyback under the locally-produced + grade-0/1 rule.</li>
+          <li>The 30,927 USA-Y-Std at P8 close is recategorized DLx production (g2) — not g0 or g1.</li>
+          <li>EUR-X-Std + EUR-Y-Std at P8 close are 31k + 26k <b>g2</b> stocks — also disqualifying.</li>
+        </ul>
+        <p><b>Conclusion:</b> nothing buyback-eligible this period — skip the program. Re-evaluate only if engine recategorizes inventory to lower grade in P9.</p>
+      </div>
+    </details>
+
+    <details class="bullcard decide">
+      <summary>
+        <span class="ribbon">Decide</span>
+        <h4>📜 ISO 9000 certification — $15k via Arthur de Big</h4>
+        <div class="one-line">Cheap, 2-yr valid, required for ISO 14000 later. Triggers Ducal Quality Prize $150k.</div>
+      </summary>
+      <div class="detail">
+        <p>Arthur de Big now offers ISO 9000 cert at <b>$15,000 flat</b> (payable to Co.1). Requires all our quarterly decision .xls, results .xls, Doc 12, Doc 14, and McKinsey/BCG analysis — shown on laptop is acceptable. <b>Co.3 has all of this already</b> from our portfolio analysis prep.</p>
+        <p>2-year valid. Required as the first step to ISO 14000 (environmental) certification later.</p>
+        <p><b>Decision pair:</b> ISO 9000 only matters if it unlocks the <b>Ducal Quality Prize ($150k)</b> — first 4 cos per subindustry, validated by AdB. Two cos already claimed; funds still available. <b>$15k cost → $150k prize = 10× ROI</b> if we're in the first-4 window. <b>File it.</b></p>
+      </div>
+    </details>
+
+    <details class="bullcard easy">
+      <summary>
+        <span class="ribbon">Easy / win</span>
+        <h4>🏆 Ducal Quality Prize — $150k</h4>
+        <div class="one-line">First 4 cos per subindustry achieving quality certs validated locally. Pair with ISO 9000.</div>
+      </summary>
+      <div class="detail">
+        <p>Herzogliche Stiftung für Management-Qualitätssicherung (Ducal Foundation for Management Quality Assurance) offers $150k for the first 4 cos per subindustry to achieve a validated quality certificate. Two cos already won in Q2. Funds still available; no expiration set.</p>
+        <p>AdB is the certified local consultant. Path: pay $15k for ISO 9000 → AdB validates → file Quality Prize request → $150k credited.</p>
       </div>
     </details>
 
     <details class="bullcard watch">
       <summary>
         <span class="ribbon">Watch</span>
-        <h4>📐 Clevers price card refresh</h4>
-        <div class="one-line">Y2 now $180k (was $300k surprise). X3 $350k NEW · Y3 $400k NEW · X4/Y4 from P9.</div>
+        <h4>📈 Input prices up another 5–8% across the board</h4>
+        <div class="one-line">Doc 23 indicator table: Inputs X 108/107/108 · Inputs Y 106/106/105. Second wave on top of Doc 22 +10%.</div>
       </summary>
       <div class="detail">
-        <p>Chips X: g2 $150k · <b>g3 $350k NEW</b> · g4 $200k from P9 · g5 under study. Boards Y: g2 $180k · <b>g3 $400k NEW</b> · g4 $800k from P9 · g5 under study. We hold X2 + Y2 already. The Y3 in-house-vs-license decision lives in §05; Industrial Restructuring + Co.X auction decisions also live there.</p>
+        <p>Doc 23's Economic Indicators table shows input price index P7→P8:</p>
+        <ul style="padding-left:18px;font-size:13px">
+          <li><b>Inputs X:</b> USA 101→108, EUR 102→107, JAP 103→108</li>
+          <li><b>Inputs Y:</b> USA 99→106, EUR 98→106, JAP 97→105</li>
+        </ul>
+        <p>That's roughly <b>+5–8 index points</b> on top of Doc 22's already-warned +10% var-cost shift. Margin defence: every cell needs another pricing pass upward, or we're walking margin backwards quarter by quarter.</p>
+        <p>Counter-signals: <b>Business cycle up everywhere</b> (USA 100→103, EUR 101→105, JAP 101→103) and <b>price level up everywhere</b> too (USA 103, EUR 105, JAP 103) — demand and tolerance for higher prices are both present.</p>
       </div>
     </details>
 
     <details class="bullcard watch">
       <summary>
         <span class="ribbon">Watch</span>
-        <h4>💳 SC rates harsher · collection/payment terms shifted</h4>
-        <div class="one-line">6%/12% USA up to/over $200k. New AR/AP mix per region.</div>
+        <h4>🤝 Labor deal landed — semiconductor strike avoided</h4>
+        <div class="one-line">Samsung-led deal: workers get 10.5% of OP + 6.2% wage rise. Implies further cost pressure.</div>
       </summary>
       <div class="detail">
-        <p><b>Supplier credit:</b> 6.0% USA / 5.0% EUR / 4.5% JAP up to $200k · <b>12.0% / 11% / 11%</b> over $200k. H/O: 5%/20%. We're at $2.54M SC — every dollar over $200k bills at the higher tier. Runoff is a P&amp;L lever, not just optics.</p>
-        <p><b>New collection (Cash/1Q/2Q):</b> USA 30/50/20 · EU 35/30/35 · JAP 35/40/25. <b>Payment:</b> USA 35/35/30 · EU 30/30/40 · JAP 25/35/40. Update the cash-flow forecast.</p>
-      </div>
-    </details>
-
-    <details class="bullcard watch">
-      <summary>
-        <span class="ribbon">Watch</span>
-        <h4>🏗️ New USA capacity &amp; factory costs</h4>
-        <div class="one-line">USA per-plant: X 40k / Y 30k. New USA factory $980k X / $900k Y · zero build time.</div>
-      </summary>
-      <div class="detail">
-        <p>Our USA-Y plant moves 24k → 30k cap. New USA factories: $980k X, $900k Y, immediate ramp-up. EUR new factory: $1.35M X, $980k Y. Useful baseline if Co.X auction surfaces a cheap plant — "build vs buy distressed" comparison.</p>
-      </div>
-    </details>
-
-    <details class="bullcard watch">
-      <summary>
-        <span class="ribbon">Watch</span>
-        <h4>🇯🇵 JAP export quotas abolished</h4>
-        <div class="one-line">EU-bound JAP exports no longer need METI registration.</div>
-      </summary>
-      <div class="detail">
-        <p>Cross-shipping JAP → EUR is now unrestricted. Relevant if we ever produce more X in JAP than the JAP market wants (or if we shift Y sourcing to EUR for JAP).</p>
+        <p>Korean semiconductor strike averted with a deal: <b>workers receive 10.5% of operating profit</b> on top of company-wide bonus pool + <b>6.2% wage increase</b>. Doc 23 notes: <i>"for SIM companies, this implies that production costs will suffer additional pressure"</i>.</p>
+        <p>Not an immediate action — but a layer to factor into per-unit cost estimates for P9 onwards.</p>
       </div>
     </details>
 
     <details class="bullcard skip">
       <summary>
         <span class="ribbon">Skip</span>
-        <h4>❌ Cannes IFEAM Ad Gala — INELIGIBLE</h4>
-        <div class="one-line">Requires ad spend in BOTH Q6 AND Q7. We had $0 in both.</div>
+        <h4>❌ Co.X (Co.18) — fully dismantled, no buyer</h4>
+        <div class="one-line">Auction window closed. Assets donated to Liechtenstein charities. Sunk our $40k pack? Need to check.</div>
       </summary>
       <div class="detail">
-        <p>$100k production reimbursement + $500k/$250k/$150k prizes for the 3 winners. Eligibility filter: companies with advertising in Q6 AND Q7. Co.3 ad spend = $0 in both → out. Note for P9+: starting ad spend now would unlock future gala eligibility.</p>
+        <p>Doc 23 confirms Co.18 (the troubled Co.X) was <b>fully dismantled</b> in P8 — no SIM corp absorbed it. Corporate office closed. Remaining assets donated to charities in Liechtenstein.</p>
+        <p><b>Open question:</b> if we paid the $40k Tender Information Pack in P8, was that refunded? Confirm in the P8 results once decrypted.</p>
       </div>
     </details>
 
     <details class="bullcard skip">
       <summary>
         <span class="ribbon">Skip</span>
-        <h4>❌ China license auction — INELIGIBLE</h4>
-        <div class="one-line">Requires ≥2 USA factories. We have 1 (USA-Y; Plant 2 written off P7).</div>
+        <h4>❌ Yakuza — scam (no real protection)</h4>
+        <div class="one-line">Doc 23 reframes Yakuza as a "suctioning parasite" service. Skip.</div>
       </summary>
       <div class="detail">
-        <p>$350k starting bid for a license to sell into the Chinese market (2 winners in P8, 5 more in P11). Re-evaluable in P11 only if we build new USA capacity by then.</p>
+        <p>Doc 23 explicitly flags Yakuza/Jacuzzi insurance as a scam: <i>"these service providers only mix with their kind and no medicine has been discovered so far for this type of suctioning parasites."</i> Companies that paid in P8 got robbed.</p>
+        <p>If we didn't pay in P8 (per our pre-P8 plan we did NOT take Yakuza), good. Skip permanently.</p>
+      </div>
+    </details>
+
+    <details class="bullcard skip">
+      <summary>
+        <span class="ribbon">Skip</span>
+        <h4>❌ No more job offers</h4>
+        <div class="one-line">Admin announcement: job offer column discontinued. Career risk closed.</div>
+      </summary>
+      <div class="detail">
+        <p>Doc 23 ends the running "Job Demands" column. Managers staying in their roles for the duration. Mildly amusing finale.</p>
       </div>
     </details>
 
   </div>
-</div>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     ⑦ P7 RETROSPECTIVE — canvas + verified outcomes + P8 actions
-     ═══════════════════════════════════════════════════════════ -->
-<div class="section">
-  <span class="num">07</span>
-  <h2>Ahead of P8 lock</h2>
-  <span class="tag">what each owner does next</span>
 </div>
 
 <div class="card">
-  <h3>Owner checklist <span class="sub">decisions + non-.xls actions for P8</span></h3>
-  <p class="muted" style="margin-bottom:12px;font-size:14px">Two big shifts from Doc 22 vs P7: sub→HQ is now free (no declaration, no 7% tax — our blocker is gone) and EU labor subsidy is over. New gated decisions on restructuring vs METI tender, JAP insurance, Co.X auction, Y3 path.</p>
+  <h3>Grade-3 prize race · status carried into P9 <span class="sub">X3 in-house · Y3 still open</span></h3>
+  <div class="bulletin-grid">
+
+    <details class="bullcard easy" open>
+      <summary>
+        <span class="ribbon">In hand</span>
+        <h4>✅ X3 patent — in-house, P8 INFO sheet confirmed (max X = 3)</h4>
+        <div class="one-line">Ducal $300k not yet credited in P8 P&amp;L. Re-file in P9 if missed.</div>
+      </summary>
+      <div class="detail">
+        <p>P8 INFO sheet confirms Max Grade of Improvement X=3, Y=2. <b>X3 patented in-house ✓</b>. The W-column non-operating income in P8 P&amp;L shows NO $300k receivable — either the Ducal claim wasn't filed correctly in the P8 .xls OR is deferred to P9 books.</p>
+        <p><b>Action:</b> Roberto to verify with admin whether P9 claim is still in-window. File a fresh Grants Request on blank paper to Administrator if not already credited.</p>
+      </div>
+    </details>
+
+    <details class="bullcard decide" open>
+      <summary>
+        <span class="ribbon">Decide</span>
+        <h4>🥇 Y3 — in-house ($370k+) vs Clevers license ($350k Doc 23)</h4>
+        <div class="one-line">Y3 license dropped $50k vs Doc 22. EV math now tighter; in-house still wins on prize stack.</div>
+      </summary>
+      <div class="detail">
+        <p>Doc 23 Clevers card moved Y3 license <b>$400k → $350k</b>. In-house still preserves Ducal + Golden Band eligibility; license still forfeits both.</p>
+        <ul style="padding-left:18px;font-size:13px">
+          <li><b>In-house Y3:</b> patent eligible → Golden Band $500k (first Co with X3+Y3 patents) + Ducal $300k (X3 already qualifies) + METI plant bonus $200k/plant first-period g3. Upside up to $1.1M.</li>
+          <li><b>License Y3 from Clevers $350k:</b> immediate g3 production capability, but forfeits Ducal + Golden Band. Only METI plant bonuses available. Upside capped ~$400k.</li>
+        </ul>
+        <p><b>P8 outcome:</b> Y3 did <b>NOT</b> deliver in-house (INFO max Y still grade 2). Our R&amp;D this period was only $185k (vs $370k doctrine floor) — likely the cause. <b>P9 fork:</b></p>
+        <ul style="padding-left:18px;font-size:13px">
+          <li><b>Path A — re-up in-house R&amp;D:</b> spend $370k+ this period; ~$1.1M prize upside if Y3 lands (Golden Band $500k + Ducal $300k + METI plant bonuses $200k+ ×2). But P10 risk if R&amp;D still doesn't deliver.</li>
+          <li><b>Path B — Clevers Y3 license $350k:</b> guaranteed g3 Y production capability this period. Forfeits Golden Band + Ducal. Caps upside at ~$400k (METI plant bonus only).</li>
+        </ul>
+        <p><b>Kavya's call:</b> Path A still wins on EV (~$700k spread) <b>only if we trust the R&amp;D will land</b> at full $370k spend. After P8's under-doctrine spend + non-delivery, Path B (license) starts looking like the de-risked play. Final call before P9 lock.</p>
+      </div>
+    </details>
+
+    <details class="bullcard easy">
+      <summary>
+        <span class="ribbon">Prize</span>
+        <h4>🏆 Golden Band Diploma — $500k</h4>
+        <div class="one-line">First Co with BOTH X3 + Y3 patents (in-house only). We have X3. Y3 = the unlock.</div>
+      </summary>
+      <div class="detail">
+        <p>Liechtenstein Ministry prize. Patents only — license route ineligible. The whole grade-3 in-house bet hinges on this $500k landing once Y3 R&amp;D delivers.</p>
+      </div>
+    </details>
+
+    <details class="bullcard easy">
+      <summary>
+        <span class="ribbon">Prize</span>
+        <h4>🇯🇵 METI plant bonus — $200k per plant</h4>
+        <div class="one-line">First period producing g3 in each plant. Works with license or patent.</div>
+      </summary>
+      <div class="detail">
+        <p>One-shot per plant on the first period it manufactures a grade-3 product. With 2 EUR plants (X + Y) potentially producing g3, headline upside up to $400k. JAP X plant could add another $200k. Compatible with the license route — the only prize Clevers users still get.</p>
+      </div>
+    </details>
+
+  </div>
+</div>
+
+<div class="card">
+  <h3>Cannes Ad Gala — competitor positioning read <span class="sub">SimMBA26-Gala · soft intel from competitor ads</span></h3>
+  <p class="lead" style="font-size:15px">7 cos submitted polished ads to the gala. Each ad reveals the brand axis a competitor is leaning into — useful when reading P8 results pricing.</p>
+  <table class="results" style="margin-top:12px">
+    <thead><tr><th>Co</th><th>Tagline</th><th>Positioning axis</th><th>So-what for us</th></tr></thead>
+    <tbody>
+      <tr><td><b>Co.5</b></td><td>"When supply chains shake, your technology shouldn't" · <i>Steady by design</i></td><td>Reliability premium</td><td>Co.5 paid for the premium-reliability story → expect Co.5 to defend high prices (saw them at $44 EUR X-DLx, $46 JAP X-DLx P7).</td></tr>
+      <tr><td><b>Co.7</b></td><td>"When the supply chain broke, ours didn't" · 100% delivered · <i>Certainty, delivered</i></td><td>Delivery/reliability, EUR X+Y</td><td>Co.7 leaning hard on "we ship even when others can't" — Door-to-Door spend likely. EUR-centric (X chips + Y boards).</td></tr>
+      <tr><td><b>Co.8</b></td><td>"Crafted in Japan. Engineered for everyone" · Tokyo, Japan</td><td>Japanese precision, global reach</td><td>Co.8 explicitly Japan-first. Was lowest on JAP Y-Std ($29) and EUR Y-Std ($32) P7 — Japan-origin global discount play.</td></tr>
+      <tr><td><b>Co.10</b></td><td>"Powering the world. Quietly." · X-Series chips · Y-Series boards</td><td>Invisible-systems platform</td><td>Co.10 doesn't pick a region; full X+Y range. Was lowest on USA-Y-DLx ($32) P7 — volume player.</td></tr>
+      <tr><td><b>Co.11</b></td><td>"Powering Creativity" · 映画 · 1nv1ntel</td><td>Creator/media verticals</td><td>Co.11 picking a use-case lane (creative/film). Niche but premium pricing potential.</td></tr>
+      <tr><td><b>Co.14</b></td><td><i>The Japan Matrix: Agile Flow</i> · Lean Six Sigma · Japan g1 std chip · X1</td><td>Lean ops / volume liquidation</td><td>Co.14 is the "consolidated high-volume inventory" play. JAP origin, grade-1 standard. Cheaper end of the cluster.</td></tr>
+      <tr><td><b>Co.16</b></td><td>"A016 Micro Chips · Powering what's next" · Cannes official partner</td><td>Premium creative-tier marketing</td><td>Co.16 invested in design polish. Was lowest USA X-DLx ($26) P7 — value entry. Aspirational positioning + value pricing = land grab.</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <b>Pattern:</b> half the cos are anchoring on <b>reliability / on-time delivery</b> (Co.5, Co.7, Co.10) — exactly the angle Door-to-Door rewards. Expect those cos to apply to Door-to-Door reflexively. <b>Co.14's Japan Matrix lean-volume story</b> signals high-volume g1/g0 liquidation pressure in JAP — relevant for our JAP X pricing in P9.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ⑥ P9 PLAN — last-submitted P8 reference + actions + watchlist
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section">
+  <span class="num">06</span>
+  <h2>P9 plan</h2>
+  <span class="tag">last canvas · actions · watchlist</span>
+</div>
+
+<div class="card">
+  <h3>P8 canvas — what we executed <span class="sub">last .xls · 141k units produced · 137k units sold</span></h3>
+  <table class="results">
+    <thead>
+      <tr>
+        <th>Cell</th>
+        <th>Capacity</th>
+        <th>P7 end inv</th>
+        <th>P8 produce</th>
+        <th>Grade</th>
+        <th>P8 price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><b>🇺🇸 USA</b> X-Std</td><td style="text-align:right;color:var(--muted)">no plant</td><td style="text-align:right">0 <small style="color:var(--muted)">(cleared P7)</small></td><td style="text-align:right">—</td><td><span class="grade-chip gnone">—</span></td><td style="text-align:right;color:var(--muted)">$0 <small>(no stock)</small></td></tr>
+      <tr><td><b>🇺🇸 USA</b> X-DLx</td><td style="text-align:right;color:var(--muted)">no plant</td><td style="text-align:right">0</td><td style="text-align:right">—</td><td><span class="grade-chip gnone">—</span></td><td style="text-align:right;color:var(--muted)">$0 <small>(no stock)</small></td></tr>
+      <tr class="cell-good"><td><b>🇺🇸 USA</b> Y-Std</td><td style="text-align:right">30k <small style="color:var(--muted)">(1 plant)</small></td><td style="text-align:right">25,028 <small style="color:var(--muted)">(stranded)</small></td><td style="text-align:right">—</td><td><span class="grade-chip g0">g0</span></td><td style="text-align:right"><b>$22</b> <small style="color:var(--muted)">(clear)</small></td></tr>
+      <tr class="cell-good"><td><b>🇺🇸 USA</b> Y-DLx</td><td style="text-align:right">30k</td><td style="text-align:right">24,000 <small style="color:var(--muted)">(N+1 g2)</small></td><td style="text-align:right"><b>15–18k</b></td><td><span class="grade-chip g2">g2</span></td><td style="text-align:right"><b>$42–45</b></td></tr>
+      <tr class="cell-good"><td><b>🇪🇺 EUR</b> X-Std</td><td style="text-align:right">35k</td><td style="text-align:right">15,000</td><td style="text-align:right">—</td><td><span class="grade-chip g1">g1</span></td><td style="text-align:right"><b>$24</b> <small style="color:var(--muted)">(clear)</small></td></tr>
+      <tr class="cell-good"><td><b>🇪🇺 EUR</b> X-DLx</td><td style="text-align:right">35k</td><td style="text-align:right">20,000</td><td style="text-align:right"><b>18–20k</b></td><td><span class="grade-chip g2">g2</span></td><td style="text-align:right"><b>$34</b></td></tr>
+      <tr class="cell-good"><td><b>🇪🇺 EUR</b> Y-Std</td><td style="text-align:right">30k</td><td style="text-align:right">15,000</td><td style="text-align:right">—</td><td><span class="grade-chip g1">g1</span></td><td style="text-align:right"><b>$34</b> <small style="color:var(--muted)">(clear)</small></td></tr>
+      <tr class="cell-good"><td><b>🇪🇺 EUR</b> Y-DLx</td><td style="text-align:right">30k</td><td style="text-align:right">15,000</td><td style="text-align:right"><b>15–18k</b></td><td><span class="grade-chip g2">g2</span></td><td style="text-align:right"><b>$46</b></td></tr>
+      <tr><td><b>🇯🇵 JAP</b> X-Std</td><td style="text-align:right">70k <small style="color:var(--muted)">(2 plants)</small></td><td style="text-align:right">0 <small style="color:var(--muted)">(cleared P7)</small></td><td style="text-align:right">—</td><td><span class="grade-chip gnone">—</span></td><td style="text-align:right;color:var(--muted)">$0 <small>(no stock)</small></td></tr>
+      <tr class="cell-good"><td><b>🇯🇵 JAP</b> X-DLx <small style="color:var(--accent)">(P1)</small></td><td style="text-align:right">35k</td><td style="text-align:right">30,000</td><td style="text-align:right"><b>30k</b> <small style="color:var(--accent)">g3 ⭐</small></td><td><span class="grade-chip g2">g2</span></td><td style="text-align:right"><b>$34</b></td></tr>
+      <tr class="cell-good"><td><b>🇯🇵 JAP</b> X-DLx <small style="color:var(--accent)">(P2)</small></td><td style="text-align:right">35k</td><td style="text-align:right">—</td><td style="text-align:right"><b>25k</b> g2 + tender</td><td><span class="grade-chip g2">g2</span></td><td style="text-align:right">METI tender bid 15k @ $29</td></tr>
+      <tr><td><b>🇯🇵 JAP</b> Y-Std</td><td style="text-align:right;color:var(--muted)">no plant</td><td style="text-align:right">15,000 <small style="color:var(--muted)">(final)</small></td><td style="text-align:right">—</td><td><span class="grade-chip g0">g0</span></td><td style="text-align:right"><b>$30</b> <small style="color:var(--muted)">(exit)</small></td></tr>
+      <tr><td><b>🇯🇵 JAP</b> Y-DLx</td><td style="text-align:right;color:var(--muted)">no plant</td><td style="text-align:right">0</td><td style="text-align:right">—</td><td><span class="grade-chip gnone">—</span></td><td style="text-align:right;color:var(--muted)">$0 <small>(no stock)</small></td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <b>P8 strategic stance (per plan):</b> clear g1 across EUR + g0 strands in USA/JAP · run JAP-X with BOTH plants active (P1 → g3 X-DLx for METI plant bonus claim, P2 → g2 for tender + consumer) · METI tender bid 15k g2 at $29 · NO Yakuza · NO restructuring · sub→HQ clean repat (no declaration now) · EUR g4 leap setup for P9.
+  </div>
+  <div class="note green">
+    <b>P8 vs plan:</b> production ran ABOVE plan on most cells — USA-Y 24k (plan 15-18k), EUR-X 31k (plan 18-20k), EUR-Y 26k (plan 15-18k), JAP-X P1 35k g3 (plan 30k). Engine ran plants closer to capacity than we modeled. METI tender ✓ landed at $29/15k. Plant 2 ✓ reactivated. Y3 R&amp;D ✗ did not deliver (max Y grade still 2). X3 Ducal claim ✗ not credited in P8 books.
+  </div>
+</div>
+
+<div class="card">
+  <h3>Ahead of P9 lock <span class="sub">Doc 23 landed · open threads for the next .xls</span></h3>
+  <p class="muted" style="margin-bottom:12px;font-size:14px">The two big P9 levers: <b>Door-to-Door</b> (industry-wide demand subsidy with asymmetric cost trap — applying dominates) and <b>EU Y tender</b> (250k Y2 + 250k Y3, we qualify, $20k/offer). The Liechtenstein gov change reshapes HQ economics: tax 10%, bond 1.5%, ST loans 1.25%, HQ floor $250k, HQ→sub 7% tax. ISO 9000 + Ducal Quality $150k is a 10× ROI ($15k → $150k) we should grab.</p>
 
   <div class="owner-group">
-    <div class="owner-head"><span class="name">Satoshi</span><span class="role">Marketing · pricing + JAP-Y</span></div>
+    <div class="owner-head"><span class="name">Roberto</span><span class="role">Strategy · Door-to-Door + market intel</span></div>
     <ul class="checklist">
-      <li><b>Lift prices to absorb +10% variable costs + EU tax 31%</b> — every line. Working brief: EUR Y-DLx → $46–48, EUR X-DLx → $34–36, JAP X-DLx → $33–35, JAP Y-Std → $34–36, USA-Y-DLx debut $43–45. Defending margin, not chasing volume.</li>
-      <li><b>JAP-Y sourcing decision</b> — keep importing Y-Std from USA at $30/u (P7 razor margin) OR shift to producing Y-DLx in EUR for JAP. JAP export quotas now abolished — EUR → JAP shipping is unrestricted.</li>
+      <li><b>File Door-to-Door Service application — Payment to Co.1 $200k</b> (auto-adjusts to $100k/$120k as tier resolves). Asymmetric trap: applying dominates in 4 of 5 outcomes. <b>1 hour before close.</b></li>
+      <li><b>Market intel re-read</b> — input prices indexed up another 5–8% (Doc 23 economic indicators). Business cycle UP across all 3 areas → demand resilient. Price level UP everywhere → ceiling has room. Translate to pricing direction for Satoshi.</li>
+      <li><b>Gala read-out</b> — competitor positioning visible from the Cannes ad submissions: Co.5 premium "Steady by design", Co.7 reliability/100% delivery, Co.8 Japanese precision, Co.10 invisible-systems platform, Co.11 creativity, Co.14 "Japan Matrix" lean Six Sigma, Co.16 creative-tier. These ad campaigns reveal each Co's marketing axis. Useful when reading P8 results pricing patterns.</li>
     </ul>
   </div>
 
   <div class="owner-group">
-    <div class="owner-head"><span class="name">Kavya</span><span class="role">R&amp;D · grade-3 prize race</span></div>
+    <div class="owner-head"><span class="name">Satoshi + Roberto</span><span class="role">Marketing · EU Y tender + pricing</span></div>
     <ul class="checklist">
-      <li><b>File Ducal Academy claim — $300k</b> — one-page filing alongside P8 .xls. X3 already in-house (P7 INFO sheet confirmed). $300k solo / $150k split.</li>
-      <li><b>Y3 go/no-go — in-house ($370k+) vs Clevers license ($400k)</b> — in-house wins on EV (keeps Golden Band $500k + Ducal eligibility). License is the cashflow-safe play. Bring recommendation before P8 lock.</li>
-      <li><b>R&amp;D doctrine floor for P8</b> — restart $560k X + $370k Y in the .xls (subject to Y3 decision).</li>
+      <li><b>EU Y Tender — size the bid</b> · 250k Y2 + 250k Y3, max 100k per Co, lots of 10k, $20k fee per offer. Co.3 qualifies (2 EUR plants). Realistic offer: 20–40k Y2 (drawing from EUR-Y g2 inventory + new production) at a defensible discount vs our retail $46. EU may declare null if our offer &gt; our retail in same market. <b>Submit 1h before close.</b></li>
+      <li><b>Re-lift prices — P8 actuals show we left margin everywhere.</b> Working direction informed by P8 sales data: EUR Y-DLx $47 → <b>$50–53</b> (median $51, ceiling $66), EUR X-DLx $32 → <b>$38–42</b> (median $40, Co.6 at $55 g3), <b>JAP X-DLx g3 debut at $48–55</b> (35k batch ready; Co.10 g2 at $56 sets ceiling), JAP X-Std g2 $32 → <b>$35–37</b> (25k stock left), USA-Y-DLx $43 → <b>$45–48</b> (lift to clear 7k+ remaining). Add EUR ad spend $50–75k each cell to defend P10 Gala eligibility.</li>
+      <li><b>JAP-Y exit confirmed</b> — per P8 plan we stop importing. No JAP-Y-Std listing in P9.</li>
     </ul>
   </div>
 
   <div class="owner-group">
-    <div class="owner-head"><span class="name">Jeongho + Billie</span><span class="role">Finance · treasury · SC runoff</span></div>
+    <div class="owner-head"><span class="name">Kavya</span><span class="role">R&amp;D · prize race + EUR g4 leap</span></div>
     <ul class="checklist">
-      <li><b>Sub→HQ repatriation — clean execute, no paperwork</b> — Doc 22 drops the declaration AND the 7% tax. Size the negative row-21 entries on EUR + JAP to actual HQ obligations (R&amp;D + Clevers + interest + dividends). No filing required.</li>
-      <li><b>Supplier credit runoff — URGENT</b> — SC at $2.54M after P7. New rates harsher: 6.0% USA up to $200k / <b>12.0% over $200k</b>. Refinance bulk to area bank loans at the new 1.0% Securities base. Target: SC under $1M by P9.</li>
-      <li><b>Re-cost the loan stack at SI 1.0%</b> (was 2% in P7) — model ST vs LT vs SC under the new rate card. Include JAP BoJ rate 0.20% + WCR 95%.</li>
+      <li><b>X3 Ducal claim — NOT credited in P8 P&amp;L.</b> Re-file in P9 via Grants Request on blank paper to Administrator. Confirm filing window with admin.</li>
+      <li><b>Y3 fork: Path A re-up R&amp;D ($370k+) OR Path B Clevers Y3 license ($350k)</b> · P8 in-house didn't deliver despite under-doctrine spend ($185k). Path A retains Golden Band + Ducal eligibility (~$1.1M upside if it lands); Path B guarantees g3 production but caps upside at ~$400k.</li>
+      <li><b>EUR g4 leap — execute</b> · Clevers X4 license now <b>$200k</b> (Doc 23, cheaper than X3 $300k). Buy and start g4 X production in EUR P9; g4 saleable P10. Trade-off: license route forfeits Ducal/Golden Band on X — but we already have X3 in-house, so we keep prize eligibility on the X3 line and use X4 license as a speed move.</li>
+      <li><b>R&amp;D — restore doctrine floor for P9</b> · P8 came in under at $200k X + $185k Y (likely cause of Y3 non-delivery). Restart $560k X + $370k Y minimum. Tradable up if we're chasing Y3 patent breakthrough.</li>
     </ul>
   </div>
 
   <div class="owner-group">
-    <div class="owner-head"><span class="name">Febby</span><span class="role">Ops · USA-Y + JAP plants</span></div>
+    <div class="owner-head"><span class="name">Jeongho + Billie</span><span class="role">Finance · treasury · new Liechtenstein rules</span></div>
     <ul class="checklist">
-      <li><b>USA-Y P8 monetization</b> — price 24k Y-DLx g2 at $43–45 + clear 25k Y-Std overhang. Flips USA-Y from −$200k to positive.</li>
-      <li><b>Industrial Restructuring decision (THIS QUARTER ONLY)</b> — sell JAP-X Plant 2 at 90% book value? Frees $267k/qtr fixed cost + cash. <b>Trap:</b> drops to 1 JAP plant → INELIGIBLE for METI 200k X tender. Coordinate with Billie before deciding.</li>
-      <li><b>Free Production Optimum study from Arthur de Big</b> — original (now outdated) study qualifies. Pull updated optimum volumes given the +10% var-cost shift.</li>
+      <li><b>Sub→HQ repatriation — clean (still free since Doc 22)</b>. But mind the <b>NEW HQ→sub 7% tax</b> (Doc 23) — fund subs via local bank loans where possible rather than HQ transfers down.</li>
+      <li><b>HQ cash buffer at $650k ✓</b> (P8 close) — comfortably above the new Liechtenstein $250k floor. Maintain ≥$400k buffer to absorb the 10% income tax landing in P9 books.</li>
+      <li><b>Liechtenstein corporate tax 10% — apply to HQ earnings forecast</b>. Holding excess cash at HQ now costs 10% annually; large idle HQ balances are no longer free.</li>
+      <li><b>Re-cost the loan stack at SI 1.5% / ST-loans 1.25%</b> (Doc 23) — both went up vs Doc 22's 1.0%. Cheap-debt window narrowed but still well below supplier credit's 12% over-$200k tier.</li>
+      <li><b>SC stays at $0</b> — P8 close confirmed $0 (down from $2.54M at P7). Avoid re-tapping unless absolutely necessary; the 12%-over-$200k tier is the worst rate in our stack. Use area bank loans at 1.25% ST instead.</li>
     </ul>
   </div>
 
   <div class="owner-group">
-    <div class="owner-head"><span class="name">Roberto</span><span class="role">Strategy · market intel</span></div>
+    <div class="owner-head"><span class="name">Febby</span><span class="role">Ops · adm buyback + production</span></div>
     <ul class="checklist">
-      <li><b>~~Re-file EU labor subsidy~~ — PROGRAM ENDED in Doc 22.</b> Adjust P8+ HQ inflow plan: −$200k/qtr permanent.</li>
-      <li><b>Market intel re-read</b> — with +10% variable costs landing for every Co simultaneously, the competitive pricing baseline shifts up too. Scan competitor median + look for early P8 signals.</li>
-      <li><b>Arthur de Big SIM report</b> — $40k/copy/period (80% discount). Decide if one print would surface per-Co P&amp;L detail we're missing.</li>
+      <li><b>Administrator 90% buyback — go/no-go</b> · grades 0 or 1, locally produced, first 4 cos / first 200k units. Candidates: USA-Y-Std g0 25k stranded (if not cleared in P8), EUR-X-Std g1 15k, EUR-Y-Std g1 15k. Confirm at-close inventory from P8 results, then decide which lines to push at 90% var cost vs hold for retail.</li>
+      <li><b>P9 production canvas</b> — once P8 inventory known: EUR-X plant pivots to g4 (X4 license), EUR-Y continues g2 (or shifts to g3 if license taken), JAP-X g3 (P1) + g2 (P2), USA-Y g2.</li>
     </ul>
   </div>
 
   <div class="owner-group">
-    <div class="owner-head"><span class="name">Billie</span><span class="role">CEO · gated decisions</span></div>
+    <div class="owner-head"><span class="name">Billie</span><span class="role">CEO · ISO + gated decisions</span></div>
     <ul class="checklist">
-      <li><b>METI Japan X tender — bid or pass?</b> 200k units X2/X3 · max 50k per Co · $10k entry fee per offer · sealed bid 1h before close. Eligibility: ≥2 JAP plants ✓ (conditional on NOT selling JAP-X P2 under restructuring).</li>
-      <li><b>Yakuza JAP insurance — pay $300k?</b> Without it, EUR + JAP plants take ~20% output haircut. With it, 100% capacity guaranteed in JAP. Especially relevant if we're bidding METI (50k tender needs guaranteed output).</li>
-      <li><b>Co.X auction — pay $40k for the Tender Information Pack?</b> Russian-oligarch-owned Co.X being broken up at 80% book, P8 + P9. Only open the pack if we'd actually bid.</li>
+      <li><b>ISO 9000 certification — file it</b> · $15k to Co.1 via Arthur de Big. Pair with the <b>Ducal Quality Prize $150k</b> claim (first 4 cos per subindustry; 2 already won, 2 slots left). <b>10× ROI if we land it.</b> All required files (decision .xls P5–P8, results .xls, Doc 12, Doc 14, McKinsey/BCG) already on laptop.</li>
+      <li><b>METI JAP-X plant bonus claim ($200k) — FILE NOW.</b> P8 INFO confirmed JAP-X Plant 1 produced 35k DLx grade-3 ✓. Submit the Grants Request on blank paper to Administrator before P9 decision close.</li>
+      <li><b>Co.18 (was Co.X) dismantled — recover the $40k pack?</b> If we paid the Tender Information Pack in P8, confirm in P8 results whether it was refunded.</li>
     </ul>
   </div>
 
   <div class="owner-group">
-    <div class="owner-head"><span class="name">All directors</span><span class="role">P8 bulletin ritual</span></div>
+    <div class="owner-head"><span class="name">All directors</span><span class="role">P9 bulletin ritual</span></div>
     <ul class="checklist">
-      <li><b>Re-sign bulletin × 6</b> — another $60k bonus across the team. Same channel as P7.</li>
-      <li><b>Cannes IFEAM Ad Gala — INELIGIBLE</b> (no ad spend in Q6 or Q7). Note for P9+.</li>
-      <li><b>China license auction — INELIGIBLE</b> (need 2 USA factories; we have 1).</li>
+      <li><b>Re-sign bulletin × 6</b> — assumed $60k bonus carries forward. Same channel.</li>
+      <li><b>Yakuza — confirmed scam in Doc 23</b>, skip permanently.</li>
+      <li><b>Job offers column ended</b> — Doc 23 stopped publishing. Career page closed.</li>
     </ul>
   </div>
 </div>
 
+<div class="card">
+  <h3>Verified at P8 results <span class="sub">2026-05-26 · what actually landed</span></h3>
+  <ul class="checklist">
+    <li class="done"><b>USA-Y: 25k Std g0 cleared at $24</b> ✓ · 17k of 24k DLx g2 sold at $43 ✓ partial · USA-Y still −$60k operating (7k DLx unsold + 30,927 recat. Std book value drags fixed cost absorption).</li>
+    <li class="done"><b>JAP-X Plant 2 REACTIVATED</b> ✓ · 25k Std g2 produced at $18/u, $450k cost. Engine accepted active production despite long idle.</li>
+    <li class="done"><b>METI tender WON</b> ✓ · 15k g2 @ $29 industrial = $435k revenue. P9 plant bonus $200k claim eligible.</li>
+    <li class="done"><b>JAP-X Plant 1 produced 35k DLx g3</b> ✓ · at cap. 35k g3 sitting in inventory as N+1, saleable P9.</li>
+    <li><b>X3 Ducal $300k claim — outcome unclear in P8 P&amp;L</b> · the W column shows no $300k receivable. Either deferred to P9 books or filing was missed in the P8 .xls. Roberto to verify with admin.</li>
+    <li><b>Y3 patent did NOT deliver</b> · INFO max Y grade still 2. Either re-up R&amp;D in P9 or take Clevers Y3 $350k license. R&amp;D was under doctrine ($185k vs $370k floor) — likely cause.</li>
+    <li class="done"><b>EUR + JAP at full capacity</b> ✓ · no output haircut. EUR-X 31k DLx · EUR-Y 26k DLx · JAP-X 35k+25k. Total 141k units (up from P7 119k).</li>
+    <li class="done"><b>Sub→HQ flowed clean</b> ✓ · HQ cash $650k, well above the new $250k floor.</li>
+    <li class="done"><b>SC: $2.54M → $0</b> ✓✓ · Area bank loans bumped $1.5M → $2.5M to absorb. Total interest dropped <b>$461k → $50k</b>.</li>
+    <li class="done"><b>EU corp tax 31% landed</b> ✓ · EUR sub paid $116,736 (≈31% on $376k gross earnings).</li>
+    <li><b>Co.18 Tender Pack $40k</b> — no entry visible in W column; either we didn't pay (per the pre-P8 plan we didn't commit to bidding) OR was refunded silently. Treat as $0 net cost.</li>
+    <li class="done"><b>Net positive!</b> ✓ · +$143k net · operating $342k · interest $50k · taxes $124k · RE improves to −$4.46M (+$143k from P7 −$4.61M).</li>
+    <li class="done"><b>$100k EUR advertising spent</b> ✓ · first non-zero ad spend. Unlocks future Cannes Gala eligibility (2 prior periods of ad spend required).</li>
+  </ul>
+</div>
 
+<div class="card">
+  <h3>Verify when P9 results land <span class="sub">drives the P10 plan</span></h3>
+  <ul class="checklist">
+    <li><b>Door-to-Door tier resolution</b> — how many cos applied? What did we actually pay? Did demand hold or drop in the markets where we'd skipped advertising?</li>
+    <li><b>EU Y Tender outcome</b> — did our bid win a slot? At what price? Was the alternative-grade discount used?</li>
+    <li><b>Liechtenstein 10% tax landing</b> — HQ income line shows new tax band?</li>
+    <li><b>HQ→sub 7% transfer tax</b> — confirm transfers from HQ to subs got taxed; sub→HQ stayed free.</li>
+    <li><b>HQ cash above $250k floor</b> — new minimum; ensure we didn't trip the threshold.</li>
+    <li><b>ISO 9000 cert + Ducal Quality $150k</b> — both landed?</li>
+    <li><b>EUR g4 X launch</b> (if we took the X4 license) — production ran clean, N+1 means saleable P10.</li>
+  </ul>
+</div>
 
 
 
 <footer>
-  P5–P7 played · P8 bulletin (Doc 22) landed 2026-05-21 · <a href="https://github.com/lifeinprogrezz/esade-mba-private">repo</a>
+  Co.3 · Strategic Business Simulation · ESADE MBA 2025–2026<br>
+  Strategy approved 2026-05-13 · P7 results 2026-05-20 · P8 bulletin (Doc 22) 2026-05-21 · P9 bulletin (Doc 23) 2026-05-26 · P8 results delivered 2026-05-26 (net +$143k)<br>
+  <a href="https://github.com/lifeinprogrezz/esade-mba-private">repo</a>
 </footer>
 
 </main>
